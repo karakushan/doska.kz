@@ -1,0 +1,122 @@
+.woocommerce .products {
+  *zoom: 1;
+}
+.woocommerce .products:before,
+.woocommerce .products:after {
+  content: " ";
+  display: table;
+}
+.woocommerce .products:after {
+  clear: both;
+}
+.woocommerce .products li {
+  float: left;
+}
+.pacz-product-categories .pacz-product-categories-list {
+  *zoom: 1;
+  list-style: none;
+  padding: 0;
+  margin-left: 0;
+}
+.pacz-product-categories .pacz-product-categories-list:before,
+.pacz-product-categories .pacz-product-categories-list:after {
+  content: " ";
+  display: table;
+}
+.pacz-product-categories .pacz-product-categories-list:after {
+  clear: both;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item {
+  margin-left: 0;
+  display: inline-block;
+  float: left;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item .category-img {
+  max-width: 100%;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: transform 1s ease-in-out;
+  -webkit-transition: transform 1s ease-in-out;
+  -moz-transition: transform 1s ease-in-out;
+  -ms-transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item .item-holder {
+  overflow: hidden;
+  position: relative;
+  margin: 0 15px 30px 15px;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item .item-holder h4 {
+  position: absolute;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item .item-holder h4 span {
+  display: block;
+  text-align: center;
+  width: 55%;
+  margin: 0 auto;
+  background-color: #222222;
+  line-height: 1;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item .item-holder h4 span.category-name {
+  font-size: 13px;
+  color: #fff;
+  padding: 20px 20px 5px 20px;
+  font-weight: bold;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item .item-holder h4 span.item-count {
+  font-size: 12px;
+  color: #a9a9a9;
+  padding: 5px 20px 20px 20px;
+  text-transform: uppercase;
+}
+.pacz-product-categories .pacz-product-categories-list .product-item:hover .category-img {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+.pacz-product-categories .pacz-product-categories-list.columns-4 .product-item {
+  width: 24.9%;
+}
+.pacz-product-categories .pacz-product-categories-list.columns-3 .product-item {
+  width: 33.3%;
+}
+.pacz-product-categories .pacz-product-categories-list.columns-2 .product-item {
+  width: 49.9%;
+}
+.pacz-product-categories .pacz-product-categories-list.columns-1 .product-item {
+  width: 100%;
+}
+.pacz-product-categories .pacz-product-categories-list.columns-1 .product-item .item-holder {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media handheld, only screen and (max-width: 960px) {
+  .pacz-product-categories .pacz-product-categories-list.columns-3 .product-item,
+  .pacz-product-categories .pacz-product-categories-list.columns-4 .product-item {
+    width: 49.9% !important;
+  }
+  .pacz-product-categories .pacz-product-categories-list.columns-3 .product-item .item-holder,
+  .pacz-product-categories .pacz-product-categories-list.columns-4 .product-item .item-holder {
+    margin: 0 15px 30px 15px !important;
+  }
+}
+@media handheld, only screen and (max-width: 550px) {
+  .pacz-product-categories .pacz-product-categories-list.columns-2 .product-item,
+  .pacz-product-categories .pacz-product-categories-list.columns-3 .product-item,
+  .pacz-product-categories .pacz-product-categories-list.columns-4 .product-item {
+    width: 100% !important;
+  }
+  .pacz-product-categories .pacz-product-categories-list.columns-2 .product-item .item-holder,
+  .pacz-product-categories .pacz-product-categories-list.columns-3 .product-item .item-holder,
+  .pacz-product-categories .pacz-product-categories-list.columns-4 .product-item .item-holder {
+    margin-left: 0;
+  }
+}

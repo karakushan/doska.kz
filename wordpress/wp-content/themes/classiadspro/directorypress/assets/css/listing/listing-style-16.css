@@ -1,0 +1,78 @@
+/* style 16 */
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-16  .directorypress-listing-text-content-wrap
+ {
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+	
+}
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-16:hover  .directorypress-listing-text-content-wrap
+ {
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    background: rgb(91, 39, 132, 0.7);
+    width: 100%;
+	overflow:hidden;
+}
+.listing-post-style-16 .directorypress-listing-text-content-wrap header h2{
+    color:#fff !important;
+	text-transform:uppercase;
+	margin:0;
+	padding:10px 15px;
+}
+.directorypress-listing.listing-post-style-16 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap .directorypress-listing-title h2 a{
+    color:#fff !important;
+	text-transform:uppercase;
+}
+.directorypress-listing.listing-post-style-16 .directorypress-listing-item-holder:hover .directorypress-listing-text-content-wrap .directorypress-listing-title h2 a{
+    color:#fff !important;
+}
+.listing-post-style-16 figure.directorypress-listing-figure {
+    overflow: hidden;
+
+}
+.directorypress-widget .listing-post-style-16 .directorypress-listing-item-holder{
+	border-radius:0 !important;
+}
+/* feature tags */
+.listing-post-style-16 .has_featured-tag-1{
+	position:absolute;
+	top:5px;
+	right:5px;
+}
+
+.listing-post-style-16 .directorypress-field-type-status{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+.listing-post-style-16 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:0;
+}
+/* wcfm integration */
+
+.listing-post-style-16 .listing-add-to-cart {
+    position: absolute;
+    top: auto;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    right: 10px;
+    line-height: 32px;
+    font-size: 16px;
+    bottom: 10px;
+    border-radius: 2px;
+}

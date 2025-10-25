@@ -1,0 +1,98 @@
+/* style 17 */
+.listing-post-style-17 .directorypress-listing-item-holder{
+	box-shadow:none;
+}
+.listing-post-style-17 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap{
+	padding:11px 14px 8px;
+	border-left:1px solid #eee;
+	border-right:1px solid #eee;
+}
+.listing-post-style-17 .directorypress-listing-item-holder header.directorypress-listing-title h2 {
+    margin: 3px 0 0;
+}
+.listing-post-style-17 figure.directorypress-listing-figure{
+	border-top:1px solid #eee;
+	border-left:1px solid #eee;
+	border-right:1px solid #eee;
+	padding:3px 3px 0;
+}
+
+.listing-post-style-17 .listing-bottom-metas{
+	border:1px solid #eee;
+	padding:8px 14px 9px;
+}
+.listing-post-style-17 .listing-bottom-metas:before{
+	display:none;
+}
+.listing-post-style-17 .directorypress-listing-text-content-wrap .directorypress-field-type-price{
+	float:none !important;
+	display:block;
+	margin:0;
+	color:#15a949;
+	
+}
+.listing-post-style-17 .directorypress-listing-text-content-wrap .directorypress-field-type-price .directorypress-field-title{
+	display:none;
+}
+.listing-post-style-17 .listing-location{
+	margin:0;
+}
+.listing-post-style-17 .listing-location i{
+	margin-right:5px;
+}
+.rtl .listing-post-style-17 .listing-location i{
+	margin-right:0;
+	margin-left:5px;
+}
+.listing-post-style-17 .listing-bottom-metas .add_to_favourites.btn{
+	padding:0;
+	line-height:1;
+	float:right;
+	color:#999 !important;
+}
+.rtl .listing-post-style-17 .listing-bottom-metas .add_to_favourites.btn{
+	float:left;
+}
+.listing-post-style-17 .listing-bottom-metas .publish_date{
+	float:left;
+	line-height:1;
+}
+.rtl .listing-post-style-17 .listing-bottom-metas .publish_date{
+	float:right;
+}
+.listing-scroll.listing-post-style-17{
+	margin-bottom:0 !important;
+}
+
+.listing-post-style-17 .directorypress-field-type-status {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+.listing-post-style-17 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:0;
+}
+/* wcfm integration */
+
+.listing-post-style-17 .listing-add-to-cart {
+    position: absolute;
+    top: auto;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    right: 10px;
+    line-height: 32px;
+    font-size: 16px;
+    bottom: 10px;
+    border-radius: 2px;
+}

@@ -1,0 +1,309 @@
+.pacz-image-box {
+  overflow: hidden;
+}
+.pacz-image-box.rounded-true {
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+}
+.pacz-image-box.rounded-true .pacz-image-box-media {
+  -webkit-border-top-right-radius: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 9px;
+  border-top-left-radius: 9px;
+  background-clip: padding-box;
+  -moz-border-radius-topright: 9px;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 9px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  -webkit-mask-image: -webkit-radial-gradient(circle, #ffffff, #000000);
+}
+.pacz-image-box.rounded-true .featured-image {
+  -webkit-border-top-right-radius: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 9px;
+  border-top-left-radius: 9px;
+  background-clip: padding-box;
+  -moz-border-radius-topright: 9px;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 9px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  position: relative;
+  z-index: 1;
+}
+.pacz-image-box.rounded-true .featured-image img {
+  -webkit-border-top-right-radius: 9px;
+  border-top-right-radius: 9px;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 9px;
+  border-top-left-radius: 9px;
+  background-clip: padding-box;
+  -moz-border-radius-topright: 9px;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 9px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  vertical-align: middle;
+}
+.pacz-image-box.align-left .item-holder {
+  text-align: left;
+}
+.pacz-image-box.align-center .item-holder {
+  text-align: center;
+}
+.pacz-image-box.align-right .item-holder {
+  text-align: right;
+}
+.pacz-image-box .gallery-meta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  text-align: center;
+  min-width: 32px;
+  margin: -17px 0 0 -17px;
+}
+.pacz-image-box .gallery-meta i {
+  font-size: 16px;
+  width: 27px;
+  height: 27px;
+  text-align: center;
+  color: #fff;
+  border-radius: 3px;
+  border: 3px solid #fff;
+  display: inline-block;
+  margin: 0 auto;
+  -webkit-backface-visibility: hidden;
+}
+.pacz-image-box .gallery-meta i:before {
+  height: 28px;
+  line-height: 28px;
+}
+.pacz-image-box .gallery-meta i:hover {
+  background-color: #fff;
+  color: #000;
+}
+.pacz-image-box .image-box-title {
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+}
+.pacz-image-box .image-box-desc {
+  font-size: 14px;
+  line-height: 24px;
+}
+.pacz-image-box .item-holder {
+  padding: 30px;
+}
+.pacz-image-box .featured-image {
+  display: block;
+  overflow: hidden;
+}
+.pacz-image-box .featured-image img {
+  -webkit-transform: translate3d(0, 0, 0) scale(1.05);
+  transform: translate3d(0, 0, 0) scale(1.05);
+  -webkit-transition: -webkit-transform 0.35s ease-in-out;
+  transition: transform 0.35s ease-in-out;
+}
+.pacz-image-box .featured-image i {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.25s ease-in-out, visibility 0.25s, background-color 0.25s, color 0.25s;
+  transition: opacity 0.25s, transform 0.25s ease-in-out, visibility 0.25s, background-color 0.25s, color 0.25s;
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+.pacz-image-box .featured-image i:hover {
+  background-color: #fff;
+  color: #000;
+}
+.pacz-image-box .featured-image:hover img {
+  -webkit-transform: translate3d(0, -2.5%, 0) scale(1.05);
+  transform: translate3d(0, -2.5%, 0) scale(1.05);
+}
+.pacz-image-box .featured-image:hover i {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.pacz-image-box .pacz-image-box-media {
+  overflow: hidden;
+  position: relative;
+}
+.pacz-image-box .pacz-imagebox-video-preview {
+  display: none;
+}
+.pacz-image-box .pacz-video-container {
+  padding-top: 0;
+}
+.pacz-image-box .pacz-imagebox-video {
+  display: block;
+  width: 100%;
+}
+.pacz-image-box .pacz-imagebox-video video {
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+@media handheld, only screen and (max-width: 600px) {
+  .pacz-image-box .pacz-imagebox-video.video-self-hosted {
+    display: none!important;
+  }
+  .pacz-image-box .pacz-imagebox-video-preview {
+    display: block;
+  }
+}
+/* Shortcode:Moving Images
+-------------------------------------------------------------------- */
+.pacz-moving-image img {
+  display: inline-block !important;
+  width: auto !important;
+}
+.pacz-moving-image.align-center {
+  text-align: center;
+}
+.pacz-moving-image.align-center img {
+  margin: 0 auto;
+}
+.pacz-moving-image.align-right {
+  text-align: right;
+}
+.pacz-moving-image.align-left {
+  text-align: left;
+}
+
+.pacz-advanced-gmaps img {
+  max-width: none !important;
+}
+/* Shortcode:Image
+-------------------------------------------------------------------- */
+.pacz-image {
+  position: relative;
+  overflow: hidden;
+  line-height: 4px;
+}
+.pacz-image a {
+  display: block;
+}
+.pacz-image.circular-true {
+  border-radius: 50%;
+}
+.pacz-image.circular-true img {
+  border-radius: 50%;
+}
+.pacz-image.circular-true .hover-overlay {
+  border-radius: 50%;
+}
+.pacz-image.align-left {
+  text-align: left;
+}
+.pacz-image.align-right {
+  float: right;
+}
+.pacz-image.align-center {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+.pacz-image img {
+  position: relative;
+  z-index: 6;
+  line-height: 4px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.pacz-image.style1-image .hover-overlay {
+  background-color: #000 !important;
+}
+.pacz-image.style1-image:hover .hover-overlay {
+  opacity: 0.6;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+}
+.pacz-image.style1-image:hover .pacz-image-hover i,
+.pacz-image.style1-image:hover .pacz-image-caption {
+  opacity: 1;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+}
+.pacz-image.style2-image .hover-overlay {
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: -o-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background-color: inherit !important;
+}
+.pacz-image.style2-image:hover .hover-overlay {
+  opacity: 1;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+}
+.pacz-image.style2-image:hover .pacz-image-hover i,
+.pacz-image.style2-image:hover .pacz-image-caption {
+  opacity: 1;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+}
+.pacz-image.style2-image:hover .pacz-image-hover {
+  pointer-events: auto;
+}
+.pacz-image .pacz-image-hover {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  z-index: 12;
+  text-align: center;
+  display: block;
+}
+.pacz-image .pacz-image-hover i {
+  font-size: 16px;
+  color: #fff;
+  position: relative;
+  opacity: 0;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  display: inline-block;
+  border: 3px solid #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.pacz-image .pacz-image-hover i:hover {
+  background-color: #fff;
+  color: #000;
+}
+.pacz-image .pacz-image-caption {
+  line-height: 24px;
+  font-size: 13px;
+  margin-top: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff !important;
+  position: relative;
+  opacity: 0;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+}

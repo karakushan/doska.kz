@@ -1,0 +1,45 @@
+/* Charts
+-------------------------------------------------------------------- */
+.pacz-chart {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+}
+.pacz-chart canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.pacz-chart i,
+.pacz-chart .chart-custom-text,
+.pacz-chart .chart-percent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  color: #444;
+  text-align: center;
+}
+.pacz-chart i {
+  font-size: 48px;
+}
+.pacz-chart .chart-custom-text {
+  font-size: 18px;
+}
+.pacz-chart .chart-percent {
+  font-weight: 600;
+  font-size: 16px;
+}
+.pacz-chart-desc {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+}
+@media handheld, only screen and (max-width: 600px) {
+  .pacz-chart {
+    margin: 0 auto;
+  }
+}

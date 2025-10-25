@@ -1,0 +1,519 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: DirectoryPress Advanced Fields\n"
+"POT-Creation-Date: 2025-02-03 15:52+0500\n"
+"PO-Revision-Date: 2021-12-03 06:57+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: directorypress-advanced-fields.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: admin/class-directorypress-advanced-fields-admin.php:34
+msgid "Listing Status"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:119
+msgid "Digit"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:120
+msgid "Radio"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:121
+msgid "Checkbox"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:122
+msgid "Color"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:123
+msgid "Attachment"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:124
+msgid "Hours"
+msgstr ""
+
+#: includes/class-directorypress-advanced-fields.php:125
+msgid "Status"
+msgstr ""
+
+#: includes/fields/attachment/_html/configuration.php:5
+msgid "Allow custom file title"
+msgstr ""
+
+#: includes/fields/attachment/_html/configuration.php:14
+msgid "Default file title"
+msgstr ""
+
+#: includes/fields/attachment/_html/configuration.php:23
+msgid "Default Title"
+msgstr ""
+
+#: includes/fields/attachment/_html/configuration.php:29
+msgid "Allowed mime types"
+msgstr ""
+
+#: includes/fields/attachment/_html/input.php:21
+msgid "Upload:"
+msgstr ""
+
+#: includes/fields/attachment/_html/input.php:24
+msgid "File title:"
+msgstr ""
+
+#: includes/fields/attachment/_html/input.php:27
+msgid "reset uploaded file"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:25
+#: includes/fields/attachment/attachment.php:26
+msgid "Default file title text"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:27
+#: includes/fields/attachment/attachment.php:28
+msgid "Use default file title text"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:32
+#: includes/fields/digit/digit.php:34 includes/fields/hours/hours.php:38
+msgid "Field configuration was updated successfully!"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:105
+#, php-format
+msgid "%s is required to be uploaded!"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:122
+msgid "File upload failed!"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:127
+msgid "This type of file is not allowed!"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:131
+msgid "The content of file is not allowed!"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:141
+msgid "Error during file upload!"
+msgstr ""
+
+#: includes/fields/attachment/attachment.php:189
+msgid "ID of media attachment is invalid"
+msgstr ""
+
+#: includes/fields/checkbox/_html/configuration.php:42
+#: includes/fields/color/_html/configuration.php:46
+#: includes/fields/status/_html/configuration.php:46
+msgid "Selection items:"
+msgstr ""
+
+#: includes/fields/checkbox/_html/configuration.php:81
+#: includes/fields/color/_html/configuration.php:85
+#: includes/fields/status/_html/configuration.php:85
+msgid "Add New Option"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:22
+msgid "How to display items"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:26
+msgid "All items with checked/unchecked marks"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:35
+msgid "Only checked items"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:47
+msgid "Select icon type"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:51
+msgid "default check icon "
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:60
+msgid "Custom icons"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:82 includes/fields/color/color.php:29
+#: includes/fields/status/status.php:31
+msgid "Options"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:83
+msgid "How to display Options"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:84
+msgid "Select Icon Type"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:85
+msgid "Option's Icon"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:100 includes/fields/color/color.php:47
+#: includes/fields/status/status.php:49
+msgid "updated successfully!"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:146 includes/fields/color/color.php:92
+#: includes/fields/status/status.php:96
+#, php-format
+msgid "This selection option index \"%d\" doesn't exist"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:151 includes/fields/color/color.php:97
+#, php-format
+msgid "At least one option must be selected in \"%s\" content field"
+msgstr ""
+
+#: includes/fields/checkbox/checkbox.php:194
+#: includes/fields/color/color.php:140 includes/fields/status/status.php:131
+#, php-format
+msgid "This selection option \"%s\" doesn't exist"
+msgstr ""
+
+#: includes/fields/color/color.php:32 includes/fields/status/status.php:34
+msgid "Color code"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:5
+msgid "Select Value Type"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:7
+msgid "integer"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:12
+msgid "decimal"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:20
+#: includes/fields/digit/digit.php:27
+msgid "Decimal separator"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:23
+#: includes/fields/digit/_html/configuration.php:33
+msgid "dot"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:24
+#: includes/fields/digit/_html/configuration.php:34
+msgid "comma"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:29
+#: includes/fields/digit/digit.php:28
+msgid "Thousands separator"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:32
+msgid "no separator"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:35
+msgid "space"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:40
+msgid "Minimum Length (optional)"
+msgstr ""
+
+#: includes/fields/digit/_html/configuration.php:46
+msgid "Maximum Length (optional)"
+msgstr ""
+
+#: includes/fields/digit/digit.php:26
+msgid "Is integer or decimal"
+msgstr ""
+
+#: includes/fields/digit/digit.php:29
+#: includes/search/filters/digit/class-digit.php:212
+#: includes/search/filters/hours/class-hours.php:105
+msgid "Min"
+msgstr ""
+
+#: includes/fields/digit/digit.php:30
+#: includes/search/filters/digit/class-digit.php:217
+#: includes/search/filters/hours/class-hours.php:110
+msgid "Max"
+msgstr ""
+
+#: includes/fields/digit/digit.php:131
+#, php-format
+msgid "The %s field must contain only numbers."
+msgstr ""
+
+#: includes/fields/digit/digit.php:133
+#, php-format
+msgid "The %s field must contain an integer."
+msgstr ""
+
+#: includes/fields/digit/digit.php:135
+#, php-format
+msgid "The %s field must contain a number greater than %s."
+msgstr ""
+
+#: includes/fields/digit/digit.php:137
+#, php-format
+msgid "The %s field must contain a number less than %s."
+msgstr ""
+
+#: includes/fields/hours/_html/configuration.php:5
+#: includes/fields/hours/hours.php:30
+msgid "Time Interval"
+msgstr ""
+
+#: includes/fields/hours/_html/input.php:58
+msgid "custom timing"
+msgstr ""
+
+#: includes/fields/hours/_html/input.php:59 includes/fields/hours/hours.php:187
+msgid "day off"
+msgstr ""
+
+#: includes/fields/hours/_html/input.php:60
+msgid "Open 24 Hours"
+msgstr ""
+
+#: includes/fields/hours/hours.php:48
+msgid "Field configuration was not updated!"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Sunday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Monday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Tuesday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Wednesday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Thursday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Friday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:71 includes/fields/hours/hours.php:150
+msgid "Saturday"
+msgstr ""
+
+#: includes/fields/hours/hours.php:157 includes/fields/hours/hours.php:198
+msgid "Closed"
+msgstr ""
+
+#: includes/fields/hours/hours.php:159
+msgid "Open 24 hours"
+msgstr ""
+
+#: includes/fields/hours/hours.php:189
+msgid "24 hours"
+msgstr ""
+
+#: includes/fields/hours/hours.php:196
+msgid "Open"
+msgstr ""
+
+#: includes/fields/status/_html/input.php:12
+#: includes/search/filters/color/_html/selectbox.php:10
+#, php-format
+msgid "- Select %s -"
+msgstr ""
+
+#: includes/fields/status/status.php:100
+#, php-format
+msgid "\"%s\" field is required"
+msgstr ""
+
+#: includes/search/filters/color/class-color.php:7
+msgid "All"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:19
+#: includes/search/filters/digit/class-digit.php:15
+#: includes/search/filters/price/_html/configuration.php:19
+#: includes/search/filters/price/class-price.php:9
+msgid "Search mode"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:21
+#: includes/search/filters/price/_html/configuration.php:21
+msgid "Exact Number"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:26
+#: includes/search/filters/price/_html/configuration.php:31
+msgid "Min-Max"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:31
+#: includes/search/filters/price/_html/configuration.php:36
+msgid "Min-Max Slider"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:36
+msgid "Min-Max Range Slider"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:42
+#: includes/search/filters/price/_html/configuration.php:47
+msgid "From:"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:42
+#: includes/search/filters/price/_html/configuration.php:47
+msgid "To:"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:47
+#: includes/search/filters/digit/class-digit.php:16
+#: includes/search/filters/price/_html/configuration.php:52
+#: includes/search/filters/price/class-price.php:10
+msgid "Min-Max options"
+msgstr ""
+
+#: includes/search/filters/digit/_html/configuration.php:64
+#: includes/search/filters/price/_html/configuration.php:69
+msgid "Add min-max option"
+msgstr ""
+
+#: includes/search/filters/digit/_html/digit.php:8
+#, php-format
+msgid "Enter %s"
+msgstr ""
+
+#: includes/search/filters/digit/_html/min-max.php:10
+#: includes/search/filters/price/_html/min-max.php:11
+msgid "- Select min -"
+msgstr ""
+
+#: includes/search/filters/digit/_html/min-max.php:20
+#: includes/search/filters/price/_html/min-max.php:21
+msgid "- Select max -"
+msgstr ""
+
+#: includes/search/filters/digit/_html/slider.php:4
+#: includes/search/filters/digit/_html/slider.php:7
+#: includes/search/filters/digit/_html/slider.php:18
+#: includes/search/filters/digit/_html/slider.php:40
+#: includes/search/filters/digit/_html/slider.php:50
+#: includes/search/filters/digit/_html/slider.php:73
+#: includes/search/filters/price/_html/slider.php:4
+#: includes/search/filters/price/_html/slider.php:7
+#: includes/search/filters/price/_html/slider.php:27
+#: includes/search/filters/price/_html/slider.php:44
+#: includes/search/filters/price/_html/slider.php:83
+#: includes/search/filters/price/_html/slider.php:106
+#: includes/search/filters/price/_html/slider.php:157
+msgid "min"
+msgstr ""
+
+#: includes/search/filters/digit/_html/slider.php:5
+#: includes/search/filters/digit/_html/slider.php:8
+#: includes/search/filters/digit/_html/slider.php:18
+#: includes/search/filters/digit/_html/slider.php:44
+#: includes/search/filters/digit/_html/slider.php:57
+#: includes/search/filters/digit/_html/slider.php:74
+#: includes/search/filters/price/_html/slider.php:5
+#: includes/search/filters/price/_html/slider.php:8
+#: includes/search/filters/price/_html/slider.php:27
+#: includes/search/filters/price/_html/slider.php:44
+#: includes/search/filters/price/_html/slider.php:88
+#: includes/search/filters/price/_html/slider.php:110
+#: includes/search/filters/price/_html/slider.php:158
+msgid "max"
+msgstr ""
+
+#: includes/search/filters/digit/class-digit.php:17
+#: includes/search/filters/price/class-price.php:11
+msgid "From option"
+msgstr ""
+
+#: includes/search/filters/digit/class-digit.php:18
+#: includes/search/filters/price/class-price.php:12
+msgid "To option"
+msgstr ""
+
+#: includes/search/filters/digit/class-digit.php:22
+#: includes/search/filters/price/class-price.php:16
+msgid "Search field configuration was updated successfully!"
+msgstr ""
+
+#: includes/search/filters/hours/_html/input.php:6
+#: includes/search/filters/price/_html/range.php:7
+#, php-format
+msgid "%s Range Options"
+msgstr ""
+
+#: includes/search/filters/price/_html/configuration.php:26
+msgid "Range Options"
+msgstr ""
+
+#: includes/search/filters/price/_html/configuration.php:41
+msgid "Range Slider"
+msgstr ""
+
+#: includes/search/filters/price/class-price.php:80
+#, php-format
+msgid "%s from %s"
+msgstr ""
+
+#: includes/search/filters/price/class-price.php:87
+#, php-format
+msgid "%s to %s"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "DirectoryPress Advanced Fields"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://designinvento.net/downloads/directorypress-advanced-fields"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "This addon plugin Extends field types for DirectoryPress plugin."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Designinvento"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://designinvento.net"
+msgstr ""

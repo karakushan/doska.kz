@@ -1,0 +1,458 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 24/02/2019 19:51
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-engine-oil:before { content: "\f100"; }
+.flaticon-wheel:before { content: "\f101"; }
+.flaticon-timing-belt:before { content: "\f102"; }
+.flaticon-oil-gauge:before { content: "\f103"; }
+.flaticon-door:before { content: "\f104"; }
+.flaticon-wheel-1:before { content: "\f105"; }
+.flaticon-starter:before { content: "\f106"; }
+.flaticon-headlights:before { content: "\f107"; }
+.flaticon-automatic-transmission:before { content: "\f108"; }
+.flaticon-radiator:before { content: "\f109"; }
+.flaticon-seat:before { content: "\f10a"; }
+.flaticon-mirror:before { content: "\f10b"; }
+.flaticon-seatbelt:before { content: "\f10c"; }
+.flaticon-condenser:before { content: "\f10d"; }
+.flaticon-air-conditioner:before { content: "\f10e"; }
+.flaticon-hood:before { content: "\f10f"; }
+.flaticon-car:before { content: "\f110"; }
+.flaticon-window:before { content: "\f111"; }
+.flaticon-spark-plug:before { content: "\f112"; }
+.flaticon-light-bulb:before { content: "\f113"; }
+.flaticon-fender:before { content: "\f114"; }
+.flaticon-oil-filter:before { content: "\f115"; }
+.flaticon-mirror-1:before { content: "\f116"; }
+.flaticon-bumper:before { content: "\f117"; }
+.flaticon-air-filter:before { content: "\f118"; }
+.flaticon-antenna:before { content: "\f119"; }
+.flaticon-grid:before { content: "\f11a"; }
+.flaticon-navigator:before { content: "\f11b"; }
+.flaticon-brake-pad:before { content: "\f11c"; }
+.flaticon-accelerator:before { content: "\f11d"; }
+.flaticon-motor:before { content: "\f11e"; }
+.flaticon-oil:before { content: "\f11f"; }
+.flaticon-gas-station:before { content: "\f120"; }
+.flaticon-car-wash:before { content: "\f121"; }
+.flaticon-steering-wheel:before { content: "\f122"; }
+.flaticon-manual:before { content: "\f123"; }
+.flaticon-safety-belt:before { content: "\f124"; }
+.flaticon-paint:before { content: "\f125"; }
+.flaticon-clipboard:before { content: "\f126"; }
+.flaticon-disc-brake:before { content: "\f127"; }
+.flaticon-speedometer:before { content: "\f128"; }
+.flaticon-spark-plug-1:before { content: "\f129"; }
+.flaticon-spark-plug-2:before { content: "\f12a"; }
+.flaticon-speedometer-1:before { content: "\f12b"; }
+.flaticon-piston:before { content: "\f12c"; }
+.flaticon-start-button:before { content: "\f12d"; }
+.flaticon-disc-brake-1:before { content: "\f12e"; }
+.flaticon-parking-sensor:before { content: "\f12f"; }
+.flaticon-airbag:before { content: "\f130"; }
+.flaticon-speedometer-2:before { content: "\f131"; }
+.flaticon-inspection:before { content: "\f132"; }
+.flaticon-engine:before { content: "\f133"; }
+.flaticon-tire:before { content: "\f134"; }
+.flaticon-piston-1:before { content: "\f135"; }
+.flaticon-electrical-service:before { content: "\f136"; }
+.flaticon-wheel-alignment:before { content: "\f137"; }
+.flaticon-alloy-wheel:before { content: "\f138"; }
+.flaticon-ignition:before { content: "\f139"; }
+.flaticon-work-tools:before { content: "\f13a"; }
+.flaticon-road:before { content: "\f13b"; }
+.flaticon-placeholder:before { content: "\f13c"; }
+.flaticon-24-hours:before { content: "\f13d"; }
+.flaticon-auto-suspension:before { content: "\f13e"; }
+.flaticon-battery:before { content: "\f13f"; }
+.flaticon-gasoline:before { content: "\f140"; }
+.flaticon-battery-1:before { content: "\f141"; }
+.flaticon-car-1:before { content: "\f142"; }
+.flaticon-document:before { content: "\f143"; }
+.flaticon-car-2:before { content: "\f144"; }
+.flaticon-engine-1:before { content: "\f145"; }
+.flaticon-maintenance:before { content: "\f146"; }
+.flaticon-car-3:before { content: "\f147"; }
+.flaticon-protection:before { content: "\f148"; }
+.flaticon-car-service:before { content: "\f149"; }
+.flaticon-car-service-1:before { content: "\f14a"; }
+.flaticon-car-4:before { content: "\f14b"; }
+.flaticon-car-5:before { content: "\f14c"; }
+.flaticon-car-6:before { content: "\f14d"; }
+.flaticon-chain:before { content: "\f14e"; }
+.flaticon-compressor:before { content: "\f14f"; }
+.flaticon-cogwheel:before { content: "\f150"; }
+.flaticon-disc-brake-2:before { content: "\f151"; }
+.flaticon-engine-2:before { content: "\f152"; }
+.flaticon-gear-stick:before { content: "\f153"; }
+.flaticon-hand:before { content: "\f154"; }
+.flaticon-airplane:before { content: "\f155"; }
+.flaticon-tractor:before { content: "\f156"; }
+.flaticon-airplane-1:before { content: "\f157"; }
+.flaticon-airplane-2:before { content: "\f158"; }
+.flaticon-boat:before { content: "\f159"; }
+.flaticon-vehicle:before { content: "\f15a"; }
+.flaticon-bus:before { content: "\f15b"; }
+.flaticon-car-7:before { content: "\f15c"; }
+.flaticon-car-8:before { content: "\f15d"; }
+.flaticon-car-9:before { content: "\f15e"; }
+.flaticon-car-10:before { content: "\f15f"; }
+.flaticon-crane:before { content: "\f160"; }
+.flaticon-cruise:before { content: "\f161"; }
+.flaticon-airplane-3:before { content: "\f162"; }
+.flaticon-delivery:before { content: "\f163"; }
+.flaticon-tractor-1:before { content: "\f164"; }
+.flaticon-goods:before { content: "\f165"; }
+.flaticon-goods-1:before { content: "\f166"; }
+.flaticon-goods-2:before { content: "\f167"; }
+.flaticon-jeep:before { content: "\f168"; }
+.flaticon-train:before { content: "\f169"; }
+.flaticon-lorry:before { content: "\f16a"; }
+.flaticon-lorry-1:before { content: "\f16b"; }
+.flaticon-ambulance:before { content: "\f16c"; }
+.flaticon-airplane-4:before { content: "\f16d"; }
+.flaticon-airplane-5:before { content: "\f16e"; }
+.flaticon-steering-wheel-1:before { content: "\f16f"; }
+.flaticon-oil-1:before { content: "\f170"; }
+.flaticon-speedometer-3:before { content: "\f171"; }
+.flaticon-key:before { content: "\f172"; }
+.flaticon-parking:before { content: "\f173"; }
+.flaticon-gauge:before { content: "\f174"; }
+.flaticon-car-engine:before { content: "\f175"; }
+.flaticon-motorcycle:before { content: "\f176"; }
+.flaticon-engine-3:before { content: "\f177"; }
+.flaticon-dashboard:before { content: "\f178"; }
+.flaticon-formula-1:before { content: "\f179"; }
+.flaticon-belt:before { content: "\f17a"; }
+.flaticon-timing-belt-1:before { content: "\f17b"; }
+.flaticon-motorcycle-1:before { content: "\f17c"; }
+.flaticon-windshield:before { content: "\f17d"; }
+.flaticon-spray-paint:before { content: "\f17e"; }
+.flaticon-motorcycle-2:before { content: "\f17f"; }
+.flaticon-engine-4:before { content: "\f180"; }
+.flaticon-air-filter-1:before { content: "\f181"; }
+.flaticon-helmet:before { content: "\f182"; }
+.flaticon-engine-5:before { content: "\f183"; }
+.flaticon-engine-6:before { content: "\f184"; }
+.flaticon-quad:before { content: "\f185"; }
+.flaticon-damper:before { content: "\f186"; }
+.flaticon-damper-1:before { content: "\f187"; }
+.flaticon-steering-wheel-2:before { content: "\f188"; }
+.flaticon-oil-2:before { content: "\f189"; }
+.flaticon-piston-2:before { content: "\f18a"; }
+.flaticon-motorcycle-3:before { content: "\f18b"; }
+.flaticon-battery-2:before { content: "\f18c"; }
+.flaticon-car-door:before { content: "\f18d"; }
+.flaticon-helmet-1:before { content: "\f18e"; }
+.flaticon-jerrycan:before { content: "\f18f"; }
+.flaticon-piston-3:before { content: "\f190"; }
+.flaticon-helmet-2:before { content: "\f191"; }
+.flaticon-suspension:before { content: "\f192"; }
+.flaticon-engine-7:before { content: "\f193"; }
+.flaticon-car-lights:before { content: "\f194"; }
+.flaticon-piston-4:before { content: "\f195"; }
+.flaticon-gearshift:before { content: "\f196"; }
+.flaticon-cross-wrench:before { content: "\f197"; }
+.flaticon-chassis:before { content: "\f198"; }
+.flaticon-car-11:before { content: "\f199"; }
+.flaticon-crankshaft:before { content: "\f19a"; }
+.flaticon-alloy-wheel-1:before { content: "\f19b"; }
+.flaticon-wheel-2:before { content: "\f19c"; }
+.flaticon-camera:before { content: "\f19d"; }
+.flaticon-radiator-1:before { content: "\f19e"; }
+.flaticon-chassis-1:before { content: "\f19f"; }
+.flaticon-motor-1:before { content: "\f1a0"; }
+.flaticon-tire-1:before { content: "\f1a1"; }
+.flaticon-distribution:before { content: "\f1a2"; }
+.flaticon-route:before { content: "\f1a3"; }
+.flaticon-highway:before { content: "\f1a4"; }
+.flaticon-speedometer-4:before { content: "\f1a5"; }
+.flaticon-gas-station-1:before { content: "\f1a6"; }
+.flaticon-speedometer-5:before { content: "\f1a7"; }
+.flaticon-key-1:before { content: "\f1a8"; }
+.flaticon-battery-3:before { content: "\f1a9"; }
+.flaticon-anchor:before { content: "\f1aa"; }
+.flaticon-quad-1:before { content: "\f1ab"; }
+.flaticon-finish:before { content: "\f1ac"; }
+.flaticon-cross-wrench-1:before { content: "\f1ad"; }
+.flaticon-chopper:before { content: "\f1ae"; }
+.flaticon-cone:before { content: "\f1af"; }
+.flaticon-case:before { content: "\f1b0"; }
+.flaticon-car-key:before { content: "\f1b1"; }
+.flaticon-battery-4:before { content: "\f1b2"; }
+.flaticon-gasoline-1:before { content: "\f1b3"; }
+.flaticon-navigation:before { content: "\f1b4"; }
+.flaticon-piston-5:before { content: "\f1b5"; }
+.flaticon-tricycle:before { content: "\f1b6"; }
+.flaticon-traffic-light:before { content: "\f1b7"; }
+.flaticon-tools:before { content: "\f1b8"; }
+.flaticon-speedometer-6:before { content: "\f1b9"; }
+.flaticon-podium:before { content: "\f1ba"; }
+.flaticon-street:before { content: "\f1bb"; }
+.flaticon-traffic-light-1:before { content: "\f1bc"; }
+.flaticon-dashboard-1:before { content: "\f1bd"; }
+.flaticon-gear-shift:before { content: "\f1be"; }
+.flaticon-traffic-cone:before { content: "\f1bf"; }
+.flaticon-warning:before { content: "\f1c0"; }
+.flaticon-traffic-light-2:before { content: "\f1c1"; }
+.flaticon-car-light:before { content: "\f1c2"; }
+.flaticon-stop:before { content: "\f1c3"; }
+.flaticon-road-1:before { content: "\f1c4"; }
+.flaticon-location:before { content: "\f1c5"; }
+.flaticon-street-1:before { content: "\f1c6"; }
+.flaticon-road-2:before { content: "\f1c7"; }
+.flaticon-dashboard-2:before { content: "\f1c8"; }
+.flaticon-sign:before { content: "\f1c9"; }
+.flaticon-car-12:before { content: "\f1ca"; }
+.flaticon-tachometer:before { content: "\f1cb"; }
+.flaticon-car-light-1:before { content: "\f1cc"; }
+.flaticon-road-3:before { content: "\f1cd"; }
+.flaticon-first-aid-kit:before { content: "\f1ce"; }
+.flaticon-battery-5:before { content: "\f1cf"; }
+.flaticon-stop-1:before { content: "\f1d0"; }
+    
+    $font-Flaticon-engine-oil: "\f100";
+    $font-Flaticon-wheel: "\f101";
+    $font-Flaticon-timing-belt: "\f102";
+    $font-Flaticon-oil-gauge: "\f103";
+    $font-Flaticon-door: "\f104";
+    $font-Flaticon-wheel-1: "\f105";
+    $font-Flaticon-starter: "\f106";
+    $font-Flaticon-headlights: "\f107";
+    $font-Flaticon-automatic-transmission: "\f108";
+    $font-Flaticon-radiator: "\f109";
+    $font-Flaticon-seat: "\f10a";
+    $font-Flaticon-mirror: "\f10b";
+    $font-Flaticon-seatbelt: "\f10c";
+    $font-Flaticon-condenser: "\f10d";
+    $font-Flaticon-air-conditioner: "\f10e";
+    $font-Flaticon-hood: "\f10f";
+    $font-Flaticon-car: "\f110";
+    $font-Flaticon-window: "\f111";
+    $font-Flaticon-spark-plug: "\f112";
+    $font-Flaticon-light-bulb: "\f113";
+    $font-Flaticon-fender: "\f114";
+    $font-Flaticon-oil-filter: "\f115";
+    $font-Flaticon-mirror-1: "\f116";
+    $font-Flaticon-bumper: "\f117";
+    $font-Flaticon-air-filter: "\f118";
+    $font-Flaticon-antenna: "\f119";
+    $font-Flaticon-grid: "\f11a";
+    $font-Flaticon-navigator: "\f11b";
+    $font-Flaticon-brake-pad: "\f11c";
+    $font-Flaticon-accelerator: "\f11d";
+    $font-Flaticon-motor: "\f11e";
+    $font-Flaticon-oil: "\f11f";
+    $font-Flaticon-gas-station: "\f120";
+    $font-Flaticon-car-wash: "\f121";
+    $font-Flaticon-steering-wheel: "\f122";
+    $font-Flaticon-manual: "\f123";
+    $font-Flaticon-safety-belt: "\f124";
+    $font-Flaticon-paint: "\f125";
+    $font-Flaticon-clipboard: "\f126";
+    $font-Flaticon-disc-brake: "\f127";
+    $font-Flaticon-speedometer: "\f128";
+    $font-Flaticon-spark-plug-1: "\f129";
+    $font-Flaticon-spark-plug-2: "\f12a";
+    $font-Flaticon-speedometer-1: "\f12b";
+    $font-Flaticon-piston: "\f12c";
+    $font-Flaticon-start-button: "\f12d";
+    $font-Flaticon-disc-brake-1: "\f12e";
+    $font-Flaticon-parking-sensor: "\f12f";
+    $font-Flaticon-airbag: "\f130";
+    $font-Flaticon-speedometer-2: "\f131";
+    $font-Flaticon-inspection: "\f132";
+    $font-Flaticon-engine: "\f133";
+    $font-Flaticon-tire: "\f134";
+    $font-Flaticon-piston-1: "\f135";
+    $font-Flaticon-electrical-service: "\f136";
+    $font-Flaticon-wheel-alignment: "\f137";
+    $font-Flaticon-alloy-wheel: "\f138";
+    $font-Flaticon-ignition: "\f139";
+    $font-Flaticon-work-tools: "\f13a";
+    $font-Flaticon-road: "\f13b";
+    $font-Flaticon-placeholder: "\f13c";
+    $font-Flaticon-24-hours: "\f13d";
+    $font-Flaticon-auto-suspension: "\f13e";
+    $font-Flaticon-battery: "\f13f";
+    $font-Flaticon-gasoline: "\f140";
+    $font-Flaticon-battery-1: "\f141";
+    $font-Flaticon-car-1: "\f142";
+    $font-Flaticon-document: "\f143";
+    $font-Flaticon-car-2: "\f144";
+    $font-Flaticon-engine-1: "\f145";
+    $font-Flaticon-maintenance: "\f146";
+    $font-Flaticon-car-3: "\f147";
+    $font-Flaticon-protection: "\f148";
+    $font-Flaticon-car-service: "\f149";
+    $font-Flaticon-car-service-1: "\f14a";
+    $font-Flaticon-car-4: "\f14b";
+    $font-Flaticon-car-5: "\f14c";
+    $font-Flaticon-car-6: "\f14d";
+    $font-Flaticon-chain: "\f14e";
+    $font-Flaticon-compressor: "\f14f";
+    $font-Flaticon-cogwheel: "\f150";
+    $font-Flaticon-disc-brake-2: "\f151";
+    $font-Flaticon-engine-2: "\f152";
+    $font-Flaticon-gear-stick: "\f153";
+    $font-Flaticon-hand: "\f154";
+    $font-Flaticon-airplane: "\f155";
+    $font-Flaticon-tractor: "\f156";
+    $font-Flaticon-airplane-1: "\f157";
+    $font-Flaticon-airplane-2: "\f158";
+    $font-Flaticon-boat: "\f159";
+    $font-Flaticon-vehicle: "\f15a";
+    $font-Flaticon-bus: "\f15b";
+    $font-Flaticon-car-7: "\f15c";
+    $font-Flaticon-car-8: "\f15d";
+    $font-Flaticon-car-9: "\f15e";
+    $font-Flaticon-car-10: "\f15f";
+    $font-Flaticon-crane: "\f160";
+    $font-Flaticon-cruise: "\f161";
+    $font-Flaticon-airplane-3: "\f162";
+    $font-Flaticon-delivery: "\f163";
+    $font-Flaticon-tractor-1: "\f164";
+    $font-Flaticon-goods: "\f165";
+    $font-Flaticon-goods-1: "\f166";
+    $font-Flaticon-goods-2: "\f167";
+    $font-Flaticon-jeep: "\f168";
+    $font-Flaticon-train: "\f169";
+    $font-Flaticon-lorry: "\f16a";
+    $font-Flaticon-lorry-1: "\f16b";
+    $font-Flaticon-ambulance: "\f16c";
+    $font-Flaticon-airplane-4: "\f16d";
+    $font-Flaticon-airplane-5: "\f16e";
+    $font-Flaticon-steering-wheel-1: "\f16f";
+    $font-Flaticon-oil-1: "\f170";
+    $font-Flaticon-speedometer-3: "\f171";
+    $font-Flaticon-key: "\f172";
+    $font-Flaticon-parking: "\f173";
+    $font-Flaticon-gauge: "\f174";
+    $font-Flaticon-car-engine: "\f175";
+    $font-Flaticon-motorcycle: "\f176";
+    $font-Flaticon-engine-3: "\f177";
+    $font-Flaticon-dashboard: "\f178";
+    $font-Flaticon-formula-1: "\f179";
+    $font-Flaticon-belt: "\f17a";
+    $font-Flaticon-timing-belt-1: "\f17b";
+    $font-Flaticon-motorcycle-1: "\f17c";
+    $font-Flaticon-windshield: "\f17d";
+    $font-Flaticon-spray-paint: "\f17e";
+    $font-Flaticon-motorcycle-2: "\f17f";
+    $font-Flaticon-engine-4: "\f180";
+    $font-Flaticon-air-filter-1: "\f181";
+    $font-Flaticon-helmet: "\f182";
+    $font-Flaticon-engine-5: "\f183";
+    $font-Flaticon-engine-6: "\f184";
+    $font-Flaticon-quad: "\f185";
+    $font-Flaticon-damper: "\f186";
+    $font-Flaticon-damper-1: "\f187";
+    $font-Flaticon-steering-wheel-2: "\f188";
+    $font-Flaticon-oil-2: "\f189";
+    $font-Flaticon-piston-2: "\f18a";
+    $font-Flaticon-motorcycle-3: "\f18b";
+    $font-Flaticon-battery-2: "\f18c";
+    $font-Flaticon-car-door: "\f18d";
+    $font-Flaticon-helmet-1: "\f18e";
+    $font-Flaticon-jerrycan: "\f18f";
+    $font-Flaticon-piston-3: "\f190";
+    $font-Flaticon-helmet-2: "\f191";
+    $font-Flaticon-suspension: "\f192";
+    $font-Flaticon-engine-7: "\f193";
+    $font-Flaticon-car-lights: "\f194";
+    $font-Flaticon-piston-4: "\f195";
+    $font-Flaticon-gearshift: "\f196";
+    $font-Flaticon-cross-wrench: "\f197";
+    $font-Flaticon-chassis: "\f198";
+    $font-Flaticon-car-11: "\f199";
+    $font-Flaticon-crankshaft: "\f19a";
+    $font-Flaticon-alloy-wheel-1: "\f19b";
+    $font-Flaticon-wheel-2: "\f19c";
+    $font-Flaticon-camera: "\f19d";
+    $font-Flaticon-radiator-1: "\f19e";
+    $font-Flaticon-chassis-1: "\f19f";
+    $font-Flaticon-motor-1: "\f1a0";
+    $font-Flaticon-tire-1: "\f1a1";
+    $font-Flaticon-distribution: "\f1a2";
+    $font-Flaticon-route: "\f1a3";
+    $font-Flaticon-highway: "\f1a4";
+    $font-Flaticon-speedometer-4: "\f1a5";
+    $font-Flaticon-gas-station-1: "\f1a6";
+    $font-Flaticon-speedometer-5: "\f1a7";
+    $font-Flaticon-key-1: "\f1a8";
+    $font-Flaticon-battery-3: "\f1a9";
+    $font-Flaticon-anchor: "\f1aa";
+    $font-Flaticon-quad-1: "\f1ab";
+    $font-Flaticon-finish: "\f1ac";
+    $font-Flaticon-cross-wrench-1: "\f1ad";
+    $font-Flaticon-chopper: "\f1ae";
+    $font-Flaticon-cone: "\f1af";
+    $font-Flaticon-case: "\f1b0";
+    $font-Flaticon-car-key: "\f1b1";
+    $font-Flaticon-battery-4: "\f1b2";
+    $font-Flaticon-gasoline-1: "\f1b3";
+    $font-Flaticon-navigation: "\f1b4";
+    $font-Flaticon-piston-5: "\f1b5";
+    $font-Flaticon-tricycle: "\f1b6";
+    $font-Flaticon-traffic-light: "\f1b7";
+    $font-Flaticon-tools: "\f1b8";
+    $font-Flaticon-speedometer-6: "\f1b9";
+    $font-Flaticon-podium: "\f1ba";
+    $font-Flaticon-street: "\f1bb";
+    $font-Flaticon-traffic-light-1: "\f1bc";
+    $font-Flaticon-dashboard-1: "\f1bd";
+    $font-Flaticon-gear-shift: "\f1be";
+    $font-Flaticon-traffic-cone: "\f1bf";
+    $font-Flaticon-warning: "\f1c0";
+    $font-Flaticon-traffic-light-2: "\f1c1";
+    $font-Flaticon-car-light: "\f1c2";
+    $font-Flaticon-stop: "\f1c3";
+    $font-Flaticon-road-1: "\f1c4";
+    $font-Flaticon-location: "\f1c5";
+    $font-Flaticon-street-1: "\f1c6";
+    $font-Flaticon-road-2: "\f1c7";
+    $font-Flaticon-dashboard-2: "\f1c8";
+    $font-Flaticon-sign: "\f1c9";
+    $font-Flaticon-car-12: "\f1ca";
+    $font-Flaticon-tachometer: "\f1cb";
+    $font-Flaticon-car-light-1: "\f1cc";
+    $font-Flaticon-road-3: "\f1cd";
+    $font-Flaticon-first-aid-kit: "\f1ce";
+    $font-Flaticon-battery-5: "\f1cf";
+    $font-Flaticon-stop-1: "\f1d0";

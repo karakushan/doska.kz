@@ -1,0 +1,26 @@
+/* Shortcode: Skill Meter
+-------------------------------------------------------------------- */
+.pacz-skill-meter {
+  margin-bottom: 18px;
+}
+.pacz-skill-meter .pacz-skill-meter-title {
+  display: block;
+  margin-bottom: 10px;
+  color: #777;
+  line-height: 13px;
+  font-weight: bold;
+}
+.pacz-skill-meter .pacz-progress-bar {
+  position: relative;
+  display: block;
+  background-color: #eee;
+  width: 100%;
+  border-color: #eee;
+  border-style: solid;
+}
+.pacz-skill-meter .pacz-progress-bar .progress-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}

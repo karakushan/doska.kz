@@ -1,0 +1,114 @@
+/* style 11 */
+
+.listing-post-style-11 .directorypress-listing-item-holder {
+	box-shadow: 0 2px #f1f1f1
+}
+.listing-post-style-11 .directorypress-listing-item-holder:hover,
+.listing-post-style-12 .directorypress-listing-item-holder {
+	box-shadow: none
+}
+.listing-post-style-11 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap {
+	border: 1px solid #f1f1f1;
+	background: #fff
+}
+.listing-post-style-11 .directorypress-listing-item-holder:hover .directorypress-listing-text-content-wrap {
+	background-color: #f8f8f8
+}
+
+.listing-post-style-11 figure .price {
+	position: absolute;
+	top: 10px;
+	right: 10px
+}
+.listing-post-style-11 figure .price .directorypress-field-type-price {
+	margin: 0
+}
+.listing-post-style-11 figure .price .field-content {
+	background: #333;
+	padding: 0 10px;
+	min-width: 70px;
+	min-height: 22px;
+	line-height: 22px;
+	color: #fff;
+	text-align: center
+}
+.listing-post-style-11 .listing-cat-icon1 {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 30px;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+}
+.rtl .listing-post-style-11 .listing-cat-icon1 {
+    float: right;
+}
+
+.listing-post-style-11 .listing-cat-icon1 .font-icon {
+	line-height: 32px;
+	width: 32px;
+	max-width: 32px;
+	border-radius: 50%;
+	height: 32px;
+	background: #333;
+	text-align: center;
+	color: #fff;
+	display: block
+}
+
+.listing-post-style-11 .directorypress-listing-title h2 {
+    line-height: 30px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    font-weight: 400;
+}
+.listing-post-style-11 .directorypress-listing-title {
+	line-height: 1;
+	float: left;
+	width: calc(100% - 32px);
+	padding-left: 10px;
+}
+.rtl .listing-post-style-11 .directorypress-listing-title {
+	float:right;
+}
+/* feature tags */
+.listing-post-style-11 .has_featured-tag-1{
+	position:absolute;
+	top:10px;
+	left:10px;
+}
+.listing-post-style-11 .directorypress-field-type-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.listing-post-style-11 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:0;
+}
+/* wcfm integration */
+
+.listing-post-style-11 .listing-add-to-cart {
+    position: absolute;
+    top: auto;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    right: 10px;
+    line-height: 32px;
+    font-size: 16px;
+    bottom: 10px;
+    border-radius: 0;
+}

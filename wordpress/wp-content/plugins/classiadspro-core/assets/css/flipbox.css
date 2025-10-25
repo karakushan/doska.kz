@@ -1,0 +1,161 @@
+/* Shortcode:Flibox
+-------------------------------------------------------------------- */
+.pacz-flipbox-container {
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  -ms-perspective: 2000px;
+  perspective: 2000px;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  width: 100%;
+  text-align: center;
+}
+.pacz-flipbox-container.flip-horizontal .pacz-flipbox-front {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  ms-transform: rotateY(0deg);
+}
+.pacz-flipbox-container.flip-horizontal .pacz-flipbox-back {
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+  ms-transform: rotateY(-180deg);
+}
+.pacz-flipbox-container.flip-horizontal:hover .pacz-flipbox-back {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  ms-transform: rotateY(0deg);
+}
+.pacz-flipbox-container.flip-horizontal:hover .pacz-flipbox-front {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  ms-transform: rotateY(180deg);
+  visibility: hidden;
+}
+.pacz-flipbox-container.flip-vertical .pacz-flipbox-front {
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  -o-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  ms-transform: rotateX(0deg);
+}
+.pacz-flipbox-container.flip-vertical .pacz-flipbox-back {
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+  -ms-transform: rotateX(180deg);
+  -o-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+  ms-transform: rotateX(180deg);
+}
+.pacz-flipbox-container.flip-vertical .pacz-flipbox-flipper {
+  -webkit-transform-origin: 100% 213.5px;
+  -moz-transform-origin: 100% 213.5px;
+  -ms-transform-origin: 100% 213.5px;
+  -o-transform-origin: 100% 213.5px;
+}
+.pacz-flipbox-container.flip-vertical:hover .pacz-flipbox-back {
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  -o-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+  ms-transform: rotateX(0deg);
+}
+.pacz-flipbox-container.flip-vertical:hover .pacz-flipbox-front {
+  -webkit-transform: rotateX(-180deg);
+  -moz-transform: rotateX(-180deg);
+  -ms-transform: rotateX(-180deg);
+  -o-transform: rotateX(-180deg);
+  transform: rotateX(-180deg);
+  ms-transform: rotateX(-180deg);
+  visibility: hidden;
+}
+.pacz-flipbox-flipper {
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -ms-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  -ms-perspective: 2000px;
+  perspective: 2000px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  height: 100%;
+  position: relative;
+}
+.pacz-flipbox-front,
+.pacz-flipbox-back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -ms-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+.pacz-flipbox-front.border-radius-true,
+.pacz-flipbox-back.border-radius-true {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.pacz-flipbox-front .front-desc {
+  padding: 0 10%;
+}
+.pacz-flipbox-back .back-desc {
+  padding: 0 10%;
+}
+.pacz-flipbox-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+.pacz-flipbox-content .back-button {
+  display: inline-block;
+  margin-top: 20px;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  overflow: visible;
+}
+.pacz-flipbox-content .back-button.rounded {
+  overflow: inherit !important;
+}
+.pacz-flipbox-content .front-title,
+.pacz-flipbox-content .back-title {
+  padding: 20px;
+}
+@-moz-document url-prefix() {
+  
+}

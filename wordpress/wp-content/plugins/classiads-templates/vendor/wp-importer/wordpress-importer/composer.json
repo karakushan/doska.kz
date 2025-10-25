@@ -1,0 +1,17 @@
+{
+  "name": "wp-importer/wordpress-importer",
+  "description": "Improved WP content importer used in OCDI plugin and MerlinWP.",
+  "keywords": ["wp", "wordpress", "theme", "import", "content"],
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name":  "wordpressdotorg",
+      "email": ""
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "WpImporter\\WordpressImporter\\": "src/"
+    }
+  }
+}

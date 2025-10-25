@@ -1,5 +1,5 @@
 # WordPress files
-wordpress/
+# wordpress/
 
 # Database backups
 *.sql

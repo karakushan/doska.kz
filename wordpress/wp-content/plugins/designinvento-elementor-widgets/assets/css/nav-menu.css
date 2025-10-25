@@ -1,0 +1,12 @@
+.elementor-widget-pacz-navigation-menu{}
+.elementor-widget-pacz-navigation-menu.hfb-nav-menu__breakpoint-tablet .hfb-active-menu + .hfb-nav-menu__layout-horizontal,
+.elementor-widget-pacz-navigation-menu.hfb-nav-menu__breakpoint-desktop .hfb-active-menu + .hfb-nav-menu__layout-horizontal{
+  width: 270px !important;
+  left: 0 !important;
+  z-index: 9999;
+  flex-direction: column;
+  position: fixed;
+  top: 46px;
+  bottom: 0;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

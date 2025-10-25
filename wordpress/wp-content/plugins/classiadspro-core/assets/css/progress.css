@@ -1,0 +1,94 @@
+.pacz-progress-button {
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+}
+.pacz-progress-button i {
+  border-right: none!important;
+}
+.pacz-progress-button[disabled],
+.pacz-progress-button[disabled].state-loading {
+  cursor: default;
+}
+.pacz-progress-button .pacz-progress-button-content {
+  position: relative;
+  display: block;
+}
+.pacz-progress-button .state-success,
+.pacz-progress-button .state-error {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  margin-top: -8px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+}
+.pacz-progress-button.medium .state-success,
+.pacz-progress-button.medium .state-error {
+  font-size: 14px;
+}
+.notransition {
+  transition: none !important;
+}
+.pacz-progress-button .pacz-progress-inner {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 0;
+  transform-origin: bottom left;
+  -o-transform-origin: bottom left;
+  -ms-transform-origin: bottom left;
+  -moz-transform-origin: bottom left;
+  -webkit-transform-origin: bottom left;
+}
+.pacz-contact-form-wrapper.dark-skin .outline-button .pacz-progress-inner,
+.pacz-contact-form-wrapper.light-skin .outline-button:hover .pacz-progress-inner {
+  background: rgba(0, 0, 0, 0.5);
+}
+.pacz-contact-form-wrapper.light-skin .outline-button .pacz-progress-inner,
+.pacz-contact-form-wrapper.dark-skin .outline-button:hover .pacz-progress-inner {
+  background: rgba(255, 255, 255, 0.5);
+}
+.pacz-progress-button[data-horizontal] .pacz-progress-inner {
+  bottom: 0;
+  width: 0;
+  height: 5px;
+  transition: width 0.3s, opacity 0.3s;
+  transform-origin: bottom left;
+  -webkit-transform-origin: bottom left;
+  -moz-transform-origin: bottom left;
+  -ms-transform-origin: bottom left;
+  -o-transform-origin: bottom left;
+}
+.pacz-progress-button[data-vertical] .pacz-progress-inner {
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  transition: height 0.3s, opacity 0.3s;
+}
+/* move-up */
+/* ====================== */
+.pacz-progress-button[data-style="move-up"] {
+  overflow: visible;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.pacz-progress-button[data-style="move-up"] .pacz-progress-button-content {
+  z-index: 10;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+}
+.pacz-progress-button[data-style="move-up"] .pacz-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.pacz-progress-button[data-style="move-up"].state-loading .pacz-progress-button-content {
+  -webkit-transform: translateY(-10px);
+  transform: translateY(-10px);
+}

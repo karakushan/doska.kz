@@ -1,0 +1,165 @@
+/* style 12 */
+.listing-post-style-12 .directorypress-listing-item-holder{
+	overflow:visible;
+}
+.listing-post-style-12 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap {
+	border: none;
+	background: #fff;
+	padding: 17px 20px!important
+}
+.listing-post-style-12 .directorypress-listing-item-holder:hover {
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .2)
+}
+
+.listing-post-style-12 .add_to_favourites {
+    display: block;
+    font-size: 16px;
+    z-index: 100;
+    background: #fff;
+    border-radius: 2px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+	float:left;
+	margin-left:5px;
+}
+.listing-post-style-12 .add_to_favourites span.checked.fas.fa-heart {
+	color: #555;
+}
+.listing-post-style-12 .add_to_favourites span.unchecked.fas.fa-heart{
+	color: #d1d1d1;
+}
+.listing-post-style-12 .price {
+	float: right
+}
+.listing-post-style-12 .cat-wrapper {
+	float: left
+}
+.listing-post-style-12 .cat-wrapper .listing-cat {
+	font-size: 13px
+}
+.listing-post-style-12 .price .directorypress-field-type-price {
+	margin: 0
+}
+.listing-post-style-12 .price .field-content {
+	font-size: 13px;
+	color: #e3c536;
+	font-weight: 700
+}
+.listing-post-style-12 .listing-cat-icon1 {
+	display: inline-block;
+	line-height: 32px;
+	position: absolute;
+	top: auto;
+	left: 10px;
+	max-width: 32px;
+	overflow: hidden;
+	bottom: 10px;
+}
+.listing-post-style-12 .listing-cat-icon1.svg-wrap {
+
+    width: 32px;
+    overflow: hidden;
+    bottom: 10px;
+    background: rgba(255,255,255,1);
+    border-radius: 3px;
+    height: 32px;
+    padding: 6px;
+
+}
+.listing-post-style-12 .listing-cat-icon1 .font-icon {
+    line-height: 32px;
+    width: 32px;
+    max-width: 32px;
+    border-radius: 0;
+    height: 32px;
+    background: #333;
+    background-color: rgb(51, 51, 51);
+    text-align: center;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    border-radius: 3px;
+
+}
+.listing-post-style-12 .listing-cat-icon1 .cat-icon.svg_icon {
+	font-size: 24px;
+	width: 48px;
+	height: 48px;
+	display: block;
+	background: #fff;
+    padding: 10px;
+}
+.listing-post-style-12 .listing-cat-icon1.svg-wrap img{
+
+    width: 20px;
+	margin: auto;
+	display: block;
+	vertical-align: middle;
+
+}
+.listing-post-style-12 .directorypress-listing-title h2 {
+	line-height: 20px;
+	display: inline-block;
+	vertical-align: top;
+	margin: 0;
+	padding-left: 0;
+	font-weight: 400
+}
+.listing-post-style-12 .directorypress-listing-title {
+	line-height: 1
+}
+/* feature tags */
+.listing-post-style-12 .has_featured-tag-1{
+	position:absolute;
+	top:13px;
+	left:25px;
+}
+
+.listing-post-style-12 .directorypress-field-type-status {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.rtl .listing-post-style-12 .directorypress-field-type-status {
+    left: 10px;
+    right: auto;
+}
+.listing-post-style-12 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:0;
+}
+.listing-post-style-12 .listing-grid-buttons{
+	position:absolute;
+	top:10px;
+	right:10px;
+}
+.rtl .listing-post-style-12 .listing-grid-buttons{
+	left:10px;
+	right:auto;
+}
+/* wcfm integration */
+
+.listing-post-style-12 .listing-add-to-cart {
+    position: static;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    line-height: 32px;
+    font-size: 16px;
+    border-radius: 2px;
+	float:left;
+	margin-left:5px;
+}

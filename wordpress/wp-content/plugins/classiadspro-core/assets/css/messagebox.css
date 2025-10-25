@@ -1,0 +1,89 @@
+/* Shortcode:Message Boxes
+-------------------------------------------------------------------- */
+.pacz-message-box {
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.pacz-message-box.rounded-style {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+.pacz-message-box .pacz-inner-grid {
+  padding: 15px;
+}
+.pacz-message-box .messagebox-content {
+  display: block;
+  margin: 16px 15px 16px 95px;
+  padding: 12px 0 12px 20px;
+  border-left: 2px solid rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+}
+.pacz-message-box .messagebox-content p {
+  margin-bottom: 0;
+  color: inherit;
+  font-size: inherit;
+}
+.pacz-message-box .messagebox-icon {
+  position: absolute;
+  top: 50%;
+  left: 60px;
+  margin-top: -20px;
+  width: 40px;
+  height: 40px;
+  font-size: 32px;
+  line-height: 40px;
+}
+.pacz-message-box .box-close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 16px;
+  color: #fff;
+  z-index: 5;
+  -webkit-transition: opacity 0.2s ease-out;
+  -moz-transition: opacity 0.2s ease-out;
+  -o-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
+  opacity: 0.6;
+}
+.pacz-message-box .box-close-btn:hover {
+  opacity: 1;
+}
+.pacz-message-box.confirm-box {
+  background-color: #a5de37;
+}
+.pacz-message-box.love-box {
+  background-color: #ff667a;
+}
+.pacz-message-box.hint-box {
+  background-color: #28cdfb;
+}
+.pacz-message-box.solution-box {
+  background-color: #f668ca;
+}
+.pacz-message-box.alert-box {
+  background-color: #ff4351;
+}
+.pacz-message-box.warning-box {
+  background-color: #fc880f;
+}
+.pacz-message-box.star-box {
+  background-color: #7b72e9;
+}
+@media handheld, only screen and (max-width: 600px) {
+  .pacz-message-box .messagebox-content {
+    padding: 60px 10px 10px 10px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    text-align: center !important;
+  }
+  .pacz-message-box .messagebox-icon {
+    top: 15px !important;
+    left: 50% !important;
+    margin-top: 0 !important;
+    margin-left: -20px !important;
+  }
+}

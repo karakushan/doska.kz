@@ -1,0 +1,222 @@
+/* style 6 */
+.directorypress-listing.listing-post-style-6 .directorypress-listing-item-holder{
+	overflow:visible;
+}
+.directorypress-listings-block .listing-post-style-6 .directorypress-listing-text-content-wrap {
+	bottom: 0!important;
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: 10px 15px 15px!important;
+	z-index: 100
+}
+.directorypress-listings-block .listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-field-item .field-label .directorypress-field-icon,
+.directorypress-listings-block .listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-field-item .field-content {
+	color: #fff;
+	font-weight: 700;
+	background: #fff;
+	padding: 0px 12px;
+}
+}
+.directorypress-listings-block .listing-post-style-6.directorypress-has_featured .directorypress-listing-text-content-wrap,
+.directorypress-listings-block .listing-post-style-6.directorypress-has_sticky .directorypress-listing-text-content-wrap {
+	bottom: 25px
+}
+
+.directorypress-listing.listing-post-style-6 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap .directorypress-listing-title h2 a {
+	color: #fff!important;
+	font-weight: 400;
+	text-transform: capitalize
+}
+.directorypress-listing.listing-post-style-6 .directorypress-listing-item-holder:hover .directorypress-listing-text-content-wrap .directorypress-listing-title h2 a {
+	color: #fff!important;
+}
+.directorypress-listings-grid .listing-post-style-6.directorypress-has_featured .directorypress-listing-text-content-wrap .price {
+	float: right
+}
+.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap .price {
+	float: left
+}
+.directorypress-listings-grid .listing-post-style-6.directorypress-has_featured .directorypress-listing-text-content-wrap .directorypress-field-type-price {
+	margin: 0
+}
+.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-field-type-price {
+	margin: 10px 0 0
+}
+.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-rating {
+	float: none
+}
+.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-field-type-price .field-content {
+	color: #cddc39;
+	line-height: 26px
+}
+.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap header.directorypress-listing-title {
+	margin: 5px 0 10px
+}
+.listing-post-style-6 .listing-grid-buttons{
+	position:absolute;
+	top:15px;
+	right:15px;
+}
+.listing-post-style-6 .add_to_favourites {
+    display: block;
+    font-size: 16px;
+    z-index: 100;
+    background: #fff;
+    border-radius: 2px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+	float:left;
+	margin-left:5px;
+}
+.directorypress-listings-grid .listing-post-style-6 .add_to_favourites i{
+	line-height:inherit;
+}
+.directorypress-listings-grid .listing-post-style-6 .directorypress-has_sticky-icon {
+	top: 45px!important;
+	right: 10px!important
+}
+.listing-post-style-6 .directorypress-listing-text-content-wrap .listing-cat-icon1 {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin-bottom: 10px;
+	display: block;
+	width:48px;
+}
+.listing-post-style-6 .directorypress-listing-text-content-wrap .listing-cat-icon1 .font-icon{
+	width: 40px;
+	height: 40px;
+	display: block;
+	text-align: center;
+	font-size: 24px;
+	color: #fff;
+	line-height: 40px;
+}
+.listing-post-style-6 .directorypress-listing-text-content-wrap .listing-cat-icon1 img{
+	background: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.4) !important;
+    width: 100%;
+}
+.listing-post-style-6 .directorypress-listing-text-content-wrap .listing-cat-icon1 img.svg_icon-img{
+	width:50px;
+}
+.listing-post-style-6 .directorypress-listing-text-content-wrap .listing-cat-icon1 .cat-icon.svg_icon{
+	display: block;
+    background:#fff;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    font-size: 24px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.listing-post-style-6 .directorypress-listing-text-content-wrap .listing-cat-icon1 .cat-icon.svg_icon svg{
+	width:30px;
+}
+.directorypress-listing.listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-field-item {
+	margin: 0
+}
+.listing-post-style-6 figure.directorypress-listing-figure figcaption {
+	width: 100%;
+	height: 100%;
+	padding: 0
+}
+.listing-post-style-6 figure.directorypress-listing-figure figcaption .directorypress-figcaption,
+.listing-post-style-6 figure.directorypress-listing-figure figcaption .directorypress-figcaption .directorypress-figcaption-middle {
+	display: block
+}
+
+.listing-post-style-6 figure .listing-logo-overlay {
+	background: -webkit-linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .8) 70%);
+	background: -o-linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .8) 70%);
+	background: linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .8) 70%);
+	background-color: transparent!important;
+	opacity: 1;
+	-ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+	-webkit-transition: -webkit-transform .35s, opacity .35s;
+	transition: transform .35s, opacity .35s;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0
+}
+.listing-post-style-6 figure .listing-logo-overlay a {
+	height: 100%;
+	width: 100%;
+	display: block
+}
+.listing-post-style-6 .directorypress-listing-item-holder:hover figure .listing-logo-overlay {
+	transition: all .3s ease;
+	background: -webkit-linear-gradient(rgba(0, 0, 0, .2) 40%, rgba(0, 0, 0, .8) 60%);
+	background: -o-linear-gradient(rgba(0, 0, 0, .2) 40%, rgba(0, 0, 0, .8) 60%);
+	background: linear-gradient(rgba(0, 0, 0, .2) 40%, rgba(0, 0, 0, .8) 60%)
+}
+.listing-post-style-6 .directorypress-field-type-status{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+.listing-post-style-6 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:2px;
+}
+/* wcfm integration */
+
+.listing-post-style-6 .listing-add-to-cart {
+    position: static;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    line-height: 32px;
+    font-size: 16px;
+    border-radius: 2px;
+	float:left;
+	margin-left:5px;
+}
+
+@media handheld,
+only screen and (max-width: 1140px) {
+	.listing-post-style-6.directorypress-has_featured .directorypress-figcaption li.directorypress-listing-figcaption-option.listing-cat-icon1 {
+		top: 20%
+	}
+	.listing-post-style-6 .directorypress-figcaption li.directorypress-listing-figcaption-option.listing-cat-icon1 {
+		top: 33%
+	}
+}
+@media handheld,
+only screen and (max-width: 480px) {
+	.directorypress-listings-block .listing-post-style-6 .directorypress-listing-text-content-wrap {
+		padding: 0 15px!important
+	}
+	.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap header.directorypress-listing-title {
+		margin: 0
+	}
+	.directorypress-listings-grid .listing-post-style-6 .directorypress-listing-text-content-wrap .directorypress-field-item {
+		margin: 0!important
+	}
+	.directorypress-listing.listing-post-style-6.directorypress-has_featured .directorypress-listing-figure a.directorypress-listing-figure-img-wrap::after {
+		bottom: 15px;
+		left: 15px
+	}
+	.listing-post-style-6 figure.directorypress-listing-figure figcaption {
+		padding: 15px
+	}
+}

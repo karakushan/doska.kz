@@ -1,0 +1,39 @@
+/* Shortcode:Tables
+-------------------------------------------------------------------- */
+.pacz-fancy-table {
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 2px solid #eee;
+}
+.pacz-fancy-table table {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.pacz-fancy-table th {
+  padding: 18px 12px;
+  background-color: #f7f7f7;
+  color: #4b4b4b;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+.pacz-fancy-table tfoot td {
+  padding: 8px;
+}
+.pacz-fancy-table tfoot {
+  background-color: #f3f3f3;
+}
+.pacz-fancy-table tr:nth-child(even) {
+  background-color: #f7f7f7;
+}
+.pacz-fancy-table td {
+  padding: 15px 12px;
+  font-size: 13px;
+  color: #4b4b4b;
+  text-align: center;
+}

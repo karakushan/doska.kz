@@ -1,0 +1,52 @@
+/* Shortcode:-------------------------------------------------------------------- */
+.pacz-window-scroller {
+  margin: 0 0 20px 14px;
+  border: 1px solid #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  -webkit-box-shadow: -12px 12px 0 0 rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: -12px 12px 0 0 rgba(0, 0, 0, 0.08);
+  box-shadow: -12px 12px 0 0 rgba(0, 0, 0, 0.08);
+  cursor: ns-resize;
+}
+.pacz-window-scroller .window-top-bar {
+  position: relative;
+  background-color: #eeeeee;
+  border-bottom: 1px solid #fff;
+  height: 30px;
+}
+.pacz-window-scroller .window-top-bar:before,
+.pacz-window-scroller .window-top-bar:after,
+.pacz-window-scroller .window-top-bar span {
+  display: block;
+  height: 10px;
+  width: 10px;
+  content: "";
+  position: absolute;
+  top: 10px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+.pacz-window-scroller .window-top-bar:before {
+  background-color: #ff4351;
+  left: 12px;
+}
+.pacz-window-scroller .window-top-bar:after {
+  background-color: #ffc600;
+  left: 27px;
+}
+.pacz-window-scroller .window-top-bar span {
+  background-color: #71b93f;
+  left: 43px;
+}
+.pacz-window-scroller .image-holder {
+  overflow: hidden;
+  position: relative;
+}
+.pacz-window-scroller .image-holder img {
+  position: absolute;
+  top: 0;
+}

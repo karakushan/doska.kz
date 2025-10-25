@@ -1,0 +1,1452 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: ElKit ( Elementor Addons Kit )\n"
+"POT-Creation-Date: 2024-04-03 00:25+0500\n"
+"PO-Revision-Date: 2021-03-27 06:26+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: elkit.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: includes/class-elkit.php:92
+msgid "ElKit"
+msgstr ""
+
+#: includes/icons.php:91
+msgid "Material Design"
+msgstr ""
+
+#: includes/section-controls.php:16
+msgid "Elkit Effects"
+msgstr ""
+
+#: includes/section-controls.php:23
+msgid "Background Image Parallax"
+msgstr ""
+
+#: includes/section-controls.php:25 includes/section-controls.php:52
+msgid "Show"
+msgstr ""
+
+#: includes/section-controls.php:26 includes/section-controls.php:53
+msgid "Hide"
+msgstr ""
+
+#: includes/section-controls.php:33 includes/section-controls.php:409
+msgid "Speed"
+msgstr ""
+
+#: includes/section-controls.php:49
+msgid "Multi Item Parallax"
+msgstr ""
+
+#: includes/section-controls.php:59
+msgid "Effect Type"
+msgstr ""
+
+#: includes/section-controls.php:63
+msgid "Css Animation"
+msgstr ""
+
+#: includes/section-controls.php:64
+msgid "Mouse Move"
+msgstr ""
+
+#: includes/section-controls.php:65
+msgid "On Scroll"
+msgstr ""
+
+#: includes/section-controls.php:66
+msgid "Parallax Tilt"
+msgstr ""
+
+#: includes/section-controls.php:73
+msgid "Item source"
+msgstr ""
+
+#: includes/section-controls.php:95 includes/widgets/clients.php:113
+#: includes/widgets/image-box.php:99
+msgid "Choose Image"
+msgstr ""
+
+#: includes/section-controls.php:105
+msgid "Choose Shape"
+msgstr ""
+
+#: includes/section-controls.php:109
+msgid "Shape 1"
+msgstr ""
+
+#: includes/section-controls.php:110
+msgid "Shape 2"
+msgstr ""
+
+#: includes/section-controls.php:111
+msgid "Shape 3"
+msgstr ""
+
+#: includes/section-controls.php:112
+msgid "Shape 4"
+msgstr ""
+
+#: includes/section-controls.php:113
+msgid "Shape 5"
+msgstr ""
+
+#: includes/section-controls.php:114
+msgid "Shape 6"
+msgstr ""
+
+#: includes/section-controls.php:115
+msgid "Shape 7"
+msgstr ""
+
+#: includes/section-controls.php:116
+msgid "Shape 8"
+msgstr ""
+
+#: includes/section-controls.php:117
+msgid "Shape 9"
+msgstr ""
+
+#: includes/section-controls.php:118
+msgid "Shape 10"
+msgstr ""
+
+#: includes/section-controls.php:119
+msgid "Shape 11"
+msgstr ""
+
+#: includes/section-controls.php:120
+msgid "Shape 12"
+msgstr ""
+
+#: includes/section-controls.php:121
+msgid "Shape 13"
+msgstr ""
+
+#: includes/section-controls.php:122
+msgid "Shape 14"
+msgstr ""
+
+#: includes/section-controls.php:133 includes/widgets/clients.php:617
+#: includes/widgets/countdown.php:265 includes/widgets/countdown.php:323
+#: includes/widgets/countdown.php:520 includes/widgets/countdown.php:579
+#: includes/widgets/countdown.php:773 includes/widgets/countdown.php:834
+#: includes/widgets/countdown.php:1029 includes/widgets/countdown.php:1090
+#: includes/widgets/icon-box.php:319 includes/widgets/icon-box.php:537
+#: includes/widgets/icon-box.php:585 includes/widgets/icon-list.php:385
+#: includes/widgets/icon-list.php:610 includes/widgets/icon-list.php:658
+#: includes/widgets/image-box.php:488 includes/widgets/image-box.php:510
+#: includes/widgets/image-box.php:552 includes/widgets/image-box.php:571
+#: includes/widgets/tabs.php:352 includes/widgets/tabs.php:429
+#: includes/widgets/testimonials.php:565
+#: includes/widgets/testimonials.php:905
+#: includes/widgets/woo-products.php:428
+msgid "Color"
+msgstr ""
+
+#: includes/section-controls.php:147 includes/widgets/clients.php:484
+#: includes/widgets/countdown.php:168 includes/widgets/image-box.php:224
+#: includes/widgets/testimonials.php:772
+#: includes/widgets/woo-products.php:295
+msgid "Width"
+msgstr ""
+
+#: includes/section-controls.php:151
+msgid "Auto"
+msgstr ""
+
+#: includes/section-controls.php:152
+msgid "Custom"
+msgstr ""
+
+#: includes/section-controls.php:161
+msgid "Custom Width"
+msgstr ""
+
+#: includes/section-controls.php:197
+msgid "Rotate"
+msgstr ""
+
+#: includes/section-controls.php:221
+msgid "Blur"
+msgstr ""
+
+#: includes/section-controls.php:248
+msgid "Position X (%)"
+msgstr ""
+
+#: includes/section-controls.php:275
+msgid "Position Y (%)"
+msgstr ""
+
+#: includes/section-controls.php:303
+msgid "Animation"
+msgstr ""
+
+#: includes/section-controls.php:336 includes/widgets/clients.php:390
+#: includes/widgets/clients.php:452 includes/widgets/image-box.php:318
+#: includes/widgets/image-box.php:380
+msgid "Opacity"
+msgstr ""
+
+#: includes/section-controls.php:337
+msgid "Opacity will be (0-1), default value 1"
+msgstr ""
+
+#: includes/section-controls.php:353
+msgid "Animation speed"
+msgstr ""
+
+#: includes/section-controls.php:372
+msgid "Animation Iteration Count"
+msgstr ""
+
+#: includes/section-controls.php:376
+msgid "Infinite"
+msgstr ""
+
+#: includes/section-controls.php:377
+msgid "Unset"
+msgstr ""
+
+#: includes/section-controls.php:390
+msgid "Animation Direction"
+msgstr ""
+
+#: includes/section-controls.php:394 includes/widgets/button.php:308
+#: includes/widgets/button.php:400 includes/widgets/clients.php:366
+#: includes/widgets/clients.php:563 includes/widgets/heading.php:153
+#: includes/widgets/icon-box.php:313 includes/widgets/icon-box.php:531
+#: includes/widgets/icon-list.php:379 includes/widgets/icon-list.php:604
+#: includes/widgets/image-box.php:294 includes/widgets/image-box.php:482
+#: includes/widgets/image-box.php:546 includes/widgets/testimonials.php:410
+#: includes/widgets/testimonials.php:538
+#: includes/widgets/testimonials.php:702
+#: includes/widgets/testimonials.php:851
+#: includes/widgets/woo-products.php:374
+msgid "Normal"
+msgstr ""
+
+#: includes/section-controls.php:395
+msgid "Reverse"
+msgstr ""
+
+#: includes/section-controls.php:396
+msgid "Alternate"
+msgstr ""
+
+#: includes/section-controls.php:422
+msgid "Parallax style"
+msgstr ""
+
+#: includes/section-controls.php:426 includes/section-controls.php:516
+msgid "X axis"
+msgstr ""
+
+#: includes/section-controls.php:427 includes/section-controls.php:517
+msgid "Y axis"
+msgstr ""
+
+#: includes/section-controls.php:428
+msgid "rotate"
+msgstr ""
+
+#: includes/section-controls.php:429
+msgid "rotateX"
+msgstr ""
+
+#: includes/section-controls.php:430
+msgid "rotateY"
+msgstr ""
+
+#: includes/section-controls.php:431
+msgid "scale"
+msgstr ""
+
+#: includes/section-controls.php:432
+msgid "scaleX"
+msgstr ""
+
+#: includes/section-controls.php:433
+msgid "scaleY"
+msgstr ""
+
+#: includes/section-controls.php:442
+msgid "Parallax Transition "
+msgstr ""
+
+#: includes/section-controls.php:443
+msgid ""
+"X, Y and Z Axis will be pixels, Rotate will be degrees (0-180), scale will "
+"be ratio"
+msgstr ""
+
+#: includes/section-controls.php:453
+msgid "Smoothness"
+msgstr ""
+
+#: includes/section-controls.php:454
+msgid ""
+"factor that slowdown the animation, the more the smoothier (default: 700)"
+msgstr ""
+
+#: includes/section-controls.php:467
+msgid "Offset Top"
+msgstr ""
+
+#: includes/section-controls.php:468 includes/section-controls.php:479
+msgid "default: 0; when the element is visible"
+msgstr ""
+
+#: includes/section-controls.php:478
+msgid "Offset Bottom"
+msgstr ""
+
+#: includes/section-controls.php:489
+msgid "MaxTilt"
+msgstr ""
+
+#: includes/section-controls.php:499
+msgid "Image Scale"
+msgstr ""
+
+#: includes/section-controls.php:500
+msgid "2 = 200%, 1.5 = 150%, etc.. Default 1"
+msgstr ""
+
+#: includes/section-controls.php:510
+msgid "Disable Axis"
+msgstr ""
+
+#: includes/section-controls.php:511
+msgid "What axis should be disabled. Can be X or Y."
+msgstr ""
+
+#: includes/section-controls.php:515
+msgid "None"
+msgstr ""
+
+#: includes/section-controls.php:527
+msgid "Z-index"
+msgstr ""
+
+#: includes/section-controls.php:529
+msgid "2"
+msgstr ""
+
+#: includes/section-controls.php:538
+msgid "Parallax"
+msgstr ""
+
+#: includes/section-controls.php:553
+msgid "Section Overflow"
+msgstr ""
+
+#: includes/section-controls.php:557
+msgid "Visible"
+msgstr ""
+
+#: includes/section-controls.php:558
+msgid "Hidden"
+msgstr ""
+
+#: includes/widget-controls.php:16
+msgid "Ekit Background Effects"
+msgstr ""
+
+#: includes/widget-controls.php:169
+msgid "CSS Transform"
+msgstr ""
+
+#: includes/widget-controls.php:179
+msgid "Translate"
+msgstr ""
+
+#: includes/widget-controls.php:194
+msgid "Translate X(%)"
+msgstr ""
+
+#: includes/widget-controls.php:216
+msgid "Translate Y(px)"
+msgstr ""
+
+#: includes/widgets/button.php:45
+msgid "Elkit Button"
+msgstr ""
+
+#: includes/widgets/button.php:85 includes/widgets/icon-box.php:133
+#: includes/widgets/icon-box.php:742 includes/widgets/icon-list.php:158
+#: includes/widgets/icon-list.php:811 includes/widgets/image-box.php:136
+#: includes/widgets/image-box.php:404 includes/widgets/tabs.php:138
+#: includes/widgets/tabs.php:420 includes/widgets/testimonials.php:174
+msgid "Content"
+msgstr ""
+
+#: includes/widgets/button.php:92 includes/widgets/countdown.php:316
+#: includes/widgets/countdown.php:572 includes/widgets/countdown.php:827
+#: includes/widgets/countdown.php:1083
+msgid "Label"
+msgstr ""
+
+#: includes/widgets/button.php:94 includes/widgets/button.php:95
+msgid "Submit"
+msgstr ""
+
+#: includes/widgets/button.php:106
+msgid "URL"
+msgstr ""
+
+#: includes/widgets/button.php:121 includes/widgets/woo-products.php:88
+msgid "Settings"
+msgstr ""
+
+#: includes/widgets/button.php:130
+msgid "Add icon? "
+msgstr ""
+
+#: includes/widgets/button.php:133
+msgid "Yes"
+msgstr ""
+
+#: includes/widgets/button.php:134
+msgid "No"
+msgstr ""
+
+#: includes/widgets/button.php:141 includes/widgets/button.php:461
+#: includes/widgets/icon-box.php:147 includes/widgets/icon-box.php:230
+#: includes/widgets/icon-list.php:172 includes/widgets/icon-list.php:295
+msgid "Icon"
+msgstr ""
+
+#: includes/widgets/button.php:155
+msgid "Icon Position"
+msgstr ""
+
+#: includes/widgets/button.php:159
+msgid "Before"
+msgstr ""
+
+#: includes/widgets/button.php:160
+msgid "After"
+msgstr ""
+
+#: includes/widgets/button.php:170 includes/widgets/heading.php:57
+#: includes/widgets/icon-box.php:195 includes/widgets/icon-list.php:260
+#: includes/widgets/image-box.php:412 includes/widgets/tabs.php:207
+#: includes/widgets/tabs.php:237 includes/widgets/tabs.php:392
+#: includes/widgets/testimonials.php:481 includes/widgets/text-editor.php:107
+msgid "Alignment"
+msgstr ""
+
+#: includes/widgets/button.php:174 includes/widgets/heading.php:61
+#: includes/widgets/icon-box.php:199 includes/widgets/icon-list.php:264
+#: includes/widgets/image-box.php:416 includes/widgets/tabs.php:396
+#: includes/widgets/testimonials.php:485
+#: includes/widgets/testimonials.php:594
+#: includes/widgets/testimonials.php:623 includes/widgets/text-editor.php:111
+msgid "Left"
+msgstr ""
+
+#: includes/widgets/button.php:178 includes/widgets/heading.php:65
+#: includes/widgets/icon-box.php:203 includes/widgets/icon-list.php:268
+#: includes/widgets/image-box.php:420 includes/widgets/tabs.php:215
+#: includes/widgets/tabs.php:245 includes/widgets/tabs.php:400
+#: includes/widgets/testimonials.php:489
+#: includes/widgets/testimonials.php:598
+#: includes/widgets/testimonials.php:627 includes/widgets/text-editor.php:115
+msgid "Center"
+msgstr ""
+
+#: includes/widgets/button.php:182 includes/widgets/heading.php:69
+#: includes/widgets/icon-box.php:207 includes/widgets/icon-list.php:272
+#: includes/widgets/image-box.php:424 includes/widgets/tabs.php:404
+#: includes/widgets/testimonials.php:493
+#: includes/widgets/testimonials.php:602
+#: includes/widgets/testimonials.php:631 includes/widgets/text-editor.php:119
+msgid "Right"
+msgstr ""
+
+#: includes/widgets/button.php:195
+msgid "Class"
+msgstr ""
+
+#: includes/widgets/button.php:197
+msgid "Class Name"
+msgstr ""
+
+#: includes/widgets/button.php:204
+msgid "id"
+msgstr ""
+
+#: includes/widgets/button.php:206
+msgid "ID"
+msgstr ""
+
+#: includes/widgets/button.php:217
+msgid "Button"
+msgstr ""
+
+#: includes/widgets/button.php:225
+msgid "Width (%)"
+msgstr ""
+
+#: includes/widgets/button.php:236
+msgid "Height (px)"
+msgstr ""
+
+#: includes/widgets/button.php:247
+msgid "Hover Effect"
+msgstr ""
+
+#: includes/widgets/button.php:250
+msgid "none"
+msgstr ""
+
+#: includes/widgets/button.php:251
+msgid "Overlay Effect 1"
+msgstr ""
+
+#: includes/widgets/button.php:252
+msgid "Overlay Effect 2"
+msgstr ""
+
+#: includes/widgets/button.php:253
+msgid "Overlay Effect 3"
+msgstr ""
+
+#: includes/widgets/button.php:254
+msgid "Overlay Effect 4"
+msgstr ""
+
+#: includes/widgets/button.php:255
+msgid "Overlay Effect 5"
+msgstr ""
+
+#: includes/widgets/button.php:256
+msgid "Overlay Effect 6"
+msgstr ""
+
+#: includes/widgets/button.php:257
+msgid "Overlay Effect 7"
+msgstr ""
+
+#: includes/widgets/button.php:258
+msgid "Overlay Effect 8"
+msgstr ""
+
+#: includes/widgets/button.php:266 includes/widgets/clients.php:336
+#: includes/widgets/clients.php:687 includes/widgets/heading.php:176
+#: includes/widgets/icon-box.php:177 includes/widgets/icon-list.php:226
+#: includes/widgets/testimonials.php:372
+#: includes/widgets/testimonials.php:975 includes/widgets/text-editor.php:170
+#: includes/widgets/woo-products.php:497
+msgid "Padding"
+msgstr ""
+
+#: includes/widgets/button.php:277 includes/widgets/button.php:491
+#: includes/widgets/clients.php:705 includes/widgets/countdown.php:428
+#: includes/widgets/countdown.php:685 includes/widgets/countdown.php:937
+#: includes/widgets/countdown.php:1187 includes/widgets/heading.php:187
+#: includes/widgets/testimonials.php:510
+#: includes/widgets/testimonials.php:993 includes/widgets/text-editor.php:181
+#: includes/widgets/woo-products.php:515
+msgid "Margin"
+msgstr ""
+
+#: includes/widgets/button.php:290
+msgid "Typography"
+msgstr ""
+
+#: includes/widgets/button.php:315 includes/widgets/button.php:352
+#: includes/widgets/heading.php:106 includes/widgets/text-editor.php:136
+msgid "Text Color"
+msgstr ""
+
+#: includes/widgets/button.php:345 includes/widgets/button.php:425
+#: includes/widgets/clients.php:429 includes/widgets/clients.php:610
+#: includes/widgets/icon-box.php:362 includes/widgets/icon-box.php:368
+#: includes/widgets/icon-box.php:579 includes/widgets/icon-box.php:689
+#: includes/widgets/icon-box.php:765 includes/widgets/icon-list.php:428
+#: includes/widgets/icon-list.php:434 includes/widgets/icon-list.php:652
+#: includes/widgets/icon-list.php:762 includes/widgets/icon-list.php:834
+#: includes/widgets/image-box.php:357 includes/widgets/image-box.php:504
+#: includes/widgets/image-box.php:565 includes/widgets/testimonials.php:435
+#: includes/widgets/testimonials.php:558
+#: includes/widgets/testimonials.php:731
+#: includes/widgets/testimonials.php:898
+#: includes/widgets/woo-products.php:421
+msgid "Hover"
+msgstr ""
+
+#: includes/widgets/button.php:383 includes/widgets/clients.php:668
+#: includes/widgets/countdown.php:382 includes/widgets/countdown.php:472
+#: includes/widgets/countdown.php:638 includes/widgets/countdown.php:725
+#: includes/widgets/countdown.php:891 includes/widgets/countdown.php:978
+#: includes/widgets/countdown.php:1147 includes/widgets/countdown.php:1220
+#: includes/widgets/heading.php:200 includes/widgets/icon-box.php:219
+#: includes/widgets/icon-box.php:415 includes/widgets/icon-box.php:631
+#: includes/widgets/icon-list.php:284 includes/widgets/icon-list.php:488
+#: includes/widgets/icon-list.php:704 includes/widgets/testimonials.php:390
+#: includes/widgets/testimonials.php:956
+#: includes/widgets/woo-products.php:478
+msgid "Border"
+msgstr ""
+
+#: includes/widgets/button.php:392
+msgid "Icon Box Border"
+msgstr ""
+
+#: includes/widgets/button.php:406 includes/widgets/button.php:442
+#: includes/widgets/clients.php:353 includes/widgets/clients.php:675
+#: includes/widgets/countdown.php:395 includes/widgets/countdown.php:479
+#: includes/widgets/countdown.php:651 includes/widgets/countdown.php:733
+#: includes/widgets/countdown.php:904 includes/widgets/countdown.php:986
+#: includes/widgets/countdown.php:1160 includes/widgets/countdown.php:1228
+#: includes/widgets/icon-box.php:422 includes/widgets/icon-box.php:638
+#: includes/widgets/icon-list.php:495 includes/widgets/icon-list.php:711
+#: includes/widgets/image-box.php:273 includes/widgets/testimonials.php:397
+#: includes/widgets/testimonials.php:963 includes/widgets/text-editor.php:292
+#: includes/widgets/woo-products.php:485
+msgid "Border Radius"
+msgstr ""
+
+#: includes/widgets/button.php:431
+msgctxt "Border Control"
+msgid "Color"
+msgstr ""
+
+#: includes/widgets/button.php:471 includes/widgets/icon-box.php:291
+#: includes/widgets/icon-list.php:357
+msgid "Icon Size"
+msgstr ""
+
+#: includes/widgets/clients.php:55
+msgid "Clients"
+msgstr ""
+
+#: includes/widgets/clients.php:106 includes/widgets/testimonials.php:583
+msgid "Client"
+msgstr ""
+
+#: includes/widgets/clients.php:166 includes/widgets/image-box.php:152
+msgid "Link"
+msgstr ""
+
+#: includes/widgets/clients.php:171 includes/widgets/image-box.php:157
+#: includes/widgets/testimonials.php:195
+msgid "https://your-link.com"
+msgstr ""
+
+#: includes/widgets/clients.php:198
+msgid "Add Clients"
+msgstr ""
+
+#: includes/widgets/clients.php:210 includes/widgets/testimonials.php:246
+#: includes/widgets/woo-products.php:160
+#: includes/widgets/woo-products.php:167
+msgid "Slider"
+msgstr ""
+
+#: includes/widgets/clients.php:217 includes/widgets/testimonials.php:253
+#: includes/widgets/woo-products.php:177
+msgid "Items Per Slide"
+msgstr ""
+
+#: includes/widgets/clients.php:230 includes/widgets/testimonials.php:266
+#: includes/widgets/woo-products.php:190
+msgid "Items to scroll Per Slide"
+msgstr ""
+
+#: includes/widgets/clients.php:242 includes/widgets/testimonials.php:278
+#: includes/widgets/woo-products.php:202
+msgid "Slide Speed"
+msgstr ""
+
+#: includes/widgets/clients.php:254 includes/widgets/image-box.php:465
+#: includes/widgets/testimonials.php:290
+#: includes/widgets/woo-products.php:214
+msgid "Spacing"
+msgstr ""
+
+#: includes/widgets/clients.php:272 includes/widgets/testimonials.php:308
+#: includes/widgets/woo-products.php:232
+msgid "Autoplay"
+msgstr ""
+
+#: includes/widgets/clients.php:274 includes/widgets/clients.php:296
+#: includes/widgets/clients.php:306 includes/widgets/testimonials.php:310
+#: includes/widgets/testimonials.php:332
+#: includes/widgets/testimonials.php:342 includes/widgets/text-editor.php:42
+#: includes/widgets/woo-products.php:169
+#: includes/widgets/woo-products.php:234
+#: includes/widgets/woo-products.php:256
+#: includes/widgets/woo-products.php:266
+msgid "On"
+msgstr ""
+
+#: includes/widgets/clients.php:275 includes/widgets/clients.php:297
+#: includes/widgets/clients.php:307 includes/widgets/testimonials.php:311
+#: includes/widgets/testimonials.php:333
+#: includes/widgets/testimonials.php:343 includes/widgets/text-editor.php:41
+#: includes/widgets/woo-products.php:170
+#: includes/widgets/woo-products.php:235
+#: includes/widgets/woo-products.php:257
+#: includes/widgets/woo-products.php:267
+msgid "Off"
+msgstr ""
+
+#: includes/widgets/clients.php:282 includes/widgets/testimonials.php:318
+#: includes/widgets/woo-products.php:242
+msgid "Autoplay Speed"
+msgstr ""
+
+#: includes/widgets/clients.php:294 includes/widgets/testimonials.php:330
+#: includes/widgets/woo-products.php:254
+msgid "Loop"
+msgstr ""
+
+#: includes/widgets/clients.php:304 includes/widgets/testimonials.php:340
+#: includes/widgets/woo-products.php:264
+msgid "Navigation"
+msgstr ""
+
+#: includes/widgets/clients.php:314 includes/widgets/testimonials.php:350
+#: includes/widgets/woo-products.php:274
+msgid "Delay"
+msgstr ""
+
+#: includes/widgets/clients.php:329 includes/widgets/image-box.php:196
+msgid "Image"
+msgstr ""
+
+#: includes/widgets/clients.php:373 includes/widgets/clients.php:374
+#: includes/widgets/countdown.php:365 includes/widgets/countdown.php:459
+#: includes/widgets/countdown.php:621 includes/widgets/countdown.php:714
+#: includes/widgets/countdown.php:874 includes/widgets/countdown.php:967
+#: includes/widgets/countdown.php:1130 includes/widgets/countdown.php:1210
+#: includes/widgets/heading.php:140 includes/widgets/heading.php:141
+#: includes/widgets/image-box.php:301 includes/widgets/image-box.php:302
+#: includes/widgets/testimonials.php:417
+#: includes/widgets/testimonials.php:418
+#: includes/widgets/testimonials.php:442
+msgid "Background"
+msgstr ""
+
+#: includes/widgets/clients.php:408 includes/widgets/image-box.php:336
+msgid "Transition Duration"
+msgstr ""
+
+#: includes/widgets/clients.php:436 includes/widgets/image-box.php:364
+msgid "Hover Background"
+msgstr ""
+
+#: includes/widgets/clients.php:477 includes/widgets/testimonials.php:765
+#: includes/widgets/woo-products.php:288
+msgid "Slider Arrows"
+msgstr ""
+
+#: includes/widgets/clients.php:507 includes/widgets/countdown.php:191
+#: includes/widgets/image-box.php:250 includes/widgets/testimonials.php:795
+#: includes/widgets/woo-products.php:318
+msgid "Height"
+msgstr ""
+
+#: includes/widgets/clients.php:530 includes/widgets/testimonials.php:818
+#: includes/widgets/woo-products.php:341
+msgid "Previous Arrow Icon"
+msgstr ""
+
+#: includes/widgets/clients.php:541 includes/widgets/testimonials.php:829
+#: includes/widgets/woo-products.php:352
+msgid "Next Arrow Icon"
+msgstr ""
+
+#: includes/widgets/clients.php:553 includes/widgets/testimonials.php:528
+#: includes/widgets/testimonials.php:841
+#: includes/widgets/woo-products.php:364
+msgid "Title Typography"
+msgstr ""
+
+#: includes/widgets/clients.php:570 includes/widgets/testimonials.php:545
+#: includes/widgets/testimonials.php:858
+#: includes/widgets/woo-products.php:381
+msgid "Icon Color"
+msgstr ""
+
+#: includes/widgets/clients.php:588 includes/widgets/clients.php:628
+#: includes/widgets/icon-box.php:341 includes/widgets/icon-box.php:380
+#: includes/widgets/icon-box.php:558 includes/widgets/icon-box.php:596
+#: includes/widgets/icon-list.php:407 includes/widgets/icon-list.php:453
+#: includes/widgets/icon-list.php:631 includes/widgets/icon-list.php:669
+#: includes/widgets/tabs.php:331 includes/widgets/testimonials.php:876
+#: includes/widgets/testimonials.php:916
+#: includes/widgets/woo-products.php:399
+#: includes/widgets/woo-products.php:439
+msgid "Background Color"
+msgstr ""
+
+#: includes/widgets/clients.php:600 includes/widgets/clients.php:640
+#: includes/widgets/countdown.php:414 includes/widgets/countdown.php:492
+#: includes/widgets/countdown.php:670 includes/widgets/countdown.php:745
+#: includes/widgets/countdown.php:923 includes/widgets/countdown.php:998
+#: includes/widgets/countdown.php:1179 includes/widgets/countdown.php:1240
+#: includes/widgets/icon-box.php:352 includes/widgets/icon-box.php:391
+#: includes/widgets/icon-box.php:569 includes/widgets/icon-box.php:607
+#: includes/widgets/icon-list.php:418 includes/widgets/icon-list.php:464
+#: includes/widgets/icon-list.php:642 includes/widgets/icon-list.php:680
+#: includes/widgets/testimonials.php:427
+#: includes/widgets/testimonials.php:451
+#: includes/widgets/testimonials.php:888
+#: includes/widgets/testimonials.php:928
+#: includes/widgets/woo-products.php:411
+#: includes/widgets/woo-products.php:451
+msgid "Box Shadow"
+msgstr ""
+
+#: includes/widgets/clients.php:648 includes/widgets/icon-box.php:399
+#: includes/widgets/icon-box.php:615 includes/widgets/icon-list.php:472
+#: includes/widgets/icon-list.php:688 includes/widgets/tabs.php:320
+#: includes/widgets/testimonials.php:458
+#: includes/widgets/testimonials.php:936
+#: includes/widgets/woo-products.php:459
+msgid "Border Color"
+msgstr ""
+
+#: includes/widgets/clients.php:723 includes/widgets/tabs.php:192
+#: includes/widgets/testimonials.php:1011
+#: includes/widgets/woo-products.php:533
+msgid "Position"
+msgstr ""
+
+#: includes/widgets/clients.php:727 includes/widgets/testimonials.php:1015
+#: includes/widgets/woo-products.php:537
+msgid "Relative"
+msgstr ""
+
+#: includes/widgets/clients.php:728 includes/widgets/testimonials.php:1016
+#: includes/widgets/woo-products.php:538
+msgid "Absolute"
+msgstr ""
+
+#: includes/widgets/clients.php:729 includes/widgets/testimonials.php:1017
+#: includes/widgets/woo-products.php:539
+msgid "Static"
+msgstr ""
+
+#: includes/widgets/clients.php:737 includes/widgets/testimonials.php:1025
+#: includes/widgets/woo-products.php:547
+msgid "Previous Arrow Position Top"
+msgstr ""
+
+#: includes/widgets/clients.php:740 includes/widgets/clients.php:788
+#: includes/widgets/testimonials.php:1028
+#: includes/widgets/testimonials.php:1076
+#: includes/widgets/woo-products.php:550
+#: includes/widgets/woo-products.php:598
+msgid "Position From Top"
+msgstr ""
+
+#: includes/widgets/clients.php:749 includes/widgets/testimonials.php:1037
+#: includes/widgets/woo-products.php:559
+msgid "Previous Arrow Position Left"
+msgstr ""
+
+#: includes/widgets/clients.php:752 includes/widgets/clients.php:800
+#: includes/widgets/testimonials.php:1040
+#: includes/widgets/testimonials.php:1088
+#: includes/widgets/woo-products.php:562
+#: includes/widgets/woo-products.php:610
+msgid "Position From Left"
+msgstr ""
+
+#: includes/widgets/clients.php:761 includes/widgets/testimonials.php:1049
+#: includes/widgets/woo-products.php:571
+msgid "Previous Arrow Position Bottom"
+msgstr ""
+
+#: includes/widgets/clients.php:764 includes/widgets/clients.php:812
+#: includes/widgets/testimonials.php:1052
+#: includes/widgets/testimonials.php:1100
+#: includes/widgets/woo-products.php:574
+#: includes/widgets/woo-products.php:622
+msgid "Position From Bottom"
+msgstr ""
+
+#: includes/widgets/clients.php:773 includes/widgets/testimonials.php:1061
+#: includes/widgets/woo-products.php:583
+msgid "Previous Arrow Position Right"
+msgstr ""
+
+#: includes/widgets/clients.php:776 includes/widgets/clients.php:824
+#: includes/widgets/testimonials.php:1064
+#: includes/widgets/testimonials.php:1112
+#: includes/widgets/woo-products.php:586
+#: includes/widgets/woo-products.php:634
+msgid "Position From Right"
+msgstr ""
+
+#: includes/widgets/clients.php:785 includes/widgets/testimonials.php:1073
+#: includes/widgets/woo-products.php:595
+msgid "Next Arrow Position Top"
+msgstr ""
+
+#: includes/widgets/clients.php:797 includes/widgets/testimonials.php:1085
+#: includes/widgets/woo-products.php:607
+msgid "Next Arrow Position Left"
+msgstr ""
+
+#: includes/widgets/clients.php:809 includes/widgets/testimonials.php:1097
+#: includes/widgets/woo-products.php:619
+msgid "Next Arrow Position Bottom"
+msgstr ""
+
+#: includes/widgets/clients.php:821 includes/widgets/testimonials.php:1109
+#: includes/widgets/woo-products.php:631
+msgid "Next Arrow Position Right"
+msgstr ""
+
+#: includes/widgets/countdown.php:27
+msgid "Countdown"
+msgstr ""
+
+#: includes/widgets/countdown.php:46
+msgid "Presets"
+msgstr ""
+
+#: includes/widgets/countdown.php:55
+msgid "Timer Settings  "
+msgstr ""
+
+#: includes/widgets/countdown.php:63
+msgid "Countdown Due Date"
+msgstr ""
+
+#: includes/widgets/countdown.php:66
+msgid "Set the due date and time"
+msgstr ""
+
+#: includes/widgets/countdown.php:72
+msgid "Custom Labels"
+msgstr ""
+
+#: includes/widgets/countdown.php:81 includes/widgets/countdown.php:83
+msgid "Weeks"
+msgstr ""
+
+#: includes/widgets/countdown.php:92 includes/widgets/countdown.php:94
+#: includes/widgets/countdown.php:249
+msgid "Days"
+msgstr ""
+
+#: includes/widgets/countdown.php:101 includes/widgets/countdown.php:103
+#: includes/widgets/countdown.php:505
+msgid "Hours"
+msgstr ""
+
+#: includes/widgets/countdown.php:110 includes/widgets/countdown.php:112
+#: includes/widgets/countdown.php:757
+msgid "Minutes"
+msgstr ""
+
+#: includes/widgets/countdown.php:119 includes/widgets/countdown.php:121
+#: includes/widgets/countdown.php:1013
+msgid "Seconds"
+msgstr ""
+
+#: includes/widgets/countdown.php:130
+msgid "Expire Action"
+msgstr ""
+
+#: includes/widgets/countdown.php:137
+msgid "On Expiry Title"
+msgstr ""
+
+#: includes/widgets/countdown.php:139
+msgid "Countdown is finished!"
+msgstr ""
+
+#: includes/widgets/countdown.php:146
+msgid "On Expiry Content"
+msgstr ""
+
+#: includes/widgets/countdown.php:148
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+"Lorem Ipsum has been the industry's standard dummy text ever since the "
+"1500s"
+msgstr ""
+
+#: includes/widgets/countdown.php:159
+msgid "Item box"
+msgstr ""
+
+#: includes/widgets/countdown.php:214 includes/widgets/countdown.php:293
+#: includes/widgets/countdown.php:546 includes/widgets/countdown.php:801
+#: includes/widgets/countdown.php:1057 includes/widgets/image-box.php:204
+msgid "Margin Bottom"
+msgstr ""
+
+#: includes/widgets/countdown.php:258 includes/widgets/countdown.php:513
+#: includes/widgets/countdown.php:766 includes/widgets/countdown.php:1022
+msgid "Digits"
+msgstr ""
+
+#: includes/widgets/countdown.php:447 includes/widgets/countdown.php:705
+#: includes/widgets/countdown.php:958 includes/widgets/countdown.php:1201
+msgid "General"
+msgstr ""
+
+#: includes/widgets/heading.php:11
+msgid "Heading"
+msgstr ""
+
+#: includes/widgets/heading.php:26
+msgid "Setting"
+msgstr ""
+
+#: includes/widgets/heading.php:35 includes/widgets/image-box.php:141
+#: includes/widgets/tabs.php:169 includes/widgets/tabs.php:173
+#: includes/widgets/testimonials.php:179 includes/widgets/text-editor.php:33
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, "
+"luctus nec ullamcorper mattis, pulvinar dapibus leo."
+msgstr ""
+
+#: includes/widgets/heading.php:41
+msgid "Display"
+msgstr ""
+
+#: includes/widgets/heading.php:44
+msgid "Block"
+msgstr ""
+
+#: includes/widgets/heading.php:45
+msgid "Inline Block"
+msgstr ""
+
+#: includes/widgets/heading.php:46 includes/widgets/icon-list.php:129
+msgid "Inline"
+msgstr ""
+
+#: includes/widgets/heading.php:73 includes/widgets/image-box.php:428
+#: includes/widgets/tabs.php:223 includes/widgets/tabs.php:253
+#: includes/widgets/testimonials.php:497
+#: includes/widgets/testimonials.php:606
+#: includes/widgets/testimonials.php:635 includes/widgets/text-editor.php:123
+msgid "Justified"
+msgstr ""
+
+#: includes/widgets/heading.php:87 includes/widgets/image-box.php:185
+#: includes/widgets/tabs.php:183 includes/widgets/text-editor.php:205
+msgid "View"
+msgstr ""
+
+#: includes/widgets/heading.php:98 includes/widgets/icon-box.php:120
+#: includes/widgets/icon-box.php:666 includes/widgets/icon-list.php:145
+#: includes/widgets/icon-list.php:739 includes/widgets/image-box.php:456
+#: includes/widgets/tabs.php:343 includes/widgets/testimonials.php:148
+#: includes/widgets/woo-products.php:135
+msgid "Title"
+msgstr ""
+
+#: includes/widgets/heading.php:150
+msgid "Blend Mode"
+msgstr ""
+
+#: includes/widgets/heading.php:207
+msgid "Radius"
+msgstr ""
+
+#: includes/widgets/icon-box.php:52 includes/widgets/icon-box.php:113
+msgid "Icon Box"
+msgstr ""
+
+#: includes/widgets/icon-box.php:123 includes/widgets/icon-list.php:148
+msgid "Item Title"
+msgstr ""
+
+#: includes/widgets/icon-box.php:124 includes/widgets/icon-list.php:149
+#: includes/widgets/icon-list.php:219
+msgid "List Item"
+msgstr ""
+
+#: includes/widgets/icon-box.php:136 includes/widgets/icon-list.php:161
+msgid "Item Content"
+msgstr ""
+
+#: includes/widgets/icon-box.php:159
+msgid "Index"
+msgstr ""
+
+#: includes/widgets/icon-box.php:170 includes/widgets/testimonials.php:365
+msgid "Item Box"
+msgstr ""
+
+#: includes/widgets/icon-box.php:237 includes/widgets/icon-box.php:458
+#: includes/widgets/icon-list.php:302 includes/widgets/icon-list.php:531
+msgid "Box Width"
+msgstr ""
+
+#: includes/widgets/icon-box.php:264 includes/widgets/icon-box.php:485
+#: includes/widgets/icon-list.php:330 includes/widgets/icon-list.php:558
+msgid "Box Height"
+msgstr ""
+
+#: includes/widgets/icon-box.php:451 includes/widgets/icon-list.php:524
+msgid "Counter"
+msgstr ""
+
+#: includes/widgets/icon-box.php:511 includes/widgets/icon-list.php:584
+msgid "Font Size"
+msgstr ""
+
+#: includes/widgets/icon-box.php:674 includes/widgets/icon-box.php:750
+#: includes/widgets/icon-list.php:747 includes/widgets/icon-list.php:819
+msgid "Title Color"
+msgstr ""
+
+#: includes/widgets/icon-box.php:701 includes/widgets/icon-box.php:777
+#: includes/widgets/icon-list.php:774 includes/widgets/icon-list.php:846
+msgid "Text Indent"
+msgstr ""
+
+#: includes/widgets/icon-list.php:52 includes/widgets/icon-list.php:113
+msgid "Icon List"
+msgstr ""
+
+#: includes/widgets/icon-list.php:120
+msgid "Layout"
+msgstr ""
+
+#: includes/widgets/icon-list.php:125 includes/widgets/text-editor.php:50
+#: includes/widgets/text-editor.php:208
+msgid "Default"
+msgstr ""
+
+#: includes/widgets/icon-list.php:184 includes/widgets/testimonials.php:106
+msgid "Items"
+msgstr ""
+
+#: includes/widgets/icon-list.php:189
+msgid "List Item #1"
+msgstr ""
+
+#: includes/widgets/icon-list.php:196
+msgid "List Item #2"
+msgstr ""
+
+#: includes/widgets/icon-list.php:203
+msgid "List Item #3"
+msgstr ""
+
+#: includes/widgets/icon-list.php:243
+msgid "Space Between"
+msgstr ""
+
+#: includes/widgets/icon-list.php:446
+msgid "Hover Animation"
+msgstr ""
+
+#: includes/widgets/image-box.php:45 includes/widgets/image-box.php:92
+msgid "Image Box"
+msgstr ""
+
+#: includes/widgets/image-box.php:122 includes/widgets/tabs.php:112
+msgid "Title & Description"
+msgstr ""
+
+#: includes/widgets/image-box.php:127
+msgid "This is the heading"
+msgstr ""
+
+#: includes/widgets/image-box.php:128 includes/widgets/testimonials.php:154
+msgid "Enter your title"
+msgstr ""
+
+#: includes/widgets/image-box.php:142 includes/widgets/testimonials.php:180
+msgid "Enter your description"
+msgstr ""
+
+#: includes/widgets/image-box.php:165 includes/widgets/testimonials.php:224
+msgid "Title HTML Tag"
+msgstr ""
+
+#: includes/widgets/image-box.php:441
+msgid "Vertical Alignment"
+msgstr ""
+
+#: includes/widgets/image-box.php:444
+msgid "Top"
+msgstr ""
+
+#: includes/widgets/image-box.php:445
+msgid "Middle"
+msgstr ""
+
+#: includes/widgets/image-box.php:446
+msgid "Bottom"
+msgstr ""
+
+#: includes/widgets/image-box.php:537
+msgid "Description"
+msgstr ""
+
+#: includes/widgets/tabs.php:56
+msgid "Elkit Tabs"
+msgstr ""
+
+#: includes/widgets/tabs.php:103 includes/widgets/tabs.php:269
+msgid "Tabs"
+msgstr ""
+
+#: includes/widgets/tabs.php:114 includes/widgets/tabs.php:115
+msgid "Tab Title"
+msgstr ""
+
+#: includes/widgets/tabs.php:125
+msgid "Content Type"
+msgstr ""
+
+#: includes/widgets/tabs.php:130 includes/widgets/text-editor.php:10
+#: includes/widgets/text-editor.php:24 includes/widgets/text-editor.php:99
+msgid "Text Editor"
+msgstr ""
+
+#: includes/widgets/tabs.php:131 includes/widgets/tabs.php:153
+msgid "Template"
+msgstr ""
+
+#: includes/widgets/tabs.php:139 includes/widgets/tabs.php:140
+msgid "Tab Content"
+msgstr ""
+
+#: includes/widgets/tabs.php:163
+msgid "Tabs Items"
+msgstr ""
+
+#: includes/widgets/tabs.php:168
+msgid "Tab #1"
+msgstr ""
+
+#: includes/widgets/tabs.php:172
+msgid "Tab #2"
+msgstr ""
+
+#: includes/widgets/tabs.php:196
+msgid "Horizontal"
+msgstr ""
+
+#: includes/widgets/tabs.php:197
+msgid "Vertical"
+msgstr ""
+
+#: includes/widgets/tabs.php:211 includes/widgets/tabs.php:241
+msgid "Start"
+msgstr ""
+
+#: includes/widgets/tabs.php:219 includes/widgets/tabs.php:249
+msgid "End"
+msgstr ""
+
+#: includes/widgets/tabs.php:277
+msgid "Navigation Width"
+msgstr ""
+
+#: includes/widgets/tabs.php:300 includes/widgets/text-editor.php:311
+msgid "Border Width"
+msgstr ""
+
+#: includes/widgets/tabs.php:366
+msgid "Active Color"
+msgstr ""
+
+#: includes/widgets/testimonials.php:55
+msgid "Testimonials"
+msgstr ""
+
+#: includes/widgets/testimonials.php:112
+msgid "Style"
+msgstr ""
+
+#: includes/widgets/testimonials.php:125
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/widgets/testimonials.php:153
+msgid "Kevin Martin"
+msgstr ""
+
+#: includes/widgets/testimonials.php:161
+msgid "Job"
+msgstr ""
+
+#: includes/widgets/testimonials.php:166
+msgid "Customer"
+msgstr ""
+
+#: includes/widgets/testimonials.php:167
+msgid "Enter your Job"
+msgstr ""
+
+#: includes/widgets/testimonials.php:190
+msgid "Website"
+msgstr ""
+
+#: includes/widgets/testimonials.php:202
+msgid "Ratting Image"
+msgstr ""
+
+#: includes/widgets/testimonials.php:215
+msgid "Add Testimonial"
+msgstr ""
+
+#: includes/widgets/testimonials.php:474
+msgid "content"
+msgstr ""
+
+#: includes/widgets/testimonials.php:590
+msgid "Clinet Name Alignment"
+msgstr ""
+
+#: includes/widgets/testimonials.php:619
+msgid "Ratting Alignment"
+msgstr ""
+
+#: includes/widgets/testimonials.php:648
+msgid "Client Name/job Margin"
+msgstr ""
+
+#: includes/widgets/testimonials.php:665
+msgid "Client ratting Margin"
+msgstr ""
+
+#: includes/widgets/testimonials.php:683
+msgid "Client Name Typography"
+msgstr ""
+
+#: includes/widgets/testimonials.php:692
+msgid "Client Job Typography"
+msgstr ""
+
+#: includes/widgets/testimonials.php:709
+#: includes/widgets/testimonials.php:738
+msgid "client name Color"
+msgstr ""
+
+#: includes/widgets/testimonials.php:719
+#: includes/widgets/testimonials.php:748
+msgid "job Color"
+msgstr ""
+
+#: includes/widgets/text-editor.php:39 includes/widgets/text-editor.php:194
+msgid "Drop Cap"
+msgstr ""
+
+#: includes/widgets/text-editor.php:55 includes/widgets/woo-products.php:103
+msgid "Columns"
+msgstr ""
+
+#: includes/widgets/text-editor.php:68
+msgid "Columns Gap"
+msgstr ""
+
+#: includes/widgets/text-editor.php:209
+msgid "Stacked"
+msgstr ""
+
+#: includes/widgets/text-editor.php:210
+msgid "Framed"
+msgstr ""
+
+#: includes/widgets/text-editor.php:220
+msgid "Primary Color"
+msgstr ""
+
+#: includes/widgets/text-editor.php:235
+msgid "Secondary Color"
+msgstr ""
+
+#: includes/widgets/text-editor.php:250
+msgid "Size"
+msgstr ""
+
+#: includes/widgets/text-editor.php:272
+msgid "Space"
+msgstr ""
+
+#: includes/widgets/woo-products.php:46
+msgid "Woo Products"
+msgstr ""
+
+#: includes/widgets/woo-products.php:95
+msgid "Product Limit"
+msgstr ""
+
+#: includes/widgets/woo-products.php:122
+msgid "Pagination"
+msgstr ""
+
+#: includes/widgets/woo-products.php:130
+msgid "Order by"
+msgstr ""
+
+#: includes/widgets/woo-products.php:134
+msgid "Date"
+msgstr ""
+
+#: includes/widgets/woo-products.php:136
+msgid "Category"
+msgstr ""
+
+#: includes/widgets/woo-products.php:137
+msgid "Random"
+msgstr ""
+
+#: includes/widgets/woo-products.php:145
+msgid "Order"
+msgstr ""
+
+#: includes/widgets/woo-products.php:149
+msgid "Descending"
+msgstr ""
+
+#: includes/widgets/woo-products.php:150
+msgid "Ascending"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "ElKit ( Elementor Addons Kit )"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://designinvento.net/downloads/elkit/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"The most advanced addons for Elementor with tons of widgets layout pack "
+"and powerful custom controls."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Designinvento"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://designinvento.net/"
+msgstr ""

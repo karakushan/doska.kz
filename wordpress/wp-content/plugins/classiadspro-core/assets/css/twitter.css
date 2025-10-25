@@ -1,0 +1,56 @@
+/* Shortcode:Twitter Feed
+-------------------------------------------------------------------- */
+.pacz-tweet-shortcode {
+  margin: 0;
+}
+.pacz-tweet-shortcode li {
+  list-style: none;
+}
+.pacz-tweet-shortcode li .tweet-time {
+  display: block;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.pacz-tweet-shortcode li span a {
+  font-size: 12px;
+  font-weight: bold;
+  font-style: italic;
+}
+.pacz-twitter-shortcode {
+    background: #fff;
+    box-shadow: 0 6px 6px -3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0;
+    padding: 50px 30px;
+}
+.tweet-icon{width:100px;height:100px;border-radius:50%;border-width:2px;border-style:solid;font-size:32px;line-height:2.8;margin:0 auto;}
+.tweet-time{
+	text-transform:capitalize !important;
+	letter-spacing:1px;
+	}
+
+.tweet-text{
+	font-size:24px;
+	font-weight:300;
+	color:#333;
+	line-height:1.4;
+	margin:40px 0 20px;
+	display:block;
+	}
+.tweet-user{
+	font-size:24px;
+	text-transform:uppercase;
+	font-weight:700;
+	display:inline-block;
+	margin-bottom:10px;
+	}
+.pacz-tweet-shortcode .owl-item{
+	text-align:center;
+	}
+.pacz-tweet-shortcode .owl-item li{
+	text-align:center;
+	width:80%;
+	margin:0 auto;
+	float:none;
+	
+}

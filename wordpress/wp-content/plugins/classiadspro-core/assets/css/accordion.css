@@ -1,0 +1,130 @@
+/* Shortcode:Accordion
+-------------------------------------------------------------------- */
+.pacz-accordion {
+  margin-bottom: 20px;
+}
+.pacz-accordion.boxed-style .pacz-accordion-single {
+  overflow: hidden;
+  background-color: #fafafa;
+}
+.pacz-accordion.boxed-style .pacz-accordion-single:last-of-type .pacz-accordion-tab {
+  border-bottom: 2px solid #eee;
+}
+.pacz-accordion.boxed-style .pacz-accordion-single.current-item .pacz-accordion-tab {
+  border-bottom: 2px solid #eee;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.pacz-accordion.boxed-style .pacz-accordion-single.current-item .pacz-accordion-tab:before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.pacz-accordion.boxed-style .pacz-accordion-tab {
+  position: relative;
+  padding: 11px 30px 11px 22px;
+  border: 2px solid #eee;
+  border-bottom: none;
+  background-color: #fafafa;
+  color: #222;
+  font-size: 13px;
+  line-height: 22px;
+  cursor: pointer;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+@media handheld, only screen and (max-width: 767px) {
+  .pacz-accordion.boxed-style .pacz-accordion-tab {
+    border-bottom: 2px solid #eee;
+  }
+}
+.pacz-accordion.boxed-style .pacz-accordion-tab i {
+  margin-right: 10px;
+  color: #686868;
+  vertical-align: middle;
+  font-size: 16px;
+}
+.pacz-accordion.boxed-style .pacz-accordion-pane .inner-box {
+  padding: 25px;
+}
+.pacz-accordion.simple-style .pacz-accordion-tab {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 12px 0 12px 20px;
+  color: #777777;
+  cursor: pointer;
+  border-bottom: 2px solid #eee;
+}
+.pacz-accordion.simple-style .pacz-accordion-tab i {
+  font-size: 16px;
+  color: #777777;
+  margin: 0 8px 0 4px;
+}
+.pacz-accordion.simple-style .pacz-accordion-pane {
+  border-top: 2px solid #eee;
+  border-bottom: 2px solid #eee;
+}
+.pacz-accordion.simple-style .pacz-accordion-pane .inner-box {
+  padding: 25px;
+  margin: 0 20px;
+}
+.pacz-accordion.simple-style .current-item .pacz-accordion-pane {
+  border-top: none;
+}
+@media handheld, only screen and (max-width: 767px) {
+  .pacz-accordion.simple-style .pacz-accordion-pane {
+    border-top: none;
+    border-bottom: none;
+  }
+}
+@media handheld, only screen and (max-width: 767px) {
+  .pacz-accordion.simple-style .pacz-accordion-single,
+  .pacz-accordion.boxed-style .pacz-accordion-single {
+    margin-bottom: 15px;
+  }
+}
+.pacz-accordion.simple-style .pacz-accordion-pane,
+.pacz-accordion.boxed-style .pacz-accordion-pane {
+  font-size: 14px;
+  color: #666;
+  position: relative;
+  line-height: 26px;
+}
+/* Shortcode:Accordion
+-------------------------------------------------------------------- */
+.pacz-toggle {
+  margin-bottom: 10px;
+}
+.pacz-toggle .pacz-toggle-title {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 12px 0 12px 20px;
+  color: #777777;
+  cursor: pointer;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.pacz-toggle .pacz-toggle-title.active-toggle {
+  border-bottom: none;
+}
+.pacz-toggle .pacz-toggle-title i {
+  font-size: 16px;
+  color: #777777;
+  margin: 0 8px 0 4px;
+}
+.pacz-toggle .pacz-toggle-pane {
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #666;
+  position: relative;
+  line-height: 26px;
+  display: none;
+}
+.pacz-toggle .pacz-toggle-pane .inner-box {
+  padding: 25px;
+  margin: 0 20px;
+}

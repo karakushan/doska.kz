@@ -1,0 +1,506 @@
+/*###########################################
+	# Listings
+###########################################*/
+
+/* listing 2 */
+
+.listing-post-style-2 .directorypress-listing-text-content-wrap .category {
+    float: right;
+}
+.listing-post-style-2 .directorypress-listing-text-content-wrap .price {
+    float: left;
+}
+.listing-post-style-2 .directorypress-listing-text-content-wrap .category {
+    float: right;
+}
+.directorypress-listings-block .field-content {
+    display: inline-block;
+    direction: rtl;
+
+}
+/* listing 3 */
+
+.listing-post-style-3 .directorypress-listing-text-content-wrap .category {
+    float: right;
+}
+.listing-post-style-3 .directorypress-listing-text-content-wrap .directorypress-rating {
+    float: left !important;
+}
+/* listing 4 */
+
+.listing-post-style-4 .directorypress-listing-text-content-wrap .category {
+    float: right;
+}
+.listing-post-style-4 .directorypress-listing-text-content-wrap .price {
+    float: left;
+}
+
+/* listing 5 */
+
+.listing-post-style-5 .directorypress-listing-text-content-wrap .listing-views{float:left !important;}
+.listing-post-style-5 .directorypress-listing-text-content-wrap .price{float:right;}
+.listing-post-style-5 .has_featured-ad{
+	left:0;
+	right: auto;
+
+}
+
+/* listing 6 */
+
+.listing-post-style-6.directorypress-has_featured .directorypress-listing-text-content-wrap .price {
+    float: left !important;
+}
+
+
+/* listing 7 */
+
+.listing-post-style-7 .directorypress-listing-text-content-wrap .category {
+    float: right;
+}
+.listing-post-style-7 .directorypress-listing-text-content-wrap .directorypress-rating {
+    float: left !important;
+}
+
+/* listing 8 */
+
+.listing-post-style-8 .directorypress-listing-text-content-wrap .category {
+    float: right;
+}
+.listing-post-style-8 .directorypress-listing-text-content-wrap .directorypress-rating {
+    float: left !important;
+}
+.listing-post-style-8 .listing-bottom-content .listing-views{float:left !important;}
+.listing-post-style-8 .listing-bottom-content .price{float:right !important;}
+.directorypress-listings-grid .listing-post-style-8 .directorypress-listing-text-content-wrap .directorypress-field-type-categories {
+    text-align: right;
+}
+
+/* listing 9 */
+
+.listing-post-style-9 .directorypress-listing-text-content-wrap .category {
+    float: right !important;
+}
+.listing-post-style-9 .directorypress-listing-text-content-wrap .directorypress-rating {
+    float: left !important;
+}
+.listing-post-style-9 .directorypress-author-link, .listing-post-style-9 .directorypress-listing-date {
+    float: right;
+    margin-right: 0;
+	margin-left:10px;
+}
+.directorypress-listing.listing-post-style-9 .directorypress-listing-text-content-wrap .listing-metas em.directorypress-listing-date i{
+	padding-left:10px;
+	padding-right:0;
+}
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-9 .directorypress-listing-text-content-wrap .listing-views{
+	float:right;
+}
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-9 .directorypress-listing-text-content-wrap .listing-views i {
+    padding-right: 0;
+	padding-left:10px;
+}
+.directorypress-listings-grid .listing-post-style-9 .directorypress-listing-item-holder .listing-location i {
+    padding-right: 0;
+	padding-left: 5px;
+}
+.listing-post-style-9 .author-in-active {
+	right: auto;
+	margin-right:-8px;
+}
+.listing-post-style-9 .author-active {
+   	right: auto;
+	margin-right:-8px;
+}
+
+/* listing 10 */
+
+.directorypress-listings-grid .listing-post-style-10 .directorypress-listing-text-content-wrap .cat-wrapper {
+    text-align: right;
+}
+.listing-post-style-10 .has_featured-ad {
+	right:auto !important;
+	left:0;
+}
+.listng-author-img {
+    right: auto !important;
+    left: 20px;
+}
+
+.author-unverified.directorypress-icon-check-circle {
+    padding-left: 0 !important;
+	padding-right: 10px;
+	float: left;
+}
+.directorypress-listings-grid .listing-post-style-10 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap .listing-location i {
+    padding-right: 0 !important;
+	float: right;
+	padding-left: 10px;
+}
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-10 .directorypress-listing-text-content-wrap .listing-views {
+    float: left !important;
+}
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-10 .directorypress-listing-text-content-wrap .price {
+    float: right;
+}
+.listing-post-style-10 .listing-ratting-icon-fields {
+    padding: 0 20px 0 0;
+
+}
+.listing-post-style-10 .listing-ratting-icon-fields .tooltip_fields {
+    float: left;
+    text-align: left;
+
+}
+.directorypress-listing.listing-post-style-10 .directorypress-listing-item-holder .add_to_favourites {
+    float: left;
+    border-right: 1px solid #eee;
+	border-left:0;
+
+}
+.listing-post-style-10 .listing-rating.grid-rating {
+    float: right;
+}
+.listing-post-style-10 .listing-ratting-icon-fields .tooltip_fields .directorypress-field-item {
+    border-right: 1px solid #eee;
+	border-left:0;
+    float: left;
+
+}
+.listing-post-style-10 .listing-ratting-icon-fields .tooltip_fields .inline-tooltip-fields {
+    float: left;
+}
+.listing-post-style-10 .author-in-active {
+	right: auto;
+	margin-right:-8px;
+}
+.listing-post-style-10 .author-active {
+   	right: auto;
+	margin-right:-8px;
+}
+
+/* listing 11 */
+
+.listing-post-style-11 .listing-cat-icon1 img.directorypress-field-icon {
+    margin: 0;
+}
+.listing-post-style-11 .directorypress-listing-title h2 {
+    line-height: 32px;
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+/* listing 12 */
+
+.listing-post-style-12.directorypress-has_featured .directorypress-listing-text-content-wrap .price {
+    float: left !important;
+}
+.listing-post-style-12 .directorypress-listing-text-content-wrap .cat-wrapper {
+    float: right !important;
+}
+.listing-post-style-12 .listing-cat-icon1 {
+    left:auto;
+	right:10px;
+}
+.listing-post-style-12 .listing-cat-icon1 img.directorypress-field-icon {
+    margin: 0;
+}
+.listing-post-style-12 .has_featured-ad {
+    left: auto;
+    right: 10px;
+}
+
+
+/* listing 13 */
+
+.listing-post-style-13 .listing-cat-icon1 img.directorypress-field-icon {
+    margin: 0;
+}
+
+.listing-post-style-13 figure .price .field-content:after{
+	border-width: 16px 10px 14px 10px;
+	border-left-color: transparent !important;
+	float: right;
+	border-right-color:#17aecb;
+	display:inline-block;
+	left:-20px;
+	right:auto;
+}
+.listing-post-style-13 figure .price {
+    right: 0;
+    left: auto;
+}
+.listing-post-style-13 .has_featured-ad {
+    top: 20px;
+    bottom: auto;
+    left: 10px;
+    right: auto;
+}
+
+/* listing 14 */
+
+.listing-post-style-14 .directorypress-listing-item-holder .listing-bottom-metas .listing-location{
+	float:right;
+}
+.listing-post-style-14 .directorypress-listing-item-holder .listing-bottom-metas .price{
+	float:left;
+}
+.listing-post-style-14 .has_featured-ad {
+    left: auto;
+    right: 15px;
+}
+.listing-post-style-14 .listing-rating.grid-rating {
+    left: auto;
+    right: 15px;
+}
+.listing-post-style-14 .directorypress-listing-item-holder .listing-location i {
+    margin-right: 0;
+	margin-left: 5px;
+}
+.listing-post-style-14 .author-in-active {
+	right: auto;
+	margin-right:-8px;
+}
+.listing-post-style-14 .author-active {
+   	right: auto;
+	margin-right:-8px;
+}
+
+/* listing 15*/
+.listing-post-style-15 .directorypress-listing-item-holder .listing-bottom-metas .listing-location {
+    float: right;
+    direction: rtl;
+}
+.listing-post-style-15 .listing-bottom-metas .price {
+    float: left;
+}
+.listing-post-style-15 .listing-cat-icon1{
+    float: right !important;
+    margin-right: 0 !important;
+    margin-left: 15px;
+}
+.listing-post-style-15 .author-in-active {
+	right: auto;
+	margin-right:-6px;
+}
+.listing-post-style-15 .author-active {
+   	right: auto;
+	margin-right:-6px;
+}
+
+/* listview ultra*/
+
+.listing-post-style-listview_ultra .has_featured-ad {
+    left: auto;
+    right: 0;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap .cat-wrapper {
+    display: inline-block;
+    padding-right: 0;
+	padding-left:10px;
+    float: right;
+}
+.listing-post-style-listview_ultra figure {
+    float: right !important;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap .price {
+    float: left;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap .add_to_favourites {
+    float: left;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap header.directorypress-listing-title .listing-metas {
+    float: right;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap .listing-location {
+    float: right;
+    direction: rtl;
+    padding-left: 15px;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap header.directorypress-listing-title .directorypress-listing-date i, .listing-post-style-listview_ultra .directorypress-listing-text-content-wrap header.directorypress-listing-title .listing-views i, .listing-post-style-listview_ultra .directorypress-listing-text-content-wrap .listing-location i {
+    margin-right: 0;
+    margin-left: 5px;
+}
+.listing-post-style-listview_ultra .directorypress-listing-text-content-wrap header.directorypress-listing-title .directorypress-listing-date, .listing-post-style-listview_ultra .directorypress-listing-text-content-wrap header.directorypress-listing-title .listing-views {
+    direction: rtl;
+	padding-right:0;
+	padding-left:10px;
+}
+
+/* list view mod*/
+.directorypress-listings-block.cz-listview article.listing-post-style-listview_mod .directorypress-listing-item-holder .directorypress-listing-text-content-wrap{
+	padding:0 !important;
+	float:right;
+}
+.listing-post-style-listview_mod .directorypress-listing-text-content-wrap .mod-inner-content{
+	padding:15px 30px 0 15px !important;
+}
+.listing-post-style-listview_mod figure {
+    float: right !important;
+}
+.listing-post-style-listview_mod .directorypress-field-type-excerpt{
+    margin: 0 0 10px !important;
+}
+.listing-post-style-listview_mod .directorypress-listing-text-content-wrap .modlist-bottom-area{
+	padding:10px 30px 10px 15px 
+}
+.listing-post-style-listview_mod .directorypress-listing-text-content-wrap .listing-rating.grid-rating{
+	float:right;
+}
+.listing-post-style-listview_mod .directorypress-listing-text-content-wrap .price{
+	float:left;
+}
+.listing-post-style-listview_mod .directorypress-listing-text-content-wrap .listing-location i{
+	padding-right:0;
+	padding-left:10px;
+}
+
+.listing-post-style-2 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15;
+}
+.listing-post-style-3 [class^="has_featured-tag-"]{
+	top:6px;
+	right:6px;
+}
+.listing-post-style-4 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15px;
+}
+.listing-post-style-5 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15px;
+}
+.listing-post-style-6 [class^="has_featured-tag-"]{
+	top: auto;
+    right: 20px;
+    left: auto;
+}
+.listing-post-style-7 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15px;
+}
+.listing-post-style-8 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15px;
+}
+.listing-post-style-9 [class^="has_featured-tag-"]{
+	top:10px;
+	right:10px;
+}
+.listing-post-style-10 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15px;
+}
+.listing-post-style-11 [class^="has_featured-tag-"]{
+	top:10px;
+	left:10px;
+}
+.listing-post-style-12 [class^="has_featured-tag-"]{
+	top:10px;
+	right:10px;
+	left:auto;
+}
+.listing-post-style-13 [class^="has_featured-tag-"]{
+	right:auto;
+	left:10px;
+}
+.listing-post-style-14 [class^="has_featured-tag-"]{
+	top:5px;
+	right:5px;
+	left:auto;
+}
+.listing-post-style-15 [class^="has_featured-tag-"]{
+	top:5px;
+	right:5px;
+}
+.listing-post-style-16 [class^="has_featured-tag-"]{
+	top:15px;
+	right:15px;
+}
+
+.view_swither_panel_style2 .btn.btn-default.directorypress-list-view-btn {
+    margin-right: 0;
+}
+.view_swither_panel_style2 .btn-primary.directorypress-grid-view-btn{
+	margin-right:15px !important;
+}
+.view_swither_panel_style2 {
+    padding: 0 15px 0 0;
+}
+.view_swither_panel_style2 .directorypress-orderby-links .btn.btn-default.btn-primary, .view_swither_panel_style2 .directorypress-orderby-links a.btn-default {
+    margin-right: 0 !important;
+	margin-left:30px !important;
+	border-left:none !important;
+}
+
+/*###########################################
+	# Locations
+###########################################*/
+
+/* style2 */
+:not(.location-archive) .location-style2 .directorypress-location-item .directorypress-location-item-holder .directorypress-parent-location a {
+    text-align: right;
+}
+
+/* style3 */
+:not(.location-archive) .location-style3 .directorypress-location-item .directorypress-location-item-holder .directorypress-parent-location a {
+    text-align: right;
+	direction:rtl;
+}
+
+/* style4 */
+.location-style4.directorypress-locations-columns .directorypress-location-item .directorypress-parent-location a::before, .listings.location-archive .directorypress-locations-columns .directorypress-location-item .directorypress-parent-location a::before {
+    margin-right: 0;
+	margin-left:15px;
+}
+
+/*###########################################
+	# Categories
+###########################################*/
+
+.cat-style-2 .directorypress-parent-category a .cat-icon{
+	float:none;
+}
+
+.cat-style-3 .directorypress-categories-wrapper .directorypress-category-holder .directorypress-parent-category a .categories-name {
+    left: auto !important;
+    right: 0;
+}
+.cat-style-3 .directorypress-categories-wrapper .directorypress-category-holder .directorypress-parent-category a .cat-icon {
+    float: left;
+}
+
+.cat-style-4 .directorypress-parent-category .cat-icon{
+	float:none;
+}
+.cat-style-4 .directorypress-parent-category .cat-icon img {
+    max-width: 32px !important;
+}
+
+.cat-style-5 .directorypress-parent-category a .cat-icon{
+	float:none;
+}
+.cat-style-7 .directorypress-category-item .cat-7-icon {
+    float: right;
+}
+.cat-style-7 .directorypress-category-item .cat-7-content {
+    float: right;
+    padding-left: 0;
+    padding-right: 20px;
+}
+.cat-style-7 .directorypress-category-holder .directorypress-parent-category a {text-align: right;}
+
+/* category style 8 */
+
+.cat-style-8 .directorypress-category-holder .directorypress-parent-category a {
+    text-align: right;
+}
+.cat-style-8 .directorypress-categories-wrapper .directorypress-category-holder .directorypress-parent-category a .cat-icon {
+    text-align: center;
+	border-left: 1px solid #d3d3d3;
+    border-right: none;
+    margin-right: 0;
+    margin-left: 10px;
+}

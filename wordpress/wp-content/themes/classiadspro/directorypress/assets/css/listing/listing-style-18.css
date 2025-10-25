@@ -1,0 +1,111 @@
+/* style 18 */
+
+.listing-post-style-18 .directorypress-listing-item-holder {
+	box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.1);
+	border-radius:6px;
+	overflow: hidden;
+}
+.listing-post-style-18 .directorypress-listing-item-holder:hover{
+	box-shadow: 0 3px 2px 0px rgba(0, 0, 0, 0.15);
+}
+.listing-post-style-18 .directorypress-listing-item-holder .directorypress-listing-text-content-wrap {
+	background: #fff
+}
+
+.listing-post-style-18 figure .price {
+	position: absolute;
+	top: 10px;
+	right: 10px
+}
+.listing-post-style-18 figure .price .directorypress-field-type-price {
+	margin: 0
+}
+.listing-post-style-18 figure .price .field-content {
+	background: #333;
+	padding: 0 10px;
+	min-width: 70px;
+	min-height: 22px;
+	line-height: 22px;
+	color: #fff;
+	text-align: center
+}
+.listing-post-style-18 .listing-cat-icon1 {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    left: 0;
+    width: 42px;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+}
+.rtl .listing-post-style-18 .listing-cat-icon1 {
+    float: right;
+}
+
+.listing-post-style-18 .listing-cat-icon1 .font-icon {
+	line-height: 32px;
+	width: 32px;
+	max-width: 32px;
+	border-radius: 50%;
+	height: 32px;
+	background: #333;
+	text-align: center;
+	color: #fff;
+	display: block
+}
+
+.listing-post-style-18 .directorypress-listing-title h2 {
+    line-height: 54px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    font-weight: 400;
+}
+.listing-post-style-18 .directorypress-listing-title {
+	line-height: 1;
+	float: left;
+	width: calc(100% - 44px);
+	padding-left: 10px;
+}
+.rtl .listing-post-style-18 .directorypress-listing-title {
+	float:right;
+}
+/* feature tags */
+.listing-post-style-18 .has_featured-tag-1{
+	position:absolute;
+	top:10px;
+	left:10px;
+}
+.listing-post-style-18 .directorypress-field-type-status {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.listing-post-style-18 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:0;
+}
+/* wcfm integration */
+
+.listing-post-style-18 .listing-add-to-cart {
+    position: absolute;
+    top: auto;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    right: 10px;
+    line-height: 32px;
+    font-size: 16px;
+    bottom: 10px;
+    border-radius: 0;
+}

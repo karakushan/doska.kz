@@ -1,0 +1,2684 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Designinvento Elementor Widgets\n"
+"POT-Creation-Date: 2025-04-08 14:08+0500\n"
+"PO-Revision-Date: 2022-10-10 16:18+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: designinvento-elementor-widgets.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: includes/elementor/advanced-categories.php:42
+msgid "Advanced Categories"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:92
+#: includes/elementor/advanced-locations.php:96
+#: includes/elementor/advanced-terms.php:92 includes/elementor/blog.php:26
+#: includes/elementor/directorypress-listing-mobile.php:105
+#: includes/elementor/directorypress-search.php:104
+msgid "Setting"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:99
+msgid "Show category listing count?"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:100
+msgid ""
+"Whether to show number of listings assigned with current category in "
+"brackets."
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:105
+#: includes/elementor/advanced-categories.php:138
+#: includes/elementor/advanced-categories.php:247
+#: includes/elementor/advanced-categories.php:294
+#: includes/elementor/advanced-categories.php:326
+#: includes/elementor/advanced-categories.php:343
+#: includes/elementor/advanced-locations.php:109
+#: includes/elementor/advanced-locations.php:122
+#: includes/elementor/advanced-locations.php:162
+#: includes/elementor/advanced-terms-slider.php:136
+#: includes/elementor/advanced-terms-slider.php:520
+#: includes/elementor/advanced-terms.php:122
+#: includes/elementor/advanced-terms.php:135
+#: includes/elementor/advanced-terms.php:175
+#: includes/elementor/advanced-terms.php:302 includes/elementor/blog.php:72
+#: includes/elementor/directorypress-listing-mobile.php:142
+#: includes/elementor/directorypress-listing-mobile.php:184
+#: includes/elementor/directorypress-listing-mobile.php:198
+#: includes/elementor/directorypress-listing-mobile.php:213
+#: includes/elementor/directorypress-listing-mobile.php:226
+#: includes/elementor/directorypress-listing-mobile.php:240
+#: includes/elementor/directorypress-listing-mobile.php:254
+#: includes/elementor/directorypress-listing-mobile.php:268
+#: includes/elementor/directorypress-listing-mobile.php:410
+#: includes/elementor/directorypress-listing-mobile.php:448
+#: includes/elementor/directorypress-listing-mobile.php:474
+#: includes/elementor/directorypress-listing-mobile.php:488
+#: includes/elementor/directorypress-search.php:116
+#: includes/elementor/directorypress-search.php:130
+#: includes/elementor/directorypress-search.php:147
+#: includes/elementor/directorypress-search.php:179
+#: includes/elementor/directorypress-search.php:211
+#: includes/elementor/directorypress-search.php:237
+#: includes/elementor/pacz-nav-menu.php:235
+#: includes/elementor/pacz-nav-menu.php:456
+#: includes/elementor/page-title.php:130
+msgid "No"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:106
+#: includes/elementor/advanced-categories.php:137
+#: includes/elementor/advanced-categories.php:248
+#: includes/elementor/advanced-categories.php:295
+#: includes/elementor/advanced-categories.php:327
+#: includes/elementor/advanced-categories.php:344
+#: includes/elementor/advanced-locations.php:110
+#: includes/elementor/advanced-locations.php:121
+#: includes/elementor/advanced-locations.php:161
+#: includes/elementor/advanced-terms-slider.php:135
+#: includes/elementor/advanced-terms-slider.php:519
+#: includes/elementor/advanced-terms.php:123
+#: includes/elementor/advanced-terms.php:134
+#: includes/elementor/advanced-terms.php:174
+#: includes/elementor/advanced-terms.php:301 includes/elementor/blog.php:73
+#: includes/elementor/directorypress-listing-mobile.php:143
+#: includes/elementor/directorypress-listing-mobile.php:185
+#: includes/elementor/directorypress-listing-mobile.php:199
+#: includes/elementor/directorypress-listing-mobile.php:212
+#: includes/elementor/directorypress-listing-mobile.php:227
+#: includes/elementor/directorypress-listing-mobile.php:241
+#: includes/elementor/directorypress-listing-mobile.php:255
+#: includes/elementor/directorypress-listing-mobile.php:269
+#: includes/elementor/directorypress-listing-mobile.php:411
+#: includes/elementor/directorypress-listing-mobile.php:449
+#: includes/elementor/directorypress-listing-mobile.php:475
+#: includes/elementor/directorypress-listing-mobile.php:489
+#: includes/elementor/directorypress-search.php:117
+#: includes/elementor/directorypress-search.php:131
+#: includes/elementor/directorypress-search.php:148
+#: includes/elementor/directorypress-search.php:180
+#: includes/elementor/directorypress-search.php:212
+#: includes/elementor/directorypress-search.php:238
+#: includes/elementor/pacz-nav-menu.php:234
+#: includes/elementor/pacz-nav-menu.php:455
+#: includes/elementor/page-title.php:129
+msgid "Yes"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:114
+#: includes/elementor/advanced-locations.php:138
+#: includes/elementor/advanced-terms-slider.php:152
+#: includes/elementor/advanced-terms.php:151
+msgid "Column Height"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:133
+#: includes/elementor/advanced-locations.php:157
+#: includes/elementor/advanced-terms-slider.php:171
+#: includes/elementor/advanced-terms.php:170
+msgid "Enable Box Link"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:149
+#: includes/elementor/advanced-locations.php:173
+#: includes/elementor/advanced-terms.php:186
+#: includes/elementor/directorypress-listing-mobile.php:315
+#: includes/elementor/directorypress-search.php:423
+msgid "Content"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:156
+#: includes/elementor/advanced-locations.php:180
+#: includes/elementor/advanced-terms-slider.php:222
+#: includes/elementor/advanced-terms.php:193
+msgid "Prefix"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:159
+#: includes/elementor/advanced-locations.php:183
+#: includes/elementor/advanced-terms-slider.php:225
+#: includes/elementor/advanced-terms.php:196
+msgid "Add a Prefix text applicable to custom style only"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:160
+#: includes/elementor/advanced-categories.php:170
+#: includes/elementor/advanced-locations.php:132
+#: includes/elementor/advanced-locations.php:184
+#: includes/elementor/advanced-locations.php:194
+#: includes/elementor/advanced-terms-slider.php:146
+#: includes/elementor/advanced-terms-slider.php:226
+#: includes/elementor/advanced-terms-slider.php:236
+#: includes/elementor/advanced-terms.php:145
+#: includes/elementor/advanced-terms.php:197
+#: includes/elementor/advanced-terms.php:207
+msgid "Type here"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:166
+#: includes/elementor/advanced-locations.php:190
+#: includes/elementor/advanced-terms-slider.php:232
+#: includes/elementor/advanced-terms.php:203
+msgid "Suffix"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:169
+#: includes/elementor/advanced-locations.php:193
+#: includes/elementor/advanced-terms-slider.php:235
+#: includes/elementor/advanced-terms.php:206
+msgid "Add a Suffix text  applicable to custom style only"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:176
+msgid "Select A Category"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:188
+#: includes/elementor/advanced-categories.php:208
+#: includes/elementor/advanced-categories.php:1228
+#: includes/elementor/advanced-locations.php:212
+#: includes/elementor/advanced-locations.php:232
+#: includes/elementor/advanced-locations.php:1188
+#: includes/elementor/advanced-terms-slider.php:267
+#: includes/elementor/advanced-terms-slider.php:1850
+#: includes/elementor/advanced-terms.php:244
+#: includes/elementor/advanced-terms.php:264
+#: includes/elementor/advanced-terms.php:1673 includes/elementor/login.php:204
+#: includes/elementor/login.php:280 includes/elementor/login.php:356
+#: includes/elementor/login.php:364 includes/elementor/login.php:553
+#: includes/elementor/login.php:1517 includes/elementor/login.php:1922
+msgid "Icon"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:195
+#: includes/elementor/advanced-locations.php:219
+#: includes/elementor/advanced-terms-slider.php:254
+#: includes/elementor/advanced-terms.php:251
+msgid "Icon Type"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:199
+#: includes/elementor/advanced-locations.php:223
+#: includes/elementor/advanced-terms-slider.php:258
+#: includes/elementor/advanced-terms.php:255
+msgid "Font/SVG"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:200
+#: includes/elementor/advanced-locations.php:224
+#: includes/elementor/advanced-terms-slider.php:259
+#: includes/elementor/advanced-terms.php:256
+msgid "Image"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:220
+#: includes/elementor/advanced-locations.php:244
+#: includes/elementor/advanced-terms-slider.php:279
+#: includes/elementor/advanced-terms.php:276
+msgid "Choose Image"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:235
+#: includes/elementor/advanced-terms-slider.php:390
+#: includes/elementor/directorypress-listing-mobile.php:398
+msgid "Slider"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:242
+#: includes/elementor/directorypress-listing-mobile.php:405
+msgid "Turn On Slider"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:259
+#: includes/elementor/advanced-terms-slider.php:397
+#: includes/elementor/directorypress-listing-mobile.php:419
+msgid "Items Per Slide"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:274
+#: includes/elementor/directorypress-listing-mobile.php:431
+msgid "Space Between Slides"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:289
+#: includes/elementor/directorypress-listing-mobile.php:443
+msgid "Turn On Autoplay"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:306
+#: includes/elementor/advanced-terms-slider.php:462
+#: includes/elementor/directorypress-listing-mobile.php:457
+msgid "Autoplay Speed"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:321
+#: includes/elementor/directorypress-listing-mobile.php:469
+msgid "Turn On Loop"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:338
+#: includes/elementor/directorypress-listing-mobile.php:483
+msgid "Turn On Navigation"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:355
+msgid "Navigation Style"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:360
+msgid "Style 1"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:361
+msgid "Style 2"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:372
+#: includes/elementor/advanced-terms-slider.php:494
+#: includes/elementor/directorypress-listing-mobile.php:497
+msgid "Delay"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:391
+msgid "category"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:400
+#: includes/elementor/advanced-categories.php:682
+#: includes/elementor/advanced-categories.php:959
+#: includes/elementor/advanced-categories.php:1237
+#: includes/elementor/advanced-categories.php:1527
+#: includes/elementor/advanced-locations.php:268
+#: includes/elementor/advanced-locations.php:642
+#: includes/elementor/advanced-locations.php:919
+#: includes/elementor/advanced-locations.php:1197
+#: includes/elementor/advanced-locations.php:1569
+#: includes/elementor/advanced-terms-slider.php:858
+#: includes/elementor/advanced-terms-slider.php:1216
+#: includes/elementor/advanced-terms-slider.php:1581
+#: includes/elementor/advanced-terms-slider.php:1859
+#: includes/elementor/advanced-terms-slider.php:2228
+#: includes/elementor/advanced-terms-slider.php:2631
+#: includes/elementor/advanced-terms.php:639
+#: includes/elementor/advanced-terms.php:1031
+#: includes/elementor/advanced-terms.php:1411
+#: includes/elementor/advanced-terms.php:1682
+#: includes/elementor/advanced-terms.php:2114
+#: includes/elementor/directorypress-listing-mobile.php:569
+#: includes/elementor/directorypress-listing-mobile.php:722
+msgid "Title Typography"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:410
+#: includes/elementor/advanced-categories.php:696
+#: includes/elementor/advanced-categories.php:973
+#: includes/elementor/advanced-categories.php:1278
+#: includes/elementor/advanced-categories.php:1541
+#: includes/elementor/advanced-locations.php:282
+#: includes/elementor/advanced-locations.php:656
+#: includes/elementor/advanced-locations.php:933
+#: includes/elementor/advanced-locations.php:1234
+#: includes/elementor/advanced-locations.php:1579
+#: includes/elementor/advanced-terms-slider.php:296
+#: includes/elementor/advanced-terms-slider.php:528
+#: includes/elementor/advanced-terms-slider.php:868
+#: includes/elementor/advanced-terms-slider.php:1230
+#: includes/elementor/advanced-terms-slider.php:1595
+#: includes/elementor/advanced-terms-slider.php:1900
+#: includes/elementor/advanced-terms-slider.php:2242
+#: includes/elementor/advanced-terms-slider.php:2641
+#: includes/elementor/advanced-terms.php:310
+#: includes/elementor/advanced-terms.php:649
+#: includes/elementor/advanced-terms.php:1041
+#: includes/elementor/advanced-terms.php:1421
+#: includes/elementor/advanced-terms.php:1741
+#: includes/elementor/advanced-terms.php:2124
+#: includes/elementor/directorypress-listing-mobile.php:579
+#: includes/elementor/directorypress-listing-mobile.php:732
+#: includes/elementor/login.php:669 includes/elementor/login.php:911
+#: includes/elementor/login.php:1153 includes/elementor/login.php:1354
+#: includes/elementor/login.php:1692 includes/elementor/login.php:1833
+#: includes/elementor/login.php:1967 includes/elementor/pacz-nav-menu.php:691
+#: includes/elementor/pacz-nav-menu.php:927
+#: includes/elementor/pacz-nav-menu.php:1296
+#: includes/elementor/page-title.php:317 includes/elementor/page-title.php:387
+msgid "Normal"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:417
+#: includes/elementor/advanced-categories.php:479
+#: includes/elementor/advanced-categories.php:703
+#: includes/elementor/advanced-categories.php:756
+#: includes/elementor/advanced-categories.php:980
+#: includes/elementor/advanced-categories.php:1033
+#: includes/elementor/advanced-categories.php:1548
+#: includes/elementor/advanced-categories.php:1593
+#: includes/elementor/advanced-locations.php:289
+#: includes/elementor/advanced-locations.php:395
+#: includes/elementor/advanced-locations.php:663
+#: includes/elementor/advanced-locations.php:716
+#: includes/elementor/advanced-locations.php:940
+#: includes/elementor/advanced-locations.php:993
+#: includes/elementor/advanced-locations.php:1586
+#: includes/elementor/advanced-terms-slider.php:875
+#: includes/elementor/advanced-terms-slider.php:972
+#: includes/elementor/advanced-terms-slider.php:1237
+#: includes/elementor/advanced-terms-slider.php:1334
+#: includes/elementor/advanced-terms-slider.php:1602
+#: includes/elementor/advanced-terms-slider.php:1655
+#: includes/elementor/advanced-terms-slider.php:2249
+#: includes/elementor/advanced-terms-slider.php:2338
+#: includes/elementor/advanced-terms.php:656
+#: includes/elementor/advanced-terms.php:753
+#: includes/elementor/advanced-terms.php:1048
+#: includes/elementor/advanced-terms.php:1146
+#: includes/elementor/advanced-terms.php:1428
+#: includes/elementor/advanced-terms.php:1481
+#: includes/elementor/advanced-terms.php:2131
+#: includes/elementor/advanced-terms.php:2220
+#: includes/elementor/directorypress-listing-mobile.php:586
+#: includes/elementor/directorypress-listing-mobile.php:618
+msgid "Title Color"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:428
+#: includes/elementor/advanced-categories.php:490
+#: includes/elementor/advanced-categories.php:714
+#: includes/elementor/advanced-categories.php:767
+#: includes/elementor/advanced-categories.php:991
+#: includes/elementor/advanced-categories.php:1044
+#: includes/elementor/advanced-locations.php:300
+#: includes/elementor/advanced-locations.php:406
+#: includes/elementor/advanced-locations.php:674
+#: includes/elementor/advanced-locations.php:727
+#: includes/elementor/advanced-locations.php:951
+#: includes/elementor/advanced-locations.php:1004
+#: includes/elementor/advanced-terms-slider.php:886
+#: includes/elementor/advanced-terms-slider.php:983
+#: includes/elementor/advanced-terms-slider.php:1248
+#: includes/elementor/advanced-terms-slider.php:1345
+#: includes/elementor/advanced-terms-slider.php:1613
+#: includes/elementor/advanced-terms-slider.php:1666
+#: includes/elementor/advanced-terms.php:667
+#: includes/elementor/advanced-terms.php:764
+#: includes/elementor/advanced-terms.php:1059
+#: includes/elementor/advanced-terms.php:1157
+#: includes/elementor/advanced-terms.php:1439
+#: includes/elementor/advanced-terms.php:1492 includes/elementor/login.php:720
+#: includes/elementor/login.php:797 includes/elementor/login.php:962
+#: includes/elementor/login.php:1039
+msgid "Text Shadow"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:451
+#: includes/elementor/advanced-categories.php:504
+#: includes/elementor/advanced-categories.php:728
+#: includes/elementor/advanced-categories.php:781
+#: includes/elementor/advanced-categories.php:1005
+#: includes/elementor/advanced-categories.php:1058
+#: includes/elementor/advanced-categories.php:1302
+#: includes/elementor/advanced-categories.php:1347
+#: includes/elementor/advanced-categories.php:1565
+#: includes/elementor/advanced-categories.php:1610
+#: includes/elementor/advanced-locations.php:323
+#: includes/elementor/advanced-locations.php:420
+#: includes/elementor/advanced-locations.php:688
+#: includes/elementor/advanced-locations.php:741
+#: includes/elementor/advanced-locations.php:965
+#: includes/elementor/advanced-locations.php:1018
+#: includes/elementor/advanced-locations.php:1258
+#: includes/elementor/advanced-locations.php:1347
+#: includes/elementor/advanced-locations.php:1603
+#: includes/elementor/advanced-locations.php:1692
+#: includes/elementor/advanced-terms-slider.php:541
+#: includes/elementor/advanced-terms-slider.php:619
+#: includes/elementor/advanced-terms-slider.php:900
+#: includes/elementor/advanced-terms-slider.php:997
+#: includes/elementor/advanced-terms-slider.php:1262
+#: includes/elementor/advanced-terms-slider.php:1359
+#: includes/elementor/advanced-terms-slider.php:1627
+#: includes/elementor/advanced-terms-slider.php:1680
+#: includes/elementor/advanced-terms-slider.php:1924
+#: includes/elementor/advanced-terms-slider.php:2013
+#: includes/elementor/advanced-terms-slider.php:2266
+#: includes/elementor/advanced-terms-slider.php:2355
+#: includes/elementor/advanced-terms-slider.php:2666
+#: includes/elementor/advanced-terms-slider.php:2706
+#: includes/elementor/advanced-terms.php:323
+#: includes/elementor/advanced-terms.php:401
+#: includes/elementor/advanced-terms.php:681
+#: includes/elementor/advanced-terms.php:778
+#: includes/elementor/advanced-terms.php:1073
+#: includes/elementor/advanced-terms.php:1171
+#: includes/elementor/advanced-terms.php:1453
+#: includes/elementor/advanced-terms.php:1506
+#: includes/elementor/advanced-terms.php:1765
+#: includes/elementor/advanced-terms.php:1854
+#: includes/elementor/advanced-terms.php:2148
+#: includes/elementor/advanced-terms.php:2237
+#: includes/elementor/directorypress-listing-mobile.php:757
+#: includes/elementor/directorypress-listing-mobile.php:797
+#: includes/elementor/login.php:688 includes/elementor/login.php:755
+#: includes/elementor/login.php:930 includes/elementor/login.php:997
+#: includes/elementor/login.php:1172 includes/elementor/login.php:1224
+#: includes/elementor/login.php:1384 includes/elementor/login.php:1457
+#: includes/elementor/pacz-nav-menu.php:713
+#: includes/elementor/pacz-nav-menu.php:776
+#: includes/elementor/pacz-nav-menu.php:860
+#: includes/elementor/pacz-nav-menu.php:949
+#: includes/elementor/pacz-nav-menu.php:989
+#: includes/elementor/pacz-nav-menu.php:1030
+#: includes/elementor/pacz-nav-menu.php:1315
+#: includes/elementor/pacz-nav-menu.php:1358
+msgid "Background Color"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:462
+#: includes/elementor/advanced-categories.php:515
+#: includes/elementor/advanced-categories.php:739
+#: includes/elementor/advanced-categories.php:792
+#: includes/elementor/advanced-categories.php:1016
+#: includes/elementor/advanced-categories.php:1069
+#: includes/elementor/advanced-categories.php:1313
+#: includes/elementor/advanced-categories.php:1358
+#: includes/elementor/advanced-categories.php:1576
+#: includes/elementor/advanced-categories.php:1621
+#: includes/elementor/advanced-locations.php:334
+#: includes/elementor/advanced-locations.php:431
+#: includes/elementor/advanced-locations.php:699
+#: includes/elementor/advanced-locations.php:752
+#: includes/elementor/advanced-locations.php:976
+#: includes/elementor/advanced-locations.php:1029
+#: includes/elementor/advanced-locations.php:1269
+#: includes/elementor/advanced-locations.php:1358
+#: includes/elementor/advanced-locations.php:1614
+#: includes/elementor/advanced-locations.php:1703
+#: includes/elementor/advanced-terms-slider.php:328
+#: includes/elementor/advanced-terms-slider.php:552
+#: includes/elementor/advanced-terms-slider.php:630
+#: includes/elementor/advanced-terms-slider.php:911
+#: includes/elementor/advanced-terms-slider.php:1008
+#: includes/elementor/advanced-terms-slider.php:1273
+#: includes/elementor/advanced-terms-slider.php:1370
+#: includes/elementor/advanced-terms-slider.php:1638
+#: includes/elementor/advanced-terms-slider.php:1691
+#: includes/elementor/advanced-terms-slider.php:1935
+#: includes/elementor/advanced-terms-slider.php:2024
+#: includes/elementor/advanced-terms-slider.php:2277
+#: includes/elementor/advanced-terms-slider.php:2366
+#: includes/elementor/advanced-terms-slider.php:2678
+#: includes/elementor/advanced-terms-slider.php:2718
+#: includes/elementor/advanced-terms.php:334
+#: includes/elementor/advanced-terms.php:412
+#: includes/elementor/advanced-terms.php:692
+#: includes/elementor/advanced-terms.php:789
+#: includes/elementor/advanced-terms.php:1084
+#: includes/elementor/advanced-terms.php:1182
+#: includes/elementor/advanced-terms.php:1464
+#: includes/elementor/advanced-terms.php:1517
+#: includes/elementor/advanced-terms.php:1776
+#: includes/elementor/advanced-terms.php:1865
+#: includes/elementor/advanced-terms.php:2159
+#: includes/elementor/advanced-terms.php:2248
+#: includes/elementor/directorypress-listing-mobile.php:769
+#: includes/elementor/directorypress-listing-mobile.php:809
+#: includes/elementor/directorypress-search.php:646
+#: includes/elementor/directorypress-search.php:759
+#: includes/elementor/login.php:712 includes/elementor/login.php:789
+#: includes/elementor/login.php:954 includes/elementor/login.php:1031
+#: includes/elementor/login.php:1196 includes/elementor/login.php:1258
+#: includes/elementor/login.php:1418 includes/elementor/login.php:1502
+#: includes/elementor/login.php:1710 includes/elementor/login.php:1748
+#: includes/elementor/pacz-nav-menu.php:742
+#: includes/elementor/pacz-nav-menu.php:830
+#: includes/elementor/pacz-nav-menu.php:892
+msgid "Box Shadow"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:472
+#: includes/elementor/advanced-categories.php:749
+#: includes/elementor/advanced-categories.php:1026
+#: includes/elementor/advanced-categories.php:1323
+#: includes/elementor/advanced-categories.php:1586
+#: includes/elementor/advanced-locations.php:388
+#: includes/elementor/advanced-locations.php:709
+#: includes/elementor/advanced-locations.php:986
+#: includes/elementor/advanced-locations.php:1323
+#: includes/elementor/advanced-locations.php:1668
+#: includes/elementor/advanced-terms-slider.php:347
+#: includes/elementor/advanced-terms-slider.php:606
+#: includes/elementor/advanced-terms-slider.php:965
+#: includes/elementor/advanced-terms-slider.php:1327
+#: includes/elementor/advanced-terms-slider.php:1648
+#: includes/elementor/advanced-terms-slider.php:1989
+#: includes/elementor/advanced-terms-slider.php:2331
+#: includes/elementor/advanced-terms-slider.php:2688
+#: includes/elementor/advanced-terms.php:388
+#: includes/elementor/advanced-terms.php:746
+#: includes/elementor/advanced-terms.php:1139
+#: includes/elementor/advanced-terms.php:1474
+#: includes/elementor/advanced-terms.php:1830
+#: includes/elementor/advanced-terms.php:2213
+#: includes/elementor/directorypress-listing-mobile.php:611
+#: includes/elementor/directorypress-listing-mobile.php:779
+#: includes/elementor/login.php:737 includes/elementor/login.php:979
+#: includes/elementor/login.php:1206 includes/elementor/login.php:1428
+#: includes/elementor/login.php:1720 includes/elementor/login.php:1871
+#: includes/elementor/login.php:1988 includes/elementor/pacz-nav-menu.php:752
+#: includes/elementor/pacz-nav-menu.php:967
+#: includes/elementor/pacz-nav-menu.php:1338
+msgid "Hover"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:497
+#: includes/elementor/advanced-categories.php:774
+#: includes/elementor/advanced-categories.php:1051
+#: includes/elementor/advanced-categories.php:1340
+#: includes/elementor/advanced-categories.php:1603
+#: includes/elementor/advanced-locations.php:413
+#: includes/elementor/advanced-locations.php:734
+#: includes/elementor/advanced-locations.php:1011
+#: includes/elementor/advanced-locations.php:1340
+#: includes/elementor/advanced-locations.php:1685
+#: includes/elementor/advanced-terms-slider.php:612
+#: includes/elementor/advanced-terms-slider.php:990
+#: includes/elementor/advanced-terms-slider.php:1352
+#: includes/elementor/advanced-terms-slider.php:1673
+#: includes/elementor/advanced-terms-slider.php:2006
+#: includes/elementor/advanced-terms-slider.php:2348
+#: includes/elementor/advanced-terms.php:394
+#: includes/elementor/advanced-terms.php:771
+#: includes/elementor/advanced-terms.php:1164
+#: includes/elementor/advanced-terms.php:1499
+#: includes/elementor/advanced-terms.php:1847
+#: includes/elementor/advanced-terms.php:2230
+msgid "Hover Animation"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:523
+#: includes/elementor/advanced-categories.php:800
+#: includes/elementor/advanced-categories.php:1077
+#: includes/elementor/advanced-categories.php:1366
+#: includes/elementor/advanced-categories.php:1629
+#: includes/elementor/advanced-locations.php:439
+#: includes/elementor/advanced-locations.php:760
+#: includes/elementor/advanced-locations.php:1037
+#: includes/elementor/advanced-locations.php:1366
+#: includes/elementor/advanced-locations.php:1711
+#: includes/elementor/advanced-terms-slider.php:638
+#: includes/elementor/advanced-terms-slider.php:1016
+#: includes/elementor/advanced-terms-slider.php:1378
+#: includes/elementor/advanced-terms-slider.php:1699
+#: includes/elementor/advanced-terms-slider.php:2032
+#: includes/elementor/advanced-terms-slider.php:2374
+#: includes/elementor/advanced-terms-slider.php:2726
+#: includes/elementor/advanced-terms.php:420
+#: includes/elementor/advanced-terms.php:797
+#: includes/elementor/advanced-terms.php:1190
+#: includes/elementor/advanced-terms.php:1525
+#: includes/elementor/advanced-terms.php:1873
+#: includes/elementor/advanced-terms.php:2256
+#: includes/elementor/directorypress-listing-mobile.php:817
+#: includes/elementor/login.php:777 includes/elementor/login.php:1019
+#: includes/elementor/login.php:1246 includes/elementor/pacz-nav-menu.php:1224
+#: includes/elementor/pacz-nav-menu.php:1325
+#: includes/elementor/pacz-nav-menu.php:1368
+msgid "Border Color"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:542
+#: includes/elementor/advanced-categories.php:819
+#: includes/elementor/advanced-categories.php:1096
+#: includes/elementor/advanced-categories.php:1385
+#: includes/elementor/advanced-categories.php:1648
+#: includes/elementor/advanced-locations.php:502
+#: includes/elementor/advanced-locations.php:779
+#: includes/elementor/advanced-locations.php:1056
+#: includes/elementor/advanced-locations.php:1426
+#: includes/elementor/advanced-locations.php:1774
+#: includes/elementor/advanced-terms-slider.php:336
+#: includes/elementor/advanced-terms-slider.php:363
+#: includes/elementor/advanced-terms-slider.php:716
+#: includes/elementor/advanced-terms-slider.php:1076
+#: includes/elementor/advanced-terms-slider.php:1441
+#: includes/elementor/advanced-terms-slider.php:1718
+#: includes/elementor/advanced-terms-slider.php:2095
+#: includes/elementor/advanced-terms-slider.php:2437
+#: includes/elementor/advanced-terms-slider.php:2746
+#: includes/elementor/advanced-terms.php:498
+#: includes/elementor/advanced-terms.php:875
+#: includes/elementor/advanced-terms.php:1271
+#: includes/elementor/advanced-terms.php:1541
+#: includes/elementor/advanced-terms.php:1955
+#: includes/elementor/advanced-terms.php:2337
+#: includes/elementor/directorypress-listing-mobile.php:837
+#: includes/elementor/directorypress-search.php:630
+#: includes/elementor/directorypress-search.php:751
+#: includes/elementor/login.php:637 includes/elementor/login.php:879
+#: includes/elementor/login.php:1121 includes/elementor/login.php:1322
+#: includes/elementor/login.php:1659
+msgid "Border"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:549
+#: includes/elementor/advanced-categories.php:826
+#: includes/elementor/advanced-categories.php:1103
+#: includes/elementor/advanced-categories.php:1392
+#: includes/elementor/advanced-categories.php:1655
+#: includes/elementor/advanced-locations.php:509
+#: includes/elementor/advanced-locations.php:786
+#: includes/elementor/advanced-locations.php:1063
+#: includes/elementor/advanced-locations.php:1433
+#: includes/elementor/advanced-locations.php:1781
+#: includes/elementor/advanced-terms-slider.php:243
+#: includes/elementor/advanced-terms-slider.php:723
+#: includes/elementor/advanced-terms-slider.php:1083
+#: includes/elementor/advanced-terms-slider.php:1448
+#: includes/elementor/advanced-terms-slider.php:1725
+#: includes/elementor/advanced-terms-slider.php:2102
+#: includes/elementor/advanced-terms-slider.php:2444
+#: includes/elementor/advanced-terms-slider.php:2753
+#: includes/elementor/advanced-terms.php:505
+#: includes/elementor/advanced-terms.php:882
+#: includes/elementor/advanced-terms.php:1278
+#: includes/elementor/advanced-terms.php:1548
+#: includes/elementor/advanced-terms.php:1988
+#: includes/elementor/advanced-terms.php:2344
+#: includes/elementor/directorypress-listing-mobile.php:844
+#: includes/elementor/pacz-nav-menu.php:724
+#: includes/elementor/pacz-nav-menu.php:812
+#: includes/elementor/pacz-nav-menu.php:1075
+#: includes/elementor/pacz-nav-menu.php:1448
+msgid "Border Radius"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:575
+#: includes/elementor/advanced-categories.php:852
+#: includes/elementor/advanced-categories.php:1129
+#: includes/elementor/advanced-categories.php:1418
+#: includes/elementor/advanced-categories.php:1666
+#: includes/elementor/advanced-locations.php:535
+#: includes/elementor/advanced-locations.php:812
+#: includes/elementor/advanced-locations.php:1089
+#: includes/elementor/advanced-locations.php:1460
+#: includes/elementor/advanced-locations.php:1814
+#: includes/elementor/advanced-terms-slider.php:749
+#: includes/elementor/advanced-terms-slider.php:1109
+#: includes/elementor/advanced-terms-slider.php:1474
+#: includes/elementor/advanced-terms-slider.php:1751
+#: includes/elementor/advanced-terms-slider.php:2119
+#: includes/elementor/advanced-terms-slider.php:2455
+#: includes/elementor/advanced-terms-slider.php:2765
+#: includes/elementor/advanced-terms.php:531
+#: includes/elementor/advanced-terms.php:908
+#: includes/elementor/advanced-terms.php:1304
+#: includes/elementor/advanced-terms.php:1574
+#: includes/elementor/advanced-terms.php:2005
+#: includes/elementor/advanced-terms.php:2355
+#: includes/elementor/directorypress-listing-mobile.php:856
+#: includes/elementor/login.php:598 includes/elementor/login.php:840
+#: includes/elementor/login.php:1082 includes/elementor/login.php:1294
+#: includes/elementor/login.php:1647 includes/elementor/page-title.php:245
+msgid "Padding"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:592
+#: includes/elementor/advanced-categories.php:869
+#: includes/elementor/advanced-categories.php:1146
+#: includes/elementor/advanced-categories.php:1435
+#: includes/elementor/advanced-categories.php:1683
+#: includes/elementor/advanced-locations.php:552
+#: includes/elementor/advanced-locations.php:829
+#: includes/elementor/advanced-locations.php:1106
+#: includes/elementor/advanced-locations.php:1477
+#: includes/elementor/advanced-locations.php:1831
+#: includes/elementor/advanced-terms-slider.php:766
+#: includes/elementor/advanced-terms-slider.php:1126
+#: includes/elementor/advanced-terms-slider.php:1491
+#: includes/elementor/advanced-terms-slider.php:1768
+#: includes/elementor/advanced-terms-slider.php:2136
+#: includes/elementor/advanced-terms-slider.php:2472
+#: includes/elementor/advanced-terms-slider.php:2783
+#: includes/elementor/advanced-terms.php:548
+#: includes/elementor/advanced-terms.php:925
+#: includes/elementor/advanced-terms.php:1321
+#: includes/elementor/advanced-terms.php:1591
+#: includes/elementor/advanced-terms.php:2022
+#: includes/elementor/advanced-terms.php:2372
+#: includes/elementor/directorypress-listing-mobile.php:874
+#: includes/elementor/login.php:586 includes/elementor/login.php:828
+#: includes/elementor/login.php:1070 includes/elementor/login.php:1282
+#: includes/elementor/login.php:1635
+msgid "Margin"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:609
+#: includes/elementor/advanced-categories.php:886
+#: includes/elementor/advanced-categories.php:1163
+#: includes/elementor/advanced-categories.php:1452
+#: includes/elementor/advanced-categories.php:1700
+#: includes/elementor/advanced-locations.php:569
+#: includes/elementor/advanced-locations.php:846
+#: includes/elementor/advanced-locations.php:1123
+#: includes/elementor/advanced-locations.php:1494
+#: includes/elementor/advanced-locations.php:1848
+#: includes/elementor/advanced-terms-slider.php:783
+#: includes/elementor/advanced-terms-slider.php:1143
+#: includes/elementor/advanced-terms-slider.php:1508
+#: includes/elementor/advanced-terms-slider.php:1785
+#: includes/elementor/advanced-terms-slider.php:2153
+#: includes/elementor/advanced-terms-slider.php:2489
+#: includes/elementor/advanced-terms-slider.php:2801
+#: includes/elementor/advanced-terms.php:565
+#: includes/elementor/advanced-terms.php:958
+#: includes/elementor/advanced-terms.php:1338
+#: includes/elementor/advanced-terms.php:1608
+#: includes/elementor/advanced-terms.php:2039
+#: includes/elementor/advanced-terms.php:2405
+#: includes/elementor/directorypress-listing-mobile.php:892
+msgid "Position"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:613
+#: includes/elementor/advanced-categories.php:890
+#: includes/elementor/advanced-categories.php:1167
+#: includes/elementor/advanced-categories.php:1456
+#: includes/elementor/advanced-categories.php:1704
+#: includes/elementor/advanced-locations.php:573
+#: includes/elementor/advanced-locations.php:850
+#: includes/elementor/advanced-locations.php:1127
+#: includes/elementor/advanced-locations.php:1498
+#: includes/elementor/advanced-locations.php:1852
+#: includes/elementor/advanced-terms-slider.php:787
+#: includes/elementor/advanced-terms-slider.php:1147
+#: includes/elementor/advanced-terms-slider.php:1512
+#: includes/elementor/advanced-terms-slider.php:1789
+#: includes/elementor/advanced-terms-slider.php:2157
+#: includes/elementor/advanced-terms-slider.php:2493
+#: includes/elementor/advanced-terms-slider.php:2805
+#: includes/elementor/advanced-terms.php:569
+#: includes/elementor/advanced-terms.php:962
+#: includes/elementor/advanced-terms.php:1342
+#: includes/elementor/advanced-terms.php:1612
+#: includes/elementor/advanced-terms.php:2043
+#: includes/elementor/advanced-terms.php:2409
+#: includes/elementor/directorypress-listing-mobile.php:896
+msgid "Relative"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:614
+#: includes/elementor/advanced-categories.php:891
+#: includes/elementor/advanced-categories.php:1168
+#: includes/elementor/advanced-categories.php:1457
+#: includes/elementor/advanced-categories.php:1705
+#: includes/elementor/advanced-locations.php:574
+#: includes/elementor/advanced-locations.php:851
+#: includes/elementor/advanced-locations.php:1128
+#: includes/elementor/advanced-locations.php:1499
+#: includes/elementor/advanced-locations.php:1853
+#: includes/elementor/advanced-terms-slider.php:788
+#: includes/elementor/advanced-terms-slider.php:1148
+#: includes/elementor/advanced-terms-slider.php:1513
+#: includes/elementor/advanced-terms-slider.php:1790
+#: includes/elementor/advanced-terms-slider.php:2158
+#: includes/elementor/advanced-terms-slider.php:2494
+#: includes/elementor/advanced-terms-slider.php:2806
+#: includes/elementor/advanced-terms.php:570
+#: includes/elementor/advanced-terms.php:963
+#: includes/elementor/advanced-terms.php:1343
+#: includes/elementor/advanced-terms.php:1613
+#: includes/elementor/advanced-terms.php:2044
+#: includes/elementor/advanced-terms.php:2410
+#: includes/elementor/directorypress-listing-mobile.php:897
+msgid "Absolute"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:615
+#: includes/elementor/advanced-categories.php:892
+#: includes/elementor/advanced-categories.php:1169
+#: includes/elementor/advanced-categories.php:1458
+#: includes/elementor/advanced-categories.php:1706
+#: includes/elementor/advanced-locations.php:575
+#: includes/elementor/advanced-locations.php:852
+#: includes/elementor/advanced-locations.php:1129
+#: includes/elementor/advanced-locations.php:1500
+#: includes/elementor/advanced-locations.php:1854
+#: includes/elementor/advanced-terms-slider.php:789
+#: includes/elementor/advanced-terms-slider.php:1149
+#: includes/elementor/advanced-terms-slider.php:1514
+#: includes/elementor/advanced-terms-slider.php:1791
+#: includes/elementor/advanced-terms-slider.php:2159
+#: includes/elementor/advanced-terms-slider.php:2495
+#: includes/elementor/advanced-terms-slider.php:2807
+#: includes/elementor/advanced-terms.php:571
+#: includes/elementor/advanced-terms.php:964
+#: includes/elementor/advanced-terms.php:1344
+#: includes/elementor/advanced-terms.php:1614
+#: includes/elementor/advanced-terms.php:2045
+#: includes/elementor/advanced-terms.php:2411
+#: includes/elementor/directorypress-listing-mobile.php:898
+msgid "Static"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:623
+#: includes/elementor/advanced-categories.php:1714
+#: includes/elementor/advanced-terms-slider.php:797
+#: includes/elementor/advanced-terms-slider.php:1157
+#: includes/elementor/advanced-terms.php:579
+#: includes/elementor/advanced-terms.php:972
+msgid "Category Position Top"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:626
+#: includes/elementor/advanced-categories.php:1180
+#: includes/elementor/advanced-categories.php:1469
+#: includes/elementor/advanced-categories.php:1717
+#: includes/elementor/advanced-locations.php:586
+#: includes/elementor/advanced-locations.php:1140
+#: includes/elementor/advanced-locations.php:1511
+#: includes/elementor/advanced-locations.php:1865
+#: includes/elementor/advanced-terms-slider.php:800
+#: includes/elementor/advanced-terms-slider.php:1160
+#: includes/elementor/advanced-terms-slider.php:1802
+#: includes/elementor/advanced-terms-slider.php:2170
+#: includes/elementor/advanced-terms-slider.php:2506
+#: includes/elementor/advanced-terms-slider.php:2818
+#: includes/elementor/advanced-terms-slider.php:2866
+#: includes/elementor/advanced-terms.php:582
+#: includes/elementor/advanced-terms.php:975
+#: includes/elementor/advanced-terms.php:1625
+#: includes/elementor/advanced-terms.php:2056
+#: includes/elementor/advanced-terms.php:2422
+#: includes/elementor/directorypress-listing-mobile.php:909
+#: includes/elementor/directorypress-listing-mobile.php:957
+msgid "Position From Top"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:635
+#: includes/elementor/advanced-categories.php:1726
+#: includes/elementor/advanced-terms-slider.php:809
+#: includes/elementor/advanced-terms-slider.php:1169
+#: includes/elementor/advanced-terms.php:591
+#: includes/elementor/advanced-terms.php:984
+msgid "Category Position Left"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:638
+#: includes/elementor/advanced-categories.php:1192
+#: includes/elementor/advanced-categories.php:1481
+#: includes/elementor/advanced-categories.php:1729
+#: includes/elementor/advanced-locations.php:598
+#: includes/elementor/advanced-locations.php:1152
+#: includes/elementor/advanced-locations.php:1523
+#: includes/elementor/advanced-locations.php:1877
+#: includes/elementor/advanced-terms-slider.php:812
+#: includes/elementor/advanced-terms-slider.php:1172
+#: includes/elementor/advanced-terms-slider.php:1814
+#: includes/elementor/advanced-terms-slider.php:2182
+#: includes/elementor/advanced-terms-slider.php:2518
+#: includes/elementor/advanced-terms-slider.php:2830
+#: includes/elementor/advanced-terms-slider.php:2878
+#: includes/elementor/advanced-terms.php:594
+#: includes/elementor/advanced-terms.php:987
+#: includes/elementor/advanced-terms.php:1637
+#: includes/elementor/advanced-terms.php:2068
+#: includes/elementor/advanced-terms.php:2434
+#: includes/elementor/directorypress-listing-mobile.php:921
+#: includes/elementor/directorypress-listing-mobile.php:969
+msgid "Position From Left"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:647
+#: includes/elementor/advanced-categories.php:1738
+#: includes/elementor/advanced-terms-slider.php:1181
+#: includes/elementor/advanced-terms.php:996
+msgid "Category Position Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:650
+#: includes/elementor/advanced-categories.php:1204
+#: includes/elementor/advanced-categories.php:1493
+#: includes/elementor/advanced-categories.php:1741
+#: includes/elementor/advanced-locations.php:610
+#: includes/elementor/advanced-locations.php:1164
+#: includes/elementor/advanced-locations.php:1535
+#: includes/elementor/advanced-locations.php:1889
+#: includes/elementor/advanced-terms-slider.php:824
+#: includes/elementor/advanced-terms-slider.php:1184
+#: includes/elementor/advanced-terms-slider.php:1826
+#: includes/elementor/advanced-terms-slider.php:2194
+#: includes/elementor/advanced-terms-slider.php:2530
+#: includes/elementor/advanced-terms-slider.php:2842
+#: includes/elementor/advanced-terms-slider.php:2890
+#: includes/elementor/advanced-terms.php:606
+#: includes/elementor/advanced-terms.php:999
+#: includes/elementor/advanced-terms.php:1649
+#: includes/elementor/advanced-terms.php:2080
+#: includes/elementor/advanced-terms.php:2446
+#: includes/elementor/directorypress-listing-mobile.php:933
+#: includes/elementor/directorypress-listing-mobile.php:981
+msgid "Position From Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:659
+#: includes/elementor/advanced-categories.php:1750
+#: includes/elementor/advanced-terms-slider.php:1193
+#: includes/elementor/advanced-terms.php:1008
+msgid "Category Position Right"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:662
+#: includes/elementor/advanced-categories.php:1216
+#: includes/elementor/advanced-categories.php:1505
+#: includes/elementor/advanced-categories.php:1753
+#: includes/elementor/advanced-locations.php:622
+#: includes/elementor/advanced-locations.php:1176
+#: includes/elementor/advanced-locations.php:1547
+#: includes/elementor/advanced-locations.php:1901
+#: includes/elementor/advanced-terms-slider.php:836
+#: includes/elementor/advanced-terms-slider.php:1196
+#: includes/elementor/advanced-terms-slider.php:1838
+#: includes/elementor/advanced-terms-slider.php:2206
+#: includes/elementor/advanced-terms-slider.php:2542
+#: includes/elementor/advanced-terms-slider.php:2854
+#: includes/elementor/advanced-terms-slider.php:2902
+#: includes/elementor/advanced-terms.php:618
+#: includes/elementor/advanced-terms.php:1011
+#: includes/elementor/advanced-terms.php:1661
+#: includes/elementor/advanced-terms.php:2092
+#: includes/elementor/advanced-terms.php:2458
+#: includes/elementor/directorypress-listing-mobile.php:945
+#: includes/elementor/directorypress-listing-mobile.php:993
+msgid "Position From Right"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:674
+#: includes/elementor/advanced-locations.php:634
+#: includes/elementor/advanced-terms-slider.php:1208
+#: includes/elementor/advanced-terms.php:1023
+msgid "Prefix Text"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:900
+#: includes/elementor/advanced-categories.php:1177
+#: includes/elementor/advanced-categories.php:1466
+#: includes/elementor/advanced-locations.php:860
+#: includes/elementor/advanced-locations.php:1137
+#: includes/elementor/advanced-locations.php:1508
+#: includes/elementor/advanced-terms-slider.php:1522
+#: includes/elementor/advanced-terms-slider.php:1799
+#: includes/elementor/advanced-terms-slider.php:2167
+#: includes/elementor/advanced-terms-slider.php:2503
+#: includes/elementor/advanced-terms.php:1352
+#: includes/elementor/advanced-terms.php:1622
+#: includes/elementor/advanced-terms.php:2053
+#: includes/elementor/advanced-terms.php:2419
+msgid "Position Top"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:903
+#: includes/elementor/advanced-locations.php:863
+#: includes/elementor/advanced-terms-slider.php:1525
+#: includes/elementor/advanced-terms.php:1355
+msgid "From Top"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:912
+#: includes/elementor/advanced-categories.php:1189
+#: includes/elementor/advanced-categories.php:1478
+#: includes/elementor/advanced-locations.php:872
+#: includes/elementor/advanced-locations.php:1149
+#: includes/elementor/advanced-locations.php:1520
+#: includes/elementor/advanced-terms-slider.php:1534
+#: includes/elementor/advanced-terms-slider.php:1811
+#: includes/elementor/advanced-terms-slider.php:2179
+#: includes/elementor/advanced-terms-slider.php:2515
+#: includes/elementor/advanced-terms.php:1364
+#: includes/elementor/advanced-terms.php:1634
+#: includes/elementor/advanced-terms.php:2065
+#: includes/elementor/advanced-terms.php:2431
+msgid "Position Left"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:915
+#: includes/elementor/advanced-locations.php:875
+#: includes/elementor/advanced-terms-slider.php:1537
+#: includes/elementor/advanced-terms.php:1367
+msgid "From Left"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:924
+#: includes/elementor/advanced-categories.php:1201
+#: includes/elementor/advanced-categories.php:1490
+#: includes/elementor/advanced-locations.php:884
+#: includes/elementor/advanced-locations.php:1161
+#: includes/elementor/advanced-locations.php:1532
+#: includes/elementor/advanced-terms-slider.php:821
+#: includes/elementor/advanced-terms-slider.php:1546
+#: includes/elementor/advanced-terms-slider.php:1823
+#: includes/elementor/advanced-terms-slider.php:2191
+#: includes/elementor/advanced-terms-slider.php:2527
+#: includes/elementor/advanced-terms.php:603
+#: includes/elementor/advanced-terms.php:1376
+#: includes/elementor/advanced-terms.php:1646
+#: includes/elementor/advanced-terms.php:2077
+#: includes/elementor/advanced-terms.php:2443
+msgid "Position Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:927
+#: includes/elementor/advanced-locations.php:887
+#: includes/elementor/advanced-terms-slider.php:1549
+#: includes/elementor/advanced-terms.php:1379
+msgid "From Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:936
+#: includes/elementor/advanced-categories.php:1213
+#: includes/elementor/advanced-categories.php:1502
+#: includes/elementor/advanced-locations.php:896
+#: includes/elementor/advanced-locations.php:1173
+#: includes/elementor/advanced-locations.php:1544
+#: includes/elementor/advanced-terms-slider.php:833
+#: includes/elementor/advanced-terms-slider.php:1558
+#: includes/elementor/advanced-terms-slider.php:1835
+#: includes/elementor/advanced-terms-slider.php:2203
+#: includes/elementor/advanced-terms-slider.php:2539
+#: includes/elementor/advanced-terms.php:615
+#: includes/elementor/advanced-terms.php:1388
+#: includes/elementor/advanced-terms.php:1658
+#: includes/elementor/advanced-terms.php:2089
+#: includes/elementor/advanced-terms.php:2455
+msgid "Position Right"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:939
+#: includes/elementor/advanced-locations.php:899
+#: includes/elementor/advanced-terms-slider.php:1561
+#: includes/elementor/advanced-terms.php:1391
+msgid "From Right"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:951
+#: includes/elementor/advanced-locations.php:911
+#: includes/elementor/advanced-terms-slider.php:1573
+#: includes/elementor/advanced-terms.php:1403
+msgid "Suffix Text"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:1249
+#: includes/elementor/advanced-locations.php:1205
+#: includes/elementor/advanced-terms-slider.php:1871
+#: includes/elementor/advanced-terms.php:1712
+msgid "SVG/Image Icon Width"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:1285
+#: includes/elementor/advanced-categories.php:1330
+#: includes/elementor/advanced-locations.php:1241
+#: includes/elementor/advanced-locations.php:1330
+#: includes/elementor/advanced-locations.php:1675
+#: includes/elementor/advanced-terms-slider.php:1907
+#: includes/elementor/advanced-terms-slider.php:1996
+#: includes/elementor/advanced-terms-slider.php:2695
+#: includes/elementor/advanced-terms.php:1748
+#: includes/elementor/advanced-terms.php:1837
+#: includes/elementor/directorypress-listing-mobile.php:786
+#: includes/elementor/pacz-nav-menu.php:1303
+#: includes/elementor/pacz-nav-menu.php:1345
+#: includes/elementor/page-title.php:292 includes/elementor/page-title.php:361
+msgid "Color"
+msgstr ""
+
+#: includes/elementor/advanced-categories.php:1518
+#: includes/elementor/advanced-locations.php:1560
+#: includes/elementor/advanced-terms-slider.php:2219
+#: includes/elementor/advanced-terms.php:2105
+msgid "Counter"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:46
+msgid "Advanced Locations"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:103
+msgid "Show location listing count?"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:104
+msgid ""
+"Whether to show number of listings assigned with current location in "
+"brackets."
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:118
+#: includes/elementor/advanced-terms-slider.php:132
+#: includes/elementor/advanced-terms.php:131
+msgid "Add text with count? "
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:128
+#: includes/elementor/advanced-terms-slider.php:142
+#: includes/elementor/advanced-terms.php:141
+msgid "Count suffix custom text"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:131
+#: includes/elementor/advanced-terms-slider.php:145
+#: includes/elementor/advanced-terms.php:144
+msgid "if empty default text (listings) will be added"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:200
+msgid "Select A Location"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:259
+#: includes/elementor/advanced-terms-slider.php:849
+#: includes/elementor/advanced-terms.php:630
+#: includes/elementor/page-title.php:111 includes/elementor/page-title.php:273
+msgid "Title"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:341
+#: includes/elementor/advanced-locations.php:452
+#: includes/elementor/advanced-locations.php:1276
+#: includes/elementor/advanced-locations.php:1376
+#: includes/elementor/advanced-locations.php:1621
+#: includes/elementor/advanced-locations.php:1724
+#: includes/elementor/advanced-terms-slider.php:559
+#: includes/elementor/advanced-terms-slider.php:648
+#: includes/elementor/advanced-terms-slider.php:918
+#: includes/elementor/advanced-terms-slider.php:1026
+#: includes/elementor/advanced-terms-slider.php:1280
+#: includes/elementor/advanced-terms-slider.php:1391
+#: includes/elementor/advanced-terms-slider.php:1942
+#: includes/elementor/advanced-terms-slider.php:2045
+#: includes/elementor/advanced-terms-slider.php:2284
+#: includes/elementor/advanced-terms-slider.php:2387
+#: includes/elementor/advanced-terms.php:341
+#: includes/elementor/advanced-terms.php:430
+#: includes/elementor/advanced-terms.php:699
+#: includes/elementor/advanced-terms.php:807
+#: includes/elementor/advanced-terms.php:1091
+#: includes/elementor/advanced-terms.php:1203
+#: includes/elementor/advanced-terms.php:1783
+#: includes/elementor/advanced-terms.php:1886
+#: includes/elementor/advanced-terms.php:2166
+#: includes/elementor/advanced-terms.php:2269
+msgid "Offset X"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:364
+#: includes/elementor/advanced-locations.php:475
+#: includes/elementor/advanced-locations.php:1299
+#: includes/elementor/advanced-locations.php:1399
+#: includes/elementor/advanced-locations.php:1644
+#: includes/elementor/advanced-locations.php:1747
+#: includes/elementor/advanced-terms-slider.php:582
+#: includes/elementor/advanced-terms-slider.php:671
+#: includes/elementor/advanced-terms-slider.php:941
+#: includes/elementor/advanced-terms-slider.php:1049
+#: includes/elementor/advanced-terms-slider.php:1303
+#: includes/elementor/advanced-terms-slider.php:1414
+#: includes/elementor/advanced-terms-slider.php:1965
+#: includes/elementor/advanced-terms-slider.php:2068
+#: includes/elementor/advanced-terms-slider.php:2307
+#: includes/elementor/advanced-terms-slider.php:2410
+#: includes/elementor/advanced-terms.php:364
+#: includes/elementor/advanced-terms.php:453
+#: includes/elementor/advanced-terms.php:722
+#: includes/elementor/advanced-terms.php:830
+#: includes/elementor/advanced-terms.php:1114
+#: includes/elementor/advanced-terms.php:1226
+#: includes/elementor/advanced-terms.php:1806
+#: includes/elementor/advanced-terms.php:1909
+#: includes/elementor/advanced-terms.php:2189
+#: includes/elementor/advanced-terms.php:2292
+msgid "Offset Y"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:583
+#: includes/elementor/advanced-locations.php:1862
+msgid "Location Position Top"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:595
+#: includes/elementor/advanced-locations.php:1874
+msgid "Location Position Left"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:607
+#: includes/elementor/advanced-locations.php:1886
+msgid "Location Position Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:619
+#: includes/elementor/advanced-locations.php:1898
+msgid "Location Position Right"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:1792
+msgid "Width (%)"
+msgstr ""
+
+#: includes/elementor/advanced-locations.php:1803
+msgid "Height (px)"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:48
+msgid "Advanced Terms Slider"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:97
+msgid "Global Setting"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:105
+#: includes/elementor/advanced-terms.php:99
+#: includes/elementor/pacz-nav-menu.php:256
+#: includes/elementor/page-title.php:138
+msgid "Layout"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:106
+#: includes/elementor/advanced-terms.php:100
+msgid "Widget layout"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:111
+#: includes/elementor/advanced-terms.php:105
+msgid "icon/title/counter"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:112
+#: includes/elementor/advanced-terms.php:106
+msgid "title/icon/counter"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:113
+#: includes/elementor/advanced-terms.php:107
+msgid "counter/title/icon"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:114
+#: includes/elementor/advanced-terms.php:108
+msgid "counter/icon/title"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:122
+msgid "Listing Count"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:124
+#: includes/elementor/advanced-terms-slider.php:173
+#: includes/elementor/advanced-terms-slider.php:454
+#: includes/elementor/advanced-terms-slider.php:476
+#: includes/elementor/advanced-terms-slider.php:486
+msgid "On"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:125
+#: includes/elementor/advanced-terms-slider.php:174
+#: includes/elementor/advanced-terms-slider.php:455
+#: includes/elementor/advanced-terms-slider.php:477
+#: includes/elementor/advanced-terms-slider.php:487
+msgid "Off"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:184
+msgid "Items"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:193
+#: includes/elementor/advanced-terms.php:213
+msgid "Select A Taxonomy"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:206
+#: includes/elementor/advanced-terms.php:226
+msgid "Select A Term"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:302
+#: includes/elementor/advanced-terms-slider.php:311
+#: includes/elementor/advanced-terms-slider.php:319
+#: includes/elementor/advanced-terms-slider.php:354
+#: includes/elementor/page-title.php:263
+msgid "Background"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:378
+msgid "Add Item"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:410
+msgid "Items to scroll Per Slide"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:422
+msgid "Slide Speed"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:434
+msgid "Spacing"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:452
+msgid "Autoplay"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:474
+msgid "Loop"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:484
+msgid "Navigation"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:509
+#: includes/elementor/advanced-terms.php:291
+msgid "Content Wrapper"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:516
+#: includes/elementor/advanced-terms.php:298
+msgid "Content Wrapper "
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:693
+#: includes/elementor/advanced-terms.php:475
+#: includes/elementor/advanced-terms.php:852
+#: includes/elementor/advanced-terms.php:1248
+#: includes/elementor/advanced-terms.php:1931
+#: includes/elementor/advanced-terms.php:2314
+msgid "Transition Speed"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2555
+#: includes/elementor/directorypress-listing-mobile.php:646
+msgid "Slider Arrows"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2562
+#: includes/elementor/directorypress-listing-mobile.php:653
+msgid "Width"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2585
+#: includes/elementor/directorypress-listing-mobile.php:676
+msgid "Height"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2608
+#: includes/elementor/directorypress-listing-mobile.php:699
+msgid "Previous Arrow Icon"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2619
+#: includes/elementor/directorypress-listing-mobile.php:710
+msgid "Next Arrow Icon"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2648
+#: includes/elementor/directorypress-listing-mobile.php:739
+#: includes/elementor/login.php:699 includes/elementor/login.php:765
+#: includes/elementor/login.php:941 includes/elementor/login.php:1007
+#: includes/elementor/login.php:1183 includes/elementor/login.php:1234
+#: includes/elementor/login.php:1405 includes/elementor/login.php:1489
+#: includes/elementor/login.php:1994
+msgid "Icon Color"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2815
+#: includes/elementor/directorypress-listing-mobile.php:906
+msgid "Previous Arrow Position Top"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2827
+#: includes/elementor/directorypress-listing-mobile.php:918
+msgid "Previous Arrow Position Left"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2839
+#: includes/elementor/directorypress-listing-mobile.php:930
+msgid "Previous Arrow Position Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2851
+#: includes/elementor/directorypress-listing-mobile.php:942
+msgid "Previous Arrow Position Right"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2863
+#: includes/elementor/directorypress-listing-mobile.php:954
+msgid "Next Arrow Position Top"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2875
+#: includes/elementor/directorypress-listing-mobile.php:966
+msgid "Next Arrow Position Left"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2887
+#: includes/elementor/directorypress-listing-mobile.php:978
+msgid "Next Arrow Position Bottom"
+msgstr ""
+
+#: includes/elementor/advanced-terms-slider.php:2899
+#: includes/elementor/directorypress-listing-mobile.php:990
+msgid "Next Arrow Position Right"
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:46
+msgid "Advanced Terms"
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:116
+msgid "Show Terms listing count?"
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:117
+msgid ""
+"Whether to show number of listings assigned with current Term in brackets."
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:942
+#: includes/elementor/advanced-terms.php:2389
+msgid "Display"
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:946
+#: includes/elementor/advanced-terms.php:2393
+msgid "Block"
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:947
+#: includes/elementor/advanced-terms.php:2394
+msgid "Inline Block"
+msgstr ""
+
+#: includes/elementor/advanced-terms.php:1690
+msgid "SVG/Image Icon Box Width"
+msgstr ""
+
+#: includes/elementor/blog.php:11
+msgid "Posts"
+msgstr ""
+
+#: includes/elementor/blog.php:33
+msgid "Post Style"
+msgstr ""
+
+#: includes/elementor/blog.php:38 includes/elementor/pacz-nav-menu.php:305
+msgid "Classic"
+msgstr ""
+
+#: includes/elementor/blog.php:39
+msgid "Grid"
+msgstr ""
+
+#: includes/elementor/blog.php:40
+msgid "Grid Style 2"
+msgstr ""
+
+#: includes/elementor/blog.php:41
+msgid "List Style"
+msgstr ""
+
+#: includes/elementor/blog.php:49
+msgid "Grid Columns"
+msgstr ""
+
+#: includes/elementor/blog.php:54
+msgid "2 Columns"
+msgstr ""
+
+#: includes/elementor/blog.php:55
+msgid "3 Columns"
+msgstr ""
+
+#: includes/elementor/blog.php:56
+msgid "4 Columns"
+msgstr ""
+
+#: includes/elementor/blog.php:67
+msgid "Turn On Pagination"
+msgstr ""
+
+#: includes/elementor/blog.php:81
+msgid "Per Page Items"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:55
+msgid "Mobile Listings"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:112
+msgid "Defualt Listing View Type"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:117
+msgid "Grid View"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:118
+msgid "List View"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:126
+msgid "Grid View Style"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:137
+msgid "Show All listings"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:152
+msgid "Number of Items to show"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:167
+msgid "Grid View Columns Per Row"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:179
+msgid "2 column mobile view"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:193
+msgid "Show Featured Listing Only"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:207
+msgid "Show Listing View Switcher"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:221
+msgid "Hide Sorting"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:235
+msgid "Hide Listing Count"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:249
+msgid "Hide Pagination"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:263
+msgid "Infinite Scroll"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:277
+msgid "Listing Sort By"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:288
+msgid "Order Listing As"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:293
+msgid "ASC"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:294
+msgid "Descending"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:302
+msgid "Order By Text"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:305
+msgid "Custom Order By Text"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:322
+#: includes/elementor/directorypress-search.php:430
+msgid "Select Directory"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:333
+#: includes/elementor/directorypress-search.php:441
+msgid "Unique ID"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:335
+#: includes/elementor/directorypress-search.php:443
+msgid ""
+"Insert unique id if you like to connect this module to a specific module "
+"like map or search(optional)"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:343
+#: includes/elementor/directorypress-search.php:451
+msgid "Select Specific Categories"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:354
+msgid "Custom Category Link"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:357
+msgid "url to any category"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:363
+msgid "Custom Category Link Text"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:366
+msgid "Explore Category"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:372
+#: includes/elementor/directorypress-search.php:462
+msgid "Select Specific Locations"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:383
+msgid "Select Packages"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:513
+#: includes/elementor/directorypress-search.php:476
+msgid "Style"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:520
+msgid "Grid Thumbnail Dimension"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:523
+msgid ""
+"Crop the original image size to any custom size. Set custom width or height "
+"to keep the original size ratio."
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:533
+msgid "Grid Column Gap"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:536
+msgid ""
+"Padding would effect grid item left and right, a 15px value means 30px gap "
+"between items"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:546
+msgid "Grid Column margin bottom"
+msgstr ""
+
+#: includes/elementor/directorypress-listing-mobile.php:597
+#: includes/elementor/directorypress-listing-mobile.php:629
+msgid "Content wrapper Background"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:55
+msgid "DirectoryPress Search"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:111
+msgid "Turn On Keyword Search"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:125
+msgid "Turn On Ajax Keyword Search"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:142
+msgid "Turn On Category Search"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:156
+msgid "Category Depth Level"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:161
+#: includes/elementor/directorypress-search.php:193
+msgid "Level 1"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:162
+#: includes/elementor/directorypress-search.php:194
+msgid "Level 2"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:174
+msgid "Turn On Location Search"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:188
+msgid "Locations Depth Level"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:206
+msgid "Show Address Search?"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:220
+msgid "Default address"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:232
+msgid "Hide Search Button"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:246
+msgid "Fields Gap"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:265
+msgid "Fields Height"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:288
+msgid "Fields Margin Top"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:310
+msgid "Fields Margin Bottom"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:332
+msgid "Keyword Field Width"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:354
+msgid "Location Field Width"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:376
+msgid "Search Button Width"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:398
+msgid "Button Margin Top"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:483
+msgid "Search Form Padding"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:495
+msgid "Search Form Border"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:502
+msgid "Search Form Border Radius"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:522
+#: includes/elementor/directorypress-search.php:523
+msgid "Search Form Background"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:533
+msgid "Fields"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:541
+msgid "Field Text Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:551
+msgid "Field Placeholder Text Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:561
+msgid "Field Icon Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:571
+msgid "Field Icon Background Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:581
+msgid "Field Icon Font Size"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:599
+msgid "Field Border Radius"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:621
+msgid "Field Border"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:637
+msgid "Field Box Shadow"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:653
+msgid "Field Typography"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:662
+#: includes/elementor/directorypress-search.php:679
+#: includes/elementor/directorypress-search.php:824
+#: includes/elementor/login.php:629 includes/elementor/login.php:871
+#: includes/elementor/login.php:1113
+msgid "Typography"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:670
+msgid "Field Label Typography"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:687
+#: includes/elementor/directorypress-search.php:695
+msgid "Field Background Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:707
+msgid "Button"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:714
+msgid "Search Button Type"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:719
+msgid "Text + Icon Left"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:720
+msgid "Text + Icon Right"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:721
+msgid "Text Only"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:722
+msgid "Icon Only"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:730
+msgid "Button Text Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:740
+msgid "Button Text Hover Color"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:766
+msgid "Button Border Radius"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:783
+msgid "Button Height"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:802
+msgid "Search Icon"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:815
+msgid "Button Typography"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:832
+#: includes/elementor/directorypress-search.php:841
+msgid "Button Background"
+msgstr ""
+
+#: includes/elementor/directorypress-search.php:849
+#: includes/elementor/directorypress-search.php:858
+msgid "Button Background Hover"
+msgstr ""
+
+#: includes/elementor/login.php:65 includes/elementor/login.php:578
+msgid "Login Menu"
+msgstr ""
+
+#: includes/elementor/login.php:125 includes/elementor/page-title.php:238
+msgid "Container"
+msgstr ""
+
+#: includes/elementor/login.php:131 includes/elementor/login.php:398
+#: includes/elementor/pacz-nav-menu.php:268
+#: includes/elementor/pacz-nav-menu.php:375
+msgid "Alignment"
+msgstr ""
+
+#: includes/elementor/login.php:135 includes/elementor/login.php:402
+#: includes/elementor/login.php:450 includes/elementor/pacz-nav-menu.php:272
+#: includes/elementor/pacz-nav-menu.php:379
+#: includes/elementor/page-title.php:172 includes/elementor/page-title.php:202
+msgid "Left"
+msgstr ""
+
+#: includes/elementor/login.php:139 includes/elementor/login.php:406
+#: includes/elementor/login.php:454 includes/elementor/pacz-nav-menu.php:276
+#: includes/elementor/pacz-nav-menu.php:383
+#: includes/elementor/page-title.php:176 includes/elementor/page-title.php:206
+msgid "Center"
+msgstr ""
+
+#: includes/elementor/login.php:143 includes/elementor/login.php:410
+#: includes/elementor/login.php:458 includes/elementor/pacz-nav-menu.php:280
+#: includes/elementor/pacz-nav-menu.php:387
+#: includes/elementor/page-title.php:180 includes/elementor/page-title.php:210
+msgid "Right"
+msgstr ""
+
+#: includes/elementor/login.php:157 includes/elementor/login.php:424
+msgid "Direction"
+msgstr ""
+
+#: includes/elementor/login.php:161 includes/elementor/login.php:428
+msgid "Left to right"
+msgstr ""
+
+#: includes/elementor/login.php:165 includes/elementor/login.php:432
+msgid "Right to left"
+msgstr ""
+
+#: includes/elementor/login.php:182 includes/elementor/login.php:189
+msgid "Login Button"
+msgstr ""
+
+#: includes/elementor/login.php:191 includes/elementor/login.php:267
+#: includes/elementor/login.php:343 includes/elementor/login.php:499
+#: includes/elementor/login.php:510
+msgid "Show"
+msgstr ""
+
+#: includes/elementor/login.php:192 includes/elementor/login.php:268
+#: includes/elementor/login.php:344 includes/elementor/login.php:500
+#: includes/elementor/login.php:511
+msgid "Hide"
+msgstr ""
+
+#: includes/elementor/login.php:200 includes/elementor/login.php:276
+#: includes/elementor/login.php:352
+msgid "Choose Style"
+msgstr ""
+
+#: includes/elementor/login.php:205 includes/elementor/login.php:281
+#: includes/elementor/login.php:357 includes/elementor/login.php:376
+#: includes/elementor/pacz-nav-menu.php:595
+msgid "Text"
+msgstr ""
+
+#: includes/elementor/login.php:206 includes/elementor/login.php:282
+msgid "Both"
+msgstr ""
+
+#: includes/elementor/login.php:213 includes/elementor/login.php:486
+msgid "Login Button Icon"
+msgstr ""
+
+#: includes/elementor/login.php:225 includes/elementor/login.php:301
+msgid "Button Text"
+msgstr ""
+
+#: includes/elementor/login.php:237 includes/elementor/login.php:313
+msgid "Url"
+msgstr ""
+
+#: includes/elementor/login.php:239 includes/elementor/login.php:315
+msgid "https://designsvilla.com/"
+msgstr ""
+
+#: includes/elementor/login.php:258 includes/elementor/login.php:265
+msgid "Register Button"
+msgstr ""
+
+#: includes/elementor/login.php:289
+msgid "Register Button Icon"
+msgstr ""
+
+#: includes/elementor/login.php:334 includes/elementor/login.php:1062
+#: includes/elementor/pacz-nav-menu.php:1195
+msgid "Divider"
+msgstr ""
+
+#: includes/elementor/login.php:341
+msgid "turm on divider"
+msgstr ""
+
+#: includes/elementor/login.php:392 includes/elementor/login.php:1274
+msgid "User Menu"
+msgstr ""
+
+#: includes/elementor/login.php:446
+msgid "Dropdown Items Alignment"
+msgstr ""
+
+#: includes/elementor/login.php:472
+msgid "User Profile Image"
+msgstr ""
+
+#: includes/elementor/login.php:476
+msgid "profile photo"
+msgstr ""
+
+#: includes/elementor/login.php:477
+msgid "Custom Icon"
+msgstr ""
+
+#: includes/elementor/login.php:478
+msgid "Disable"
+msgstr ""
+
+#: includes/elementor/login.php:497
+msgid "User Display Name"
+msgstr ""
+
+#: includes/elementor/login.php:508
+msgid "User Nicename"
+msgstr ""
+
+#: includes/elementor/login.php:519 includes/elementor/login.php:1620
+msgid "User Menu Dropdown"
+msgstr ""
+
+#: includes/elementor/login.php:523 includes/elementor/pacz-nav-menu.php:318
+msgid "Default"
+msgstr ""
+
+#: includes/elementor/login.php:524
+msgid "Custom"
+msgstr ""
+
+#: includes/elementor/login.php:533
+msgid "Label"
+msgstr ""
+
+#: includes/elementor/login.php:543
+msgid "url"
+msgstr ""
+
+#: includes/elementor/login.php:562
+msgid "Add user dropdown menu"
+msgstr ""
+
+#: includes/elementor/login.php:609 includes/elementor/login.php:851
+#: includes/elementor/login.php:1093 includes/elementor/login.php:1543
+#: includes/elementor/login.php:1942 includes/elementor/pacz-nav-menu.php:1413
+msgid "Icon Size"
+msgstr ""
+
+#: includes/elementor/login.php:645 includes/elementor/login.php:887
+#: includes/elementor/login.php:1129 includes/elementor/login.php:1330
+#: includes/elementor/login.php:1667
+msgid "Border radius"
+msgstr ""
+
+#: includes/elementor/login.php:676 includes/elementor/login.php:743
+#: includes/elementor/login.php:918 includes/elementor/login.php:985
+#: includes/elementor/login.php:1160 includes/elementor/login.php:1212
+#: includes/elementor/pacz-nav-menu.php:698
+#: includes/elementor/pacz-nav-menu.php:759
+#: includes/elementor/pacz-nav-menu.php:847
+#: includes/elementor/pacz-nav-menu.php:934
+#: includes/elementor/pacz-nav-menu.php:974
+#: includes/elementor/pacz-nav-menu.php:1013
+msgid "Text Color"
+msgstr ""
+
+#: includes/elementor/login.php:820
+msgid "Register Menu"
+msgstr ""
+
+#: includes/elementor/login.php:1306
+msgid "Display Name Typography"
+msgstr ""
+
+#: includes/elementor/login.php:1314
+msgid "Display Nicename Typography"
+msgstr ""
+
+#: includes/elementor/login.php:1361 includes/elementor/login.php:1434
+msgid "Display Name Text Color"
+msgstr ""
+
+#: includes/elementor/login.php:1372 includes/elementor/login.php:1445
+msgid "Nicename Text Color"
+msgstr ""
+
+#: includes/elementor/login.php:1394 includes/elementor/login.php:1467
+msgid "Icon Box background Color"
+msgstr ""
+
+#: includes/elementor/login.php:1478
+msgid "Icon Box border Color"
+msgstr ""
+
+#: includes/elementor/login.php:1525
+msgid "Icon Box Size"
+msgstr ""
+
+#: includes/elementor/login.php:1563
+msgid "Icon Box Margin"
+msgstr ""
+
+#: includes/elementor/login.php:1575
+msgid "Icon Box Border"
+msgstr ""
+
+#: includes/elementor/login.php:1583
+msgid "Icon Box Border radius"
+msgstr ""
+
+#: includes/elementor/login.php:1603
+msgid "icon box Padding"
+msgstr ""
+
+#: includes/elementor/login.php:1627
+msgid "Menu Box"
+msgstr ""
+
+#: includes/elementor/login.php:1698 includes/elementor/login.php:1726
+msgid "Box Background Color"
+msgstr ""
+
+#: includes/elementor/login.php:1737
+msgid "Box Border Color"
+msgstr ""
+
+#: includes/elementor/login.php:1762
+msgid "Menu Item"
+msgstr ""
+
+#: includes/elementor/login.php:1770
+msgid "Menu Item Margin"
+msgstr ""
+
+#: includes/elementor/login.php:1781
+msgid "Menu Item Padding"
+msgstr ""
+
+#: includes/elementor/login.php:1793
+msgid "Links Typography"
+msgstr ""
+
+#: includes/elementor/login.php:1801
+msgid "Menu Item Border"
+msgstr ""
+
+#: includes/elementor/login.php:1809
+msgid "Menu Item Border radius"
+msgstr ""
+
+#: includes/elementor/login.php:1839 includes/elementor/login.php:1877
+msgid "Menu Item Background Color"
+msgstr ""
+
+#: includes/elementor/login.php:1850 includes/elementor/login.php:1888
+msgid "Menu Item Shadow"
+msgstr ""
+
+#: includes/elementor/login.php:1857 includes/elementor/login.php:1905
+msgid "Links Text Color"
+msgstr ""
+
+#: includes/elementor/login.php:1895
+msgid "Menu Item Border Color"
+msgstr ""
+
+#: includes/elementor/login.php:1930
+msgid "Icon Margin"
+msgstr ""
+
+#: includes/elementor/login.php:1973
+msgid "Links Icon Color"
+msgstr ""
+
+#: includes/elementor/login.php:2072
+msgid "My Dashboard"
+msgstr ""
+
+#: includes/elementor/login.php:2073
+msgid "My Listings"
+msgstr ""
+
+#: includes/elementor/login.php:2074
+msgid "Edit Profile"
+msgstr ""
+
+#: includes/elementor/login.php:2075 includes/elementor/login.php:2081
+msgid "logout"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:72
+msgid "Designinvento Menu"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:198
+#: includes/elementor/pacz-nav-menu.php:208
+msgid "Menu"
+msgstr ""
+
+#. translators: %s Nav menu URL
+#: includes/elementor/pacz-nav-menu.php:214
+#, php-format
+msgid ""
+"Go to the <a href=\"%s\" target=\"_blank\">Menus screen</a> to manage your "
+"menus."
+msgstr ""
+
+#. translators: %s Nav menu URL
+#: includes/elementor/pacz-nav-menu.php:223
+#, php-format
+msgid ""
+"<strong>There are no menus in your site.</strong><br>Go to the <a href=\"%s"
+"\" target=\"_blank\">Menus screen</a> to create one."
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:232
+msgid "Enable Schema Support"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:249
+msgid "Desktop Layout"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:260
+msgid "Horizontal"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:284
+msgid "Justify"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:299
+msgid "Submenu Icon"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:303
+msgid "Arrows"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:304
+msgid "Plus Sign"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:314
+msgid "Submenu Animation"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:319
+msgid "Slide Up"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:331
+msgid "Action On Menu Click"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:334
+msgid "For Horizontal layout, this will affect on the selected breakpoint"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:336
+msgid "Open Submenu"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:337
+msgid "Redirect To Self Link"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:349
+msgid "Responsive Layout"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:355
+msgid "Breakpoint"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:359
+msgid "Mobile (768px >)"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:360
+msgid "Tablet (1025px >)"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:361
+msgid "Desktop)"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:362
+#: includes/elementor/pacz-nav-menu.php:590
+#: includes/elementor/pacz-nav-menu.php:1209
+msgid "None"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:392
+msgid "This is the alignement of menu icon on selected responsive breakpoints."
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:412
+msgid "Menu Icon"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:430
+msgid "Close Icon"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:446
+#: includes/elementor/pacz-nav-menu.php:1264
+#: includes/elementor/pacz-nav-menu.php:1460
+msgid "Author Section"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:453
+msgid "Enable Author Info Section"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:463
+msgid "Logged out user content after author info"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:474
+msgid "Logged in user content after author info"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:490
+msgid "Main Menu"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:498
+#: includes/elementor/pacz-nav-menu.php:1131
+msgid "Horizontal Padding"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:521
+#: includes/elementor/pacz-nav-menu.php:1149
+msgid "Vertical Padding"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:543
+msgid "Space Between"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:565
+msgid "Row Spacing"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:586
+msgid "Link Hover Effect"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:591
+msgid "Underline"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:592
+msgid "Overline"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:593
+msgid "Double Line"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:594
+msgid "Framed"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:606
+#: includes/elementor/pacz-nav-menu.php:648
+msgid "Animation"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:627
+msgid "Frame Animation"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:791
+#: includes/elementor/pacz-nav-menu.php:873
+msgid "Link Hover Effect Color"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:840
+#: includes/elementor/pacz-nav-menu.php:1006
+msgid "Active"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:908
+msgid "Dropdown"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:916
+msgid ""
+"<b>Note:</b> On desktop, below style options will apply to the submenu. On "
+"mobile, this will apply to the entire menu."
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1106
+msgid "Dropdown Width (px)"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1173
+msgid "Top Distance"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1204
+msgid "Border Style"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1210
+msgid "Solid"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1211
+msgid "Double"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1212
+msgid "Dotted"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1213
+msgid "Dashed"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1240
+#: includes/elementor/pacz-nav-menu.php:1432
+msgid "Border Width"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1274
+msgid "Author Section Background Color"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1286
+msgid "Responsive Menu Icon"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1381
+msgid "Icon Width"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1397
+msgid "Icon Height"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1467
+msgid "Menu close icon background color"
+msgstr ""
+
+#: includes/elementor/pacz-nav-menu.php:1477
+msgid "Menu close icon color"
+msgstr ""
+
+#: includes/elementor/page-title.php:56
+msgid "Page Title"
+msgstr ""
+
+#. translators: %1$s doc link
+#: includes/elementor/page-title.php:120
+msgid "<b>Note:</b> Archive page title will be visible on frontend."
+msgstr ""
+
+#: includes/elementor/page-title.php:127
+msgid "Enable Full Width Container"
+msgstr ""
+
+#: includes/elementor/page-title.php:131
+msgid "Section should be full width as well to make it work."
+msgstr ""
+
+#: includes/elementor/page-title.php:141
+msgid "Title + Breadcrumbs (title at top)"
+msgstr ""
+
+#: includes/elementor/page-title.php:142
+msgid "Breadcrumbs (Breadcrumbs at top)"
+msgstr ""
+
+#: includes/elementor/page-title.php:143
+msgid "Title only"
+msgstr ""
+
+#: includes/elementor/page-title.php:151
+msgid "HTML Tag"
+msgstr ""
+
+#: includes/elementor/page-title.php:154
+msgid "H1"
+msgstr ""
+
+#: includes/elementor/page-title.php:155
+msgid "H2"
+msgstr ""
+
+#: includes/elementor/page-title.php:156
+msgid "H3"
+msgstr ""
+
+#: includes/elementor/page-title.php:157
+msgid "H4"
+msgstr ""
+
+#: includes/elementor/page-title.php:158
+msgid "H5"
+msgstr ""
+
+#: includes/elementor/page-title.php:159
+msgid "H6"
+msgstr ""
+
+#: includes/elementor/page-title.php:168
+msgid " Title Alignment"
+msgstr ""
+
+#: includes/elementor/page-title.php:184 includes/elementor/page-title.php:214
+msgid "Justified"
+msgstr ""
+
+#: includes/elementor/page-title.php:198
+msgid "Breadcrumbs Alignment"
+msgstr ""
+
+#: includes/elementor/page-title.php:314 includes/elementor/page-title.php:384
+msgid "Blend Mode"
+msgstr ""
+
+#: includes/elementor/page-title.php:342
+msgid "Breadcrumbs"
+msgstr ""
+
+#: includes/elementor/page-title.php:459
+msgid "Blog"
+msgstr ""
+
+#: includes/elementor/page-title.php:468
+msgid "Latest News"
+msgstr ""
+
+#: includes/elementor/page-title.php:472
+msgid "Search"
+msgstr ""
+
+#: includes/elementor/page-title.php:476 includes/elementor/page-title.php:479
+#: includes/elementor/page-title.php:482 includes/elementor/page-title.php:488
+#: includes/elementor/page-title.php:495
+#, php-format
+msgid " %s"
+msgstr ""
+
+#: includes/elementor/page-title.php:485
+#, php-format
+msgid "%s"
+msgstr ""
+
+#: includes/elementor/page-title.php:491
+msgid "Author Profile"
+msgstr ""
+
+#: includes/elementor/page-title.php:499
+msgid "404 Not Found"
+msgstr ""
+
+#: includes/elementor/page-title.php:604
+msgid "Home"
+msgstr ""
+
+#: includes/elementor/page-title.php:697
+msgid "Search results for &ldquo;"
+msgstr ""
+
+#: includes/elementor/page-title.php:701
+msgid "Tag &ldquo;"
+msgstr ""
+
+#: includes/elementor/page-title.php:706
+msgid "Author:"
+msgstr ""
+
+#: includes/elementor/page-title.php:726
+msgid "Page"
+msgstr ""
+
+#: includes/elementor/page-title.php:767
+msgid "Split"
+msgstr ""
+
+#: includes/elementor/page-title.php:770
+msgid "Merge"
+msgstr ""
+
+#: includes/elementor/page-title.php:773 includes/elementor/page-title.php:787
+#: includes/elementor/page-title.php:807
+msgid "Edit"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Designinvento Elementor Widgets"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://designinvento.net/plugins/designinvento-elementor-widgets/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Plugin Provides Premium features for All Designinvento Themes"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Designinvento"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://designinvento.net/"
+msgstr ""

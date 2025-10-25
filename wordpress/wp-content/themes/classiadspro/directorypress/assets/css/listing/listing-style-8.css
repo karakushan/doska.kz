@@ -1,0 +1,221 @@
+/* style 8 */
+.listing-post-style-8 .directorypress-listing-item-holder {
+    overflow:visible;
+}
+.listing-post-style-8 .directorypress-listing-text-content-wrap .category {
+	display: inline-block;
+	float: left
+}
+.listing-post-style-8 .directorypress-listing-text-content-wrap .category a {
+	display: inline-block;
+	min-width: 50px;
+	min-height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color: #fff;
+	border-radius: 2px;
+	padding: 0 10px;
+	font-size: 10px;
+	background:#555;
+}
+.listing-post-style-8 .directorypress-listing-text-content-wrap .directorypress-rating {
+	float: right;
+	display: inline-block;
+	line-height: 26px
+}
+.listing-post-style-8 .directorypress-listing-text-content-wrap .directorypress-rating .ui-rater-starsOff {
+	margin-top: 3px
+}
+.listing-post-style-8 .directorypress-listing-text-content-wrap .directorypress-field-type-excerpt {
+	margin-top: 0
+}
+.directorypress-listing.listing-post-style-8 header.directorypress-listing-title {
+	clear: both
+}
+.directorypress-listing.listing-post-style-8 header.directorypress-listing-title h2 a {
+	font-weight: 400;
+	text-transform: capitalize
+}
+.listing-post-style-8 .directorypress-listing-figcaption-option .listing-cat-icon1 {
+	position:static;
+	display:block;
+	
+}
+.listing-post-style-8 .directorypress-listing-figcaption-option .listing-cat-icon1 .cat-icon.svg_icon{
+	width: 50px;
+	background: #fff;
+	height: 50px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 50%;
+}
+.listing-post-style-8 .directorypress-listing-figcaption-option .listing-cat-icon1 .cat-icon.svg_icon svg{
+	width: 24px;
+    line-height: 50px;
+    margin-top: 13px;
+}
+.listing-post-style-8 .directorypress-listing-figcaption-option .listing-cat-icon1 .font-icon{
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	color: #fff;
+	text-align: center;
+	display: block;
+	font-size: 24px;
+	margin:0 auto;
+}
+.listing-post-style-8 .directorypress-listing-figcaption-option img.directorypress-field-icon {
+	margin: 0 5px 10px 0;
+	min-width:auto !important;
+}
+.directorypress-listing.listing-post-style-8 figcaption .directorypress-figcaption .directorypress-location span {
+	font-size: 13px;
+	font-weight: 400;
+	text-transform: capitalize
+}
+.directorypress-listing-cat a {
+	padding: 4px 25px;
+	display: none;
+	color: #fff;
+	font-size: 10px;
+	text-transform: uppercase
+}
+.directorypress-listing-cat a:hover {
+	color: #fff
+}
+.directorypress-listing-cat a:first-child,
+.directorypress-listings-grid .listing-post-style-8 .directorypress-field-type-string .field-label {
+	display: inline-block
+}
+.directorypress-listings-grid .listing-post-style-8 .listing-bottom-content .price {
+	float: left
+}
+.listing-post-style-8 .listing-bottom-content .price .directorypress-field-type-price {
+	margin: 0!important;
+	line-height:1;
+
+}
+
+.directorypress-listings-grid .listing-post-style-8 .directorypress-field-type-string .field-label .directorypress-field-title {
+	display: none
+}
+.directorypress-listings-grid .listing-post-style-8 .listing-bottom-content {
+	text-align: center;
+	margin-bottom: 0;
+	padding: 15px;
+	border-top: 1px solid #eee
+}
+.directorypress-listings-grid .listing-post-style-8 .listing-bottom-content .add_to_favourites {
+	padding: 0!important;
+	display: inline-block
+}
+.directorypress-listings-grid .listing-post-style-8 .listing-bottom-content .listing-views {
+	display: inline-block;
+	float: right;
+	margin-bottom: 0;
+	line-height: 14px!important
+}
+.directorypress-listings-grid .listing-post-style-8 .listing-bottom-content .directorypress-rating {
+	display: inline-block;
+	float: left
+}
+.directorypress-listings-grid .listing-post-style-8 .directorypress-listing-cat {
+	margin-bottom: 5px
+}
+.directorypress-listing.listing-post-style-8.directorypress-has_featured .directorypress-listing-figure a:after {
+	background-color: #ff2d2d!important
+}
+.directorypress-listings-block.directorypress-listings-grid .listing-post-style-8 .directorypress-listing-text-content-wrap {
+	padding: 15px 15px 3px
+}
+.listing-post-style-8 figure.directorypress-listing-figure figcaption {
+	bottom: 0;
+	height: calc(100% - 20px);
+	height: -webkit-calc(100% - 20px);
+    height: -moz-calc(100% - 20px);
+	left: 0;
+	margin: auto;
+	right: 0;
+	text-align: center;
+	top: 0;
+	opacity: 0;
+	background: rgba(0, 0, 0, .6);
+	width: calc(100% - 20px);
+	width: -webkit-calc(100% - 20px);
+    width: -moz-calc(100% - 20px);
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transition: opacity .3s;
+	-moz-transition: opacity .3s;
+	transition: opacity .3s
+}
+.directorypress-single-listing-logo-wrap.style2 .owl-item a:hover i,
+.listing-post-style-8:hover figure.directorypress-listing-figure figcaption {
+	opacity: 1
+}
+
+.listing8-overlay-link {
+	display: block!important;
+	width: 100%;
+	height: 100%;
+	position: absolute
+}
+
+.listing-post-style-8 .listing-grid-buttons{
+	position:absolute;
+	top:15px;
+	right:15px;
+}
+.listing-post-style-8 .add_to_favourites {
+    display: block;
+    font-size: 16px;
+    z-index: 100;
+    background: #fff;
+    border-radius: 2px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+	float:left;
+	margin-left:5px;
+}
+
+.listing-post-style-8 .has_featured-tag-8{
+	position:static;
+	float:left;
+	border-radius:2px;
+}
+
+.listing-post-style-8 .directorypress-field-type-status{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+.listing-post-style-8 .directorypress-field-type-status .field-content .listing-status-tag{
+    background: #81d742;
+    padding: 1px 8px 0;
+    display: block;
+    font-size: 11px;
+    color: #fff;
+    min-width: 60px;
+    min-height: 20px;
+    line-height: 20px;
+	border-radius:2px;
+}
+
+/* wcfm integration */
+
+.listing-post-style-8 .listing-add-to-cart {
+    position: static;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    line-height: 32px;
+    font-size: 16px;
+    border-radius: 2px;
+	float:left;
+	margin-left:5px;
+}

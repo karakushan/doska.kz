@@ -1,0 +1,59 @@
+/*
+Theme Name: ClassiadsPro
+Theme URI: http://themeforest.net/user/designinvento/portfolio
+Description: A Beautiful, Professional and Ultimate Wordpress Theme Made by designinvento
+Author: DesignInvento
+Author URI: http://themeforest.net/user/designinvento
+Version: 6.2.1
+Text Domain: classiadspro
+Tags:translation-ready
+License: GNU General Public License v2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+
+/*
+
+Please do not add your styles in this file and instead use 
+child theme or use custom.css in the same root this file locates.
+
+
+
+*/
+.ultimate-btn-inline-block{
+display:inline-block;
+}
+
+.classaids-frontend-offcanvas{
+	padding-top:50px;
+	z-index:10000;
+}
+
+/* Style the button that is used to open the sidepanel */
+.classaids-frontend-offcanvas-btn {
+  width:120px;
+  display:inline-block;
+  Position:fixed;
+  right:0;
+  top:50%;
+  cursor:pointer;
+  transform:scale(1);
+}
+.classaids-frontend-offcanvas-btn:hover{
+	transform:scale(1.01);
+}
+
+.classaids-frontend-offcanvas-btn img{
+	width:100%;
+}
+.classaids-frontend-offcanvas .list-group{
+	margin-left:0;
+}
+.classaids-frontend-offcanvas .list-group-item a img{
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.classaids-frontend-offcanvas .offcanvas-footer{
+	text-align:center;
+	padding:10px;
+}

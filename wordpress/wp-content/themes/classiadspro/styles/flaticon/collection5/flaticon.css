@@ -1,0 +1,117 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 09/09/2020 15:48
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.facz-fic5-car:before { content: "\f100"; }
+.facz-fic5-house:before { content: "\f101"; }
+.facz-fic5-shopping-bag:before { content: "\f102"; }
+.facz-fic5-beer:before { content: "\f103"; }
+.facz-fic5-bed:before { content: "\f104"; }
+.facz-fic5-camera:before { content: "\f105"; }
+.facz-fic5-dice:before { content: "\f106"; }
+.facz-fic5-cutlery:before { content: "\f107"; }
+.facz-fic5-hair-salon:before { content: "\f108"; }
+.facz-fic5-smartphone:before { content: "\f109"; }
+.facz-fic5-burger:before { content: "\f10a"; }
+.facz-fic5-noodle:before { content: "\f10b"; }
+.facz-fic5-fish:before { content: "\f10c"; }
+.facz-fic5-tools:before { content: "\f10d"; }
+.facz-fic5-technical-support:before { content: "\f10e"; }
+.facz-fic5-technical:before { content: "\f10f"; }
+.facz-fic5-plumber:before { content: "\f110"; }
+.facz-fic5-bus:before { content: "\f111"; }
+.facz-fic5-paint-roller:before { content: "\f112"; }
+.facz-fic5-delivery-truck:before { content: "\f113"; }
+.facz-fic5-travel:before { content: "\f114"; }
+.facz-fic5-sandwich:before { content: "\f115"; }
+.facz-fic5-bathtub:before { content: "\f116"; }
+.facz-fic5-garage:before { content: "\f117"; }
+.facz-fic5-set-square:before { content: "\f118"; }
+.facz-fic5-plug:before { content: "\f119"; }
+.facz-fic5-drilling-machine:before { content: "\f11a"; }
+.facz-fic5-bulb:before { content: "\f11b"; }
+.facz-fic5-authorized-dealer:before { content: "\f11c"; }
+.facz-fic5-barbell:before { content: "\f11d"; }
+.facz-fic5-shipping-and-delivery:before { content: "\f11e"; }
+.facz-fic5-sunbed:before { content: "\f11f"; }
+.facz-fic5-boxing-gloves:before { content: "\f120"; }
+.facz-fic5-career:before { content: "\f121"; }
+.facz-fic5-scuba:before { content: "\f122"; }
+.facz-fic5-balancer:before { content: "\f123"; }
+.facz-fic5-lotus-position:before { content: "\f124"; }
+.facz-fic5-car-wash:before { content: "\f125"; }
+.facz-fic5-racing:before { content: "\f126"; }
+.facz-fic5-guitar:before { content: "\f127"; }
+.facz-fic5-ring:before { content: "\f128"; }
+.facz-fic5-high-heels:before { content: "\f129"; }
+.facz-fic5-clock:before { content: "\f12a"; }
+.facz-fic5-mai-thai:before { content: "\f12b"; }
+.facz-fic5-pizza-slice:before { content: "\f12c"; }
+.facz-fic5-wheelchair:before { content: "\f12d"; }
+.facz-fic5-take-away:before { content: "\f12e"; }
+.facz-fic5-glass:before { content: "\f12f"; }
+.facz-fic5-lavatory:before { content: "\f130"; }
+.facz-fic5-bicycle:before { content: "\f131"; }
+.facz-fic5-tv-monitor:before { content: "\f132"; }
+.facz-fic5-waiter:before { content: "\f133"; }
+.facz-fic5-open:before { content: "\f134"; }
+.facz-fic5-pinwheel:before { content: "\f135"; }
+.facz-fic5-pushchair:before { content: "\f136"; }
+.facz-fic5-credit-card:before { content: "\f137"; }
+.facz-fic5-ok:before { content: "\f138"; }
+.facz-fic5-check:before { content: "\f139"; }
+.facz-fic5-check-mark:before { content: "\f13a"; }
+.facz-fic5-wifi-signal:before { content: "\f13b"; }
+.facz-fic5-wifi:before { content: "\f13c"; }
+.facz-fic5-wifi-1:before { content: "\f13d"; }
+.facz-fic5-shooting-stars:before { content: "\f13e"; }
+.facz-fic5-star:before { content: "\f13f"; }
+.facz-fic5-hammer:before { content: "\f140"; }
+.facz-fic5-income:before { content: "\f141"; }
+.facz-fic5-car-service:before { content: "\f142"; }
+.facz-fic5-car-oil:before { content: "\f143"; }
+.facz-fic5-phone-call:before { content: "\f144"; }
+.facz-fic5-telephone:before { content: "\f145"; }
+.facz-fic5-compass:before { content: "\f146"; }
+.facz-fic5-signpost:before { content: "\f147"; }
+.facz-fic5-chat:before { content: "\f148"; }
+.facz-fic5-message:before { content: "\f149"; }
+.facz-fic5-ipo:before { content: "\f14a"; }
+.facz-fic5-globe:before { content: "\f14b"; }
+.facz-fic5-close-1:before { content: "\f14c"; }
+.facz-fic5-hospital-sign:before { content: "\f14d"; }
+.facz-fic5-close-2:before { content: "\f14e"; }
+.facz-fic5-magnifying-glass:before { content: "\f14f"; }
+.facz-fic5-zoom:before { content: "\f150"; }
+.facz-fic5-loupe:before { content: "\f151"; }
+.facz-fic5-loupe-1:before { content: "\f152"; }
+.facz-fic5-search:before { content: "\f153"; }
+.facz-fic5-search-1:before { content: "\f154"; }

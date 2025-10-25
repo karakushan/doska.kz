@@ -1,0 +1,41 @@
+/* Shortcode:Audio Player
+-------------------------------------------------------------------- */
+.pacz-audio {
+  margin-bottom: 10px;
+  padding: 9px;
+  position: relative;
+}
+.pacz-audio.add-baloon .jp-interface:before {
+  position: absolute;
+  top: -8px;
+  left: 50px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  content: "";
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  background-color: #fff;
+  border-left: 2px solid #eee;
+  border-top: 2px solid #eee;
+}
+.pacz-audio .pacz-audio-author {
+  display: block;
+  margin: 0 0 9px 30px;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 0;
+}
+.pacz-audio.small-version-true .jp-interface {
+  padding: 20px 20px 55px;
+}
+.pacz-audio.small-version-true .jp-controls {
+  top: 62px;
+  left: 20px;
+}
+.pacz-audio.small-version-true .js-volume-wrapper {
+  top: 62px;
+  right: 20px;
+}
