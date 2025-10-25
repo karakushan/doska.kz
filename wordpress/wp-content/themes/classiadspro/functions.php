@@ -412,3 +412,512 @@ function pacz_add_image_size($name = '', $width = '', $height = '', $crop = fals
 	add_theme_support( $name );
 	add_image_size( $name, $width, $height, $crop );
 }
+
+// Looking to send emails in production? Check out our Email API/SMTP product!
+function mailtrap($phpmailer) {
+	$phpmailer->isSMTP();
+	$phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+	$phpmailer->SMTPAuth = true;
+	$phpmailer->Port = 2525;
+	$phpmailer->Username = '221f66dfa5dc86';
+	$phpmailer->Password = '03a18f3433fc8a';
+  }
+  
+  add_action('phpmailer_init', 'mailtrap');
+
+/**
+ * Handle avatar upload during user registration
+ * Hooks into wpfb_form_register_new_user_success action from form-builder-wp plugin
+ * 
+ * @param int $user_id The newly created user ID
+ * @param array $data Form submission data
+ */
+function classiadspro_handle_registration_avatar($user_id, $data) {
+	// Debug: log all data
+	error_log('Registration avatar handler called for user: ' . $user_id);
+	error_log('Form data: ' . print_r($data, true));
+	error_log('FILES data: ' . print_r($_FILES, true));
+	
+	// Check if avatar field exists in form data (processed by Form Builder WP)
+	if (empty($data['avatar']) || !is_array($data['avatar'])) {
+		error_log('Avatar field not found in form data or not array');
+		return;
+	}
+	
+	$avatar_data = $data['avatar'];
+	error_log('Avatar data found: ' . print_r($avatar_data, true));
+	
+	// Check if we have file info
+	if (empty($avatar_data['file_url'])) {
+		error_log('Avatar file_url missing');
+		return;
+	}
+	
+	// Convert file URL to local file path
+	$upload_base_url = wp_get_upload_dir()['baseurl'];
+	$upload_base_dir = wp_get_upload_dir()['basedir'];
+	
+	// Remove base URL and construct file path
+	$file_relative_path = str_replace($upload_base_url, '', $avatar_data['file_url']);
+	$file_path = $upload_base_dir . $file_relative_path;
+	
+	error_log('Avatar file_url: ' . $avatar_data['file_url']);
+	error_log('Avatar file_path constructed: ' . $file_path);
+	
+	// Check if file exists
+	if (!file_exists($file_path)) {
+		error_log('Avatar file does not exist: ' . $file_path);
+		// Try alternate path construction
+		$alt_file_path = $upload_base_dir . '/' . ltrim($file_relative_path, '/');
+		if (file_exists($alt_file_path)) {
+			$file_path = $alt_file_path;
+			error_log('Avatar found at alternate path: ' . $file_path);
+		} else {
+			return;
+		}
+	}
+	
+	error_log('Avatar file found at: ' . $file_path);
+	
+	// Get file info
+	$file_info = wp_check_filetype($file_path);
+	$file_type = $file_info['type'];
+	
+	// Validate file type (only images)
+	$allowed_types = array('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp');
+	
+	if (!in_array($file_type, $allowed_types)) {
+		error_log('Avatar: invalid file type - ' . $file_type);
+		return;
+	}
+	
+	// Validate file size (max 5MB)
+	$file_size = filesize($file_path);
+	$max_size = 5 * 1024 * 1024; // 5MB in bytes
+	if ($file_size > $max_size) {
+		error_log('Avatar: file too large - ' . $file_size);
+		return;
+	}
+	
+	error_log('Avatar file validation passed. Type: ' . $file_type . ', Size: ' . $file_size);
+	
+	// Load WordPress file handling functions
+	require_once(ABSPATH . 'wp-admin/includes/file.php');
+	require_once(ABSPATH . 'wp-admin/includes/image.php');
+	require_once(ABSPATH . 'wp-admin/includes/media.php');
+	
+	// Prepare attachment data
+	$attachment = array(
+		'post_mime_type' => $file_type,
+		'post_title' => sprintf('Avatar for user %d', $user_id),
+		'post_content' => '',
+		'post_status' => 'inherit',
+		'post_author' => $user_id,
+	);
+	
+	// Insert attachment into media library
+	$attach_id = wp_insert_attachment($attachment, $file_path);
+	
+	if (is_wp_error($attach_id)) {
+		error_log('Avatar attachment insert error: ' . $attach_id->get_error_message());
+		return;
+	}
+	
+	// Generate attachment metadata (thumbnails, etc)
+	$attach_data = wp_generate_attachment_metadata($attach_id, $file_path);
+	wp_update_attachment_metadata($attach_id, $attach_data);
+	
+	// Get the attachment URL
+	$file_url = wp_get_attachment_url($attach_id);
+	
+	// Save attachment ID to user meta for our custom avatar
+	update_user_meta($user_id, 'avatar_id', $attach_id);
+	update_user_meta($user_id, 'user_avatar_url', $file_url);
+	
+	// For compatibility with popular avatar plugins
+	update_user_meta($user_id, 'wp_user_avatar', $attach_id);
+	update_user_meta($user_id, 'simple_local_avatar', $attach_id);
+	
+	error_log('Avatar uploaded successfully for user ' . $user_id . ': attachment ID ' . $attach_id . ', URL: ' . $file_url);
+}
+add_action('wpfb_form_register_new_user_success', 'classiadspro_handle_registration_avatar', 10, 2);
+
+/**
+ * Send welcome email to newly registered user
+ * Hooks into wpfb_form_register_new_user_success action
+ * Sends welcome email in English
+ * 
+ * @param int $user_id The newly created user ID
+ * @param array $data Form submission data
+ */
+function classiadspro_send_welcome_email($user_id, $data) {
+	// Get user data
+	$user = get_userdata($user_id);
+	
+	if (!$user) {
+		error_log('Welcome email: User not found - ID ' . $user_id);
+		return;
+	}
+	
+	// Get site info
+	$site_name = get_bloginfo('name');
+	$site_url = get_home_url();
+	$login_url = wp_login_url();
+	
+	// Prepare email content in English
+	$to = $user->user_email;
+	$subject = sprintf('Welcome to %s', $site_name);
+	
+	// Build HTML email
+	$message = '<html><body>';
+	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">';
+	$message .= '<tr><td style="padding: 40px 0;">';
+	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">';
+	
+	// Header
+	$message .= '<tr style="background-color: #191a1f;">';
+	$message .= '<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">';
+	$message .= '<h1 style="color: #ffffff; margin: 0; font-size: 24px;">Welcome, ' . esc_html($user->display_name) . '!</h1>';
+	$message .= '</td>';
+	$message .= '</tr>';
+	
+	// Content
+	$message .= '<tr>';
+	$message .= '<td style="padding: 40px 30px;">';
+	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
+	$message .= 'Thank you for registering with us! Your account has been successfully created.';
+	$message .= '</p>';
+	
+	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
+	$message .= 'Here is your account information:';
+	$message .= '</p>';
+	
+	// Account info
+	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 20px 0; border: 1px solid #eeeeee; border-radius: 4px;">';
+	$message .= '<tr style="background-color: #f9f9f9;">';
+	$message .= '<td style="padding: 15px; font-weight: bold; color: #191a1f; width: 40%;">Username:</td>';
+	$message .= '<td style="padding: 15px; color: #666666;">' . esc_html($user->user_login) . '</td>';
+	$message .= '</tr>';
+	$message .= '<tr>';
+	$message .= '<td style="padding: 15px; font-weight: bold; color: #191a1f; background-color: #f9f9f9;">Email:</td>';
+	$message .= '<td style="padding: 15px; color: #666666; background-color: #f9f9f9;">' . esc_html($user->user_email) . '</td>';
+	$message .= '</tr>';
+	$message .= '</table>';
+	
+	// Verification notice
+	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #fff8e6; border-left: 4px solid #EB6653; border-radius: 4px;">';
+	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #EB6653;">⚠️ ACCOUNT VERIFICATION REQUIRED</p>';
+	$message .= '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
+	$message .= 'Your account is currently under verification. Our team will review your information and verify your account within 24-48 hours. ';
+	$message .= 'You will receive a confirmation email once your account is verified.';
+	$message .= '</p>';
+	$message .= '</div>';
+	
+	// Listings notice
+	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #e8f4f8; border-left: 4px solid #2081cc; border-radius: 4px;">';
+	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #2081cc;">📋 POSTING LISTINGS</p>';
+	$message .= '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
+	$message .= 'After your account is verified, you will be able to post listings and manage your ads from your dashboard. ';
+	$message .= 'Please note that all listings must comply with our community guidelines.';
+	$message .= '</p>';
+	$message .= '</div>';
+	
+	// Call to action
+	$message .= '<p style="margin: 30px 0; text-align: center;">';
+	$message .= '<a href="' . esc_url(trailingslashit($site_url) . 'my-dashboard/') . '" style="display: inline-block; padding: 12px 30px; background-color: #EB6653; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>';
+	$message .= '</p>';
+	
+	// Additional info
+	$message .= '<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
+	$message .= 'If you have any questions or need assistance, please don\'t hesitate to contact us.';
+	$message .= '</p>';
+	
+	$message .= '<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">';
+	$message .= 'Best regards,<br>';
+	$message .= 'The ' . esc_html($site_name) . ' Team<br>';
+	$message .= '<a href="' . esc_url($site_url) . '" style="color: #EB6653; text-decoration: none;">' . esc_html($site_url) . '</a>';
+	$message .= '</p>';
+	
+	$message .= '</td>';
+	$message .= '</tr>';
+	
+	$message .= '</table>';
+	$message .= '</td></tr>';
+	$message .= '</table>';
+	$message .= '</body></html>';
+	
+	// Set email headers
+	$headers = array(
+		'Content-Type: text/html; charset=UTF-8',
+		'From: ' . get_option('siteurl') . ' <' . get_option('admin_email') . '>',
+	);
+	
+	// Send email
+	$sent = wp_mail($to, $subject, $message, $headers);
+	
+	if ($sent) {
+		error_log('Welcome email sent to ' . $user->user_email . ' for user ID ' . $user_id);
+	} else {
+		error_log('Failed to send welcome email to ' . $user->user_email . ' for user ID ' . $user_id);
+	}
+}
+add_action('wpfb_form_register_new_user_success', 'classiadspro_send_welcome_email', 15, 2);
+
+/**
+ * Filter to use custom avatar instead of Gravatar
+ * Replaces default WordPress avatar with user uploaded photo
+ * Works in admin panel and frontend
+ * 
+ * @param string $avatar The default avatar HTML
+ * @param mixed $id_or_email User ID, email, or user object
+ * @param int $size Avatar size in pixels
+ * @param string $default Default avatar URL
+ * @param string $alt Alt text for avatar
+ * @return string Modified avatar HTML
+ */
+function classiadspro_custom_avatar($avatar, $id_or_email, $size, $default, $alt) {
+	$user_id = 0;
+	
+	// Get user ID from different input types
+	if (is_numeric($id_or_email)) {
+		$user_id = (int) $id_or_email;
+	} elseif (is_string($id_or_email)) {
+		$user = get_user_by('email', $id_or_email);
+		if ($user) {
+			$user_id = $user->ID;
+		}
+	} elseif (is_object($id_or_email)) {
+		if (isset($id_or_email->user_id)) {
+			$user_id = (int) $id_or_email->user_id;
+		} elseif (isset($id_or_email->ID)) {
+			$user_id = (int) $id_or_email->ID;
+		}
+	}
+	
+	if (!$user_id) {
+		return $avatar;
+	}
+	
+	// Get custom avatar attachment ID
+	$custom_avatar_id = get_user_meta($user_id, 'avatar_id', true);
+	
+	if (!$custom_avatar_id) {
+		return $avatar;
+	}
+	
+	// Get avatar image URL
+	$custom_avatar_url = wp_get_attachment_image_url($custom_avatar_id, array($size, $size));
+	
+	if (!$custom_avatar_url) {
+		return $avatar;
+	}
+	
+	// Build custom avatar HTML
+	$avatar = sprintf(
+		'<img alt="%s" src="%s" class="avatar avatar-%d photo" height="%d" width="%d" loading="lazy" decoding="async" />',
+		esc_attr($alt),
+		esc_url($custom_avatar_url),
+		(int) $size,
+		(int) $size,
+		(int) $size
+	);
+	
+	return $avatar;
+}
+add_filter('get_avatar', 'classiadspro_custom_avatar', 10, 5);
+
+/**
+ * Add custom avatar field to user profile in admin
+ * Allows admins to view and change user avatar
+ * 
+ * @param WP_User $user Current user object
+ */
+function classiadspro_admin_avatar_field($user) {
+	$avatar_id = get_user_meta($user->ID, 'avatar_id', true);
+	$avatar_url = get_user_meta($user->ID, 'user_avatar_url', true);
+	?>
+	<h3><?php _e('Profile Photo', 'classiadspro'); ?></h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="custom_avatar"><?php _e('Current Avatar', 'classiadspro'); ?></label></th>
+			<td>
+				<?php if ($avatar_id): ?>
+					<?php echo wp_get_attachment_image($avatar_id, array(150, 150), false, array('style' => 'border-radius: 50%;')); ?>
+					<p>
+						<button type="button" class="button" id="remove_avatar_button"><?php _e('Remove Avatar', 'classiadspro'); ?></button>
+					</p>
+					<input type="hidden" name="remove_avatar" id="remove_avatar" value="0" />
+				<?php else: ?>
+					<p><?php _e('No custom avatar uploaded yet.', 'classiadspro'); ?></p>
+				<?php endif; ?>
+				
+				<p class="description"><?php _e('Avatar uploaded during registration. To change it, user needs to upload a new one through the registration form.', 'classiadspro'); ?></p>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="new_avatar_upload"><?php _e('Upload New Avatar', 'classiadspro'); ?></label></th>
+			<td>
+				<input type="file" name="new_avatar" id="new_avatar_upload" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" />
+				<p class="description"><?php _e('Upload new avatar (JPG, PNG, GIF, WEBP - max 5MB)', 'classiadspro'); ?></p>
+			</td>
+		</tr>
+	</table>
+	
+	<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$('#remove_avatar_button').on('click', function() {
+			if (confirm('<?php _e('Are you sure you want to remove the avatar?', 'classiadspro'); ?>')) {
+				$('#remove_avatar').val('1');
+				$(this).closest('tr').find('img').fadeOut();
+				$(this).parent().html('<p><?php _e('Avatar will be removed on save.', 'classiadspro'); ?></p>');
+			}
+		});
+	});
+	</script>
+	<?php
+}
+add_action('show_user_profile', 'classiadspro_admin_avatar_field');
+add_action('edit_user_profile', 'classiadspro_admin_avatar_field');
+
+/**
+ * Save custom avatar from admin profile
+ * Handles avatar upload and removal from user profile page
+ * 
+ * @param int $user_id User ID
+ */
+function classiadspro_admin_save_avatar_field($user_id) {
+	if (!current_user_can('edit_user', $user_id)) {
+		return false;
+	}
+	
+	// Handle avatar removal
+	if (isset($_POST['remove_avatar']) && $_POST['remove_avatar'] == '1') {
+		$old_avatar_id = get_user_meta($user_id, 'avatar_id', true);
+		if ($old_avatar_id) {
+			wp_delete_attachment($old_avatar_id, true);
+		}
+		delete_user_meta($user_id, 'avatar_id');
+		delete_user_meta($user_id, 'user_avatar_url');
+		delete_user_meta($user_id, 'wp_user_avatar');
+		delete_user_meta($user_id, 'simple_local_avatar');
+		return;
+	}
+	
+	// Handle new avatar upload
+	if (empty($_FILES['new_avatar']) || empty($_FILES['new_avatar']['name'])) {
+		return;
+	}
+	
+	$avatar_file = $_FILES['new_avatar'];
+	
+	// Validate file upload
+	if ($avatar_file['error'] !== UPLOAD_ERR_OK) {
+		return;
+	}
+	
+	// Verify this is a valid uploaded file
+	if (!is_uploaded_file($avatar_file['tmp_name'])) {
+		return;
+	}
+	
+	// Validate file type
+	$allowed_types = array('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp');
+	if (!in_array($avatar_file['type'], $allowed_types)) {
+		return;
+	}
+	
+	// Validate file size (max 5MB)
+	$max_size = 5 * 1024 * 1024;
+	if ($avatar_file['size'] > $max_size) {
+		return;
+	}
+	
+	// Load WordPress file handling functions
+	require_once(ABSPATH . 'wp-admin/includes/file.php');
+	require_once(ABSPATH . 'wp-admin/includes/image.php');
+	require_once(ABSPATH . 'wp-admin/includes/media.php');
+	
+	// Delete old avatar if exists
+	$old_avatar_id = get_user_meta($user_id, 'avatar_id', true);
+	if ($old_avatar_id) {
+		wp_delete_attachment($old_avatar_id, true);
+	}
+	
+	// Upload new avatar
+	$upload_overrides = array(
+		'test_form' => false,
+		'test_type' => true,
+	);
+	
+	$uploaded_file = wp_handle_upload($avatar_file, $upload_overrides);
+	
+	if (isset($uploaded_file['error'])) {
+		return;
+	}
+	
+	$file_path = $uploaded_file['file'];
+	$file_url = $uploaded_file['url'];
+	$file_type = $uploaded_file['type'];
+	
+	// Create attachment
+	$attachment = array(
+		'post_mime_type' => $file_type,
+		'post_title' => sprintf('Avatar for user %d', $user_id),
+		'post_content' => '',
+		'post_status' => 'inherit',
+		'post_author' => $user_id,
+	);
+	
+	$attach_id = wp_insert_attachment($attachment, $file_path);
+	
+	if (is_wp_error($attach_id)) {
+		return;
+	}
+	
+	// Generate metadata
+	$attach_data = wp_generate_attachment_metadata($attach_id, $file_path);
+	wp_update_attachment_metadata($attach_id, $attach_data);
+	
+	// Update user meta
+	update_user_meta($user_id, 'avatar_id', $attach_id);
+	update_user_meta($user_id, 'user_avatar_url', $file_url);
+	update_user_meta($user_id, 'wp_user_avatar', $attach_id);
+	update_user_meta($user_id, 'simple_local_avatar', $attach_id);
+}
+add_action('personal_options_update', 'classiadspro_admin_save_avatar_field');
+add_action('edit_user_profile_update', 'classiadspro_admin_save_avatar_field');
+
+/**
+ * Add avatar column to users list in admin
+ * Shows custom avatar in users table
+ * 
+ * @param array $columns Existing columns
+ * @return array Modified columns
+ */
+function classiadspro_add_avatar_column($columns) {
+	$columns['avatar'] = __('Avatar', 'classiadspro');
+	return $columns;
+}
+add_filter('manage_users_columns', 'classiadspro_add_avatar_column');
+
+/**
+ * Display avatar in users list column
+ * 
+ * @param string $output Column output
+ * @param string $column_name Column name
+ * @param int $user_id User ID
+ * @return string Column content
+ */
+function classiadspro_show_avatar_column($output, $column_name, $user_id) {
+	if ($column_name === 'avatar') {
+		$avatar_id = get_user_meta($user_id, 'avatar_id', true);
+		if ($avatar_id) {
+			return wp_get_attachment_image($avatar_id, array(32, 32), false, array('style' => 'border-radius: 50%;'));
+		} else {
+			return get_avatar($user_id, 32);
+		}
+	}
+	return $output;
+}
+add_filter('manage_users_custom_column', 'classiadspro_show_avatar_column', 10, 3);
+

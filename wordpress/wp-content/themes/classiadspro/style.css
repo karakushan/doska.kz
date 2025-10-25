@@ -57,3 +57,30 @@ display:inline-block;
 	text-align:center;
 	padding:10px;
 }
+
+/* Sticky Widget Effect - Fix for Elementor containers */
+/* Fix for parent containers to enable sticky effect */
+#page {
+	overflow-x: visible;
+}
+
+.elementor-section,
+.elementor-container,
+.elementor-column,
+.elementor-row,
+.elementor-widget-wrap {
+	overflow: visible !important;
+}
+
+/* Ensure the sticky widget works properly */
+.sticky-widget {
+	position: sticky;
+	top: 20px;
+	z-index: 999;
+	transition: all 0.3s ease;
+}
+
+.sticky-widget.is-sticky {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+}

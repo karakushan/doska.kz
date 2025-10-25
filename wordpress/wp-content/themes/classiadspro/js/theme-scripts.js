@@ -4182,3 +4182,34 @@ jQuery(window).load(function() {
    jQuery('.pacz-preloader').fadeOut('slow');
    wooproduct_equal_height();
 });
+
+// Sticky Widget Effect
+jQuery(document).ready(function() {
+	var stickyWidgets = jQuery('.sticky-widget');
+
+	if (stickyWidgets.length) {
+		stickyWidgets.each(function() {
+			var widget = jQuery(this);
+			var widgetTop = widget.offset().top; // Initial offset
+
+			function checkSticky() {
+				var scrollTop = jQuery(window).scrollTop();
+
+				if (scrollTop + 20 > widgetTop) { // Added 20px offset for top
+					if (!widget.hasClass('is-sticky')) {
+						widget.addClass('is-sticky');
+					}
+				} else {
+					if (widget.hasClass('is-sticky')) {
+						widget.removeClass('is-sticky');
+					}
+				}
+			}
+
+			jQuery(window).on('scroll', checkSticky);
+			jQuery(window).on('resize', function() {
+				widgetTop = widget.offset().top; // Recalculate on resize
+			});
+		});
+	}
+});

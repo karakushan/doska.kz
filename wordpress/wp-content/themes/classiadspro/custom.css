@@ -3,3 +3,67 @@
 Your custom css
 
 */
+
+/* Avatar Upload Field Styles */
+.wpfb_form_avatar {
+    margin-bottom: 20px;
+}
+
+.wpfb_form_avatar label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #191a1f;
+}
+
+.wpfb_form_avatar input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px dashed #cfd9e0;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.wpfb_form_avatar input[type="file"]:hover {
+    border-color: #eb6653;
+    background-color: #fff;
+}
+
+.wpfb_form_avatar input[type="file"]:focus {
+    outline: none;
+    border-color: #eb6653;
+    box-shadow: 0 0 0 3px rgba(235, 102, 83, 0.1);
+}
+
+.wpfb_form_avatar .help-block {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #546b7e;
+}
+
+.wpfb_form_avatar.has-error input[type="file"] {
+    border-color: #dc3545;
+}
+
+.wpfb_form_avatar.has-error .help-block {
+    color: #dc3545;
+}
+
+/* Avatar Preview */
+.wpfb-avatar-preview {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.wpfb-avatar-preview img {
+    max-width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eb6653;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}

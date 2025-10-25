@@ -86,6 +86,12 @@ $table_prefix = 'wp_';
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
 define( 'WP_DEBUG', true );
+// Enable Debug logging to the /wp-content/debug.log file
+define( 'WP_DEBUG_LOG', true );
+// Disable displaying debug info on the page
+define( 'WP_DEBUG_DISPLAY', false );
+// Error reporting - exclude Deprecated, Strict, and Notices
+error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE );
 
 /* Add any custom values between this line and the "stop editing" line. */
 // Увеличиваем лимиты PHP

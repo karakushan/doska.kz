@@ -1389,10 +1389,10 @@ function wpfb_form_get_fields(){
 			'widget_class'	=>'Form_Builder_Wp_Widget_Email',
 			'file' 	=> 'email.php',
 		),
-		/* 'wpfb_form_file' => array(
+	 'wpfb_form_file' => array(
 			'widget_class'	=>'Form_Builder_Wp_Widget_File',
 			'file' 	=> 'file.php',
-		), */
+		), 
 		'wpfb_form_hidden' => array(
 			'widget_class'	=>'Form_Builder_Wp_Widget_Hidden',
 			'file' 	=> 'hidden.php',
