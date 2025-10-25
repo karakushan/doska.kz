@@ -1,0 +1,41 @@
+ИНСТРУКЦИЯ ПО УСТАНОВКЕ WORDPRESS DUPLICATOR
+
+=== Шаг 1: Подготовка ===
+
+1. Создайте папку wordpress:
+   mkdir wordpress
+
+2. Поместите файлы Duplicator в папку wordpress:
+   - installer.php
+   - archive-[название].zip
+
+=== Шаг 2: Запуск ===
+
+docker-compose up -d
+
+=== Шаг 3: Установка ===
+
+1. Откройте браузер: http://localhost:8080/installer.php
+
+2. Данные для подключения к БД:
+   Database Host: db
+   Database Name: wordpress
+   Database User: wordpress
+   Database Password: wordpress
+
+3. После установки удалите файлы:
+   rm wordpress/installer.php
+   rm wordpress/installer-backup.php
+   rm wordpress/archive-*.zip
+
+=== Доступ ===
+
+WordPress: http://localhost:8080
+phpMyAdmin: http://localhost:8081
+
+=== Управление ===
+
+Остановить: docker-compose down
+Логи: docker-compose logs -f
+Удалить всё: docker-compose down -v
+

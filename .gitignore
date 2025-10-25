@@ -1,0 +1,24 @@
+# WordPress files
+wordpress/
+
+# Database backups
+*.sql
+*.sql.gz
+
+# Duplicator archives
+*.zip
+installer.php
+installer-backup.php
+installer-log.txt
+dup-installer/
+
+# Docker volumes
+db_data/
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
