@@ -1054,6 +1054,7 @@ function classiadspro_show_avatar_column($output, $column_name, $user_id) {
  */
 function classiadspro_admin_verification_fields($user) {
 	$document_id = get_user_meta($user->ID, 'registration_document_id', true);
+	$avatar_id = get_user_meta($user->ID, 'avatar_id', true);
 	$is_verified = get_user_meta($user->ID, 'user_verified', true);
 	?>
 	<h3><?php _e('User Verification', 'classiadspro'); ?></h3>
@@ -1077,6 +1078,65 @@ function classiadspro_admin_verification_fields($user) {
 			</td>
 		</tr>
 		<tr>
+			<th><label><?php _e('User Avatar (Profile Photo)', 'classiadspro'); ?></label></th>
+			<td>
+				<?php if ($avatar_id): ?>
+					<div style="margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
+						<?php 
+						$avatar_url = wp_get_attachment_url($avatar_id);
+						$avatar_title = get_the_title($avatar_id);
+						$avatar_type = get_post_mime_type($avatar_id);
+						?>
+						
+						<!-- Avatar Preview -->
+						<div style="margin-bottom: 15px; text-align: center;">
+							<a href="<?php echo esc_url($avatar_url); ?>" target="_blank" rel="noopener noreferrer" style="display: inline-block; cursor: pointer;">
+								<img src="<?php echo esc_url($avatar_url); ?>" 
+								     alt="<?php echo esc_attr($avatar_title); ?>" 
+								     style="max-width: 400px; max-height: 500px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: opacity 0.3s ease;" 
+								     onmouseover="this.style.opacity='0.8';" 
+								     onmouseout="this.style.opacity='1';" />
+							</a>
+						</div>
+						
+						<!-- Avatar Info -->
+						<table style="width: 100%; margin: 15px 0 0 0;">
+							<tr style="background-color: #f0f0f0;">
+								<td style="padding: 8px; font-weight: bold; width: 30%;"><?php _e('File Name:', 'classiadspro'); ?></td>
+								<td style="padding: 8px;"><?php echo esc_html($avatar_title); ?></td>
+							</tr>
+							<tr>
+								<td style="padding: 8px; font-weight: bold; background-color: #f0f0f0;"><?php _e('File Type:', 'classiadspro'); ?></td>
+								<td style="padding: 8px;"><?php echo esc_html($avatar_type); ?></td>
+							</tr>
+							<tr style="background-color: #f0f0f0;">
+								<td style="padding: 8px; font-weight: bold;"><?php _e('Uploaded:', 'classiadspro'); ?></td>
+								<td style="padding: 8px;">
+									<?php 
+									$attachment = get_post($avatar_id);
+									echo esc_html(date_i18n('F d, Y H:i', strtotime($attachment->post_date)));
+									?>
+								</td>
+							</tr>
+						</table>
+						
+						<!-- Actions -->
+						<p style="margin: 15px 0 0 0;">
+							<a href="<?php echo esc_url($avatar_url); ?>" target="_blank" class="button button-primary">
+								<?php _e('View/Download Avatar', 'classiadspro'); ?>
+							</a>
+						</p>
+					</div>
+				<?php else: ?>
+					<div style="padding: 20px; background-color: #fff8e6; border: 1px solid #ddd; border-left: 4px solid #ffc107; border-radius: 4px;">
+						<p style="margin: 0; color: #856404;">
+							⚠️ <?php _e('No avatar uploaded.', 'classiadspro'); ?>
+						</p>
+					</div>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
 			<th><label><?php _e('Registration Document (Passport Photo)', 'classiadspro'); ?></label></th>
 			<td>
 				<?php if ($document_id): ?>
@@ -1091,9 +1151,13 @@ function classiadspro_admin_verification_fields($user) {
 						<!-- Document Preview -->
 						<?php if ($is_image): ?>
 							<div style="margin-bottom: 15px; text-align: center;">
-								<img src="<?php echo esc_url($document_url); ?>" 
-								     alt="<?php echo esc_attr($document_title); ?>" 
-								     style="max-width: 400px; max-height: 500px; border: 1px solid #ddd; border-radius: 4px;" />
+								<a href="<?php echo esc_url($document_url); ?>" target="_blank" rel="noopener noreferrer" style="display: inline-block; cursor: pointer;">
+									<img src="<?php echo esc_url($document_url); ?>" 
+									     alt="<?php echo esc_attr($document_title); ?>" 
+									     style="max-width: 400px; max-height: 500px; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; transition: opacity 0.3s ease;" 
+									     onmouseover="this.style.opacity='0.8';" 
+									     onmouseout="this.style.opacity='1';" />
+								</a>
 							</div>
 						<?php else: ?>
 							<div style="margin-bottom: 15px; padding: 20px; background-color: #e8f4f8; border-radius: 4px; text-align: center;">
@@ -1147,6 +1211,7 @@ add_action('edit_user_profile', 'classiadspro_admin_verification_fields');
 
 /**
  * Save verification status from admin profile
+ * Sends email to user when account is verified
  * 
  * @param int $user_id User ID
  */
@@ -1155,15 +1220,129 @@ function classiadspro_admin_save_verification_field($user_id) {
 		return false;
 	}
 	
-	// Handle verification checkbox
-	if (isset($_POST['user_verified'])) {
-		update_user_meta($user_id, 'user_verified', '1');
-	} else {
-		update_user_meta($user_id, 'user_verified', '0');
+	// Get current verification status
+	$old_verified = get_user_meta($user_id, 'user_verified', true);
+	$new_verified = isset($_POST['user_verified']) ? '1' : '0';
+	
+	// Update verification status
+	update_user_meta($user_id, 'user_verified', $new_verified);
+	
+	// If verification status changed to verified, send email
+	if ($old_verified !== '1' && $new_verified === '1') {
+		classiadspro_send_verification_email($user_id);
 	}
 }
 add_action('personal_options_update', 'classiadspro_admin_save_verification_field');
 add_action('edit_user_profile_update', 'classiadspro_admin_save_verification_field');
+
+/**
+ * Send account verification email to user
+ * Notifies user that their account has been verified and they can post listings
+ * 
+ * @param int $user_id User ID
+ */
+function classiadspro_send_verification_email($user_id) {
+	$user = get_userdata($user_id);
+	
+	if (!$user) {
+		error_log('Verification email: User not found - ID ' . $user_id);
+		return;
+	}
+	
+	// Get site info
+	$site_name = get_bloginfo('name');
+	$site_url = get_home_url();
+	$dashboard_url = trailingslashit($site_url) . 'my-dashboard/';
+	
+	// Prepare email
+	$to = $user->user_email;
+	$subject = sprintf('Your Account Has Been Verified - %s', $site_name);
+	
+	// Build HTML email
+	$message = '<html><body>';
+	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">';
+	$message .= '<tr><td style="padding: 40px 0;">';
+	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">';
+	
+	// Header
+	$message .= '<tr style="background-color: #28a745;">';
+	$message .= '<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">';
+	$message .= '<h1 style="color: #ffffff; margin: 0; font-size: 24px;">✓ Account Verified!</h1>';
+	$message .= '</td>';
+	$message .= '</tr>';
+	
+	// Content
+	$message .= '<tr>';
+	$message .= '<td style="padding: 40px 30px;">';
+	
+	// Main message
+	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
+	$message .= 'Hello ' . esc_html($user->display_name) . ',';
+	$message .= '</p>';
+	
+	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
+	$message .= 'Great news! Your account has been verified by our team. You can now post listings and manage your ads on our platform.';
+	$message .= '</p>';
+	
+	// Success box
+	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #e8f5e9; border-left: 4px solid #28a745; border-radius: 4px;">';
+	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #28a745;">✓ VERIFICATION COMPLETE</p>';
+	$message .= '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
+	$message .= 'Your account is now fully active. You can start posting listings right away!';
+	$message .= '</p>';
+	$message .= '</div>';
+	
+	// What you can do now
+	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">';
+	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #1976d2;">📋 YOU CAN NOW:</p>';
+	$message .= '<ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 13px; line-height: 1.8; color: #333333;">';
+	$message .= '<li>Post new listings and manage your ads</li>';
+	$message .= '<li>Update your profile and account information</li>';
+	$message .= '<li>Interact with potential buyers/renters</li>';
+	$message .= '<li>Monitor listing views and inquiries</li>';
+	$message .= '</ul>';
+	$message .= '</div>';
+	
+	// Call to action
+	$message .= '<p style="margin: 30px 0; text-align: center;">';
+	$message .= '<a href="' . esc_url($dashboard_url) . '" style="display: inline-block; padding: 12px 30px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>';
+	$message .= '</p>';
+	
+	// Additional info
+	$message .= '<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
+	$message .= 'If you have any questions or need assistance, please don\'t hesitate to contact us.';
+	$message .= '</p>';
+	
+	// Footer
+	$message .= '<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">';
+	$message .= 'Best regards,<br>';
+	$message .= 'The ' . esc_html($site_name) . ' Team<br>';
+	$message .= '<a href="' . esc_url($site_url) . '" style="color: #28a745; text-decoration: none;">' . esc_html($site_url) . '</a>';
+	$message .= '</p>';
+	
+	$message .= '</td>';
+	$message .= '</tr>';
+	
+	$message .= '</table>';
+	$message .= '</td></tr>';
+	$message .= '</table>';
+	$message .= '</body></html>';
+	
+	// Set email headers
+	$headers = array(
+		'Content-Type: text/html; charset=UTF-8',
+		'From: ' . get_option('siteurl') . ' <' . get_option('admin_email') . '>',
+	);
+	
+	// Send email
+	$sent = wp_mail($to, $subject, $message, $headers);
+	
+	if ($sent) {
+		error_log('Verification email sent to ' . $user->user_email . ' for user ID ' . $user_id);
+	} else {
+		error_log('Failed to send verification email to ' . $user->user_email . ' for user ID ' . $user_id);
+	}
+}
 
 /**
  * Add verification status column to users list in admin
