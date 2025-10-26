@@ -543,6 +543,131 @@ function classiadspro_handle_registration_avatar($user_id, $data) {
 add_action('wpfb_form_register_new_user_success', 'classiadspro_handle_registration_avatar', 10, 2);
 
 /**
+ * Handle document upload during user registration
+ * Hooks into wpfb_form_register_new_user_success action from form-builder-wp plugin
+ * 
+ * @param int $user_id The newly created user ID
+ * @param array $data Form submission data
+ */
+function classiadspro_handle_registration_document($user_id, $data) {
+	// Debug: log document data
+	error_log('Registration document handler called for user: ' . $user_id);
+	error_log('Form data: ' . print_r($data, true));
+	
+	// Check if document field exists in form data (processed by Form Builder WP)
+	if (empty($data['document']) || !is_array($data['document'])) {
+		error_log('Document field not found in form data or not array');
+		return;
+	}
+	
+	$document_data = $data['document'];
+	error_log('Document data found: ' . print_r($document_data, true));
+	
+	// Check if we have file info
+	if (empty($document_data['file_url'])) {
+		error_log('Document file_url missing');
+		return;
+	}
+	
+	// Convert file URL to local file path
+	$upload_base_url = wp_get_upload_dir()['baseurl'];
+	$upload_base_dir = wp_get_upload_dir()['basedir'];
+	
+	// Remove base URL and construct file path
+	$file_relative_path = str_replace($upload_base_url, '', $document_data['file_url']);
+	$file_path = $upload_base_dir . $file_relative_path;
+	
+	error_log('Document file_url: ' . $document_data['file_url']);
+	error_log('Document file_path constructed: ' . $file_path);
+	
+	// Check if file exists
+	if (!file_exists($file_path)) {
+		error_log('Document file does not exist: ' . $file_path);
+		// Try alternate path construction
+		$alt_file_path = $upload_base_dir . '/' . ltrim($file_relative_path, '/');
+		if (file_exists($alt_file_path)) {
+			$file_path = $alt_file_path;
+			error_log('Document found at alternate path: ' . $file_path);
+		} else {
+			return;
+		}
+	}
+	
+	error_log('Document file found at: ' . $file_path);
+	
+	// Get file info
+	$file_info = wp_check_filetype($file_path);
+	$file_type = $file_info['type'];
+	
+	// Validate file type (documents)
+	$allowed_types = array(
+		'application/pdf',
+		'application/msword',
+		'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+		'text/plain',
+		'image/jpeg',
+		'image/jpg',
+		'image/png',
+		'application/vnd.ms-excel',
+		'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+	);
+	
+	if (!in_array($file_type, $allowed_types)) {
+		error_log('Document: invalid file type - ' . $file_type);
+		return;
+	}
+	
+	// Validate file size (max 10MB)
+	$file_size = filesize($file_path);
+	$max_size = 10 * 1024 * 1024; // 10MB in bytes
+	if ($file_size > $max_size) {
+		error_log('Document: file too large - ' . $file_size);
+		return;
+	}
+	
+	error_log('Document file validation passed. Type: ' . $file_type . ', Size: ' . $file_size);
+	
+	// Load WordPress file handling functions
+	require_once(ABSPATH . 'wp-admin/includes/file.php');
+	require_once(ABSPATH . 'wp-admin/includes/image.php');
+	require_once(ABSPATH . 'wp-admin/includes/media.php');
+	
+	// Prepare attachment data
+	$attachment = array(
+		'post_mime_type' => $file_type,
+		'post_title' => sprintf('Registration document for user %d', $user_id),
+		'post_content' => '',
+		'post_status' => 'inherit',
+		'post_author' => $user_id,
+	);
+	
+	// Insert attachment into media library
+	$attach_id = wp_insert_attachment($attachment, $file_path);
+	
+	if (is_wp_error($attach_id)) {
+		error_log('Document attachment insert error: ' . $attach_id->get_error_message());
+		return;
+	}
+	
+	// Generate attachment metadata
+	$attach_data = wp_generate_attachment_metadata($attach_id, $file_path);
+	wp_update_attachment_metadata($attach_id, $attach_data);
+	
+	// Get the attachment URL
+	$file_url = wp_get_attachment_url($attach_id);
+	
+	// Save attachment ID to user meta
+	update_user_meta($user_id, 'registration_document_id', $attach_id);
+	update_user_meta($user_id, 'registration_document_url', $file_url);
+	
+	// Set user as not verified by default
+	update_user_meta($user_id, 'user_verified', '0');
+	
+	error_log('Document uploaded successfully for user ' . $user_id . ': attachment ID ' . $attach_id . ', URL: ' . $file_url);
+}
+add_action('wpfb_form_register_new_user_success', 'classiadspro_handle_registration_document', 10, 2);
+
+/**
  * Send welcome email to newly registered user
  * Hooks into wpfb_form_register_new_user_success action
  * Sends welcome email in English
@@ -776,8 +901,8 @@ function classiadspro_admin_avatar_field($user) {
 	</script>
 	<?php
 }
-add_action('show_user_profile', 'classiadspro_admin_avatar_field');
-add_action('edit_user_profile', 'classiadspro_admin_avatar_field');
+// add_action('show_user_profile', 'classiadspro_admin_avatar_field');
+// add_action('edit_user_profile', 'classiadspro_admin_avatar_field');
 
 /**
  * Save custom avatar from admin profile
@@ -884,8 +1009,8 @@ function classiadspro_admin_save_avatar_field($user_id) {
 	update_user_meta($user_id, 'wp_user_avatar', $attach_id);
 	update_user_meta($user_id, 'simple_local_avatar', $attach_id);
 }
-add_action('personal_options_update', 'classiadspro_admin_save_avatar_field');
-add_action('edit_user_profile_update', 'classiadspro_admin_save_avatar_field');
+// add_action('personal_options_update', 'classiadspro_admin_save_avatar_field');
+// add_action('edit_user_profile_update', 'classiadspro_admin_save_avatar_field');
 
 /**
  * Add avatar column to users list in admin
@@ -898,7 +1023,7 @@ function classiadspro_add_avatar_column($columns) {
 	$columns['avatar'] = __('Avatar', 'classiadspro');
 	return $columns;
 }
-add_filter('manage_users_columns', 'classiadspro_add_avatar_column');
+// add_filter('manage_users_columns', 'classiadspro_add_avatar_column');
 
 /**
  * Display avatar in users list column
@@ -919,5 +1044,158 @@ function classiadspro_show_avatar_column($output, $column_name, $user_id) {
 	}
 	return $output;
 }
-add_filter('manage_users_custom_column', 'classiadspro_show_avatar_column', 10, 3);
+// add_filter('manage_users_custom_column', 'classiadspro_show_avatar_column', 10, 3);
+
+/**
+ * Add verification and document fields to user profile in admin
+ * Allows admins to view registration document and verify user
+ * 
+ * @param WP_User $user Current user object
+ */
+function classiadspro_admin_verification_fields($user) {
+	$document_id = get_user_meta($user->ID, 'registration_document_id', true);
+	$is_verified = get_user_meta($user->ID, 'user_verified', true);
+	?>
+	<h3><?php _e('User Verification', 'classiadspro'); ?></h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="user_verified"><?php _e('Account Status', 'classiadspro'); ?></label></th>
+			<td>
+				<label>
+					<input type="checkbox" name="user_verified" id="user_verified" value="1" <?php checked($is_verified, '1'); ?> />
+					<span><?php _e('Verified - User can post listings', 'classiadspro'); ?></span>
+				</label>
+				<p class="description">
+					<?php 
+					if ($is_verified) {
+						_e('✓ User account is verified and can post listings', 'classiadspro');
+					} else {
+						_e('✗ User account is not verified. User cannot post listings until verified.', 'classiadspro');
+					}
+					?>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<th><label><?php _e('Registration Document (Passport Photo)', 'classiadspro'); ?></label></th>
+			<td>
+				<?php if ($document_id): ?>
+					<div style="margin-bottom: 20px; padding: 15px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
+						<?php 
+						$document_url = wp_get_attachment_url($document_id);
+						$document_title = get_the_title($document_id);
+						$document_type = get_post_mime_type($document_id);
+						$is_image = strpos($document_type, 'image/') === 0;
+						?>
+						
+						<!-- Document Preview -->
+						<?php if ($is_image): ?>
+							<div style="margin-bottom: 15px; text-align: center;">
+								<img src="<?php echo esc_url($document_url); ?>" 
+								     alt="<?php echo esc_attr($document_title); ?>" 
+								     style="max-width: 400px; max-height: 500px; border: 1px solid #ddd; border-radius: 4px;" />
+							</div>
+						<?php else: ?>
+							<div style="margin-bottom: 15px; padding: 20px; background-color: #e8f4f8; border-radius: 4px; text-align: center;">
+								<p style="margin: 0; font-size: 48px;">📄</p>
+								<p style="margin: 5px 0 0 0; color: #666;"><?php _e('Document preview not available', 'classiadspro'); ?></p>
+							</div>
+						<?php endif; ?>
+						
+						<!-- Document Info -->
+						<table style="width: 100%; margin: 15px 0 0 0;">
+							<tr style="background-color: #f0f0f0;">
+								<td style="padding: 8px; font-weight: bold; width: 30%;"><?php _e('File Name:', 'classiadspro'); ?></td>
+								<td style="padding: 8px;"><?php echo esc_html($document_title); ?></td>
+							</tr>
+							<tr>
+								<td style="padding: 8px; font-weight: bold; background-color: #f0f0f0;"><?php _e('File Type:', 'classiadspro'); ?></td>
+								<td style="padding: 8px;"><?php echo esc_html($document_type); ?></td>
+							</tr>
+							<tr style="background-color: #f0f0f0;">
+								<td style="padding: 8px; font-weight: bold;"><?php _e('Uploaded:', 'classiadspro'); ?></td>
+								<td style="padding: 8px;">
+									<?php 
+									$attachment = get_post($document_id);
+									echo esc_html(date_i18n('F d, Y H:i', strtotime($attachment->post_date)));
+									?>
+								</td>
+							</tr>
+						</table>
+						
+						<!-- Actions -->
+						<p style="margin: 15px 0 0 0;">
+							<a href="<?php echo esc_url($document_url); ?>" target="_blank" class="button button-primary">
+								<?php _e('View/Download Document', 'classiadspro'); ?>
+							</a>
+						</p>
+					</div>
+				<?php else: ?>
+					<div style="padding: 20px; background-color: #fff8e6; border: 1px solid #ddd; border-left: 4px solid #ffc107; border-radius: 4px;">
+						<p style="margin: 0; color: #856404;">
+							⚠️ <?php _e('No registration document uploaded.', 'classiadspro'); ?>
+						</p>
+					</div>
+				<?php endif; ?>
+			</td>
+		</tr>
+	</table>
+	<?php
+}
+add_action('show_user_profile', 'classiadspro_admin_verification_fields');
+add_action('edit_user_profile', 'classiadspro_admin_verification_fields');
+
+/**
+ * Save verification status from admin profile
+ * 
+ * @param int $user_id User ID
+ */
+function classiadspro_admin_save_verification_field($user_id) {
+	if (!current_user_can('edit_user', $user_id)) {
+		return false;
+	}
+	
+	// Handle verification checkbox
+	if (isset($_POST['user_verified'])) {
+		update_user_meta($user_id, 'user_verified', '1');
+	} else {
+		update_user_meta($user_id, 'user_verified', '0');
+	}
+}
+add_action('personal_options_update', 'classiadspro_admin_save_verification_field');
+add_action('edit_user_profile_update', 'classiadspro_admin_save_verification_field');
+
+/**
+ * Add verification status column to users list in admin
+ * Shows verification status in users table
+ * 
+ * @param array $columns Existing columns
+ * @return array Modified columns
+ */
+function classiadspro_add_verification_column($columns) {
+	$columns['verified'] = __('Status', 'classiadspro');
+	return $columns;
+}
+add_filter('manage_users_columns', 'classiadspro_add_verification_column');
+
+/**
+ * Display verification status in users list column
+ * 
+ * @param string $output Column output
+ * @param string $column_name Column name
+ * @param int $user_id User ID
+ * @return string Column content
+ */
+function classiadspro_show_verification_column($output, $column_name, $user_id) {
+	if ($column_name === 'verified') {
+		$is_verified = get_user_meta($user_id, 'user_verified', true);
+		if ($is_verified) {
+			return '<span style="color: #28a745; font-weight: bold;">✓ ' . __('Verified', 'classiadspro') . '</span>';
+		} else {
+			return '<span style="color: #dc3545; font-weight: bold;">✗ ' . __('Not Verified', 'classiadspro') . '</span>';
+		}
+	}
+	return $output;
+}
+add_filter('manage_users_custom_column', 'classiadspro_show_verification_column', 10, 3);
 

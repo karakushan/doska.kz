@@ -22,3 +22,9 @@ db_data/
 .DS_Store
 Thumbs.db
 
+# Log files
+*.log
+wp-content/debug.log
+wordpress/wp-content/debug.log
+*.log.gz
+
