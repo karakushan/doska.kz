@@ -67,3 +67,86 @@ Your custom css
     border: 3px solid #eb6653;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+/* Collapse Filters Section by Default */
+.directorypress-search-form .default-search-fields-section-label {
+    cursor: pointer !important;
+    user-select: none;
+    position: relative;
+    background: transparent !important;
+}
+
+.directorypress-search-form .default-search-fields-section-label::after {
+    content: '\F0140';
+    font-family: 'Material Design Icons';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: content 0.3s ease;
+    font-size: 20px;
+    background: transparent !important;
+}
+
+.directorypress-search-form .default-search-fields-wrapper.collapsed .default-search-fields-section-label::after {
+    content: '\F0142';
+}
+
+.directorypress-search-form .default-search-fields-wrapper.collapsed .default-search-fields-content-box {
+    display: none;
+}
+
+.directorypress-search-form .default-search-fields-section-label:hover {
+    opacity: 0.8;
+    cursor: pointer !important;
+}
+
+/* Individual Filter Fields Collapse */
+.directorypress-search-form .search-content-field-label {
+    cursor: pointer !important;
+    user-select: none;
+    position: relative;
+    background: transparent !important;
+}
+
+.directorypress-search-form .search-content-field-label:hover {
+    opacity: 0.8;
+    cursor: pointer !important;
+}
+
+.directorypress-search-form .search-content-field-label::after {
+    content: '\F0140' !important;
+    font-family: 'Material Design Icons' !important;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: content 0.3s ease;
+    font-size: 20px;
+    background: transparent !important;
+}
+
+/* Prevent duplicate icons */
+.directorypress-search-form .search-content-field-label::before {
+    display: none !important;
+}
+
+.directorypress-search-form .search-element-col.collapsed .search-content-field-label::after {
+    content: '\F0142' !important;
+}
+
+.directorypress-search-form .search-element-col.collapsed .field-input-wrapper,
+.directorypress-search-form .search-element-col.collapsed .search-field-content-wrapper {
+    display: none;
+}
+
+/* Center Search Button */
+.directorypress-search-form .cz-submit-btn.btn-primary {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-search-bar .search-element-col.pull-right.directorypress-search-submit-button-wrap {
+    padding-top: 43px!important;
+}

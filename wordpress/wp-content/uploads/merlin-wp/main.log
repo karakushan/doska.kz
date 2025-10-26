@@ -4964,3 +4964,4 @@
 [2025-09-24T08:28:12.200614+00:00] merlin-logger.INFO: The content import AJAX call will be executed with this import data {"title":"After import setup","data":"5"} []
 [2025-09-24T08:28:17.103835+00:00] merlin-logger.DEBUG: The final step has been displayed [] []
 [2025-10-25T09:18:48.970094+00:00] merlin-logger.DEBUG: The welcome step has been displayed [] []
+[2025-10-26T12:43:37.906029+00:00] merlin-logger.DEBUG: The welcome step has been displayed [] []

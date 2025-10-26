@@ -1378,3 +1378,109 @@ function classiadspro_show_verification_column($output, $column_name, $user_id) 
 }
 add_filter('manage_users_custom_column', 'classiadspro_show_verification_column', 10, 3);
 
+// Collapse Filters by default
+add_action('wp_footer', 'classiadspro_collapse_filters', 999);
+/**
+ * Collapse filters section and individual filter fields by default on page load
+ */
+function classiadspro_collapse_filters() {
+	?>
+	<script>
+	(function($) {
+		'use strict';
+		
+		function initFiltersCollapse() {
+			// Main Filters Section
+			$('.directorypress-search-form .default-search-fields-wrapper').each(function() {
+				var wrapper = $(this);
+				
+				// Skip if already initialized
+				if (wrapper.data('filters-initialized')) {
+					return;
+				}
+				
+				wrapper.data('filters-initialized', true);
+				wrapper.addClass('collapsed');
+				
+				var label = wrapper.find('> .default-search-fields-section-label').first();
+				var content = wrapper.find('> .default-search-fields-content-box').first();
+				
+				content.hide();
+				
+				// Remove any existing handlers before adding new one
+				label.off('click.filterToggle');
+				label.on('click.filterToggle', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					e.stopImmediatePropagation();
+					
+					var isCollapsed = wrapper.hasClass('collapsed');
+					wrapper.toggleClass('collapsed');
+					
+					if (isCollapsed) {
+						content.stop(true, true).slideDown(300);
+					} else {
+						content.stop(true, true).slideUp(300);
+					}
+					
+					return false;
+				});
+			});
+			
+			// Individual Filter Fields (Status, Brand Name, Colors, etc.)
+			$('.directorypress-search-form .search-element-col').each(function() {
+				var fieldCol = $(this);
+				
+				// Skip if already initialized
+				if (fieldCol.data('field-initialized')) {
+					return;
+				}
+				
+				var label = fieldCol.find('> .search-content-field-label').first();
+				var fieldContent = fieldCol.find('> .field-input-wrapper, > .search-field-content-wrapper').first();
+				
+				if (label.length && fieldContent.length) {
+					fieldCol.data('field-initialized', true);
+					fieldCol.addClass('collapsed');
+					fieldContent.hide();
+					
+					// Remove any existing handlers before adding new one
+					label.off('click.fieldToggle');
+					label.on('click.fieldToggle', function(e) {
+						e.preventDefault();
+						e.stopPropagation();
+						e.stopImmediatePropagation();
+						
+						var isCollapsed = fieldCol.hasClass('collapsed');
+						fieldCol.toggleClass('collapsed');
+						
+						if (isCollapsed) {
+							fieldContent.stop(true, true).slideDown(300);
+						} else {
+							fieldContent.stop(true, true).slideUp(300);
+						}
+						
+						return false;
+					});
+				}
+			});
+		}
+		
+		$(function() {
+			// Small delay to ensure DOM is fully loaded
+			setTimeout(function() {
+				initFiltersCollapse();
+			}, 100);
+			
+			// Re-initialize on AJAX content load
+			$(document).on('directorypress_content_loaded', function() {
+				setTimeout(function() {
+					initFiltersCollapse();
+				}, 100);
+			});
+		});
+	})(jQuery);
+	</script>
+	<?php
+}
+
