@@ -1,0 +1,8 @@
+{
+    "config": {
+        "vendor-dir": "wordpress/wp-content/themes/classiadspro/vendor"
+    },
+    "require": {
+        "kreait/firebase-php": "^7.23"
+    }
+}

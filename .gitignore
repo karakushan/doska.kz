@@ -28,3 +28,6 @@ wp-content/debug.log
 wordpress/wp-content/debug.log
 *.log.gz
 
+# Firebase credentials
+**/firebase-push-notifications/service-account-*.json
+

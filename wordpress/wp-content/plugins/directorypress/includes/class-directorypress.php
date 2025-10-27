@@ -886,8 +886,20 @@ class DirectoryPress {
 		}
 		$listings_ids_to_suspend = array_unique($listings_ids_to_suspend);
 		foreach ($listings_ids_to_suspend AS $listing_id) {
+			$old_status = get_post_status($listing_id);
 			update_post_meta($listing_id, '_listing_status', 'expired');
 			wp_update_post(array('ID' => $listing_id, 'post_status' => 'draft')); // This needed in order terms counts were always actual
+			
+			// Trigger listing expired hook
+			do_action('directorypress_listing_expired', $listing_id);
+			
+			// Trigger listing deactivated hook if status changed from publish to draft
+			if ($old_status === 'publish') {
+				do_action('directorypress_listing_deactivated', $listing_id);
+			}
+			
+			// Trigger general status change hook
+			do_action('directorypress_listing_status_changed', $listing_id, $old_status, 'draft');
 			
 			$listing = directorypress_get_listing($listing_id);
 			if ($listing->package->change_package_id && ($new_package = $this->packages->get_package_by_id($listing->package->change_package_id))) {

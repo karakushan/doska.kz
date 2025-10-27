@@ -19,6 +19,10 @@ function classiadspro_load_textdomain() {
     load_theme_textdomain( 'classiadspro', get_template_directory() . '/languages' );
 }
 add_action( 'after_setup_theme', 'classiadspro_load_textdomain' );
+
+// Load Firebase Push Notifications
+require_once get_template_directory() . '/includes/actions/firebase.php';
+
 $theme = new Classiadspro_Theme();
 $theme->init(array(
 		"theme_name" => "Classiadspro",

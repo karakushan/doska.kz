@@ -3696,6 +3696,8 @@
 		),
 		
 	));
+	
+	
      Redux::setSection( $opt_name, array(
         'title'  => esc_html__( 'Import / Export', 'classiadspro' ),
         'desc'   => esc_html__( 'Import and Export your Redux Framework settings from file, text or URL.', 'classiadspro' ),
