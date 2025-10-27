@@ -88,6 +88,7 @@
 						<?php if ($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_allow_edit_profile']): ?>
 							<li class=""><a href="<?php echo directorypress_dashboardUrl(array('directory_action' => 'profile')); ?>"><span><?php _e('Edit Profile', 'directorypress-frontend'); ?></span></a></li>		
 						<?php endif; ?>
+						<li class=""><a href="<?php echo directorypress_dashboardUrl(array('directory_action' => 'notification_settings')); ?>" data-bs-target="notification_settings"><i class="fa fa-bell"></i><span><?php _e('Notification Settings', 'directorypress-frontend'); ?></span></a></li>
 						<?php if(class_exists('WooCommerce') && (isset($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_woocommerce_frontend_links']) && $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_woocommerce_frontend_links'])): ?>
 							<?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
 								<li class="<?php echo wc_get_account_menu_item_classes( $endpoint ); ?>">

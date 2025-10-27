@@ -120,6 +120,10 @@ class directorypress_dashboard_handler extends directorypress_public {
 				$this->template = array(DPFL_TEMPLATES_PATH, 'directorypress_panel.php');
 					$this->subtemplate = array(DPFL_TEMPLATES_PATH, 'messages.php');
 					$this->active_tab = 'messages';
+			}elseif ($directorypress_object->action == 'notification_settings') {
+				$this->template = array(DPFL_TEMPLATES_PATH, 'directorypress_panel.php');
+				$this->subtemplate = array(DPFL_TEMPLATES_PATH, 'notification_settings.php');
+				$this->active_tab = 'notification_settings';
 			}elseif (function_exists('wpml_object_id_filter') && $sitepress && $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_enable_frontend_translations'] && $directorypress_object->action == 'add_translation' && isset($_GET['listing_id']) && isset($_GET['to_lang'])) {
 				$master_post_id = sanitize_text_field($_GET['listing_id']);
 				$lang_code = sanitize_text_field($_GET['to_lang']);
