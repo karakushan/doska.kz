@@ -30,4 +30,5 @@ wordpress/wp-content/debug.log
 
 # Firebase credentials
 **/firebase-push-notifications/service-account-*.json
+backups/*.json
 
