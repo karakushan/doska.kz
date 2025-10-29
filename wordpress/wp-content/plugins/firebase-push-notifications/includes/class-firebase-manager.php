@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Firebase Manager Class
  * Handles Firebase Cloud Messaging operations
@@ -8,33 +9,37 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class FirebaseManager {
-    
+class FirebaseManager
+{
+
     private static $instance = null;
     private $messaging = null;
     private $isInitialized = false;
-    
+
     /**
      * Get singleton instance
      */
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance === null) {
             self::$instance = new self();
         }
         return self::$instance;
     }
-    
+
     /**
      * Constructor
      */
-    private function __construct() {
+    private function __construct()
+    {
         $this->init();
     }
-    
+
     /**
      * Initialize Firebase
      */
-    private function init() {
+    private function init()
+    {
         try {
             // Check if Firebase is enabled
             $firebase_enabled = get_option('firebase_enabled', false);
@@ -42,10 +47,10 @@ class FirebaseManager {
                 error_log('Firebase Push Notifications: Firebase is disabled');
                 return;
             }
-            
+
             $service_account_json = null;
             $service_account_file_path = get_option('firebase_service_account_file_path', '');
-            
+
             // Try to load from file first (new method)
             if (!empty($service_account_file_path)) {
                 if (file_exists($service_account_file_path) && is_readable($service_account_file_path)) {
@@ -58,26 +63,26 @@ class FirebaseManager {
                     error_log('Firebase Push Notifications: Service account file not found or not readable: ' . $service_account_file_path);
                 }
             }
-            
+
             // Fallback to legacy database storage if file method failed
             if ($service_account_json === null || empty($service_account_json)) {
                 error_log('Firebase Push Notifications: File method failed, trying legacy database storage');
                 $service_account_json = get_option('firebase_service_account_json', '');
             }
-            
+
             // Check if service account JSON is provided
             if (empty($service_account_json)) {
                 error_log('Firebase Push Notifications: Service account JSON not configured');
                 return;
             }
-            
+
             // Parse service account JSON
             $serviceAccount = json_decode($service_account_json, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
                 error_log('Firebase Push Notifications: Invalid service account JSON - ' . json_last_error_msg());
                 return;
             }
-            
+
             // Validate required fields in service account
             $requiredFields = ['type', 'project_id', 'private_key', 'client_email'];
             foreach ($requiredFields as $field) {
@@ -86,27 +91,26 @@ class FirebaseManager {
                     return;
                 }
             }
-            
+
             // Check if Composer autoloader exists
             $autoloaderPath = FIREBASE_PUSH_NOTIFICATIONS_PLUGIN_DIR . 'vendor/autoload.php';
             if (!file_exists($autoloaderPath)) {
                 error_log('Firebase Push Notifications: Composer autoloader not found at: ' . $autoloaderPath);
                 return;
             }
-            
+
             // Initialize Firebase
             $factory = new \Kreait\Firebase\Factory();
             $factory = $factory->withServiceAccount($serviceAccount);
-            
+
             $this->messaging = $factory->createMessaging();
             $this->isInitialized = true;
-            
+
             if (!empty($service_account_file_path) && file_exists($service_account_file_path)) {
                 error_log('Firebase Push Notifications: Successfully initialized from file: ' . $service_account_file_path);
             } else {
                 error_log('Firebase Push Notifications: Successfully initialized from database storage');
             }
-            
         } catch (Exception $e) {
             error_log('Firebase Push Notifications initialization error: ' . $e->getMessage());
             error_log('Firebase Push Notifications stack trace: ' . $e->getTraceAsString());
@@ -115,18 +119,20 @@ class FirebaseManager {
             error_log('Firebase Push Notifications stack trace: ' . $e->getTraceAsString());
         }
     }
-    
+
     /**
      * Check if Firebase is initialized
      */
-    public function isInitialized() {
+    public function isInitialized()
+    {
         return $this->isInitialized;
     }
-    
+
     /**
      * Get detailed initialization status
      */
-    public function getInitializationStatus() {
+    public function getInitializationStatus()
+    {
         $status = array(
             'enabled' => false,
             'service_account_configured' => false,
@@ -136,7 +142,7 @@ class FirebaseManager {
             'initialization_error' => null,
             'details' => array()
         );
-        
+
         // Check if Firebase is enabled
         $firebase_enabled = get_option('firebase_enabled', false);
         if ($firebase_enabled) {
@@ -145,12 +151,12 @@ class FirebaseManager {
             $status['details'][] = 'Firebase is disabled in settings';
             return $status;
         }
-        
+
         // Check service account file path and JSON
         $service_account_file_path = get_option('firebase_service_account_file_path', '');
         $service_account_json = null;
         $source = 'none';
-        
+
         // Try file first
         if (!empty($service_account_file_path)) {
             if (file_exists($service_account_file_path) && is_readable($service_account_file_path)) {
@@ -165,7 +171,7 @@ class FirebaseManager {
                 $status['details'][] = 'Service account file not found or not readable: ' . $service_account_file_path;
             }
         }
-        
+
         // Fallback to database storage
         if ($service_account_json === null || empty($service_account_json)) {
             $service_account_json = get_option('firebase_service_account_json', '');
@@ -174,15 +180,15 @@ class FirebaseManager {
                 $status['details'][] = 'Service account loaded from database (legacy method)';
             }
         }
-        
+
         if (!empty($service_account_json)) {
             $status['service_account_configured'] = true;
-            
+
             // Validate JSON
             $serviceAccount = json_decode($service_account_json, true);
             if (json_last_error() === JSON_ERROR_NONE) {
                 $status['service_account_valid'] = true;
-                
+
                 // Check required fields
                 $requiredFields = ['type', 'project_id', 'private_key', 'client_email'];
                 foreach ($requiredFields as $field) {
@@ -198,7 +204,7 @@ class FirebaseManager {
         } else {
             $status['details'][] = 'Service account JSON not configured in file or database';
         }
-        
+
         // Check Composer autoloader
         $autoloaderPath = FIREBASE_PUSH_NOTIFICATIONS_PLUGIN_DIR . 'vendor/autoload.php';
         if (file_exists($autoloaderPath)) {
@@ -206,24 +212,24 @@ class FirebaseManager {
         } else {
             $status['details'][] = 'Composer autoloader not found at: ' . $autoloaderPath;
         }
-        
+
         // Check Firebase classes
         if (class_exists('\Kreait\Firebase\Factory')) {
             $status['firebase_classes_available'] = true;
         } else {
             $status['details'][] = 'Firebase PHP SDK classes not available';
         }
-        
+
         // Check if initialized
         if ($this->isInitialized) {
             $status['details'][] = 'Firebase successfully initialized';
         } else {
             $status['details'][] = 'Firebase not initialized';
         }
-        
+
         return $status;
     }
-    
+
     /**
      * Send notification to user
      * 
@@ -234,25 +240,26 @@ class FirebaseManager {
      * @param string $notification_type Type of notification
      * @return bool Success status
      */
-    public function sendNotificationToUser($user_id, $title, $body, $data = array(), $notification_type = 'general') {
+    public function sendNotificationToUser($user_id, $title, $body, $data = array(), $notification_type = 'general')
+    {
         if (!$this->isInitialized()) {
             return false;
         }
-        
+
         // Check if user has notifications enabled for this type
         if (!$this->isNotificationEnabled($user_id, $notification_type)) {
             return false;
         }
-        
+
         // Get user's FCM tokens
         $tokens = get_user_meta($user_id, '_fcm_device_tokens', true);
         if (empty($tokens) || !is_array($tokens)) {
             return false;
         }
-        
+
         $success_count = 0;
         $failed_tokens = array();
-        
+
         foreach ($tokens as $token) {
             try {
                 $message = \Kreait\Firebase\Messaging\CloudMessage::new()
@@ -263,30 +270,29 @@ class FirebaseManager {
                         'timestamp' => time()
                     )))
                     ->toToken($token);
-                
+
                 $result = $this->messaging->send($message);
                 $success_count++;
-                
+
                 // Log successful notification
                 $this->logNotification($user_id, $notification_type, $title, $body, $data, 'sent');
-                
             } catch (\Kreait\Firebase\Exception\MessagingException $e) {
                 $failed_tokens[] = $token;
                 error_log('Firebase Push Notifications: Failed to send to token ' . $token . ' - ' . $e->getMessage());
-                
+
                 // Log failed notification
                 $this->logNotification($user_id, $notification_type, $title, $body, $data, 'failed');
             }
         }
-        
+
         // Remove failed tokens
         if (!empty($failed_tokens)) {
             $this->removeFailedTokens($user_id, $failed_tokens);
         }
-        
+
         return $success_count > 0;
     }
-    
+
     /**
      * Send notification to topic
      * 
@@ -296,11 +302,12 @@ class FirebaseManager {
      * @param array $data Additional data
      * @return bool Success status
      */
-    public function sendNotificationToTopic($topic, $title, $body, $data = array()) {
+    public function sendNotificationToTopic($topic, $title, $body, $data = array())
+    {
         if (!$this->isInitialized()) {
             return false;
         }
-        
+
         try {
             $message = \Kreait\Firebase\Messaging\CloudMessage::new()
                 ->withNotification(\Kreait\Firebase\Messaging\Notification::create($title, $body))
@@ -309,16 +316,15 @@ class FirebaseManager {
                     'timestamp' => time()
                 )))
                 ->toTopic($topic);
-            
+
             $result = $this->messaging->send($message);
             return true;
-            
         } catch (\Kreait\Firebase\Exception\MessagingException $e) {
             error_log('Firebase Push Notifications: Failed to send to topic ' . $topic . ' - ' . $e->getMessage());
             return false;
         }
     }
-    
+
     /**
      * Check if notification type is enabled for user
      * 
@@ -326,14 +332,15 @@ class FirebaseManager {
      * @param string $notification_type Notification type
      * @return bool
      */
-    private function isNotificationEnabled($user_id, $notification_type) {
+    private function isNotificationEnabled($user_id, $notification_type)
+    {
         $preferences = get_user_meta($user_id, '_notification_preferences', true);
-        
+
         if (empty($preferences) || !is_array($preferences)) {
             // Default to enabled if no preferences set
             return true;
         }
-        
+
         switch ($notification_type) {
             case 'message':
                 return isset($preferences['messages']) ? $preferences['messages'] : true;
@@ -345,7 +352,7 @@ class FirebaseManager {
                 return true;
         }
     }
-    
+
     /**
      * Log notification
      * 
@@ -356,11 +363,12 @@ class FirebaseManager {
      * @param array $data Data
      * @param string $status Status
      */
-    private function logNotification($user_id, $notification_type, $title, $body, $data, $status) {
+    private function logNotification($user_id, $notification_type, $title, $body, $data, $status)
+    {
         global $wpdb;
-        
+
         $table_name = $wpdb->prefix . 'firebase_notifications_log';
-        
+
         $wpdb->insert(
             $table_name,
             array(
@@ -374,21 +382,22 @@ class FirebaseManager {
             array('%d', '%s', '%s', '%s', '%s', '%s')
         );
     }
-    
+
     /**
      * Remove failed tokens from user meta
      * 
      * @param int $user_id User ID
      * @param array $failed_tokens Array of failed tokens
      */
-    private function removeFailedTokens($user_id, $failed_tokens) {
+    private function removeFailedTokens($user_id, $failed_tokens)
+    {
         $tokens = get_user_meta($user_id, '_fcm_device_tokens', true);
         if (is_array($tokens)) {
             $tokens = array_diff($tokens, $failed_tokens);
             update_user_meta($user_id, '_fcm_device_tokens', $tokens);
         }
     }
-    
+
     /**
      * Subscribe user to topic
      * 
@@ -396,16 +405,17 @@ class FirebaseManager {
      * @param string $topic Topic name
      * @return bool Success status
      */
-    public function subscribeUserToTopic($user_id, $topic) {
+    public function subscribeUserToTopic($user_id, $topic)
+    {
         if (!$this->isInitialized()) {
             return false;
         }
-        
+
         $tokens = get_user_meta($user_id, '_fcm_device_tokens', true);
         if (empty($tokens) || !is_array($tokens)) {
             return false;
         }
-        
+
         try {
             $result = $this->messaging->subscribeToTopic($topic, $tokens);
             return true;
@@ -414,7 +424,7 @@ class FirebaseManager {
             return false;
         }
     }
-    
+
     /**
      * Unsubscribe user from topic
      * 
@@ -422,16 +432,17 @@ class FirebaseManager {
      * @param string $topic Topic name
      * @return bool Success status
      */
-    public function unsubscribeUserFromTopic($user_id, $topic) {
+    public function unsubscribeUserFromTopic($user_id, $topic)
+    {
         if (!$this->isInitialized()) {
             return false;
         }
-        
+
         $tokens = get_user_meta($user_id, '_fcm_device_tokens', true);
         if (empty($tokens) || !is_array($tokens)) {
             return false;
         }
-        
+
         try {
             $result = $this->messaging->unsubscribeFromTopic($topic, $tokens);
             return true;
@@ -440,7 +451,7 @@ class FirebaseManager {
             return false;
         }
     }
-    
+
     /**
      * Get notification statistics
      * 
@@ -449,29 +460,30 @@ class FirebaseManager {
      * @param int $days Number of days to look back (default: 30)
      * @return array Statistics
      */
-    public function getNotificationStats($user_id = null, $notification_type = null, $days = 30) {
+    public function getNotificationStats($user_id = null, $notification_type = null, $days = 30)
+    {
         global $wpdb;
-        
+
         $table_name = $wpdb->prefix . 'firebase_notifications_log';
-        
+
         $where_conditions = array();
         $where_values = array();
-        
+
         if ($user_id) {
             $where_conditions[] = 'user_id = %d';
             $where_values[] = $user_id;
         }
-        
+
         if ($notification_type) {
             $where_conditions[] = 'notification_type = %s';
             $where_values[] = $notification_type;
         }
-        
+
         $where_conditions[] = 'sent_at >= DATE_SUB(NOW(), INTERVAL %d DAY)';
         $where_values[] = $days;
-        
+
         $where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_conditions) : '';
-        
+
         $sql = "SELECT 
                     COUNT(*) as total,
                     SUM(CASE WHEN status = 'sent' THEN 1 ELSE 0 END) as sent,
@@ -480,13 +492,117 @@ class FirebaseManager {
                 FROM $table_name 
                 $where_clause
                 GROUP BY notification_type";
-        
+
         if (!empty($where_values)) {
             $results = $wpdb->get_results($wpdb->prepare($sql, $where_values));
         } else {
             $results = $wpdb->get_results($sql);
         }
-        
+
         return $results;
+    }
+
+    /**
+     * Send notification to all users (including guests)
+     * 
+     * @param string $title Notification title
+     * @param string $body Notification body
+     * @param array $data Additional data
+     * @param string $notification_type Type of notification
+     * @return array Results with success/failure counts
+     */
+    public function sendNotificationToAll($title, $body, $data = array(), $notification_type = 'general')
+    {
+        if (!$this->isInitialized()) {
+            return array('success' => 0, 'failed' => 0, 'total' => 0);
+        }
+
+        $success_count = 0;
+        $failed_count = 0;
+        $total_count = 0;
+
+        // Send to registered users
+        $users_with_tokens = get_users(array(
+            'meta_query' => array(
+                array(
+                    'key' => '_fcm_device_tokens',
+                    'compare' => 'EXISTS'
+                )
+            )
+        ));
+
+        foreach ($users_with_tokens as $user) {
+            if ($this->sendNotificationToUser($user->ID, $title, $body, $data, $notification_type)) {
+                $success_count++;
+            } else {
+                $failed_count++;
+            }
+            $total_count++;
+        }
+
+        // Send to guest tokens
+        $guest_tokens = get_option('firebase_guest_tokens', array());
+        if (is_array($guest_tokens)) {
+            $failed_guest_tokens = array();
+
+            foreach ($guest_tokens as $index => $guest_token_data) {
+                $token = $guest_token_data['token'];
+                $total_count++;
+
+                try {
+                    $message = \Kreait\Firebase\Messaging\CloudMessage::new()
+                        ->withNotification(\Kreait\Firebase\Messaging\Notification::create($title, $body))
+                        ->withData(array_merge($data, array(
+                            'notification_type' => $notification_type,
+                            'user_id' => 0, // Guest user
+                            'timestamp' => time()
+                        )))
+                        ->toToken($token);
+
+                    $result = $this->messaging->send($message);
+                    $success_count++;
+                } catch (\Kreait\Firebase\Exception\MessagingException $e) {
+                    $failed_guest_tokens[] = $index;
+                    $failed_count++;
+                    error_log('Firebase Push Notifications: Failed to send to guest token ' . $token . ' - ' . $e->getMessage());
+                }
+            }
+
+            // Remove failed guest tokens
+            if (!empty($failed_guest_tokens)) {
+                $this->removeFailedGuestTokens($failed_guest_tokens);
+            }
+        }
+
+        return array(
+            'success' => $success_count,
+            'failed' => $failed_count,
+            'total' => $total_count
+        );
+    }
+
+    /**
+     * Remove failed guest tokens
+     * 
+     * @param array $failed_indices Array of failed token indices
+     */
+    private function removeFailedGuestTokens($failed_indices)
+    {
+        $guest_tokens = get_option('firebase_guest_tokens', array());
+        if (!is_array($guest_tokens)) {
+            return;
+        }
+
+        // Remove failed tokens by index (in reverse order to maintain indices)
+        rsort($failed_indices);
+        foreach ($failed_indices as $index) {
+            if (isset($guest_tokens[$index])) {
+                unset($guest_tokens[$index]);
+            }
+        }
+
+        // Re-index array
+        $guest_tokens = array_values($guest_tokens);
+        update_option('firebase_guest_tokens', $guest_tokens);
     }
 }

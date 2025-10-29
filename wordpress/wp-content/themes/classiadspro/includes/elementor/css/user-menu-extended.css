@@ -1,0 +1,93 @@
+/**
+ * Extended styles for Login Menu Widget with Messages Support
+ * 
+ * @package classiadspro
+ */
+
+/* Message count badge in dropdown menu */
+.hfb-user-menu .dropdown-content .message-count-badge {
+    background-color: #ff4444;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-left: 5px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 1.2;
+    vertical-align: middle;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* Message count badge on profile photo */
+.hfb-user-menu .user-menu-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.hfb-user-menu .user-menu-icon .user-message-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 0 4px;
+    box-sizing: border-box;
+    z-index: 10;
+    line-height: 1;
+}
+
+/* Animation for new messages */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.hfb-user-menu .user-message-badge:not(:empty) {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hfb-user-menu .user-menu-icon .user-message-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 10px;
+        top: -3px;
+        right: -3px;
+        border-width: 1px;
+    }
+    
+    .hfb-user-menu .dropdown-content .message-count-badge {
+        font-size: 10px;
+        padding: 1px 5px;
+    }
+}
+
+/* Hover effects */
+.hfb-user-menu .dropdown-content li a:hover .message-count-badge {
+    background-color: #ff2222;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+}
+
+/* For dark themes (optional) */
+.hfb-user-menu.dark-theme .user-message-badge,
+.hfb-user-menu.dark-theme .message-count-badge {
+    border-color: #333;
+}
+

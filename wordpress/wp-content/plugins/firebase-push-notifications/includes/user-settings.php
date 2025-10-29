@@ -97,7 +97,17 @@ function firebase_handle_notification_settings_page() {
         <?php if ($token_count === 0): ?>
             <div class="alert alert-warning">
                 <strong><?php _e('Notifications are disabled', 'firebase-push-notifications'); ?></strong><br>
-                <?php _e('To receive push notifications, please allow notifications in your browser when prompted.', 'firebase-push-notifications'); ?>
+                <?php _e('To receive push notifications, please click the button below to enable them.', 'firebase-push-notifications'); ?>
+            </div>
+            
+            <div class="notification-enable-section">
+                <button id="firebase-enable-notifications" class="btn btn-primary btn-lg">
+                    <i class="fa fa-bell"></i>
+                    <?php _e('Enable Notifications', 'firebase-push-notifications'); ?>
+                </button>
+                <p class="help-text">
+                    <?php _e('Click this button to allow push notifications in your browser.', 'firebase-push-notifications'); ?>
+                </p>
             </div>
         <?php endif; ?>
         
