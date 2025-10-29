@@ -618,7 +618,7 @@ class Pacz_Elementor_Login extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .hfb-login-menu-link i' => 'font-size: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .hfb-login-menu-link svg' => 'max-width: {{SIZE}}{{UNIT}}; height: auto',
+                    '{{WRAPPER}} .hfb-login-menu-link svg' => 'max-width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
