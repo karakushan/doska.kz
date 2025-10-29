@@ -1849,7 +1849,13 @@ add_action('wp_footer', 'classiadspro_advertise_page_scripts');
  */
 function classiadspro_advertise_page_assets()
 {
-	if (is_page('advertise-listing') || (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/advertise-listing/') !== false)) {
+	// Check if we're on advertise listing page or dashboard with advertise listing
+	$is_advertise_page = is_page('advertise-listing') ||
+		(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/advertise-listing/') !== false) ||
+		(isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'advertise_listing') !== false) ||
+		(isset($_GET['listing_id']) && isset($_GET['action']) && $_GET['action'] === 'advertise_listing');
+
+	if ($is_advertise_page) {
 		$theme_data = wp_get_theme("classiadspro");
 
 		// Подключаем CSS файл для рекламирования

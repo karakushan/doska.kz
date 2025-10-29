@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template Name: Advertise Listing Page
  * 
@@ -7,11 +6,12 @@
  * This page integrates with DirectoryPress dashboard styling
  */
 
-get_header();
-
+// Get listing ID and validate BEFORE headers are sent
 $listing_id = isset($_GET['listing_id']) ? intval($_GET['listing_id']) : 0;
+error_log('Advertise listing page loaded. Listing ID: ' . $listing_id);
 
 if (!$listing_id) {
+    error_log('No listing ID provided, redirecting to dashboard');
     wp_redirect(directorypress_dashboardUrl());
     exit;
 }
@@ -19,17 +19,42 @@ if (!$listing_id) {
 $listing = directorypress_get_listing($listing_id);
 
 if (!$listing) {
+    error_log('Listing not found for ID: ' . $listing_id);
     wp_redirect(directorypress_dashboardUrl());
     exit;
 }
 
-// Handle form submission
-if (isset($_POST['submit_advertising']) && wp_verify_nonce($_POST['advertising_nonce'], 'submit_advertising')) {
+error_log('Listing found: ' . $listing->title());
+
+// Handle form submission BEFORE get_header()
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['advertising_nonce']) && isset($_POST['advertising_period'])) {
+    error_log('=== ADVERTISING FORM SUBMISSION STARTED ===');
+    error_log('Form submitted - POST data: ' . print_r($_POST, true));
+    error_log('REQUEST_METHOD: ' . $_SERVER['REQUEST_METHOD']);
+    error_log('Submit button: ' . (isset($_POST['submit_advertising']) ? 'set' : 'not set'));
+    error_log('Nonce value: ' . $_POST['advertising_nonce']);
+    
+    // Verify headers not sent
+    if (headers_sent($file, $line)) {
+        error_log('ERROR: Headers already sent in ' . $file . ' on line ' . $line);
+    } else {
+        error_log('Headers not sent yet - good for redirect');
+    }
+
+    if (!wp_verify_nonce($_POST['advertising_nonce'], 'submit_advertising')) {
+        error_log('Nonce verification failed');
+        $error_url = add_query_arg('error', urlencode('Security check failed'), $_SERVER['REQUEST_URI']);
+        wp_redirect($error_url);
+        exit;
+    }
+
     error_log('Processing advertising form for listing: ' . $listing_id);
 
     $period = isset($_POST['advertising_period']) ? sanitize_text_field($_POST['advertising_period']) : '';
+    error_log('Selected period: ' . $period);
 
     if (!in_array($period, array('1_day', '3_days', '7_days'))) {
+        error_log('Invalid period selected: ' . $period);
         $error_url = add_query_arg('error', urlencode('Please select advertising period'), $_SERVER['REQUEST_URI']);
         wp_redirect($error_url);
         exit;
@@ -37,10 +62,23 @@ if (isset($_POST['submit_advertising']) && wp_verify_nonce($_POST['advertising_n
 
     // Get product ID
     $product_ids = classiadspro_get_advertising_product_ids();
+    error_log('Available product IDs: ' . print_r($product_ids, true));
+
     $product_id = isset($product_ids[$period]) ? $product_ids[$period] : 0;
+    error_log('Selected product ID for period ' . $period . ': ' . $product_id);
 
     if (!$product_id || !function_exists('wc_get_product')) {
+        error_log('Product ID not found or WooCommerce not available. Product ID: ' . $product_id . ', WC available: ' . (function_exists('wc_get_product') ? 'yes' : 'no'));
         $error_url = add_query_arg('error', urlencode('Error: advertising product not found'), $_SERVER['REQUEST_URI']);
+        wp_redirect($error_url);
+        exit;
+    }
+
+    // Check if product exists
+    $product = wc_get_product($product_id);
+    if (!$product) {
+        error_log('Product with ID ' . $product_id . ' does not exist');
+        $error_url = add_query_arg('error', urlencode('Error: advertising product does not exist'), $_SERVER['REQUEST_URI']);
         wp_redirect($error_url);
         exit;
     }
@@ -64,9 +102,14 @@ if (isset($_POST['submit_advertising']) && wp_verify_nonce($_POST['advertising_n
 
         $cart_result = WC()->cart->add_to_cart($product_id, 1, 0, array(), $cart_item_data);
 
-        error_log('Cart add result: ' . ($cart_result ? 'Success' : 'Failed'));
+        error_log('Cart add result: ' . ($cart_result ? 'Success - Item Key: ' . $cart_result : 'Failed'));
+        
+        $checkout_url = wc_get_checkout_url();
+        error_log('Checkout URL: ' . $checkout_url);
+        error_log('About to redirect to checkout...');
 
-        wp_redirect(wc_get_checkout_url());
+        // Use WordPress safe redirect
+        wp_safe_redirect($checkout_url);
         exit;
     } else {
         $error_url = add_query_arg('error', urlencode('WooCommerce not available'), $_SERVER['REQUEST_URI']);
@@ -74,6 +117,9 @@ if (isset($_POST['submit_advertising']) && wp_verify_nonce($_POST['advertising_n
         exit;
     }
 }
+
+// NOW call get_header() after all processing is done
+get_header();
 
 $prices = classiadspro_get_advertising_prices();
 ?>
@@ -131,8 +177,7 @@ $prices = classiadspro_get_advertising_prices();
                                                 <div class="period-option">
                                                     <label class="period-label">
                                                         <input type="radio" name="advertising_period" value="3_days" required checked>
-                                                        <div class="period-card period-popular">
-                                                            <span class="popular-badge">Popular</span>
+                                                        <div class="period-card">
                                                             <div class="period-duration">3 days</div>
                                                             <div class="period-price">$<?php echo number_format($prices['3_days'], 2, '.', ''); ?></div>
                                                         </div>
@@ -186,5 +231,31 @@ $prices = classiadspro_get_advertising_prices();
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    console.log('Advertising form script loaded');
+    
+    // Ensure form submits normally without AJAX
+    $('.advertising-form').on('submit', function(e) {
+        console.log('Form submit event triggered');
+        console.log('Form data:', $(this).serialize());
+        
+        // Check if a period is selected
+        var selectedPeriod = $('input[name="advertising_period"]:checked').val();
+        console.log('Selected period:', selectedPeriod);
+        
+        if (!selectedPeriod) {
+            e.preventDefault();
+            alert('Please select an advertising period');
+            return false;
+        }
+        
+        // Let the form submit normally (no preventDefault)
+        console.log('Allowing normal form submission');
+        return true;
+    });
+});
+</script>
 
 <?php get_footer(); ?>
