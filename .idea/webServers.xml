@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a3fa3a8b-3987-4453-afb3-330789c9393e" name="doska.profglobal.top" url="http://doska.profglobal.top">
+        <fileTransfer rootFolder="/var/www/doska_profgl_usr/data/www/doska.profglobal.top" accessType="SFTP" host="77.237.234.31" port="22" sshConfigId="bc9df7de-8e33-4cd1-8eff-cc674a2a8e83" sshConfig="profglobal" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

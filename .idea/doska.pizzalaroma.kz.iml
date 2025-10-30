@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/includes" isTestSource="false" packagePrefix="Elementor" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/vendor_prefixed/twig/symfony/polyfill-ctype/" isTestSource="false" packagePrefix="ElementorDeps\Symfony\Polyfill\Ctype\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/vendor_prefixed/twig/symfony/polyfill-mbstring/" isTestSource="false" packagePrefix="ElementorDeps\Symfony\Polyfill\Mbstring\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/vendor_prefixed/twig/symfony/polyfill-php80/" isTestSource="false" packagePrefix="ElementorDeps\Symfony\Polyfill\Php80\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/vendor_prefixed/twig/symfony/polyfill-php81/" isTestSource="false" packagePrefix="ElementorDeps\Symfony\Polyfill\Php81\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/vendor_prefixed/twig/twig/twig/src" isTestSource="false" packagePrefix="ElementorDeps\Twig\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/elementor/vendor_prefixed/twig/twig/twig/tests" isTestSource="true" packagePrefix="ElementorDeps\Twig\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/query-monitor/tests/integration" isTestSource="true" packagePrefix="QM\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/woocommerce/packages/action-scheduler/classes" isTestSource="false" packagePrefix="Action_Scheduler" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+      <sourceFolder url="file://$MODULE_DIR$/wordpress/wp-includes/SimplePie/src" isTestSource="false" packagePrefix="SimplePie" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/monolog2/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/proteusthemes/wp-content-importer-v2" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/psr2/log" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/wp-importer/wordpress-importer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/beste/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/beste/in-memory-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/beste/json" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/brick/math" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/cuyz/valinor" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/fig/http-message-util" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/auth" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/cloud-core" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/cloud-storage" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/common-protos" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/gax" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/grpc-gcp" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/longrunning" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/protobuf" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/grpc/grpc" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/kreait/firebase-php" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/kreait/firebase-tokens" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/mtdowling/jmespath.php" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/rize/uri-template" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress/wp-content/plugins/query-monitor/vendor/composer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
