@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MessDetectorOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCSFixerOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PHPCodeSnifferOptionsConfiguration">
+    <option name="highlightLevel" value="WARNING" />
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/query-monitor/vendor/composer" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/wp-importer/wordpress-importer" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/psr2/log" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/proteusthemes/wp-content-importer-v2" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/composer" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/classiads-templates/vendor/monolog2/monolog" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/kreait/firebase-php" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/mtdowling/jmespath.php" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/kreait/firebase-tokens" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/beste/in-memory-cache" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/grpc/grpc" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/beste/json" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/cuyz/valinor" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/beste/clock" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/cloud-storage" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/longrunning" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/auth" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/common-protos" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/grpc-gcp" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/gax" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/google/cloud-core" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/rize/uri-template" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/wordpress/wp-content/plugins/firebase-push-notifications/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2">
+    <option name="suggestChangeDefaultLanguageLevel" value="false" />
+  </component>
+  <component name="PhpStanOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+  <component name="PsalmOptionsConfiguration">
+    <option name="transferred" value="true" />
+  </component>
+</project>

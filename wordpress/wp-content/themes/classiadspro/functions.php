@@ -50,7 +50,8 @@ if (class_exists('DirectoryPress') && class_exists('WooCommerce')) {
  * @param int $count Количество рекламируемых товаров (по умолчанию 3)
  * @return int
  */
-function classiadspro_advertised_listings_count($count) {
+function classiadspro_advertised_listings_count($count)
+{
 	// Вы можете изменить это число на любое другое
 	return 3;
 }
@@ -64,7 +65,8 @@ add_filter('classiadspro_advertised_listings_count', 'classiadspro_advertised_li
  * @param string $title Заголовок блока
  * @return string
  */
-function classiadspro_advertised_listings_title($title) {
+function classiadspro_advertised_listings_title($title)
+{
 	// Вы можете изменить текст заголовка
 	return __('Recommendations', 'classiadspro');
 }
@@ -1540,7 +1542,7 @@ function classiadspro_show_verification_column($output, $column_name, $user_id)
 add_filter('manage_users_custom_column', 'classiadspro_show_verification_column', 10, 3);
 
 // Collapse Filters by default
-add_action('wp_footer', 'classiadspro_collapse_filters', 999);
+// add_action('wp_footer', 'classiadspro_collapse_filters', 999);
 /**
  * Collapse filters section and individual filter fields by default on page load
  */
@@ -1552,90 +1554,125 @@ function classiadspro_collapse_filters()
 			'use strict';
 
 			function initFiltersCollapse() {
-				// Main Filters Section
-				$('.directorypress-search-form .default-search-fields-wrapper').each(function() {
-					var wrapper = $(this);
+				var $searchForm = $('.directorypress-search-form');
 
-					// Skip if already initialized
-					if (wrapper.data('filters-initialized')) {
-						return;
+				if (!$searchForm.length) {
+					return;
+				}
+
+				// Проверяем размер экрана
+				var isMobile = $(window).width() <= 768;
+
+				// Находим кастомный враппер фильтров (уже добавлен в шаблон)
+				var $filtersWrapper = $searchForm.find('.custom-filters-wrapper');
+				var $filtersHeader = $searchForm.find('.custom-filters-header');
+
+				if ($filtersWrapper.length && $filtersHeader.length) {
+					// Скрываем все внутренние элементы с текстом "Filters" чтобы избежать дублирования
+					$filtersWrapper.find('*').each(function() {
+						var $element = $(this);
+						if ($element.text().trim() === "Filters" && !$element.hasClass('custom-filters-header')) {
+							$element.hide();
+						}
+					});
+
+					// Устанавливаем начальное состояние в зависимости от размера экрана
+					if (isMobile) {
+						$filtersWrapper.addClass('collapsed').hide();
+						$filtersHeader.addClass('collapsed');
+					} else {
+						$filtersWrapper.removeClass('collapsed').show();
+						$filtersHeader.removeClass('collapsed');
+						// Показываем все фильтры на десктопе
+						$filtersWrapper.find('.search-field-content-wrapper, .field-input-wrapper').show();
 					}
 
-					wrapper.data('filters-initialized', true);
-					wrapper.addClass('collapsed');
-
-					var label = wrapper.find('> .default-search-fields-section-label').first();
-					var content = wrapper.find('> .default-search-fields-content-box').first();
-
-					content.hide();
-
-					// Remove any existing handlers before adding new one
-					label.off('click.filterToggle');
-					label.on('click.filterToggle', function(e) {
+					// Обработчик клика по общему заголовку
+					$filtersHeader.off('click.filtersToggle').on('click.filtersToggle', function(e) {
 						e.preventDefault();
 						e.stopPropagation();
-						e.stopImmediatePropagation();
 
-						var isCollapsed = wrapper.hasClass('collapsed');
-						wrapper.toggleClass('collapsed');
+						console.log('Filters header clicked'); // Отладка
+
+						var $header = $(this);
+						var $wrapper = $searchForm.find('.custom-filters-wrapper'); // Ищем в контексте формы
+						var isCollapsed = $wrapper.hasClass('collapsed');
+
+						console.log('Is collapsed:', isCollapsed); // Отладка
+
+						$header.toggleClass('collapsed');
+						$wrapper.toggleClass('collapsed');
 
 						if (isCollapsed) {
-							content.stop(true, true).slideDown(300);
+							// Разворачиваем все фильтры
+							$wrapper.stop(true, true).slideDown(300);
+							$wrapper.find('.search-field-content-wrapper, .field-input-wrapper').show();
+							console.log('Expanding filters'); // Отладка
 						} else {
-							content.stop(true, true).slideUp(300);
+							// Сворачиваем все фильтры
+							$wrapper.stop(true, true).slideUp(300);
+							console.log('Collapsing filters'); // Отладка
 						}
 
 						return false;
 					});
-				});
 
-				// Individual Filter Fields (Status, Brand Name, Colors, etc.)
-				$('.directorypress-search-form .search-element-col').each(function() {
-					var fieldCol = $(this);
-
-					// Skip if already initialized
-					if (fieldCol.data('field-initialized')) {
-						return;
-					}
-
-					var label = fieldCol.find('> .search-content-field-label').first();
-					var fieldContent = fieldCol.find('> .field-input-wrapper, > .search-field-content-wrapper').first();
-
-					if (label.length && fieldContent.length) {
-						fieldCol.data('field-initialized', true);
-						fieldCol.addClass('collapsed');
-						fieldContent.hide();
-
-						// Remove any existing handlers before adding new one
-						label.off('click.fieldToggle');
-						label.on('click.fieldToggle', function(e) {
-							e.preventDefault();
-							e.stopPropagation();
-							e.stopImmediatePropagation();
-
-							var isCollapsed = fieldCol.hasClass('collapsed');
-							fieldCol.toggleClass('collapsed');
-
-							if (isCollapsed) {
-								fieldContent.stop(true, true).slideDown(300);
-							} else {
-								fieldContent.stop(true, true).slideUp(300);
-							}
-
-							return false;
-						});
-					}
-				});
+					// Дополнительный обработчик для клика в любом месте заголовка
+					$filtersHeader.css('cursor', 'pointer');
+					console.log('Filters header initialized:', $filtersHeader.length); // Отладка
+				}
 			}
+
+			// Альтернативный обработчик через делегирование событий
+			$(document).on('click', '.custom-filters-header', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				console.log('Alternative click handler triggered'); // Отладка
+
+				var $header = $(this);
+				var $wrapper = $header.siblings('.custom-filters-wrapper');
+
+				if (!$wrapper.length) {
+					$wrapper = $header.next('.custom-filters-wrapper');
+				}
+
+				if (!$wrapper.length) {
+					$wrapper = $header.parent().find('.custom-filters-wrapper');
+				}
+
+				var isCollapsed = $wrapper.hasClass('collapsed');
+
+				$header.toggleClass('collapsed');
+				$wrapper.toggleClass('collapsed');
+
+				if (isCollapsed) {
+					// Разворачиваем все фильтры
+					$wrapper.stop(true, true).slideDown(300);
+					$wrapper.find('.search-field-content-wrapper, .field-input-wrapper').show();
+				} else {
+					// Сворачиваем все фильтры
+					$wrapper.stop(true, true).slideUp(300);
+				}
+
+				return false;
+			});
 
 			$(function() {
 				// Small delay to ensure DOM is fully loaded
 				setTimeout(function() {
 					initFiltersCollapse();
-				}, 100);
+				}, 500);
 
 				// Re-initialize on AJAX content load
 				$(document).on('directorypress_content_loaded', function() {
+					setTimeout(function() {
+						initFiltersCollapse();
+					}, 500);
+				});
+
+				// Переинициализация при изменении размера окна
+				$(window).on('resize', function() {
 					setTimeout(function() {
 						initFiltersCollapse();
 					}, 100);
@@ -1956,4 +1993,3 @@ add_action('wp', function () {
 		classiadspro_force_setup_advertising();
 	}
 });
-

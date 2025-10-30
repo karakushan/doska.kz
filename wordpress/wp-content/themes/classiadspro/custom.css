@@ -289,47 +289,17 @@ Your custom css
   cursor: pointer !important;
 }
 
-/* Individual Filter Fields Collapse */
+/* Individual Filter Fields - Убрали индивидуальную функциональность сворачивания */
 .directorypress-search-form .search-content-field-label {
-  cursor: pointer !important;
+  cursor: default !important;
   user-select: none;
   position: relative;
   background: transparent !important;
 }
 
-.directorypress-search-form .search-content-field-label:hover {
-  opacity: 0.8;
-  cursor: pointer !important;
-}
-
-.directorypress-search-form .search-content-field-label::after {
-  content: "\F0140" !important;
-  font-family: "Material Design Icons" !important;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: content 0.3s ease;
-  font-size: 20px;
-  background: transparent !important;
-}
-
-/* Prevent duplicate icons */
+.directorypress-search-form .search-content-field-label::after,
 .directorypress-search-form .search-content-field-label::before {
   display: none !important;
-}
-
-.directorypress-search-form
-  .search-element-col.collapsed
-  .search-content-field-label::after {
-  content: "\F0142" !important;
-}
-
-.directorypress-search-form .search-element-col.collapsed .field-input-wrapper,
-.directorypress-search-form
-  .search-element-col.collapsed
-  .search-field-content-wrapper {
-  display: none;
 }
 
 /* Center Search Button */
@@ -636,6 +606,90 @@ input:disabled + .toggle-slider {
     padding: 10px 25px;
     font-size: 15px;
   }
+}
+
+/* ============================================
+   Search Filters Wrapper Styles
+   ============================================ */
+
+/* Wrapper for entire filters section */
+.search-filters-wrapper {
+  background: #fff;
+  border-radius: 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Filters Header - Clickable. Custom by AI для pizzalaroma. Черный фон, белый текст, высота блока как у Status */
+.search-filters-header {
+  background: #222;
+  padding: 22px 28px; /* выше и чуть шире, как на скрине */
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #222; /* убираем светлую линию, сливается с фоном */
+  border-radius: 0; /* убрали скругление! */
+}
+
+.search-filters-header span {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.search-filters-header i {
+  font-size: 20px;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.search-filters-header:hover {
+  opacity: 1;
+  transform: none;
+  background: #111;
+  box-shadow: none;
+}
+
+/* Rotate icon when collapsed */
+.search-filters-wrapper.collapsed .search-filters-header i {
+  transform: rotate(180deg);
+}
+
+/* Search Container - Hidden/Shown */
+.search-filters-wrapper .search-container {
+  transition: all 0.3s ease;
+  max-height: 5000px;
+  overflow: visible;
+}
+
+/* Hide container when collapsed */
+.search-filters-wrapper.collapsed .search-container {
+  display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-filters-header span {
+    font-size: 16px;
+  }
+  .search-filters-header i {
+    font-size: 18px;
+  }
+
+  .search-filters-header {
+    padding: 12px 15px;
+  }
+}
+
+/* Hide custom filters header */
+.directorypress-search-holder .custom-filters-header {
+  display: none;
 }
 
 /* ============================================
@@ -1087,7 +1141,9 @@ input:disabled + .toggle-slider {
     font-size: 24px;
   }
 }
-
+.search-filters-wrapper.collapsed {
+    margin: 0;
+}
 /* Cancel Button Styles */
 .btn-secondary {
   background: #dc3545 !important;
@@ -1118,4 +1174,76 @@ input:disabled + .toggle-slider {
   svg {
   max-width: 42px;
   height: 42px !important;
+}
+
+/* ============================================
+   Custom Filters Wrapper Styles
+   ============================================ */
+
+/* Общий заголовок фильтров */
+.custom-filters-header {
+  cursor: pointer !important;
+  user-select: none;
+  position: relative;
+  background: #f8f9fa;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.custom-filters-header:hover {
+  background: #e9ecef;
+  border-color: #d0d0d0;
+}
+
+.custom-filters-header i {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+  color: #666;
+}
+
+.custom-filters-header.collapsed i {
+  transform: rotate(-90deg);
+}
+
+/* Контейнер всех фильтров */
+.custom-filters-wrapper {
+  transition: all 0.3s ease;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.custom-filters-wrapper.collapsed {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Убираем курсор pointer с индивидуальных фильтров */
+.custom-filters-wrapper .search-element-col {
+  cursor: default !important;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+  .custom-filters-header {
+    padding: 12px 15px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+
+  .custom-filters-header i {
+    font-size: 16px;
+  }
 }
