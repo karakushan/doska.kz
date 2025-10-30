@@ -4,6 +4,72 @@ Your custom css
 
 */
 
+/* Advertised Listings Block Styles */
+.advertised-listings-wrapper {
+  width: 100%;
+  margin-bottom: 40px;
+  border: 2px solid #eeeeee;
+  padding: 10px;
+}
+
+.advertised-listings-header {
+  margin-bottom: 0px;
+  /* text-align: center; */
+  /* border-bottom: 2px solid #e0e0e0; */
+  padding-bottom: 15px;
+}
+
+.advertised-listings-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.advertised-listings-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Prevent masonry from affecting advertised listings */
+.advertised-listings-content .directorypress-listing {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.advertised-listings-content .directorypress-listing.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.advertised-listing {
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .advertised-listings-wrapper {
+    margin-bottom: 30px;
+  }
+
+  .advertised-listings-title {
+    font-size: 20px;
+  }
+
+  .advertised-listings-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
 /* FCM Tokens Section Styles */
 .firebase-notification-settings .fcm-tokens-section {
   margin-bottom: 30px;
