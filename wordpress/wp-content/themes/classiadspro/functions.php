@@ -42,6 +42,35 @@ if (class_exists('DirectoryPress') && class_exists('WooCommerce')) {
 }
 
 /**
+ * Настройка количества рекламируемых товаров в листинге
+ * 
+ * Фильтр позволяет изменить количество рекламируемых товаров,
+ * которые отображаются в блоке "Рекомендуемые объявления"
+ * 
+ * @param int $count Количество рекламируемых товаров (по умолчанию 3)
+ * @return int
+ */
+function classiadspro_advertised_listings_count($count) {
+	// Вы можете изменить это число на любое другое
+	return 3;
+}
+add_filter('classiadspro_advertised_listings_count', 'classiadspro_advertised_listings_count');
+
+/**
+ * Заголовок блока рекламируемых товаров
+ * 
+ * Фильтр позволяет изменить заголовок блока рекламируемых товаров
+ * 
+ * @param string $title Заголовок блока
+ * @return string
+ */
+function classiadspro_advertised_listings_title($title) {
+	// Вы можете изменить текст заголовка
+	return __('Recommendations', 'classiadspro');
+}
+add_filter('classiadspro_advertised_listings_title', 'classiadspro_advertised_listings_title');
+
+/**
  * Create advertise page
  */
 function classiadspro_create_advertise_page()
@@ -1927,18 +1956,4 @@ add_action('wp', function () {
 		classiadspro_force_setup_advertising();
 	}
 });
-/**
- * Отладочная функция для тестирования отправки формы рекламирования
- */
-function classiadspro_debug_form_submission()
-{
-	if (isset($_POST['submit_advertising'])) {
-		error_log('=== ADVERTISING FORM DEBUG ===');
-		error_log('POST data: ' . print_r($_POST, true));
-		error_log('Current URL: ' . $_SERVER['REQUEST_URI']);
-		error_log('User ID: ' . get_current_user_id());
-		error_log('Nonce valid: ' . (wp_verify_nonce($_POST['advertising_nonce'], 'submit_advertising') ? 'Yes' : 'No'));
-		error_log('=== END DEBUG ===');
-	}
-}
-add_action('init', 'classiadspro_debug_form_submission');
+
