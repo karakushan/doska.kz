@@ -64,8 +64,11 @@ function classiadspro_firebase_message_sent($message_id, $message, $inserted_mes
             'action_url' => $action_url,
         );
         
-        fpn_send_push($recipient_id, $notification_data);
-        error_log('Firebase: New message notification sent to user ' . $recipient_id . ' from ' . $sender_name . ' (Message ID: ' . $message_id . ', Reply: ' . ($is_reply ? 'yes' : 'no') . ')');
+        if (function_exists('fpn_send_push')) {
+            if (fpn_send_push($recipient_id, $notification_data)) {
+                error_log('Firebase: New message notification sent to user ' . $recipient_id . ' from ' . $sender_name . ' (Message ID: ' . $message_id . ', Reply: ' . ($is_reply ? 'yes' : 'no') . ')');
+            }
+        }
     } catch (Exception $e) {
         error_log('Firebase: Error sending message notification - ' . $e->getMessage());
     }
@@ -95,8 +98,11 @@ function classiadspro_firebase_listing_expired($listing_id) {
             'action_url' => get_edit_post_link($listing_id, 'url'),
         );
         
-        fpn_send_push($author_id, $notification_data);
-        error_log('Firebase: Listing expired notification sent to user ' . $author_id);
+        if (function_exists('fpn_send_push')) {
+            if (fpn_send_push($author_id, $notification_data)) {
+                error_log('Firebase: Listing expired notification sent to user ' . $author_id);
+            }
+        }
     } catch (Exception $e) {
         error_log('Firebase: Error sending listing expired notification - ' . $e->getMessage());
     }
@@ -126,8 +132,11 @@ function classiadspro_firebase_listing_deactivated($listing_id) {
             'action_url' => get_edit_post_link($listing_id, 'url'),
         );
         
-        fpn_send_push($author_id, $notification_data);
-        error_log('Firebase: Listing deactivated notification sent to user ' . $author_id);
+        if (function_exists('fpn_send_push')) {
+            if (fpn_send_push($author_id, $notification_data)) {
+                error_log('Firebase: Listing deactivated notification sent to user ' . $author_id);
+            }
+        }
     } catch (Exception $e) {
         error_log('Firebase: Error sending listing deactivated notification - ' . $e->getMessage());
     }

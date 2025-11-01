@@ -880,6 +880,12 @@ class Firebase_Push_Notifications
 
         $notification_data = array_merge($defaults, (array)$notification_data);
 
+        // Check if notification handler and method exist
+        if (!$this->notification_handler || !method_exists($this->notification_handler, 'send_notification_to_user')) {
+            error_log('Firebase Push Notifications: Notification handler or method send_notification_to_user does not exist');
+            return false;
+        }
+
         // Send notification
         return $this->notification_handler->send_notification_to_user(
             $user_id,
