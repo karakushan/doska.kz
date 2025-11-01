@@ -319,4 +319,28 @@ class FirebaseNotificationHandler {
         
         return $this->firebase_manager->sendNotificationToUser($user_id, $title, $body, $data, $notification_type);
     }
+    
+    /**
+     * Send notification to user using notification data array
+     * 
+     * @param int $user_id User ID
+     * @param array $notification_data Notification data array with keys: title, body, icon, badge, notification_type, action_url, etc.
+     * @return bool Success status
+     */
+    public function send_notification_to_user($user_id, $notification_data = array()) {
+        if (empty($notification_data) || !is_array($notification_data)) {
+            return false;
+        }
+        
+        // Extract required fields from notification data
+        $title = isset($notification_data['title']) ? $notification_data['title'] : 'Notification';
+        $body = isset($notification_data['body']) ? $notification_data['body'] : '';
+        $notification_type = isset($notification_data['notification_type']) ? $notification_data['notification_type'] : 'general';
+        
+        // Prepare data array (exclude fields that are not part of notification data)
+        $data = $notification_data;
+        unset($data['title'], $data['body'], $data['notification_type']);
+        
+        return $this->sendNotificationToUser($user_id, $title, $body, $data, $notification_type);
+    }
 }

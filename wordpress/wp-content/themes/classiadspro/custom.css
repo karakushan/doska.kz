@@ -1236,6 +1236,11 @@ input:disabled + .toggle-slider {
 
 /* Стили для мобильных устройств */
 @media (max-width: 768px) {
+
+    .directorypress-search-holder {
+        margin: 0;
+        padding: 0!important;
+    }
   .custom-filters-header {
     padding: 12px 15px;
     font-size: 15px;

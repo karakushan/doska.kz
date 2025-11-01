@@ -299,16 +299,26 @@ function fpn_send_push($user_id, $notification_data = array())
 {
     global $firebase_notifications_instance;
 
+    // Validate input
+    if (empty($user_id) || !is_numeric($user_id)) {
+        return false;
+    }
+
     // Get the notification handler if not already stored
     if (!isset($firebase_notifications_instance)) {
-        if (class_exists('Firebase_Push_Notifications')) {
-            $firebase_notifications_instance = Firebase_Push_Notifications::getInstance();
-        } else {
+        if (!class_exists('Firebase_Push_Notifications')) {
             return false;
         }
+        $firebase_notifications_instance = Firebase_Push_Notifications::getInstance();
     }
 
     if (!$firebase_notifications_instance) {
+        return false;
+    }
+
+    // Check if method exists before calling
+    if (!method_exists($firebase_notifications_instance, 'send_push_notification')) {
+        error_log('Firebase Push Notifications: Method send_push_notification does not exist');
         return false;
     }
 
