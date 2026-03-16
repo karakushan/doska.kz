@@ -389,7 +389,9 @@ function pacz_theme_enqueue_scripts()
 
 		if (file_exists($custom_js_file)) {
 			wp_enqueue_script('pacz-custom-js', $custom_js_file_uri, array(
-				'jquery'
+				'jquery',
+				'imagesloaded',
+				'masonry'
 			), $theme_data['Version'], true);
 		}
 
@@ -458,6 +460,30 @@ function pacz_theme_enqueue_scripts()
 }
 add_action('wp_enqueue_scripts', 'pacz_dynamic_css_injection');
 add_action('wp_enqueue_scripts', 'pacz_theme_enqueue_scripts', 1);
+
+/**
+ * jQuery 3.x compatibility fix for deprecated .load() event handler
+ * Fixes "e.indexOf is not a function" error in directorypress-public.js
+ */
+add_action('wp_enqueue_scripts', 'pacz_jquery_load_fix', 0);
+function pacz_jquery_load_fix() {
+    $jquery_fix = "
+(function() {
+    var originalLoad = jQuery.fn.load;
+    jQuery.fn.load = function() {
+        if (typeof arguments[0] === 'function') {
+            // Called as .load(handler) - redirect to .on('load', handler)
+            return this.on('load', arguments[0]);
+        }
+        // Called as AJAX .load(url, ...) - use original
+        return originalLoad.apply(this, arguments);
+    };
+})();
+";
+    wp_register_script('pacz-jquery-load-fix', '', array('jquery'), false, false);
+    wp_enqueue_script('pacz-jquery-load-fix');
+    wp_add_inline_script('pacz-jquery-load-fix', $jquery_fix, 'before');
+}
 
 /**
  * wpmail_content_type
@@ -2227,12 +2253,21 @@ add_action('wp', function () {
  */
 function rs_get_currency_map() {
 	return [
-		// США / localhost - базовая валюта USD
-		'localhost:8080' => [
+		// США / базовый домен - USD
+		'adshelppro.com' => [
 			'symbol' => '$',
 			'code' => 'USD',
 			'rate' => 1,
 			'position' => 1, // до числа
+			'decimal_sep' => '.',
+			'thousand_sep' => ',',
+		],
+		// localhost для разработки
+		'localhost:8080' => [
+			'symbol' => '$',
+			'code' => 'USD',
+			'rate' => 1,
+			'position' => 1,
 			'decimal_sep' => '.',
 			'thousand_sep' => ',',
 		],

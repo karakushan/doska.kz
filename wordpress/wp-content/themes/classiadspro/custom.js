@@ -74,6 +74,57 @@ If you are using a child theme and you have added custom scripts into this file,
      * Adds a "Filters" header that controls all filter visibility
      */
 
-
   });
+
+  /**
+   * Masonry ImagesLoaded Fix
+   * Reinitialize masonry after images are loaded
+   */
+  function initMasonryWithImagesLoaded() {
+    var $masonryGrid = $('.m-grid');
+    
+    if ($masonryGrid.length && typeof $.fn.masonry === 'function') {
+      $masonryGrid.each(function() {
+        var $grid = $(this);
+        
+        // Wait for images to load
+        $grid.imagesLoaded(function() {
+          $grid.masonry({
+            itemSelector: '.m-grid-item',
+            columnWidth: '.m-grid-item',
+            percentPosition: true,
+            isOriginLeft: !($('body').hasClass('rtl'))
+          });
+          
+          // Trigger layout after a short delay for any dynamic content
+          setTimeout(function() {
+            $grid.masonry('layout');
+          }, 100);
+        });
+      });
+    }
+  }
+
+  // Run on page load
+  $(window).on('load', function() {
+    initMasonryWithImagesLoaded();
+  });
+
+  // Run after AJAX content loads (for directorypress)
+  $(document).ajaxComplete(function(event, xhr, settings) {
+    if (settings.url.indexOf('directorypress_handler_request') !== -1) {
+      setTimeout(function() {
+        initMasonryWithImagesLoaded();
+      }, 300);
+    }
+  });
+
+  // Also run when images are lazy loaded
+  $(document).on('lazyloaded', function(e) {
+    var $masonryGrid = $(e.target).closest('.m-grid');
+    if ($masonryGrid.length && typeof $.fn.masonry === 'function') {
+      $masonryGrid.masonry('layout');
+    }
+  });
+
 })(jQuery);

@@ -1286,3 +1286,69 @@ input:disabled + .toggle-slider {
   z-index: 999;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* ============================================
+   Masonry Image Fix - Fixed height for listing images
+   ============================================ */
+
+/* Фиксированная высота для контейнера изображений в grid */
+.directorypress-listings-grid figure.directorypress-listing-figure {
+  position: relative;
+  overflow: hidden;
+}
+
+.directorypress-listings-grid figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
+  position: relative;
+  padding-top: 0 !important;
+  height: 220px;
+  overflow: hidden;
+}
+
+.directorypress-listings-grid figure.directorypress-listing-figure .directorypress-listing-figure-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.directorypress-listings-grid figure.directorypress-listing-figure .listing-thumbnail {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.directorypress-listings-grid figure.directorypress-listing-figure .listing-thumbnail img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Адаптивная высота для разных размеров экрана */
+@media screen and (max-width: 767px) {
+  .directorypress-listings-grid figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
+    height: 180px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .directorypress-listings-grid figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
+    height: 200px;
+  }
+}
+
+/* Для grid-3 колонок */
+.directorypress-listings-grid-3 figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
+  height: 240px;
+}
+
+/* Для grid-2 колонок */
+.directorypress-listings-grid-2 figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
+  height: 280px;
+}
+
+/* Для grid-4 колонок */
+.directorypress-listings-grid-4 figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
+  height: 200px;
+}

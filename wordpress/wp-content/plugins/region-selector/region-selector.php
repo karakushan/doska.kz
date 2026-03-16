@@ -2,14 +2,14 @@
 /*
 Plugin Name: Region Selector Full Stable
 Description: Fully working region selector with emoji flags and server-side homepage per subdomain
-Version: 7.0
+Version: 7.1
 Author: St4rc0w
 License: GPL v2 or later
 */
 
 if (!defined('ABSPATH')) exit;
 
-define('RS_COOKIE_VERSION', 13);
+define('RS_COOKIE_VERSION', 14);
 
 /* ========================= HELPERS ========================= */
 
@@ -37,6 +37,40 @@ function rs_parse_countries(){
         ];
     }
     return $out;
+}
+
+function rs_get_cookie_name(){
+    $salt = get_option('rs_cookie_salt', time());
+    return 'rs_region_v'.RS_COOKIE_VERSION.'_'.$salt;
+}
+
+function rs_get_cookie_domain(){
+    $host = $_SERVER['HTTP_HOST'];
+    // Убираем порт если есть
+    $host = preg_replace('/:\d+$/', '', $host);
+    
+    // Для localhost не ставим domain вообще
+    if($host === 'localhost' || strpos($host, '.local') !== false){
+        return '';
+    }
+    
+    // Для IP адресов не ставим domain
+    if(filter_var($host, FILTER_VALIDATE_IP)){
+        return '';
+    }
+    
+    // Получаем основной домен (последние 2 части)
+    $parts = explode('.', $host);
+    if(count($parts) >= 2){
+        return '.' . implode('.', array_slice($parts, -2));
+    }
+    
+    return '';
+}
+
+function rs_cookie_exists(){
+    $cookie_name = rs_get_cookie_name();
+    return isset($_COOKIE[$cookie_name]);
 }
 
 /* ========================= ADMIN ========================= */
@@ -88,23 +122,28 @@ function rs_admin_page(){
 /* ========================= HANDLE REGION SELECTION ========================= */
 
 add_action('init', function(){
-    $salt = get_option('rs_cookie_salt', time());
-    $cookie_name = 'rs_region_v'.RS_COOKIE_VERSION.'_'.$salt;
+    $cookie_name = rs_get_cookie_name();
+    $cookie_domain = rs_get_cookie_domain();
     $countries = rs_parse_countries();
 
     if(isset($_GET['rs_region']) && $countries){
         $selected_code = strtolower($_GET['rs_region']);
         foreach($countries as $host => $c){
             if($c['code'] === $selected_code){
-                // Если выбранная страна совпадает с текущим хостом
-                if(strtolower($_SERVER['HTTP_HOST']) === strtolower($host)){
-                    // Просто ставим куки, редиректа не делаем
-                    setcookie($cookie_name, $host, time()+2592000, '/', '.'.implode('.',array_slice(explode('.',$_SERVER['HTTP_HOST']),-2)));
-                    $_COOKIE[$cookie_name] = $host;
+                $cookie_value = $host;
+                $cookie_path = '/';
+                $cookie_expire = time() + 2592000; // 30 дней
+                
+                // Устанавливаем куку
+                if($cookie_domain){
+                    setcookie($cookie_name, $cookie_value, $cookie_expire, $cookie_path, $cookie_domain);
                 } else {
-                    // Иначе редиректим на правильный домен
-                    setcookie($cookie_name, $host, time()+2592000, '/', '.'.implode('.',array_slice(explode('.',$_SERVER['HTTP_HOST']),-2)));
-                    $_COOKIE[$cookie_name] = $host;
+                    setcookie($cookie_name, $cookie_value, $cookie_expire, $cookie_path);
+                }
+                $_COOKIE[$cookie_name] = $cookie_value;
+                
+                // Если текущий хост не совпадает с выбранным — редирект
+                if(strtolower($_SERVER['HTTP_HOST']) !== strtolower($host)){
                     wp_redirect($c['url'].'/');
                     exit;
                 }
@@ -164,17 +203,26 @@ add_action('pre_get_posts', function ($q) {
 /* ========================= FRONTEND MODAL ========================= */
 
 add_action('wp_footer', function(){
-    $salt = get_option('rs_cookie_salt', time());
-    $cookie_name = 'rs_region_v'.RS_COOKIE_VERSION.'_'.$salt;
-
-    if(isset($_COOKIE[$cookie_name])) return; // если куки есть — модалку не показываем
+    // Проверяем куку на сервере
+    if(rs_cookie_exists()) return;
 
     $countries = rs_parse_countries();
     if(!$countries) return;
 
+    $cookie_name = rs_get_cookie_name();
+    $cookie_domain = rs_get_cookie_domain();
+
     ?>
+    <!-- Проверка localStorage ДО рендера модального окна -->
+    <script>
+    if(localStorage.getItem('rs_region_selected')){
+        window._rs_region_already_selected = true;
+    }
+    </script>
+
     <style>
-    #rs-overlay {position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center}
+    #rs-overlay {position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center}
+    #rs-overlay.show {display:flex}
     .rs-modal {background:#fff;padding:30px;border-radius:14px;text-align:center;max-width:520px;width:90%}
     .rs-btn {padding:12px 18px;border-radius:8px;border:none;background:#0073aa;color:#fff;font-size:16px;cursor:pointer;margin:5px}
     .rs-grid {display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
@@ -198,24 +246,45 @@ add_action('wp_footer', function(){
 
     <script>
     (function(){
-        const cookieName = "<?= $cookie_name ?>";
+        const cookieName = "<?= esc_js($cookie_name) ?>";
+        const cookieDomain = "<?= esc_js($cookie_domain) ?>";
         const maxAge = 30*24*60*60; // 30 дней
-        const cookieDomain = ".adshelppro.com"; // верхний уровень, чтобы куки видны всем поддоменам
+        const localStorageKey = "rs_region_selected";
+        const overlay = document.getElementById('rs-overlay');
+
+        // Проверяем localStorage — если уже выбрано, не показываем
+        if(window._rs_region_already_selected){
+            return;
+        }
+
+        // Показываем модальное окно
+        overlay.classList.add('show');
+
+        function setCookie(name, value, domain, maxAgeSec){
+            let cookieStr = name + "=" + encodeURIComponent(value) + ";path=/;max-age=" + maxAgeSec;
+            if(domain){
+                cookieStr += ";domain=" + domain;
+            }
+            document.cookie = cookieStr;
+        }
 
         document.querySelectorAll('.rs-btn').forEach(btn => {
             btn.addEventListener('click', function(){
                 const host = this.dataset.host;
                 const url  = this.dataset.url;
 
-                // Ставим куки для всех поддоменов
-                document.cookie = cookieName + "=" + host + ";path=/;domain=" + cookieDomain + ";max-age=" + maxAge;
+                // Сохраняем в localStorage как fallback
+                localStorage.setItem(localStorageKey, host);
+
+                // Ставим куки
+                setCookie(cookieName, host, cookieDomain, maxAge);
 
                 if(host !== location.host){
                     // Редирект на полный URL из настроек
                     location.href = url;
                 } else {
                     // Скрываем модалку без редиректа
-                    document.getElementById('rs-overlay').style.display = 'none';
+                    overlay.classList.remove('show');
                 }
             });
         });
@@ -229,9 +298,8 @@ add_shortcode('rs_region_selector', function($atts){
     $countries = rs_parse_countries();
     if(!$countries) return '';
 
-    $salt = get_option('rs_cookie_salt', time());
-    $cookie_name = 'rs_region_v'.RS_COOKIE_VERSION.'_'.$salt;
-    $cookie_domain = ".adshelppro.com";
+    $cookie_name = rs_get_cookie_name();
+    $cookie_domain = rs_get_cookie_domain();
 
     $current_host = strtolower($_SERVER['HTTP_HOST']);
 
@@ -260,10 +328,19 @@ add_shortcode('rs_region_selector', function($atts){
 
             const host = option.value;
             const url  = option.dataset.url;
+            const cookieName = "<?= esc_js($cookie_name) ?>";
+            const cookieDomain = "<?= esc_js($cookie_domain) ?>";
+            const localStorageKey = "rs_region_selected";
 
-            document.cookie =
-                "<?= $cookie_name ?>=" + host +
-                ";path=/;domain=<?= $cookie_domain ?>;max-age=2592000";
+            // Сохраняем в localStorage
+            localStorage.setItem(localStorageKey, host);
+
+            // Ставим куки
+            let cookieStr = cookieName + "=" + encodeURIComponent(host) + ";path=/;max-age=2592000";
+            if(cookieDomain){
+                cookieStr += ";domain=" + cookieDomain;
+            }
+            document.cookie = cookieStr;
 
             if(host !== location.host){
                 location.href = url;
@@ -331,6 +408,9 @@ add_shortcode('rs_region_selector', function($atts){
 
             const btn = dropdown.querySelector('.rs-dropdown-btn');
             const list = dropdown.querySelector('.rs-dropdown-list');
+            const cookieName = "<?= esc_js($cookie_name) ?>";
+            const cookieDomain = "<?= esc_js($cookie_domain) ?>";
+            const localStorageKey = "rs_region_selected";
 
             btn.addEventListener('click', (e)=>{
                 e.stopPropagation();
@@ -346,9 +426,15 @@ add_shortcode('rs_region_selector', function($atts){
                     const host = li.dataset.host;
                     const url  = li.dataset.url;
 
-                    document.cookie =
-                        "<?= $cookie_name ?>=" + host +
-                        ";path=/;domain=<?= $cookie_domain ?>;max-age=2592000";
+                    // Сохраняем в localStorage
+                    localStorage.setItem(localStorageKey, host);
+
+                    // Ставим куки
+                    let cookieStr = cookieName + "=" + encodeURIComponent(host) + ";path=/;max-age=2592000";
+                    if(cookieDomain){
+                        cookieStr += ";domain=" + cookieDomain;
+                    }
+                    document.cookie = cookieStr;
 
                     location.href = url;
                 });
