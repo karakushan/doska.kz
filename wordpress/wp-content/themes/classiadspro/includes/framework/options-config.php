@@ -3698,6 +3698,167 @@
 	));
 	
 	
+    Redux::setSection( $opt_name, array(
+        'title'  => esc_html__( 'Emails', 'classiadspro' ),
+        'desc'   => esc_html__( 'Email settings for user notifications', 'classiadspro' ),
+        'icon'   => 'el el-envelope',
+        'fields' => array(),
+    ));
+    
+    Redux::setSection( $opt_name, array(
+        'title'      => esc_html__( 'User Verification', 'classiadspro' ),
+        'subsection' => true,
+        'desc'       => esc_html__( 'Settings for user verification email', 'classiadspro' ),
+        'fields'     => array(
+            array(
+                'id'       => 'verification_email_subject',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Verification Email Subject', 'classiadspro' ),
+                'subtitle' => esc_html__( 'Subject line for the verification email sent to users', 'classiadspro' ),
+                'desc'     => esc_html__( 'You can use {site_name} to insert the site name', 'classiadspro' ),
+                'default'  => esc_html__( 'Your Account Has Been Verified - {site_name}', 'classiadspro' ),
+            ),
+            array(
+                'id'       => 'verification_email_message',
+                'type'     => 'ace_editor',
+                'title'    => esc_html__( 'Verification Email Message', 'classiadspro' ),
+                'subtitle' => esc_html__( 'HTML code for the verification email sent to users', 'classiadspro' ),
+                'desc'     => esc_html__( 'Available variables: {user_name}, {site_name}, {site_url}, {dashboard_url}', 'classiadspro' ),
+                'mode'     => 'html',
+                'theme'    => 'monokai',
+                'default'  => '<html><body>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">
+<tr><td style="padding: 40px 0;">
+<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+<tr style="background-color: #28a745;">
+<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">
+<h1 style="color: #ffffff; margin: 0; font-size: 24px;">✓ Account Verified!</h1>
+</td>
+</tr>
+<tr>
+<td style="padding: 40px 30px;">
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Hello {user_name},
+</p>
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Great news! Your account has been verified by our team. You can now post listings and manage your ads on our platform.
+</p>
+<div style="margin: 25px 0; padding: 20px; background-color: #e8f5e9; border-left: 4px solid #28a745; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #28a745;">✓ VERIFICATION COMPLETE</p>
+<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">
+Your account is now fully active. You can start posting listings right away!
+</p>
+</div>
+<div style="margin: 25px 0; padding: 20px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #1976d2;">📋 YOU CAN NOW:</p>
+<ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 13px; line-height: 1.8; color: #333333;">
+<li>Post new listings and manage your ads</li>
+<li>Update your profile and account information</li>
+<li>Interact with potential buyers/renters</li>
+<li>Monitor listing views and inquiries</li>
+</ul>
+</div>
+<p style="margin: 30px 0; text-align: center;">
+<a href="{dashboard_url}" style="display: inline-block; padding: 12px 30px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>
+</p>
+<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+If you have any questions or need assistance, please don\'t hesitate to contact us.
+</p>
+<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">
+Best regards,<br>
+The {site_name} Team<br>
+<a href="{site_url}" style="color: #28a745; text-decoration: none;">{site_url}</a>
+</p>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</body></html>',
+            ),
+        ),
+    ));
+    
+    Redux::setSection( $opt_name, array(
+        'title'      => esc_html__( 'User Registration', 'classiadspro' ),
+        'subsection' => true,
+        'desc'       => esc_html__( 'Settings for user registration welcome email', 'classiadspro' ),
+        'fields'     => array(
+            array(
+                'id'       => 'registration_email_subject',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Registration Email Subject', 'classiadspro' ),
+                'subtitle' => esc_html__( 'Subject line for the registration welcome email sent to users', 'classiadspro' ),
+                'desc'     => esc_html__( 'You can use {site_name} to insert the site name', 'classiadspro' ),
+                'default'  => esc_html__( 'Welcome to {site_name}', 'classiadspro' ),
+            ),
+            array(
+                'id'       => 'registration_email_message',
+                'type'     => 'ace_editor',
+                'title'    => esc_html__( 'Registration Email Message', 'classiadspro' ),
+                'subtitle' => esc_html__( 'HTML code for the registration welcome email sent to users', 'classiadspro' ),
+                'desc'     => esc_html__( 'Available variables: {user_name}, {user_login}, {user_email}, {site_name}, {site_url}, {dashboard_url}, {login_url}', 'classiadspro' ),
+                'mode'     => 'html',
+                'theme'    => 'monokai',
+                'default'  => '<html><body>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">
+<tr><td style="padding: 40px 0;">
+<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+<tr style="background-color: #191a1f;">
+<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">
+<h1 style="color: #ffffff; margin: 0; font-size: 24px;">Welcome, {user_name}!</h1>
+</td>
+</tr>
+<tr>
+<td style="padding: 40px 30px;">
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Thank you for registering with us! Your account has been successfully created.
+</p>
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Here is your account information:
+</p>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 20px 0; border: 1px solid #eeeeee; border-radius: 4px;">
+<tr style="background-color: #f9f9f9;">
+<td style="padding: 15px; font-weight: bold; color: #191a1f; width: 40%;">Username:</td>
+<td style="padding: 15px; color: #666666;">{user_login}</td>
+</tr>
+<tr>
+<td style="padding: 15px; font-weight: bold; color: #191a1f; background-color: #f9f9f9;">Email:</td>
+<td style="padding: 15px; color: #666666; background-color: #f9f9f9;">{user_email}</td>
+</tr>
+</table>
+<div style="margin: 25px 0; padding: 20px; background-color: #fff8e6; border-left: 4px solid #EB6653; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #EB6653;">⚠️ ACCOUNT VERIFICATION REQUIRED</p>
+<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">
+Your account is currently under verification. You will receive a confirmation email once your account is verified.
+</p>
+</div>
+<div style="margin: 25px 0; padding: 20px; background-color: #e8f4f8; border-left: 4px solid #2081cc; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #2081cc;">📋 POSTING LISTINGS</p>
+<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">
+After your account is verified, you will be able to post listings and manage your ads from your dashboard. Please note that all listings must comply with our community guidelines.
+</p>
+</div>
+<p style="margin: 30px 0; text-align: center;">
+<a href="{dashboard_url}" style="display: inline-block; padding: 12px 30px; background-color: #EB6653; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>
+</p>
+<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+If you have any questions or need assistance, please don\'t hesitate to contact us.
+</p>
+<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">
+Best regards,<br>
+The {site_name} Team<br>
+<a href="{site_url}" style="color: #EB6653; text-decoration: none;">{site_url}</a>
+</p>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</body></html>',
+            ),
+        ),
+    ));
      Redux::setSection( $opt_name, array(
         'title'  => esc_html__( 'Import / Export', 'classiadspro' ),
         'desc'   => esc_html__( 'Import and Export your Redux Framework settings from file, text or URL.', 'classiadspro' ),

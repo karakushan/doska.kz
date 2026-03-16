@@ -12,6 +12,7 @@
 		$listing_style_to_show = 'show_grid_style';
 	}
 	
+	echo do_shortcode('[olx_categories]');
 	echo '<div class="listings listing-archive listing-index archive-style-sidebar">';
 			if (directorypress_has_map() && $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_map_on_excerpt'] && (isset($DIRECTORYPRESS_ADIMN_SETTINGS['archive_map_position']) && $DIRECTORYPRESS_ADIMN_SETTINGS['archive_map_position'] == 1)){
 				echo '<div class="map-listings">';

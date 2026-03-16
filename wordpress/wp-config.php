@@ -90,7 +90,9 @@ define( 'WP_DEBUG', true );
 // Enable Debug logging to the /wp-content/debug.log file
 define( 'WP_DEBUG_LOG', true );
 // Disable displaying debug info on the page
-define( 'WP_DEBUG_DISPLAY', 	true );
+define( 'WP_DEBUG_DISPLAY', 	false );
+
+@ini_set( 'display_errors', 0 );
 // Error reporting - exclude Deprecated, Strict, and Notices
 error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE );
 

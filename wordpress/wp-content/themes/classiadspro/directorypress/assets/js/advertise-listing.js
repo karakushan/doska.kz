@@ -12,7 +12,7 @@
    */
   $(document).ready(function () {
     // Ensure the recommended package is selected on page load
-    if ($(".advertising-form").length > 0) {
+    if ($(".feature-form").length > 0) {
       console.log("Advertising form found");
 
       // Check if no radio button is selected
@@ -55,9 +55,9 @@
     var formSubmitted = false;
 
     // Debug: Check if form exists
-    console.log("Advertising form found:", $(".advertising-form").length);
+    console.log("Advertising form found:", $(".feature-form").length);
 
-    $(".advertising-form").on("submit", function (e) {
+    $(".feature-form").on("submit", function (e) {
       console.log("Form submit event triggered");
 
       // Prevent double submission
@@ -97,7 +97,7 @@
 
     // Debug: Check for other submit handlers
     setTimeout(function () {
-      $(".advertising-form").each(function () {
+      $(".feature-form").each(function () {
         var events = $._data(this, "events");
         if (events && events.submit) {
           console.log("Submit handlers found:", events.submit.length);
@@ -130,10 +130,10 @@
    * Smooth scroll to form on page load
    */
   $(document).ready(function () {
-    if ($(".advertising-form").length > 0 && window.location.hash === "") {
+    if ($(".feature-form").length > 0 && window.location.hash === "") {
       $("html, body").animate(
         {
-          scrollTop: $(".advertising-section").offset().top - 100,
+          scrollTop: $(".feature-section").offset().top - 100,
         },
         800
       );
@@ -172,7 +172,7 @@ $(document).ready(function () {
 
   // Debug form element
   console.log("Form elements found:", $("form").length);
-  console.log("Advertising form found:", $(".advertising-form").length);
+  console.log("Advertising form found:", $(".feature-form").length);
   console.log("Submit buttons found:", $('button[type="submit"]').length);
 });
 
@@ -200,7 +200,7 @@ $(document).ready(function () {
                     100% { transform: scale(1); }
                 }
                 
-                .advertising-form button[disabled] {
+                .feature-form button[disabled] {
                     opacity: 0.7;
                     cursor: not-allowed;
                 }

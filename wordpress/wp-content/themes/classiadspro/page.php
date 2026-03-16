@@ -58,4 +58,16 @@ get_header();
 			</div>
 		</div>
 </div>
+<style>
+.the_champ_login_ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* расстояние между иконками */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+</style>
+
 <?php get_footer(); ?>

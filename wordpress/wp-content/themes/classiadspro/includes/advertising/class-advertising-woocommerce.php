@@ -43,6 +43,9 @@ class ClassiAdsPro_Advertising_WooCommerce {
         // Order status completed (including manual admin changes)
         add_action('woocommerce_order_status_completed', array($this, 'on_payment_complete'), 10, 1);
         
+        // Order status changed (handle all status changes)
+        add_action('woocommerce_order_status_changed', array($this, 'on_order_status_changed'), 10, 4);
+        
         // Cart item data
         add_filter('woocommerce_add_cart_item_data', array($this, 'add_cart_item_data'), 10, 3);
         
@@ -57,6 +60,23 @@ class ClassiAdsPro_Advertising_WooCommerce {
     }
     
     /**
+     * Handle order status changed
+     * 
+     * Processes advertising activation when order status changes to completed
+     * 
+     * @param int $order_id Order ID
+     * @param string $status_from Previous status
+     * @param string $status_to New status
+     * @param WC_Order $order Order object
+     */
+    public function on_order_status_changed($order_id, $status_from, $status_to, $order) {
+        // Only process if status changed to completed and wasn't completed before
+        if ($status_to === 'completed' && $status_from !== 'completed') {
+            $this->process_advertising_activation($order_id);
+        }
+    }
+    
+    /**
      * Handle payment complete and order status completed
      * 
      * This method is called both when payment is automatically completed
@@ -65,9 +85,26 @@ class ClassiAdsPro_Advertising_WooCommerce {
      * @param int $order_id Order ID
      */
     public function on_payment_complete($order_id) {
+        $this->process_advertising_activation($order_id);
+    }
+    
+    /**
+     * Process advertising activation for order
+     * 
+     * Handles advertising activation with extension logic for existing active advertising
+     * 
+     * @param int $order_id Order ID
+     */
+    private function process_advertising_activation($order_id) {
         $order = wc_get_order($order_id);
         
         if (!$order) {
+            return;
+        }
+        
+        // Check if advertising was already processed for this order to avoid duplicates
+        $advertising_processed = $order->get_meta('_advertising_processed', true);
+        if ($advertising_processed) {
             return;
         }
         
@@ -86,16 +123,43 @@ class ClassiAdsPro_Advertising_WooCommerce {
                 continue;
             }
             
-            // Activate advertising
-            classiadspro_activate_advertising($listing_id, $duration);
+            // Check if listing already has active advertising
+            $existing_end_date = get_post_meta($listing_id, '_advertising_end_date', true);
+            $is_advertised = get_post_meta($listing_id, '_is_advertised', true);
+            $current_timestamp = current_time('timestamp');
             
-            // Add order note
-            $order->add_order_note(sprintf(
-                'Рекламирование активировано для объявления #%d на %d дней',
-                $listing_id,
-                $duration
-            ));
+            // If listing has active advertising and end date is in the future, extend it
+            if ($is_advertised && $existing_end_date && $existing_end_date >= $current_timestamp) {
+                // Add new duration to existing end date
+                $new_end_date = $existing_end_date + ($duration * DAY_IN_SECONDS);
+                
+                // Update end date while keeping original start date and advertising status
+                update_post_meta($listing_id, '_advertising_end_date', $new_end_date);
+                update_post_meta($listing_id, '_is_advertised', 1);
+                
+                // Add order note
+                $order->add_order_note(sprintf(
+                    'Рекламирование продлено для объявления #%d на %d дней. Новый срок окончания: %s',
+                    $listing_id,
+                    $duration,
+                    date_i18n('d.m.Y H:i', $new_end_date)
+                ));
+            } else {
+                // Activate new advertising or reactivate expired
+                classiadspro_activate_advertising($listing_id, $duration);
+                
+                // Add order note
+                $order->add_order_note(sprintf(
+                    'Рекламирование активировано для объявления #%d на %d дней',
+                    $listing_id,
+                    $duration
+                ));
+            }
         }
+        
+        // Mark advertising as processed for this order
+        $order->update_meta_data('_advertising_processed', true);
+        $order->save();
     }
     
     /**

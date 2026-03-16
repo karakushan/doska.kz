@@ -32,3 +32,6 @@ wordpress/wp-content/debug.log
 **/firebase-push-notifications/service-account-*.json
 backups/*.json
 
+# VS Code settings
+.vscode/
+

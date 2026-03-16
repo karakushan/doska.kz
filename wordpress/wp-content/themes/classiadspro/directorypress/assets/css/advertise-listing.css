@@ -4,11 +4,11 @@
  */
 
 /* Основные стили страницы рекламирования */
-.advertise-listing-wrapper {
+.feature-listing-wrapper {
   padding: 20px;
 }
 
-.advertise-listing-container {
+.feature-listing-container {
   max-width: 900px;
   margin: 0 auto;
   padding: 30px;
@@ -17,26 +17,26 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.advertise-listing-header {
+.feature-listing-header {
   text-align: center;
   margin-bottom: 40px;
   padding-bottom: 25px;
   border-bottom: 2px solid #f0f0f0;
 }
 
-.advertise-listing-header h2 {
+.feature-listing-header h2 {
   font-size: 28px;
   font-weight: 700;
   color: #333;
   margin-bottom: 10px;
 }
 
-.advertise-listing-header .listing-title {
+.feature-listing-header .listing-title {
   font-size: 18px;
   color: #666;
 }
 
-.advertising-warning {
+.feature-warning {
   background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
   border: 1px solid #ff6b6b;
   border-radius: 10px;
@@ -62,16 +62,16 @@
   font-weight: 600;
 }
 
-.advertise-listing-content {
+.feature-listing-content {
   margin-bottom: 40px;
 }
 
 /* Секции формы рекламирования */
-.advertising-section {
+.feature-section {
   margin-bottom: 40px;
 }
 
-.advertising-section h3 {
+.feature-section h3 {
   font-size: 22px;
   font-weight: 600;
   color: #333;
@@ -85,7 +85,7 @@
 }
 
 /* Выбор периода рекламирования */
-.advertising-periods {
+.feature-periods {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -216,17 +216,19 @@
 }
 
 /* Кнопки действий */
-.advertising-actions {
+.feature-actions {
   display: flex;
   gap: 15px;
   justify-content: center;
   margin-top: 30px;
 }
 
-.btn-advertising {
-  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-  color: #fff;
-  border: none;
+.btn-feature,
+.btn.btn-feature,
+.btn-primary.btn-feature {
+  background: #6fcc4e !important;
+  color: #fff !important;
+  border: none !important;
   padding: 15px 30px;
   border-radius: 8px;
   font-weight: 600;
@@ -237,11 +239,13 @@
   min-width: 180px;
 }
 
-.btn-advertising:hover {
-  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+.btn-feature:hover,
+.btn.btn-feature:hover,
+.btn-primary.btn-feature:hover {
+  background: #5db83d !important;
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
-  color: #fff;
+  box-shadow: 0 5px 15px rgba(111, 204, 78, 0.4);
+  color: #fff !important;
   text-decoration: none;
 }
 
@@ -268,7 +272,7 @@
 }
 
 /* Информация о преимуществах рекламирования */
-.advertising-info {
+.feature-info {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 12px;
   padding: 30px;
@@ -276,20 +280,20 @@
   color: #fff;
 }
 
-.advertising-info h3 {
+.feature-info h3 {
   font-size: 22px;
   font-weight: 600;
   color: #fff;
   margin-bottom: 20px;
 }
 
-.advertising-info ul {
+.feature-info ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.advertising-info li {
+.feature-info li {
   padding: 10px 0;
   color: #fff;
   font-size: 15px;
@@ -298,12 +302,12 @@
 
 /* Мобильная адаптация */
 @media (max-width: 767px) {
-  .advertise-listing-container {
+  .feature-listing-container {
     padding: 20px;
     margin: 10px;
   }
 
-  .advertising-periods {
+  .feature-periods {
     grid-template-columns: 1fr;
     gap: 15px;
   }
@@ -312,12 +316,12 @@
     padding: 25px 15px;
   }
 
-  .advertising-actions {
+  .feature-actions {
     flex-direction: column;
     align-items: center;
   }
 
-  .btn-advertising,
+  .btn-feature,
   .btn-secondary {
     width: 100%;
     max-width: 280px;
@@ -325,7 +329,7 @@
 }
 
 @media (max-width: 480px) {
-  .advertise-listing-header h2 {
+  .feature-listing-header h2 {
     font-size: 24px;
   }
 

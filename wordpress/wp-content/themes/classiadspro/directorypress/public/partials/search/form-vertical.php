@@ -190,74 +190,7 @@
 echo '</div>';
 echo '</form>';
 
-// JavaScript для toggle функционала фильтров и адаптивного поведения
-echo '<script>
-function toggleSearchFilters(header) {
-	var wrapper = header.parentElement;
-	var container = wrapper.querySelector(".search-container");
-	var icon = header.querySelector("i");
-	var form = wrapper.closest("form");
-	
-	if (container.style.display === "none") {
-		container.style.display = "block";
-		wrapper.classList.remove("collapsed");
-		if (form) form.classList.remove("filters-collapsed");
-		icon.classList.remove("fa-chevron-up");
-		icon.classList.add("fa-chevron-down");
-	} else {
-		container.style.display = "none";
-		wrapper.classList.add("collapsed");
-		if (form) form.classList.add("filters-collapsed");
-		icon.classList.remove("fa-chevron-down");
-		icon.classList.add("fa-chevron-up");
-	}
-}
-
-// Функция для проверки мобильного устройства
-function isMobileDevice() {
-	return (window.innerWidth <= 768);
-}
-
-// Функция для инициализации состояния контейнера поиска
-function initSearchContainerState() {
-	var searchContainers = document.querySelectorAll(".search-container");
-	var isMobile = isMobileDevice();
-	
-	searchContainers.forEach(function(container) {
-		var wrapper = container.parentElement;
-		var header = wrapper.querySelector(".search-filters-header");
-		var icon = header ? header.querySelector("i") : null;
-		var form = wrapper.closest("form");
-		
-		if (isMobile) {
-			// На мобильных устройствах сворачиваем
-			container.style.display = "none";
-			if (wrapper) wrapper.classList.add("collapsed");
-			if (form) form.classList.add("filters-collapsed");
-			if (icon) {
-				icon.classList.remove("fa-chevron-down");
-				icon.classList.add("fa-chevron-up");
-			}
-		} else {
-			// На ПК разворачиваем
-			container.style.display = "block";
-			if (wrapper) wrapper.classList.remove("collapsed");
-			if (form) form.classList.remove("filters-collapsed");
-			if (icon) {
-				icon.classList.remove("fa-chevron-up");
-				icon.classList.add("fa-chevron-down");
-			}
-		}
-	});
-}
-
-// Инициализация при загрузке страницы
-document.addEventListener("DOMContentLoaded", function() {
-	initSearchContainerState();
-});
-
-// Обработка изменения размера окна
-window.addEventListener("resize", function() {
-	initSearchContainerState();
-});
-</script>';
+// Подключение JavaScript для toggle функционала фильтров
+$script_url = get_template_directory_uri() . '/directorypress/assets/js/search-form-filters.js';
+$theme_version = wp_get_theme()->get('Version');
+echo '<script src="'. esc_url($script_url) .'?v=' . esc_attr($theme_version) . '"></script>';

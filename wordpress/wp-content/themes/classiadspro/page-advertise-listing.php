@@ -133,14 +133,14 @@ $prices = classiadspro_get_advertising_prices();
                 </div>
                 <div class="col-lg-9 content-wrapper-main">
                     <div id="panel-content-wrapper" class="content-wrapper clearfix">
-                        <div class="advertise-listing-wrapper">
-                            <div class="advertise-listing-container">
-                                <div class="advertise-listing-header">
+                        <div class="feature-listing-wrapper">
+                            <div class="feature-listing-container">
+                                <div class="feature-listing-header">
                                     <h2><?php esc_html_e('Advertise Listing', 'classiadspro'); ?></h2>
                                     <p class="listing-title"><?php echo esc_html($listing->title()); ?></p>
 
                                     <?php if ($listing->status != 'active' || $listing->post->post_status != 'publish'): ?>
-                                        <div class="advertising-warning">
+                                        <div class="feature-warning">
                                             <div class="warning-icon">⚠️</div>
                                             <div class="warning-text">
                                                 <strong>Warning!</strong> Your listing is not yet active or published.
@@ -150,20 +150,20 @@ $prices = classiadspro_get_advertising_prices();
                                     <?php endif; ?>
                                 </div>
 
-                                <div class="advertise-listing-content">
+                                <div class="feature-listing-content">
                                     <?php if (isset($_GET['error'])): ?>
                                         <div class="alert alert-danger">
                                             <?php echo esc_html(urldecode($_GET['error'])); ?>
                                         </div>
                                     <?php endif; ?>
 
-                                    <form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" class="advertising-form">
+                                    <form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" class="feature-form">
                                         <?php wp_nonce_field('submit_advertising', 'advertising_nonce'); ?>
 
-                                        <div class="advertising-section">
+                                        <div class="feature-section">
                                             <h3><?php esc_html_e('Choose Advertising Period', 'classiadspro'); ?></h3>
 
-                                            <div class="advertising-periods">
+                                            <div class="feature-periods">
                                                 <div class="period-option">
                                                     <label class="period-label">
                                                         <input type="radio" name="advertising_period" value="1_day" required>
@@ -196,8 +196,8 @@ $prices = classiadspro_get_advertising_prices();
                                             </div>
                                         </div>
 
-                                        <div class="advertising-actions">
-                                            <button type="submit" name="submit_advertising" class="btn btn-primary btn-advertising">
+                                        <div class="feature-actions">
+                                            <button type="submit" name="submit_advertising" class="btn btn-primary btn-feature">
                                                 <?php esc_html_e('Proceed to Payment', 'classiadspro'); ?>
                                             </button>
 
@@ -208,7 +208,7 @@ $prices = classiadspro_get_advertising_prices();
                                     </form>
                                 </div>
 
-                                <div class="advertising-info">
+                                <div class="feature-info">
                                     <h3><?php esc_html_e('Advertising Benefits', 'classiadspro'); ?></h3>
                                     <ul>
                                         <li>✓ Your listing will be shown in the special "Featured" block</li>
@@ -237,7 +237,7 @@ jQuery(document).ready(function($) {
     console.log('Advertising form script loaded');
     
     // Ensure form submits normally without AJAX
-    $('.advertising-form').on('submit', function(e) {
+    $('.feature-form').on('submit', function(e) {
         console.log('Form submit event triggered');
         console.log('Form data:', $(this).serialize());
         

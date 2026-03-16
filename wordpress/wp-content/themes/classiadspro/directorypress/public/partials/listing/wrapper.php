@@ -133,14 +133,14 @@
 									} else {
 										$advertised_listing = new directorypress_listing();
 										$advertised_listing->is_widget = (isset($public_handler->args['is_widget'])) ? $public_handler->args['is_widget'] : 0;
-										$advertised_listing->directorypress_init_lpost_listing(get_post());
-										$advertised_listing->listing_post_style = $public_handler->args['listing_post_style'];
-										$advertised_listing->listing_image_width = $public_handler->args['listing_image_width'];
-										$advertised_listing->listing_image_height = $public_handler->args['listing_image_height'];
-										$advertised_listing->fchash = $public_handler->hash;
-										$advertised_listing->listings_view_type = $public_handler->args['listings_view_type'];
-										$advertised_listing->listing_view = $listing_style_to_show;
-										$advertised_listing->listing_has_featured_tag_style = $public_handler->args['listing_has_featured_tag_style'];
+									$advertised_listing->directorypress_init_lpost_listing(get_post());
+									$advertised_listing->listing_post_style = $public_handler->args['listing_post_style'];
+									$advertised_listing->listing_image_width = (isset($public_handler->args['listing_image_width'])) ? $public_handler->args['listing_image_width'] : '';
+									$advertised_listing->listing_image_height = (isset($public_handler->args['listing_image_height'])) ? $public_handler->args['listing_image_height'] : '';
+									$advertised_listing->fchash = $public_handler->hash;
+									$advertised_listing->listings_view_type = $public_handler->args['listings_view_type'];
+									$advertised_listing->listing_view = $listing_style_to_show;
+									$advertised_listing->listing_has_featured_tag_style = (isset($public_handler->args['listing_has_featured_tag_style'])) ? $public_handler->args['listing_has_featured_tag_style'] : '';
 										$public_handler->listings[$listing_id] = $advertised_listing;
 									}
 									

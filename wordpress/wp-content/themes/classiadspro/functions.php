@@ -564,16 +564,25 @@ function pacz_add_image_size($name = '', $width = '', $height = '', $crop = fals
 }
 
 // Looking to send emails in production? Check out our Email API/SMTP product!
-// function mailtrap($phpmailer) {
-// 	$phpmailer->isSMTP();
-// 	$phpmailer->Host = 'sandbox.smtp.mailtrap.io';
-// 	$phpmailer->SMTPAuth = true;
-// 	$phpmailer->Port = 2525;
-// 	$phpmailer->Username = '221f66dfa5dc86';
-// 	$phpmailer->Password = '03a18f3433fc8a';
-//   }
+function mailtrap($phpmailer) {
+	// Check if we're on localhost
+	$is_localhost = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1', 'localhost:8000', 'localhost:8080']) 
+		|| strpos($_SERVER['HTTP_HOST'], '.local') !== false
+		|| strpos($_SERVER['HTTP_HOST'], 'localhost') !== false;
 
-//   add_action('phpmailer_init', 'mailtrap'); 
+	if (!$is_localhost) {
+		return;
+	}
+
+	$phpmailer->isSMTP();
+	$phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+	$phpmailer->SMTPAuth = true;
+	$phpmailer->Port = 2525;
+	$phpmailer->Username = '221f66dfa5dc86';
+	$phpmailer->Password = '03a18f3433fc8a';
+}
+
+// add_action('phpmailer_init', 'mailtrap'); 
 
 /**
  * Handle avatar upload during user registration
@@ -822,7 +831,7 @@ add_action('wpfb_form_register_new_user_success', 'classiadspro_handle_registrat
 /**
  * Send welcome email to newly registered user
  * Hooks into wpfb_form_register_new_user_success action
- * Sends welcome email in English
+ * Sends welcome email using template from theme settings
  * 
  * @param int $user_id The newly created user ID
  * @param array $data Form submission data
@@ -841,88 +850,99 @@ function classiadspro_send_welcome_email($user_id, $data)
 	$site_name = get_bloginfo('name');
 	$site_url = get_home_url();
 	$login_url = wp_login_url();
+	$dashboard_url = trailingslashit($site_url) . 'my-dashboard/';
 
-	// Prepare email content in English
+	// Get email settings from theme options
+	global $pacz_settings;
+	if (empty($pacz_settings)) {
+		$pacz_settings = get_option('pacz_settings');
+	}
+
+	// Get email subject and message from settings, or use defaults
+	$email_subject = isset($pacz_settings['registration_email_subject']) && !empty($pacz_settings['registration_email_subject']) 
+		? $pacz_settings['registration_email_subject'] 
+		: 'Welcome to {site_name}';
+
+	$email_message = isset($pacz_settings['registration_email_message']) && !empty($pacz_settings['registration_email_message']) 
+		? $pacz_settings['registration_email_message'] 
+		: '';
+
+	// If no custom message in settings, use default template
+	if (empty($email_message)) {
+		$email_message = '<html><body>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">
+<tr><td style="padding: 40px 0;">
+<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+<tr style="background-color: #191a1f;">
+<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">
+<h1 style="color: #ffffff; margin: 0; font-size: 24px;">Welcome, {user_name}!</h1>
+</td>
+</tr>
+<tr>
+<td style="padding: 40px 30px;">
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Thank you for registering with us! Your account has been successfully created.
+</p>
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Here is your account information:
+</p>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 20px 0; border: 1px solid #eeeeee; border-radius: 4px;">
+<tr style="background-color: #f9f9f9;">
+<td style="padding: 15px; font-weight: bold; color: #191a1f; width: 40%;">Username:</td>
+<td style="padding: 15px; color: #666666;">{user_login}</td>
+</tr>
+<tr>
+<td style="padding: 15px; font-weight: bold; color: #191a1f; background-color: #f9f9f9;">Email:</td>
+<td style="padding: 15px; color: #666666; background-color: #f9f9f9;">{user_email}</td>
+</tr>
+</table>
+<div style="margin: 25px 0; padding: 20px; background-color: #fff8e6; border-left: 4px solid #EB6653; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #EB6653;">⚠️ ACCOUNT VERIFICATION REQUIRED</p>
+<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">
+Your account is currently under verification. You will receive a confirmation email once your account is verified.
+</p>
+</div>
+<div style="margin: 25px 0; padding: 20px; background-color: #e8f4f8; border-left: 4px solid #2081cc; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #2081cc;">📋 POSTING LISTINGS</p>
+<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">
+After your account is verified, you will be able to post listings and manage your ads from your dashboard. Please note that all listings must comply with our community guidelines.
+</p>
+</div>
+<p style="margin: 30px 0; text-align: center;">
+<a href="{dashboard_url}" style="display: inline-block; padding: 12px 30px; background-color: #EB6653; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>
+</p>
+<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+If you have any questions or need assistance, please don\'t hesitate to contact us.
+</p>
+<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">
+Best regards,<br>
+The {site_name} Team<br>
+<a href="{site_url}" style="color: #EB6653; text-decoration: none;">{site_url}</a>
+</p>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</body></html>';
+	}
+
+	// Replace variables in subject
+	$subject = str_replace(
+		array('{site_name}', '{user_name}', '{user_login}'),
+		array($site_name, $user->display_name, $user->user_login),
+		$email_subject
+	);
+
+	// Replace variables in message
+	$message = str_replace(
+		array('{user_name}', '{user_login}', '{user_email}', '{site_name}', '{site_url}', '{dashboard_url}', '{login_url}'),
+		array(esc_html($user->display_name), esc_html($user->user_login), esc_html($user->user_email), esc_html($site_name), esc_url($site_url), esc_url($dashboard_url), esc_url($login_url)),
+		$email_message
+	);
+
+	// Prepare email
 	$to = $user->user_email;
-	$subject = sprintf('Welcome to %s', $site_name);
-
-	// Build HTML email
-	$message = '<html><body>';
-	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">';
-	$message .= '<tr><td style="padding: 40px 0;">';
-	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">';
-
-	// Header
-	$message .= '<tr style="background-color: #191a1f;">';
-	$message .= '<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">';
-	$message .= '<h1 style="color: #ffffff; margin: 0; font-size: 24px;">Welcome, ' . esc_html($user->display_name) . '!</h1>';
-	$message .= '</td>';
-	$message .= '</tr>';
-
-	// Content
-	$message .= '<tr>';
-	$message .= '<td style="padding: 40px 30px;">';
-	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
-	$message .= 'Thank you for registering with us! Your account has been successfully created.';
-	$message .= '</p>';
-
-	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
-	$message .= 'Here is your account information:';
-	$message .= '</p>';
-
-	// Account info
-	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 20px 0; border: 1px solid #eeeeee; border-radius: 4px;">';
-	$message .= '<tr style="background-color: #f9f9f9;">';
-	$message .= '<td style="padding: 15px; font-weight: bold; color: #191a1f; width: 40%;">Username:</td>';
-	$message .= '<td style="padding: 15px; color: #666666;">' . esc_html($user->user_login) . '</td>';
-	$message .= '</tr>';
-	$message .= '<tr>';
-	$message .= '<td style="padding: 15px; font-weight: bold; color: #191a1f; background-color: #f9f9f9;">Email:</td>';
-	$message .= '<td style="padding: 15px; color: #666666; background-color: #f9f9f9;">' . esc_html($user->user_email) . '</td>';
-	$message .= '</tr>';
-	$message .= '</table>';
-
-	// Verification notice
-	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #fff8e6; border-left: 4px solid #EB6653; border-radius: 4px;">';
-	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #EB6653;">⚠️ ACCOUNT VERIFICATION REQUIRED</p>';
-	$message .= '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
-	$message .= 'Your account is currently under verification. Our team will review your information and verify your account within 24-48 hours. ';
-	$message .= 'You will receive a confirmation email once your account is verified.';
-	$message .= '</p>';
-	$message .= '</div>';
-
-	// Listings notice
-	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #e8f4f8; border-left: 4px solid #2081cc; border-radius: 4px;">';
-	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #2081cc;">📋 POSTING LISTINGS</p>';
-	$message .= '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
-	$message .= 'After your account is verified, you will be able to post listings and manage your ads from your dashboard. ';
-	$message .= 'Please note that all listings must comply with our community guidelines.';
-	$message .= '</p>';
-	$message .= '</div>';
-
-	// Call to action
-	$message .= '<p style="margin: 30px 0; text-align: center;">';
-	$message .= '<a href="' . esc_url(trailingslashit($site_url) . 'my-dashboard/') . '" style="display: inline-block; padding: 12px 30px; background-color: #EB6653; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>';
-	$message .= '</p>';
-
-	// Additional info
-	$message .= '<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
-	$message .= 'If you have any questions or need assistance, please don\'t hesitate to contact us.';
-	$message .= '</p>';
-
-	$message .= '<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">';
-	$message .= 'Best regards,<br>';
-	$message .= 'The ' . esc_html($site_name) . ' Team<br>';
-	$message .= '<a href="' . esc_url($site_url) . '" style="color: #EB6653; text-decoration: none;">' . esc_html($site_url) . '</a>';
-	$message .= '</p>';
-
-	$message .= '</td>';
-	$message .= '</tr>';
-
-	$message .= '</table>';
-	$message .= '</td></tr>';
-	$message .= '</table>';
-	$message .= '</body></html>';
 
 	// Set email headers
 	$headers = array(
@@ -1415,79 +1435,90 @@ function classiadspro_send_verification_email($user_id)
 	$site_url = get_home_url();
 	$dashboard_url = trailingslashit($site_url) . 'my-dashboard/';
 
+	// Get email settings from theme options
+	global $pacz_settings;
+	if (empty($pacz_settings)) {
+		$pacz_settings = get_option('pacz_settings');
+	}
+
+	// Get email subject and message from settings, or use defaults
+	$email_subject = isset($pacz_settings['verification_email_subject']) && !empty($pacz_settings['verification_email_subject']) 
+		? $pacz_settings['verification_email_subject'] 
+		: 'Your Account Has Been Verified - {site_name}';
+
+	$email_message = isset($pacz_settings['verification_email_message']) && !empty($pacz_settings['verification_email_message']) 
+		? $pacz_settings['verification_email_message'] 
+		: '';
+
+	// If no custom message in settings, use default template
+	if (empty($email_message)) {
+		$email_message = '<html><body>
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">
+<tr><td style="padding: 40px 0;">
+<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+<tr style="background-color: #28a745;">
+<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">
+<h1 style="color: #ffffff; margin: 0; font-size: 24px;">✓ Account Verified!</h1>
+</td>
+</tr>
+<tr>
+<td style="padding: 40px 30px;">
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Hello {user_name},
+</p>
+<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+Great news! Your account has been verified by our team. You can now post listings and manage your ads on our platform.
+</p>
+<div style="margin: 25px 0; padding: 20px; background-color: #e8f5e9; border-left: 4px solid #28a745; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #28a745;">✓ VERIFICATION COMPLETE</p>
+<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">
+Your account is now fully active. You can start posting listings right away!
+</p>
+</div>
+<div style="margin: 25px 0; padding: 20px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">
+<p style="margin: 0; font-size: 13px; font-weight: bold; color: #1976d2;">📋 YOU CAN NOW:</p>
+<ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 13px; line-height: 1.8; color: #333333;">
+<li>Post new listings and manage your ads</li>
+<li>Update your profile and account information</li>
+<li>Interact with potential buyers/renters</li>
+<li>Monitor listing views and inquiries</li>
+</ul>
+</div>
+<p style="margin: 30px 0; text-align: center;">
+<a href="{dashboard_url}" style="display: inline-block; padding: 12px 30px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>
+</p>
+<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">
+If you have any questions or need assistance, please don\'t hesitate to contact us.
+</p>
+<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">
+Best regards,<br>
+The {site_name} Team<br>
+<a href="{site_url}" style="color: #28a745; text-decoration: none;">{site_url}</a>
+</p>
+</td>
+</tr>
+</table>
+</td></tr>
+</table>
+</body></html>';
+	}
+
+	// Replace variables in subject
+	$subject = str_replace(
+		array('{site_name}', '{user_name}'),
+		array($site_name, $user->display_name),
+		$email_subject
+	);
+
+	// Replace variables in message
+	$message = str_replace(
+		array('{user_name}', '{site_name}', '{site_url}', '{dashboard_url}'),
+		array(esc_html($user->display_name), esc_html($site_name), esc_url($site_url), esc_url($dashboard_url)),
+		$email_message
+	);
+
 	// Prepare email
 	$to = $user->user_email;
-	$subject = sprintf('Your Account Has Been Verified - %s', $site_name);
-
-	// Build HTML email
-	$message = '<html><body>';
-	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f5f5f5;">';
-	$message .= '<tr><td style="padding: 40px 0;">';
-	$message .= '<table cellpadding="0" cellspacing="0" border="0" width="600" align="center" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">';
-
-	// Header
-	$message .= '<tr style="background-color: #28a745;">';
-	$message .= '<td style="padding: 30px 30px; text-align: center; border-radius: 8px 8px 0 0;">';
-	$message .= '<h1 style="color: #ffffff; margin: 0; font-size: 24px;">✓ Account Verified!</h1>';
-	$message .= '</td>';
-	$message .= '</tr>';
-
-	// Content
-	$message .= '<tr>';
-	$message .= '<td style="padding: 40px 30px;">';
-
-	// Main message
-	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
-	$message .= 'Hello ' . esc_html($user->display_name) . ',';
-	$message .= '</p>';
-
-	$message .= '<p style="margin: 0 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
-	$message .= 'Great news! Your account has been verified by our team. You can now post listings and manage your ads on our platform.';
-	$message .= '</p>';
-
-	// Success box
-	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #e8f5e9; border-left: 4px solid #28a745; border-radius: 4px;">';
-	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #28a745;">✓ VERIFICATION COMPLETE</p>';
-	$message .= '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
-	$message .= 'Your account is now fully active. You can start posting listings right away!';
-	$message .= '</p>';
-	$message .= '</div>';
-
-	// What you can do now
-	$message .= '<div style="margin: 25px 0; padding: 20px; background-color: #e3f2fd; border-left: 4px solid #2196f3; border-radius: 4px;">';
-	$message .= '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #1976d2;">📋 YOU CAN NOW:</p>';
-	$message .= '<ul style="margin: 10px 0 0 0; padding-left: 20px; font-size: 13px; line-height: 1.8; color: #333333;">';
-	$message .= '<li>Post new listings and manage your ads</li>';
-	$message .= '<li>Update your profile and account information</li>';
-	$message .= '<li>Interact with potential buyers/renters</li>';
-	$message .= '<li>Monitor listing views and inquiries</li>';
-	$message .= '</ul>';
-	$message .= '</div>';
-
-	// Call to action
-	$message .= '<p style="margin: 30px 0; text-align: center;">';
-	$message .= '<a href="' . esc_url($dashboard_url) . '" style="display: inline-block; padding: 12px 30px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: bold;">Go to Your Dashboard</a>';
-	$message .= '</p>';
-
-	// Additional info
-	$message .= '<p style="margin: 30px 0 20px 0; font-size: 14px; line-height: 1.6; color: #333333;">';
-	$message .= 'If you have any questions or need assistance, please don\'t hesitate to contact us.';
-	$message .= '</p>';
-
-	// Footer
-	$message .= '<p style="margin: 0; font-size: 13px; color: #999999; border-top: 1px solid #eeeeee; padding-top: 20px;">';
-	$message .= 'Best regards,<br>';
-	$message .= 'The ' . esc_html($site_name) . ' Team<br>';
-	$message .= '<a href="' . esc_url($site_url) . '" style="color: #28a745; text-decoration: none;">' . esc_html($site_url) . '</a>';
-	$message .= '</p>';
-
-	$message .= '</td>';
-	$message .= '</tr>';
-
-	$message .= '</table>';
-	$message .= '</td></tr>';
-	$message .= '</table>';
-	$message .= '</body></html>';
 
 	// Set email headers
 	$headers = array(
@@ -1540,6 +1571,200 @@ function classiadspro_show_verification_column($output, $column_name, $user_id)
 	return $output;
 }
 add_filter('manage_users_custom_column', 'classiadspro_show_verification_column', 10, 3);
+
+/**
+ * Check if user account is verified
+ * Returns true if user is verified, false otherwise
+ * 
+ * @param int|null $user_id User ID. If not provided, uses current user ID
+ * @return bool True if user is verified
+ */
+function classiadspro_is_user_verified($user_id = null)
+{
+	if ($user_id === null) {
+		$user_id = get_current_user_id();
+	}
+	
+	if (!$user_id) {
+		return false;
+	}
+	
+	$is_verified = get_user_meta($user_id, 'user_verified', true);
+	return ($is_verified === '1');
+}
+
+/**
+ * Check user verification and block package selection if not verified
+ * Hooks into directorypress_submit_handler_construct filter
+ * 
+ * @param object $submit_handler The directorypress_submit_handler instance
+ * @return object Modified submit handler
+ */
+function classiadspro_check_user_verification_for_submit($submit_handler)
+{
+	if (!is_user_logged_in()) {
+		return $submit_handler;
+	}
+
+	// Check if user is verified
+	if (!classiadspro_is_user_verified()) {
+		// If trying to access create form, redirect back to packages page with message
+		if (isset($submit_handler->template) && is_array($submit_handler->template)) {
+			if (in_array('create_advert.php', $submit_handler->template)) {
+				directorypress_add_notification(__('Your account must be verified before you can post listings. Please wait for verification.', 'classiadspro'), 'error');
+				wp_redirect(directorypress_submitUrl());
+				exit;
+			}
+		}
+	}
+
+	return $submit_handler;
+}
+add_filter('directorypress_submit_handler_construct', 'classiadspro_check_user_verification_for_submit');
+
+/**
+ * Block listing submission via AJAX for unverified users
+ */
+function classiadspro_block_ajax_listing_submission()
+{
+	if (!is_user_logged_in()) {
+		return;
+	}
+
+	if (!classiadspro_is_user_verified() && isset($_POST['action']) && $_POST['action'] === 'dpfl_new_listng_submit') {
+		wp_send_json(array(
+			'type' => 'error',
+			'message' => '<div class="alert alert-danger">' . __('Your account must be verified before you can post listings. Please wait for verification.', 'classiadspro') . '</div>'
+		));
+	}
+}
+add_action('wp_ajax_dpfl_new_listng_submit', 'classiadspro_block_ajax_listing_submission', 5);
+add_action('wp_ajax_nopriv_dpfl_new_listng_submit', 'classiadspro_block_ajax_listing_submission', 5);
+
+/**
+ * Show verification required message before packages
+ * Hooks into directorypress_submitlisting_packages_rows_before action
+ */
+function classiadspro_show_verification_message_before_packages($package, $before_tag = '')
+{
+	static $message_shown = false;
+	
+	if ($message_shown) {
+		return;
+	}
+
+	if (!is_user_logged_in()) {
+		return;
+	}
+
+	if (!classiadspro_is_user_verified()) {
+		$message_shown = true;
+		echo '<li class="directorypress-list-group-item" style="background-color: transparent; border: none; padding: 0; margin: 0 0 20px 0;">';
+		echo '<div class="directorypress-submit-verification-notice" style="padding: 20px; background-color: #fff8e6; border-left: 4px solid #EB6653; border-radius: 4px;">';
+		echo '<p style="margin: 0; font-size: 14px; font-weight: bold; color: #EB6653;">⚠️ ' . esc_html__('ACCOUNT VERIFICATION REQUIRED', 'classiadspro') . '</p>';
+		echo '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">';
+		echo esc_html__('Your account must be verified before you can post listings.', 'classiadspro');
+		echo '</p>';
+		echo '</div>';
+		echo '</li>';
+	}
+}
+add_action('directorypress_submitlisting_packages_rows_before', 'classiadspro_show_verification_message_before_packages', 5, 2);
+
+/**
+ * Alternative: Show verification message at the top of submit page
+ */
+function classiadspro_show_verification_notice_at_top()
+{
+	if (!is_user_logged_in() || classiadspro_is_user_verified()) {
+		return;
+	}
+
+	// Check if we're on submit/pricing page
+	global $post;
+	if (!$post) {
+		return;
+	}
+
+	// Check if shortcode is present
+	if (has_shortcode($post->post_content, 'directorypress-submit')) {
+		directorypress_add_notification(__('Your account must be verified before you can post listings.', 'classiadspro'), 'info');
+	}
+}
+add_action('wp', 'classiadspro_show_verification_notice_at_top', 20);
+
+/**
+ * Filter package selection buttons to disable them for unverified users
+ * 
+ * @param string $button_html The button HTML
+ * @param object $package The package object
+ * @return string Modified button HTML
+ */
+function classiadspro_filter_package_selection_button($button_html, $package)
+{
+	if (!is_user_logged_in()) {
+		return $button_html;
+	}
+
+	if (!classiadspro_is_user_verified()) {
+		// Replace the button with disabled version
+		$button_html = str_replace(
+			'class="pricing-button"',
+			'class="pricing-button disabled" style="pointer-events: none; opacity: 0.6; cursor: not-allowed;" data-bs-toggle="tooltip" title="' . esc_attr__('Account verification required to post listings', 'classiadspro') . '"',
+			$button_html
+		);
+		$button_html = str_replace(
+			'href="' . directorypress_submitUrl(array('package' => $package->id)),
+			'href="#" onclick="return false;"',
+			$button_html
+		);
+	}
+
+	return $button_html;
+}
+
+/**
+ * Block package selection via JavaScript for unverified users
+ */
+function classiadspro_block_package_selection_js()
+{
+	if (!is_user_logged_in() || classiadspro_is_user_verified()) {
+		return;
+	}
+
+	?>
+	<script type="text/javascript">
+		(function($) {
+			$(document).ready(function() {
+				// Disable all package selection links
+				$('.directorypress-submit-section-adv a.pricing-button').each(function() {
+					var $link = $(this);
+					if (!$link.hasClass('disabled')) {
+						$link.addClass('disabled')
+							.css({
+								'pointer-events': 'none',
+								'opacity': '0.6',
+								'cursor': 'not-allowed'
+							})
+							.attr('title', '<?php echo esc_js(__('Account verification required to post listings', 'classiadspro')); ?>')
+							.attr('href', '#')
+							.on('click', function(e) {
+								e.preventDefault();
+								return false;
+							});
+					}
+				});
+
+				// Show tooltip on hover
+				$('.directorypress-submit-section-adv a.pricing-button.disabled').on('mouseenter', function() {
+					$(this).attr('data-bs-toggle', 'tooltip');
+				});
+			});
+		})(jQuery);
+	</script>
+	<?php
+}
+add_action('wp_footer', 'classiadspro_block_package_selection_js');
 
 // Collapse Filters by default
 // add_action('wp_footer', 'classiadspro_collapse_filters', 999);
@@ -1893,7 +2118,7 @@ function classiadspro_advertise_page_scripts()
 		<script>
 			jQuery(document).ready(function($) {
 				// Убеждаемся что рекомендуемый пакет выбран по умолчанию
-				if ($('.advertising-form').length > 0) {
+				if ($('.feature-form').length > 0) {
 					// Принудительно выбираем 3-дневный пакет если ничего не выбрано
 					if (!$('input[name="advertising_period"]:checked').length) {
 						$('input[name="advertising_period"][value="3_days"]').prop('checked', true);
@@ -1991,5 +2216,297 @@ function classiadspro_force_setup_advertising()
 add_action('wp', function () {
 	if (is_page('advertise-listing') || (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/advertise-listing/') !== false)) {
 		classiadspro_force_setup_advertising();
+	}
+});
+
+// ==================== CURRENCY CONVERSION BY REGION ====================
+
+/**
+ * Карта валют по регионам
+ * Базовая валюта - USD
+ */
+function rs_get_currency_map() {
+	return [
+		// США / localhost - базовая валюта USD
+		'localhost:8080' => [
+			'symbol' => '$',
+			'code' => 'USD',
+			'rate' => 1,
+			'position' => 1, // до числа
+			'decimal_sep' => '.',
+			'thousand_sep' => ',',
+		],
+		// Испания - Евро
+		'es.adshelppro.com' => [
+			'symbol' => '€',
+			'code' => 'EUR',
+			'rate' => 0.92, // обновляется автоматически
+			'position' => 4, // после числа с пробелом
+			'decimal_sep' => ',',
+			'thousand_sep' => '.',
+		],
+		// Германия - Евро
+		'de.adshelppro.com' => [
+			'symbol' => '€',
+			'code' => 'EUR',
+			'rate' => 0.92,
+			'position' => 4,
+			'decimal_sep' => ',',
+			'thousand_sep' => '.',
+		],
+		// Турция - Лира
+		'tr.adshelppro.com' => [
+			'symbol' => '₺',
+			'code' => 'TRY',
+			'rate' => 32.50,
+			'position' => 4,
+			'decimal_sep' => ',',
+			'thousand_sep' => '.',
+		],
+		// Украина - Гривна
+		'uk.adshelppro.com' => [
+			'symbol' => '₴',
+			'code' => 'UAH',
+			'rate' => 41.00,
+			'position' => 4,
+			'decimal_sep' => ',',
+			'thousand_sep' => ' ',
+		],
+	];
+}
+
+/**
+ * Получить текущую валюту по домену
+ */
+function rs_get_current_currency() {
+	$host = strtolower($_SERVER['HTTP_HOST']);
+	$map = rs_get_currency_map();
+	
+	// Точное совпадение
+	if (isset($map[$host])) {
+		return $map[$host];
+	}
+	
+	// Для localhost без порта
+	if (strpos($host, 'localhost') !== false) {
+		return $map['localhost:8080'];
+	}
+	
+	// Поиск по домену
+	foreach ($map as $domain => $currency) {
+		if (strpos($host, str_replace(['http://', 'https://'], '', $domain)) !== false) {
+			return $currency;
+		}
+	}
+	
+	// Дефолт - USD
+	return [
+		'symbol' => '$',
+		'code' => 'USD',
+		'rate' => 1,
+		'position' => 1,
+		'decimal_sep' => '.',
+		'thousand_sep' => ',',
+	];
+}
+
+/**
+ * Обновление курсов валют через API
+ */
+function rs_update_exchange_rates() {
+	$response = wp_remote_get('https://open.er-api.com/v6/latest/USD', [
+		'timeout' => 30,
+	]);
+	
+	if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
+		$body = json_decode(wp_remote_retrieve_body($response), true);
+		
+		if (isset($body['rates'])) {
+			$rates = $body['rates'];
+			
+			$saved_rates = [
+				'EUR' => $rates['EUR'] ?? 0.92,
+				'TRY' => $rates['TRY'] ?? 32.50,
+				'UAH' => $rates['UAH'] ?? 41.00,
+				'updated' => time(),
+				'source' => 'open.er-api.com',
+			];
+			
+			update_option('rs_exchange_rates', $saved_rates);
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+/**
+ * Получить актуальный курс валюты
+ */
+function rs_get_exchange_rate($currency_code) {
+	$saved = get_option('rs_exchange_rates', []);
+	
+	// Если курсы устарели (более 24 часов) - обновляем
+	if (empty($saved['updated']) || (time() - $saved['updated'] > 86400)) {
+		rs_update_exchange_rates();
+		$saved = get_option('rs_exchange_rates', []);
+	}
+	
+	return $saved[$currency_code] ?? 1;
+}
+
+/**
+ * Получить карту валют с актуальными курсами
+ */
+function rs_get_currency_map_with_rates() {
+	$map = rs_get_currency_map();
+	$rates = get_option('rs_exchange_rates', []);
+	
+	if (!empty($rates)) {
+		if (isset($rates['EUR'])) {
+			$map['es.adshelppro.com']['rate'] = $rates['EUR'];
+			$map['de.adshelppro.com']['rate'] = $rates['EUR'];
+		}
+		if (isset($rates['TRY'])) {
+			$map['tr.adshelppro.com']['rate'] = $rates['TRY'];
+		}
+		if (isset($rates['UAH'])) {
+			$map['uk.adshelppro.com']['rate'] = $rates['UAH'];
+		}
+	}
+	
+	return $map;
+}
+
+/**
+ * Конвертация цены
+ */
+function rs_convert_price($price) {
+	if (!is_numeric($price) || $price <= 0) {
+		return $price;
+	}
+	
+	$currency = rs_get_current_currency();
+	return round($price * $currency['rate'], 2);
+}
+
+/**
+ * Форматирование цены с символом валюты
+ */
+function rs_format_price($price, $convert = true) {
+	if ($convert) {
+		$price = rs_convert_price($price);
+	}
+	
+	$currency = rs_get_current_currency();
+	
+	$formatted = number_format(
+		$price,
+		2,
+		$currency['decimal_sep'],
+		$currency['thousand_sep']
+	);
+	
+	// Убираем лишние нули
+	$formatted = rtrim(rtrim($formatted, '0'), $currency['decimal_sep']);
+	
+	// Добавляем символ валюты
+	switch ($currency['position']) {
+		case 1:
+			return $currency['symbol'] . $formatted;
+		case 2:
+			return $currency['symbol'] . ' ' . $formatted;
+		case 3:
+			return $formatted . $currency['symbol'];
+		case 4:
+		default:
+			return $formatted . ' ' . $currency['symbol'];
+	}
+}
+
+// ==================== HOOKS ====================
+
+// Конвертация цен в полях DirectoryPress
+add_filter('directorypress_field_load', function($data, $field, $post_id) {
+	if (get_class($field) === 'directorypress_field_price') {
+		$currency = rs_get_current_currency();
+		
+		// Конвертируем значения
+		if (isset($data['value']) && is_numeric($data['value']) && $data['value'] > 0) {
+			$data['value'] = round($data['value'] * $currency['rate'], 2);
+		}
+		if (isset($data['value_2']) && is_numeric($data['value_2']) && $data['value_2'] > 0) {
+			$data['value_2'] = round($data['value_2'] * $currency['rate'], 2);
+		}
+		
+		// Подменяем символ валюты
+		if (!empty($field->has_frontend_currency)) {
+			$data['frontend_currency'] = $currency['symbol'];
+		}
+	}
+	return $data;
+}, 10, 3);
+
+// Изменение валюты WooCommerce
+add_filter('woocommerce_currency', function($currency) {
+	$curr = rs_get_current_currency();
+	return $curr['code'];
+});
+
+// Изменение символа валюты WooCommerce
+add_filter('woocommerce_currency_symbol', function($symbol, $currency_code) {
+	$curr = rs_get_current_currency();
+	return $curr['symbol'];
+}, 10, 2);
+
+// Конвертация цен в корзине WooCommerce
+add_filter('woocommerce_product_get_price', function($price, $product) {
+	return rs_convert_price($price);
+}, 10, 2);
+
+add_filter('woocommerce_product_get_regular_price', function($price, $product) {
+	return rs_convert_price($price);
+}, 10, 2);
+
+add_filter('woocommerce_product_get_sale_price', function($price, $product) {
+	return rs_convert_price($price);
+}, 10, 2);
+
+// Конвертация цен для вариаций
+add_filter('woocommerce_product_variation_get_price', function($price, $product) {
+	return rs_convert_price($price);
+}, 10, 2);
+
+// Запуск обновления курсов по крону
+add_action('wp', function() {
+	if (!wp_next_scheduled('rs_update_rates_event')) {
+		wp_schedule_event(time(), 'daily', 'rs_update_rates_event');
+	}
+});
+add_action('rs_update_rates_event', 'rs_update_exchange_rates');
+
+// Инициализация курсов при первом запуске
+add_action('init', function() {
+	if (get_option('rs_exchange_rates') === false) {
+		rs_update_exchange_rates();
+	}
+});
+
+// AJAX для ручного обновления курсов (для админки)
+add_action('wp_ajax_rs_refresh_rates', function() {
+	if (!current_user_can('manage_options')) {
+		wp_send_json_error('No permission');
+	}
+	
+	$result = rs_update_exchange_rates();
+	
+	if ($result) {
+		$rates = get_option('rs_exchange_rates', []);
+		wp_send_json_success([
+			'message' => 'Курсы обновлены',
+			'rates' => $rates,
+		]);
+	} else {
+		wp_send_json_error('Ошибка обновления');
 	}
 });
