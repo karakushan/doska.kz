@@ -1352,3 +1352,93 @@ input:disabled + .toggle-slider {
 .directorypress-listings-grid-4 figure.directorypress-listing-figure .directorypress-listing-figure-img-wrap {
   height: 200px;
 }
+
+/* ============================================
+   Header Vertical Alignment
+   ============================================ */
+
+/* Вертикальное выравнивание элементов в header-style-v12 */
+#pacz-header.header-style-v12 {
+  display: flex;
+  align-items: center;
+}
+
+#pacz-header.header-style-v12 .pacz-header-mainnavbar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+#pacz-header.header-style-v12 .pacz-grid {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Контейнер логотипа */
+#pacz-header.header-style-v12 .classiads-fantro-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Контейнер контента хедера */
+#pacz-header.header-style-v12 .classiads-fantro-header-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Навигационное меню */
+#pacz-header.header-style-v12 #pacz-main-navigation {
+  display: flex;
+  align-items: center;
+}
+
+#pacz-header.header-style-v12 #pacz-main-navigation > ul {
+  display: flex;
+  align-items: center;
+}
+
+#pacz-header.header-style-v12 #pacz-main-navigation > ul > li.menu-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Кнопка входа/регистрации */
+#pacz-header.header-style-v12 .logreg-header {
+  display: flex;
+  align-items: center;
+}
+
+/* Элементы выбора языка и региона в хедере */
+#pacz-header.header-style-v12 .wpml-ls,
+#pacz-header.header-style-v12 .language-selector,
+#pacz-header.header-style-v12 .region-selector {
+  display: flex;
+  align-items: center;
+}
+
+/* Форма поиска в хедере */
+#pacz-header.header-style-v12 .search-form-style-header1-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Кнопка добавления объявления */
+#pacz-header.header-style-v12 .listing-btn {
+  display: flex;
+  align-items: center;
+}
+
+.hfb-nav-menu__layout-horizontal .hfb-nav-menu {
+  
+    align-items: center;
+}
+
+.elementor-12637 .elementor-element.elementor-element-4b405885 p{
+  margin: 0;
+}
+
+.elementor-12637 .elementor-element.elementor-element-87ec07a .hfb-login-menu-link svg {
+    margin-right: 8px;
+}

@@ -381,7 +381,7 @@ add_shortcode('rs_region_selector', function($atts){
             padding: 8px 14px; border-radius: 6px;
             cursor: pointer; font-size: 14px;
             display: flex; align-items: center; gap: 6px;
-            margin-top:-15px;
+           
         }
         .rs-dropdown-list {
             position: absolute; top: 100%; left: 0;
