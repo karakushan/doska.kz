@@ -115,9 +115,9 @@ function classiadspro_deactivate_advertising($listing_id, $send_notification = t
         // Send email notification
         $user = get_user_by('id', $listing_author_id);
         if ($user) {
-            $subject = 'Срок рекламирования объявления истёк';
+            $subject = __('Your advertising period has expired', 'classiadspro');
             $message = sprintf(
-                'Здравствуйте, %s!<br><br>Срок рекламирования вашего объявления "%s" истёк.<br><br>Вы можете продлить рекламирование в личном кабинете.',
+                __('Hello, %1$s!<br><br>The advertising period for your listing "%2$s" has expired.<br><br>You can renew advertising in your dashboard.', 'classiadspro'),
                 $user->display_name,
                 $listing_title
             );
@@ -129,8 +129,8 @@ function classiadspro_deactivate_advertising($listing_id, $send_notification = t
         if (function_exists('fpn_send_push')) {
             $dashboard_url = directorypress_dashboardUrl();
             fpn_send_push($listing_author_id, array(
-                'title' => 'Реклама завершена',
-                'body' => sprintf('Срок рекламирования объявления "%s" истёк', $listing_title),
+                'title' => __('Advertising Ended', 'classiadspro'),
+                'body' => sprintf(__('The advertising period for your listing "%s" has expired', 'classiadspro'), $listing_title),
                 'notification_type' => 'advertising_expired',
                 'action_url' => $dashboard_url,
             ));

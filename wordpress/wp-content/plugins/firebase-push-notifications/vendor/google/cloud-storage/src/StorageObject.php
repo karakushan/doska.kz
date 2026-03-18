@@ -478,7 +478,7 @@ class StorageObject
     }
 
     /**
-     * Move an object within a bucket with HNS enabled.
+     * Move an object within a bucket.
      *
      * This method copies data using multiple requests so large objects can be
      * copied with a normal length timeout per request rather than one very long
@@ -688,24 +688,9 @@ class StorageObject
      *           If provided one must also include an `encryptionKey`.
      * }
      * @return StreamInterface
-     * @throws \RuntimeException
      */
     public function downloadToFile($path, array $options = [])
     {
-        // throws an exception in the case of `..` segments, paths
-        // starting with `/`, and Windows drive letters (e.g., `C:`).
-        $normalizedPath = str_replace('\\', '/', $path);
-        $pathSegments = explode('/', $normalizedPath);
-
-        if (in_array('..', $pathSegments, true) ||
-            strpos($normalizedPath, '/') === 0 ||
-            preg_match('/^[a-zA-Z]:\//', $normalizedPath)
-        ) {
-            throw new \RuntimeException(
-                'Path traversal is not allowed. File path is outside the designated directory.'
-            );
-        }
-
         $source = $this->downloadAsStream($options);
         $destination = Utils::streamFor(fopen($path, 'w'));
 
@@ -943,7 +928,7 @@ class StorageObject
      *     @type FetchAuthTokenInterface $credentialsFetcher A credentials
      *           fetcher instance.
      *     @type array $keyFile [DEPRECATED]
-     *           @deprecated This option is being deprecated because of a potential security risk.
+     *           This option is being deprecated because of a potential security risk.
      *           This option does not validate the credential configuration. The security
      *           risk occurs when a credential configuration is accepted from a source
      *           that is not under your control and used without validation on your side.
@@ -964,7 +949,7 @@ class StorageObject
      *           configurations received from external sources.
      *           @see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials
     *     @type string $keyFilePath [DEPRECATED]
-     *           @deprecated This option is being deprecated because of a potential security risk.
+     *           This option is being deprecated because of a potential security risk.
      *           This option does not validate the credential configuration. The security
      *           risk occurs when a credential configuration is accepted from a source
      *           that is not under your control and used without validation on your side.
@@ -1100,7 +1085,7 @@ class StorageObject
      *     @type FetchAuthTokenInterface $credentialsFetcher A credentials
      *           fetcher instance.
      *     @type array $keyFile [DEPRECATED]
-     *           @deprecated This option is being deprecated because of a potential security risk.
+     *           This option is being deprecated because of a potential security risk.
      *           This option does not validate the credential configuration. The security
      *           risk occurs when a credential configuration is accepted from a source
      *           that is not under your control and used without validation on your side.
@@ -1121,7 +1106,7 @@ class StorageObject
      *           configurations received from external sources.
      *           @see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials
     *     @type string $keyFilePath [DEPRECATED]
-     *           @deprecated This option is being deprecated because of a potential security risk.
+     *           This option is being deprecated because of a potential security risk.
      *           This option does not validate the credential configuration. The security
      *           risk occurs when a credential configuration is accepted from a source
      *           that is not under your control and used without validation on your side.
@@ -1238,7 +1223,7 @@ class StorageObject
      *     @type FetchAuthTokenInterface $credentialsFetcher A credentials
      *           fetcher instance.
      *     @type array $keyFile [DEPRECATED]
-     *           @deprecated This option is being deprecated because of a potential security risk.
+     *           This option is being deprecated because of a potential security risk.
      *           This option does not validate the credential configuration. The security
      *           risk occurs when a credential configuration is accepted from a source
      *           that is not under your control and used without validation on your side.
@@ -1259,7 +1244,7 @@ class StorageObject
      *           configurations received from external sources.
      *           @see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials
     *     @type string $keyFilePath [DEPRECATED]
-     *           @deprecated This option is being deprecated because of a potential security risk.
+     *           This option is being deprecated because of a potential security risk.
      *           This option does not validate the credential configuration. The security
      *           risk occurs when a credential configuration is accepted from a source
      *           that is not under your control and used without validation on your side.

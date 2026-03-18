@@ -114,7 +114,7 @@ function classiadspro_firebase_message_sent($message_id, $message, $inserted_mes
         
         // Get message content
         $message_content = isset($message['message_content']) ? $message['message_content'] : $inserted_message->post_content;
-        $message_preview = !empty($message_content) ? wp_trim_words(strip_tags($message_content), 20) : 'You have received a new message';
+        $message_preview = !empty($message_content) ? wp_trim_words(strip_tags($message_content), 20) : __('You have received a new message', 'classiadspro');
         
         // Build action URL with message ID
         $action_url = home_url('/my-dashboard/?directory_action=messages&difpaction=viewmessage&difp_id=' . intval($message_id));
@@ -122,7 +122,7 @@ function classiadspro_firebase_message_sent($message_id, $message, $inserted_mes
         // Send notification to each recipient
         foreach ($recipient_ids as $recipient_id) {
             $notification_data = array(
-                'title' => 'New message from ' . $sender_name,
+                'title' => sprintf(__('New message from %s', 'classiadspro'), $sender_name),
                 'body' => $message_preview,
                 'icon' => get_site_icon_url(),
                 'badge' => get_site_icon_url(),
@@ -139,46 +139,30 @@ function classiadspro_firebase_message_sent($message_id, $message, $inserted_mes
             } else {
                 error_log('Firebase: Function fpn_send_push does not exist');
             }
+
+            // Send email notification
+            $recipient = get_user_by('id', $recipient_id);
+            if ($recipient && $recipient->user_email) {
+                $email_subject = sprintf(__('New message from %s', 'classiadspro'), $sender_name);
+                $email_body = sprintf(
+                    '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>',
+                    sprintf(__('Hello, %s!', 'classiadspro'), esc_html($recipient->display_name)),
+                    sprintf(__('You have received a new message from %s:', 'classiadspro'), esc_html($sender_name)) . '<br><em>' . esc_html($message_preview) . '</em>',
+                    esc_url($action_url),
+                    __('View message', 'classiadspro')
+                );
+                $headers = array(
+                    'Content-Type: text/html; charset=UTF-8',
+                    'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
+                );
+                wp_mail($recipient->user_email, $email_subject, $email_body, $headers);
+            }
         }
     } catch (Exception $e) {
         error_log('Firebase: Error sending message notification - ' . $e->getMessage() . ' | Trace: ' . $e->getTraceAsString());
     }
 }
 add_action('difp_action_message_after_send', 'classiadspro_firebase_message_sent', 10, 3);
-
-/**
- * Send push notification for listing expiration
- * Hook: directorypress_listing_expired
- */
-function classiadspro_firebase_listing_expired($listing_id) {
-    try {
-        $listing = get_post($listing_id);
-        if (!$listing) {
-            return;
-        }
-        
-        $author_id = $listing->post_author;
-        $listing_title = get_the_title($listing_id);
-        
-        $notification_data = array(
-            'title' => 'Listing Expired',
-            'body' => 'Your listing "' . $listing_title . '" has expired',
-            'icon' => get_site_icon_url(),
-            'badge' => get_site_icon_url(),
-            'notification_type' => 'listing_expired',
-            'action_url' => get_edit_post_link($listing_id, 'url'),
-        );
-        
-        if (function_exists('fpn_send_push')) {
-            if (fpn_send_push($author_id, $notification_data)) {
-                error_log('Firebase: Listing expired notification sent to user ' . $author_id);
-            }
-        }
-    } catch (Exception $e) {
-        error_log('Firebase: Error sending listing expired notification - ' . $e->getMessage());
-    }
-}
-add_action('directorypress_listing_expired', 'classiadspro_firebase_listing_expired', 10, 1);
 
 /**
  * Send push notification for listing deactivation
@@ -193,14 +177,15 @@ function classiadspro_firebase_listing_deactivated($listing_id) {
         
         $author_id = $listing->post_author;
         $listing_title = get_the_title($listing_id);
+        $dashboard_url = directorypress_dashboardUrl();
         
         $notification_data = array(
-            'title' => 'Listing Deactivated',
-            'body' => 'Your listing "' . $listing_title . '" has been deactivated',
+            'title' => __('Listing Deactivated', 'classiadspro'),
+            'body' => sprintf(__('Your listing "%s" has been deactivated', 'classiadspro'), $listing_title),
             'icon' => get_site_icon_url(),
             'badge' => get_site_icon_url(),
             'notification_type' => 'listing_deactivated',
-            'action_url' => get_edit_post_link($listing_id, 'url'),
+            'action_url' => $dashboard_url,
         );
         
         if (function_exists('fpn_send_push')) {
@@ -208,8 +193,67 @@ function classiadspro_firebase_listing_deactivated($listing_id) {
                 error_log('Firebase: Listing deactivated notification sent to user ' . $author_id);
             }
         }
+
+        // Send email notification
+        $user = get_user_by('id', $author_id);
+        if ($user && $user->user_email) {
+            $subject = sprintf(__('Your listing "%s" has been deactivated', 'classiadspro'), $listing_title);
+            $body = sprintf(
+                '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>',
+                sprintf(__('Hello, %s!', 'classiadspro'), esc_html($user->display_name)),
+                sprintf(__('Your listing "%s" has been deactivated. You can manage your listings from your dashboard.', 'classiadspro'), esc_html($listing_title)),
+                esc_url($dashboard_url),
+                __('Go to Dashboard', 'classiadspro')
+            );
+            $headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
+            );
+            wp_mail($user->user_email, $subject, $body, $headers);
+        }
     } catch (Exception $e) {
         error_log('Firebase: Error sending listing deactivated notification - ' . $e->getMessage());
     }
 }
 add_action('directorypress_listing_deactivated', 'classiadspro_firebase_listing_deactivated', 10, 1);
+
+/**
+ * Send push notification when admin verifies a user account
+ * Hook: personal_options_update, edit_user_profile_update
+ */
+function classiadspro_firebase_user_verified($user_id) {
+    try {
+        if (!isset($_POST['user_verified'])) {
+            return;
+        }
+
+        $old_verified = get_user_meta($user_id, 'user_verified', true);
+        $new_verified = '1';
+
+        // Only send if status is changing to verified
+        if ($old_verified === '1') {
+            return;
+        }
+
+        $dashboard_url = trailingslashit(get_home_url()) . 'my-dashboard/';
+
+        $notification_data = array(
+            'title' => __('Account Verified', 'classiadspro'),
+            'body' => __('Your account has been verified. You can now post listings!', 'classiadspro'),
+            'icon' => get_site_icon_url(),
+            'badge' => get_site_icon_url(),
+            'notification_type' => 'user_verified',
+            'action_url' => $dashboard_url,
+        );
+
+        if (function_exists('fpn_send_push')) {
+            if (fpn_send_push($user_id, $notification_data)) {
+                error_log('Firebase: Verification notification sent to user ' . $user_id);
+            }
+        }
+    } catch (Exception $e) {
+        error_log('Firebase: Error sending verification notification - ' . $e->getMessage());
+    }
+}
+add_action('personal_options_update', 'classiadspro_firebase_user_verified', 20, 1);
+add_action('edit_user_profile_update', 'classiadspro_firebase_user_verified', 20, 1);

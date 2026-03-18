@@ -90,6 +90,9 @@ class Firebase_Push_Notifications_Plugin
      */
     private function init()
     {
+        // Handle firebase-messaging-sw.js request redirect
+        add_action('init', array($this, 'handle_firebase_sw_request'));
+        
         // Initialize Firebase Push Notifications
         $this->firebase_push_notifications = Firebase_Push_Notifications::getInstance();
 
@@ -102,6 +105,29 @@ class Firebase_Push_Notifications_Plugin
 
         // Admin notices
         add_action('admin_notices', array($this, 'admin_notices'));
+    }
+
+    /**
+     * Handle firebase-messaging-sw.js request
+     * Serve our custom service worker instead of 404
+     */
+    public function handle_firebase_sw_request()
+    {
+        $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+        
+        // Check if requesting firebase-messaging-sw.js
+        if (strpos($request_uri, 'firebase-messaging-sw.js') !== false) {
+            // Set JavaScript content type
+            header('Content-Type: application/javascript; charset=utf-8');
+            header('Cache-Control: no-cache');
+            
+            // Output our custom service worker
+            $sw_path = FIREBASE_PUSH_NOTIFICATIONS_PLUGIN_DIR . 'assets/js/service-worker.js';
+            if (file_exists($sw_path)) {
+                readfile($sw_path);
+            }
+            exit;
+        }
     }
 
     /**
@@ -218,7 +244,7 @@ class Firebase_Push_Notifications_Plugin
         $charset_collate = $wpdb->get_charset_collate();
 
         // Notification logs table
-        $table_name = $wpdb->prefix . 'firebase_notification_logs';
+        $table_name = $wpdb->prefix . 'firebase_notifications_log';
 
         $sql = "CREATE TABLE $table_name (
             id bigint(20) NOT NULL AUTO_INCREMENT,

@@ -97,6 +97,15 @@ define( 'WP_DEBUG_DISPLAY', 	false );
 error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE );
 
 /* Add any custom values between this line and the "stop editing" line. */
+
+// Dynamically set WP_HOME and WP_SITEURL based on current HTTP_HOST
+// This ensures static assets (icons, flags, CSS, JS) load correctly on subdomains
+if ( ! defined( 'WP_HOME' ) ) {
+	$rs_protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ? 'https' : 'http';
+	$rs_host     = $_SERVER['HTTP_HOST'] ?? 'adshelppro.com';
+	define( 'WP_HOME',    $rs_protocol . '://' . $rs_host );
+	define( 'WP_SITEURL', $rs_protocol . '://' . $rs_host );
+}
 // Увеличиваем лимиты PHP
 ini_set('memory_limit', '512M');
 ini_set('upload_max_filesize', '64M');

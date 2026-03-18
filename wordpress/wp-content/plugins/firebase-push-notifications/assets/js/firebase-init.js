@@ -25,6 +25,95 @@
     }
   }
 
+  // ==================== CROSS-DOMAIN COOKIE HELPERS ====================
+  // These cookies work across all subdomains (e.g., de.adshelppro.com, es.adshelppro.com)
+
+  /**
+   * Get the root domain for cross-subdomain cookies
+   * Dynamically extracts root domain from current hostname
+   */
+  function getRootDomain() {
+    const host = window.location.hostname;
+    
+    // For localhost or IP addresses, don't set domain (cookie will be for current host)
+    if (host === 'localhost' || host.indexOf('localhost:') !== -1 || /^(\d{1,3}\.){3}\d{1,3}$/.test(host)) {
+      return null;
+    }
+    
+    // Extract root domain (last two parts for standard domains, last three for country TLDs)
+    const parts = host.split('.');
+    
+    // Handle country-code TLDs like .co.uk, .com.au, etc.
+    const countryTLDs = ['co.uk', 'com.au', 'co.nz', 'co.jp', 'co.kr', 'com.br', 'com.mx'];
+    const lastTwoParts = parts.slice(-2).join('.');
+    
+    if (parts.length >= 2) {
+      // For country-code TLDs, use last 3 parts, otherwise last 2
+      if (countryTLDs.indexOf(lastTwoParts) !== -1 && parts.length >= 3) {
+        return '.' + parts.slice(-3).join('.');
+      }
+      return '.' + parts.slice(-2).join('.');
+    }
+    
+    return null;
+  }
+
+  /**
+   * Set a cookie that works across all subdomains
+   */
+  function setCrossDomainCookie(name, value, days) {
+    let cookieStr = name + '=' + encodeURIComponent(value) + '; path=/; SameSite=Lax';
+
+    const rootDomain = getRootDomain();
+    if (rootDomain) {
+      cookieStr += '; domain=' + rootDomain;
+    }
+
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      cookieStr += '; expires=' + date.toUTCString();
+    }
+
+    // Add Secure flag for HTTPS
+    if (window.location.protocol === 'https:') {
+      cookieStr += '; Secure';
+    }
+
+    document.cookie = cookieStr;
+    log('Cross-domain cookie set: ' + name + ', domain: ' + (rootDomain || 'current'));
+  }
+
+  /**
+   * Get a cookie value
+   */
+  function getCookie(name) {
+    const nameEQ = name + '=';
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(nameEQ) === 0) {
+        return decodeURIComponent(cookie.substring(nameEQ.length));
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Delete a cookie
+   */
+  function deleteCookie(name) {
+    let cookieStr = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    const rootDomain = getRootDomain();
+    if (rootDomain) {
+      cookieStr += '; domain=' + rootDomain;
+    }
+    document.cookie = cookieStr;
+  }
+
   // Global error handler for Firebase
   window.addEventListener("unhandledrejection", function (event) {
     if (
@@ -81,54 +170,100 @@
 
       // Check if Service Worker is supported before creating messaging instance
       if ("serviceWorker" in navigator) {
-        log("Service Worker supported, initializing messaging");
-        // Get messaging instance with Service Worker support
-        messaging = firebase.messaging();
-
-        // Initialize service worker first
+        log("Service Worker supported, initializing service worker first");
+        
+        // Initialize service worker FIRST, then create messaging instance
         initializeServiceWorker()
           .then(function (registration) {
-            log(
-              "Service Worker initialized, waiting for user gesture to request permission"
-            );
+            if (registration) {
+              log("Service Worker registered successfully");
+              // Now create messaging instance with custom service worker
+              try {
+                messaging = firebase.messaging();
+                log("Messaging instance created with custom service worker");
+              } catch (error) {
+                log("Error creating messaging instance: " + error.message);
+              }
+            } else {
+              log("Service Worker registration failed, creating messaging without SW");
+              messaging = firebase.messaging();
+            }
+            
+            // Continue with initialization
+            completeInitialization();
           })
           .catch(function (error) {
             log("Service Worker initialization error: " + error.message);
+            // Fallback: create messaging without service worker
+            try {
+              messaging = firebase.messaging();
+              completeInitialization();
+            } catch (e) {
+              log("Fallback messaging creation failed: " + e.message);
+            }
           });
       } else {
         // Fallback: create messaging instance without Service Worker
         try {
           log("Service Worker not supported, using fallback");
           messaging = firebase.messaging();
+          completeInitialization();
         } catch (error) {
           log("Firebase messaging not supported: " + error.message);
           return;
         }
       }
+    } catch (error) {
+      log("Firebase initialization error: " + error.message);
+    }
+  }
 
-      isInitialized = true;
-      log("Firebase initialization complete");
+  /**
+   * Complete initialization after messaging is ready
+   */
+  function completeInitialization() {
+    isInitialized = true;
+    log("Firebase initialization complete");
 
       // Set up notification permission button listener
       setupNotificationButton();
 
-      // Show permission request for all users if not already asked
-      if (Notification.permission === "default" && !hasBeenAskedForPermission()) {
-        // Small delay to ensure UI is ready
-        setTimeout(function () {
-          showPermissionDialog();
-        }, 2000);
-      } else if (Notification.permission === "granted") {
+      // Show permission request ONLY for logged in users
+      // This prevents showing the dialog to guest users
+      if (!isUserLoggedIn()) {
+        log("User not logged in, skipping permission dialog");
+        return;
+      }
+
+      // Show permission request if permission is default (not yet decided)
+      // Only show custom dialog for Safari (requires interactive user engagement)
+      // For other browsers, native permission request is triggered on first interaction
+      if (Notification.permission === "default" && isSafari()) {
+        // Safari requires interactive user engagement for permission request
+        // Check if we should show the dialog (not asked in last 24 hours)
+        const lastAskedTime = getCookie('fcm_permission_asked_time');
+        const now = Date.now();
+        const twentyFourHours = 24 * 60 * 60 * 1000;
+        
+        if (!lastAskedTime || (now - parseInt(lastAskedTime)) > twentyFourHours) {
+          log("Safari detected, showing custom permission dialog");
+          // Small delay to ensure UI is ready
+          setTimeout(function () {
+            showPermissionDialog();
+          }, 2000);
+        } else {
+          log("Permission dialog was shown recently, skipping");
+        }
+      }
+      // For non-Safari browsers, native permission request will be triggered on first interaction (see setupNotificationButton)
+      
+      if (Notification.permission === "granted") {
         // If permission already granted, handle existing tokens
         const storedToken = getStoredToken();
         if (storedToken) {
           log("Permission already granted, found stored token");
-          if (isUserLoggedIn()) {
-            log("Logged in user with stored token, syncing with server");
-            saveTokenToServer(storedToken);
-          } else {
-            log("Guest user with stored token, token already saved locally");
-          }
+          log("Logged in user with stored token, syncing with server");
+          saveTokenToServer(storedToken);
         } else {
           log("Permission granted but no stored token, getting new token");
           if (messaging) {
@@ -136,9 +271,6 @@
           }
         }
       }
-    } catch (error) {
-      log("Firebase initialization error: " + error.message);
-    }
   }
 
   /**
@@ -491,11 +623,24 @@
       return Promise.resolve(null);
     }
 
-    return navigator.serviceWorker
-      .register(
+    // First, unregister any default Firebase service worker that might exist
+    return navigator.serviceWorker.getRegistrations().then(function(registrations) {
+      // Remove any old firebase-messaging-sw.js registrations
+      const cleanupPromises = registrations.map(function(registration) {
+        if (registration.active && registration.active.scriptURL &&
+            registration.active.scriptURL.includes('firebase-messaging-sw.js')) {
+          return registration.unregister();
+        }
+        return Promise.resolve();
+      });
+      
+      return Promise.all(cleanupPromises);
+    }).then(function() {
+      // Register our custom service worker
+      return navigator.serviceWorker.register(
         "/wp-content/plugins/firebase-push-notifications/assets/js/service-worker.js"
-      )
-      .then(function (registration) {
+      );
+    }).then(function (registration) {
         serviceWorkerRegistration = registration;
         // Send Firebase config to service worker
         if (registration.active) {
@@ -521,6 +666,7 @@
         return registration;
       })
       .catch(function (error) {
+        log("Service worker registration error: " + error.message);
         return null;
       });
   }
@@ -529,7 +675,11 @@
    * Check if user is logged in
    */
   function isUserLoggedIn() {
-    // Check if WordPress user is logged in
+    // First check from WordPress localized data
+    if (typeof firebasePushNotifications !== 'undefined' && firebasePushNotifications.isLoggedIn !== undefined) {
+      return firebasePushNotifications.isLoggedIn;
+    }
+    // Fallback: check if WordPress user is logged in via body class
     return document.body.classList.contains("logged-in");
   }
 
@@ -567,25 +717,92 @@
   }
 
   /**
-   * Check if user has already been asked for permission
+   * Get current user ID from WordPress
    */
-  function hasBeenAskedForPermission() {
-    try {
-      return localStorage.getItem('fcm_permission_asked') === 'true';
-    } catch (error) {
-      return false;
+  function getCurrentUserId() {
+    // Try to get from localized data
+    if (typeof firebasePushNotifications !== 'undefined' && firebasePushNotifications.userId) {
+      return firebasePushNotifications.userId;
+    }
+    // Try to get from body class (WordPress adds logged-in class)
+    const body = document.body;
+    if (body.classList.contains('logged-in')) {
+      // Try to extract user ID from admin bar
+      const adminBarProfile = document.querySelector('#wp-admin-bar-my-account a');
+      if (adminBarProfile) {
+        const href = adminBarProfile.getAttribute('href');
+        const match = href.match(/user_id=(\d+)/);
+        if (match) {
+          return parseInt(match[1]);
+        }
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Save user notification status to Firebase Firestore
+   * This allows tracking user's notification status across devices
+   */
+  function saveUserNotificationStatusToFirebase(token, enabled) {
+    if (!isUserLoggedIn()) {
+      log("User not logged in, skipping Firebase user status save");
+      return;
+    }
+
+    // Get user ID from WordPress
+    const userId = getCurrentUserId();
+    if (!userId) {
+      log("Could not get user ID, skipping Firebase user status save");
+      return;
+    }
+
+    // Use Firestore if available
+    if (typeof firebase !== 'undefined' && firebase.firestore) {
+      try {
+        const db = firebase.firestore();
+        const userRef = db.collection('notification_users').doc(userId.toString());
+
+        userRef.set({
+          uid: userId,
+          token: token,
+          notificationsEnabled: enabled,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          platform: navigator.platform,
+          userAgent: navigator.userAgent
+        }, { merge: true })
+        .then(function() {
+          log("✅ User notification status saved to Firebase");
+        })
+        .catch(function(error) {
+          log("❌ Error saving user status to Firebase: " + error.message);
+        });
+      } catch (error) {
+        log("❌ Firestore not available: " + error.message);
+      }
+    } else {
+      log("Firestore not available, skipping Firebase user status save");
     }
   }
 
   /**
+   * Check if user has already been asked for permission
+   * Uses cross-domain cookie to persist across subdomain changes
+   */
+  function hasBeenAskedForPermission() {
+    // Check cookie only (works across subdomains)
+    return getCookie('fcm_permission_asked') === 'true';
+  }
+
+  /**
    * Mark that user has been asked for permission
+   * Uses cross-domain cookie to persist across subdomain changes
    */
   function markPermissionAsked() {
-    try {
-      localStorage.setItem('fcm_permission_asked', 'true');
-    } catch (error) {
-      log("Error marking permission as asked: " + error.message);
-    }
+    // Set cookie for 1 year (works across all subdomains)
+    setCrossDomainCookie('fcm_permission_asked', 'true', 365);
+    // Set timestamp cookie for rate limiting (24 hour cooldown)
+    setCrossDomainCookie('fcm_permission_asked_time', Date.now().toString(), 1);
   }
 
   /**
@@ -1011,6 +1228,8 @@
         if (storedToken) {
           log("Found stored token for logged in user, sending to server immediately");
           saveTokenToServer(storedToken);
+          // Save user status to Firebase
+          saveUserNotificationStatusToFirebase(storedToken, true);
         } else {
           log("No stored token found, getting new token");
           if (messaging) {
@@ -1018,14 +1237,6 @@
           } else {
             log("Messaging not initialized yet");
           }
-        }
-      } else {
-        // For guest users, always get token
-        log("Guest user, getting token");
-        if (messaging) {
-          getToken();
-        } else {
-          log("Messaging not initialized yet");
         }
       }
 
@@ -1036,6 +1247,8 @@
       }
     } else if (permission === "denied") {
       log("Permission denied");
+      // Mark permission as asked (denied) in cross-domain cookie
+      markPermissionAsked();
       // For Safari, show a helpful message
       if (isSafari()) {
         showSafariPermissionDeniedMessage();
@@ -1046,10 +1259,16 @@
   }
 
   /**
-   * Show permission request dialog for all users
+   * Show permission request dialog for logged in users only
    */
   function showPermissionDialog() {
     log("Showing permission dialog");
+
+    // Double-check that user is logged in
+    if (!isUserLoggedIn()) {
+      log("User not logged in, not showing permission dialog");
+      return;
+    }
 
     // Check if dialog already exists
     if (document.getElementById("firebase-permission-dialog")) {

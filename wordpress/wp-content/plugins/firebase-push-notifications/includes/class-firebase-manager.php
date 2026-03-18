@@ -17,6 +17,25 @@ class FirebaseManager
     private $isInitialized = false;
 
     /**
+     * Check if token entry is new format (array) or old format (string)
+     */
+    private function is_token_entry_new_format($token_entry)
+    {
+        return is_array($token_entry) && isset($token_entry['token']);
+    }
+
+    /**
+     * Get token value from entry (supports both formats)
+     */
+    private function get_token_value($token_entry)
+    {
+        if ($this->is_token_entry_new_format($token_entry)) {
+            return $token_entry['token'];
+        }
+        return $token_entry; // Old format - just a string
+    }
+
+    /**
      * Get singleton instance
      */
     public static function getInstance()
@@ -242,54 +261,112 @@ class FirebaseManager
      */
     public function sendNotificationToUser($user_id, $title, $body, $data = array(), $notification_type = 'general')
     {
+        file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - sendNotificationToUser called for user ' . $user_id . "\n", FILE_APPEND);
+        error_log('Firebase Push Notifications: sendNotificationToUser called for user ' . $user_id);
+        
         if (!$this->isInitialized()) {
+            error_log('Firebase Push Notifications: Firebase not initialized');
+            file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Firebase not initialized' . "\n", FILE_APPEND);
             return false;
         }
 
         // Check if user has notifications enabled for this type
         if (!$this->isNotificationEnabled($user_id, $notification_type)) {
+            error_log('Firebase Push Notifications: Notifications disabled for user ' . $user_id . ' type ' . $notification_type);
+            file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Notifications disabled for type: ' . $notification_type . "\n", FILE_APPEND);
             return false;
         }
 
         // Get user's FCM tokens
         $tokens = get_user_meta($user_id, '_fcm_device_tokens', true);
         if (empty($tokens) || !is_array($tokens)) {
+            error_log('Firebase Push Notifications: No tokens found for user ' . $user_id);
+            file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - No tokens found' . "\n", FILE_APPEND);
             return false;
         }
+        
+        error_log('Firebase Push Notifications: Found ' . count($tokens) . ' tokens for user ' . $user_id);
+        file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Found ' . count($tokens) . ' tokens' . "\n", FILE_APPEND);
 
         $success_count = 0;
         $failed_tokens = array();
+        $invalid_tokens = array(); // Tokens that should be removed (NotRegistered, InvalidRegistration)
 
-        foreach ($tokens as $token) {
+        file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Starting to process ' . count($tokens) . ' tokens' . "\n", FILE_APPEND);
+
+        foreach ($tokens as $token_entry) {
+            // Extract token value (supports both old string and new array format)
+            $token = $this->get_token_value($token_entry);
+            if (empty($token)) {
+                file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Empty token, skipping' . "\n", FILE_APPEND);
+                continue;
+            }
+            
+            file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Processing token: ' . substr($token, 0, 30) . '...' . "\n", FILE_APPEND);
+            
             try {
                 $message = \Kreait\Firebase\Messaging\CloudMessage::new()
                     ->withNotification(\Kreait\Firebase\Messaging\Notification::create($title, $body))
                     ->withData(array_merge($data, array(
-                        'notification_type' => $notification_type,
-                        'user_id' => $user_id,
-                        'timestamp' => time()
+                        'notification_type' => (string)$notification_type,
+                        'user_id' => (string)$user_id,
+                        'timestamp' => (string)time()
                     )))
                     ->toToken($token);
 
+                file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Sending message to Firebase...' . "\n", FILE_APPEND);
+                
                 $result = $this->messaging->send($message);
+                
+                file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Send SUCCESS! Result: ' . json_encode($result) . "\n", FILE_APPEND);
                 $success_count++;
 
                 // Log successful notification
                 $this->logNotification($user_id, $notification_type, $title, $body, $data, 'sent');
             } catch (\Kreait\Firebase\Exception\MessagingException $e) {
+                $error_message = $e->getMessage();
+                file_put_contents('/tmp/firebase-test.log', date('Y-m-d H:i:s') . ' - Send FAILED: ' . $error_message . "\n", FILE_APPEND);
                 $failed_tokens[] = $token;
-                error_log('Firebase Push Notifications: Failed to send to token ' . $token . ' - ' . $e->getMessage());
+                error_log('Firebase Push Notifications: Failed to send to token ' . $token . ' - ' . $error_message);
+
+                // Only mark token as invalid for specific errors that indicate the token is permanently invalid
+                // NotRegistered: Token was never registered or has been unregistered
+                // InvalidRegistration: Token format is invalid
+                // 
+                // DON'T remove tokens for these errors (they may be temporary):
+                // - "Requested entity was not found" - may indicate project configuration issue
+                // - "Unavailable" - temporary server error
+                // - "InternalServerError" - Firebase server error
+                $should_remove_token = false;
+                
+                if (strpos($error_message, 'NotRegistered') !== false) {
+                    $should_remove_token = true;
+                    error_log('Firebase Push Notifications: Token not registered (user revoked permission or token expired): ' . substr($token, 0, 20) . '...');
+                } elseif (strpos($error_message, 'InvalidRegistration') !== false) {
+                    $should_remove_token = true;
+                    error_log('Firebase Push Notifications: Token has invalid format: ' . substr($token, 0, 20) . '...');
+                } else {
+                    // Log other errors but don't remove token - may be temporary
+                    error_log('Firebase Push Notifications: Temporary error (token NOT removed): ' . $error_message);
+                }
+                
+                if ($should_remove_token) {
+                    $invalid_tokens[] = $token;
+                }
 
                 // Log failed notification
                 $this->logNotification($user_id, $notification_type, $title, $body, $data, 'failed');
             }
         }
 
-        // Remove failed tokens
-        if (!empty($failed_tokens)) {
-            $this->removeFailedTokens($user_id, $failed_tokens);
+        // Remove only invalid tokens (NotRegistered, InvalidRegistration)
+        // Don't remove tokens for temporary errors like Unavailable, InternalServerError
+        if (!empty($invalid_tokens)) {
+            $this->removeFailedTokens($user_id, $invalid_tokens);
         }
 
+        error_log('Firebase Push Notifications: sendNotificationToUser result - success: ' . $success_count . ', failed: ' . count($failed_tokens) . ', invalid: ' . count($invalid_tokens));
+        
         return $success_count > 0;
     }
 
@@ -312,8 +389,8 @@ class FirebaseManager
             $message = \Kreait\Firebase\Messaging\CloudMessage::new()
                 ->withNotification(\Kreait\Firebase\Messaging\Notification::create($title, $body))
                 ->withData(array_merge($data, array(
-                    'topic' => $topic,
-                    'timestamp' => time()
+                    'topic' => (string)$topic,
+                    'timestamp' => (string)time()
                 )))
                 ->toTopic($topic);
 
@@ -387,14 +464,25 @@ class FirebaseManager
      * Remove failed tokens from user meta
      * 
      * @param int $user_id User ID
-     * @param array $failed_tokens Array of failed tokens
+     * @param array $failed_tokens Array of failed token values
      */
     private function removeFailedTokens($user_id, $failed_tokens)
     {
         $tokens = get_user_meta($user_id, '_fcm_device_tokens', true);
-        if (is_array($tokens)) {
-            $tokens = array_diff($tokens, $failed_tokens);
-            update_user_meta($user_id, '_fcm_device_tokens', $tokens);
+        if (!is_array($tokens)) {
+            return;
+        }
+        
+        $updated_tokens = array();
+        foreach ($tokens as $token_entry) {
+            $token_value = $this->get_token_value($token_entry);
+            if (!in_array($token_value, $failed_tokens)) {
+                $updated_tokens[] = $token_entry;
+            }
+        }
+        
+        if (count($updated_tokens) !== count($tokens)) {
+            update_user_meta($user_id, '_fcm_device_tokens', $updated_tokens);
         }
     }
 
@@ -416,8 +504,21 @@ class FirebaseManager
             return false;
         }
 
+        // Extract token values from entries
+        $token_values = array();
+        foreach ($tokens as $token_entry) {
+            $token_value = $this->get_token_value($token_entry);
+            if (!empty($token_value)) {
+                $token_values[] = $token_value;
+            }
+        }
+        
+        if (empty($token_values)) {
+            return false;
+        }
+
         try {
-            $result = $this->messaging->subscribeToTopic($topic, $tokens);
+            $result = $this->messaging->subscribeToTopic($topic, $token_values);
             return true;
         } catch (\Kreait\Firebase\Exception\MessagingException $e) {
             error_log('Firebase Push Notifications: Failed to subscribe to topic ' . $topic . ' - ' . $e->getMessage());
@@ -443,8 +544,21 @@ class FirebaseManager
             return false;
         }
 
+        // Extract token values from entries
+        $token_values = array();
+        foreach ($tokens as $token_entry) {
+            $token_value = $this->get_token_value($token_entry);
+            if (!empty($token_value)) {
+                $token_values[] = $token_value;
+            }
+        }
+        
+        if (empty($token_values)) {
+            return false;
+        }
+
         try {
-            $result = $this->messaging->unsubscribeFromTopic($topic, $tokens);
+            $result = $this->messaging->unsubscribeFromTopic($topic, $token_values);
             return true;
         } catch (\Kreait\Firebase\Exception\MessagingException $e) {
             error_log('Firebase Push Notifications: Failed to unsubscribe from topic ' . $topic . ' - ' . $e->getMessage());
@@ -553,9 +667,9 @@ class FirebaseManager
                     $message = \Kreait\Firebase\Messaging\CloudMessage::new()
                         ->withNotification(\Kreait\Firebase\Messaging\Notification::create($title, $body))
                         ->withData(array_merge($data, array(
-                            'notification_type' => $notification_type,
-                            'user_id' => 0, // Guest user
-                            'timestamp' => time()
+                            'notification_type' => (string)$notification_type,
+                            'user_id' => '0', // Guest user
+                            'timestamp' => (string)time()
                         )))
                         ->toToken($token);
 

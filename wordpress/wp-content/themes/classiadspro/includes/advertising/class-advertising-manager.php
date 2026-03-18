@@ -200,16 +200,34 @@ class ClassiAdsPro_Advertising_Manager
             return;
         }
 
+        $dashboard_url = directorypress_dashboardUrl();
+
         // Send push notification
         if (function_exists('fpn_send_push')) {
-            $dashboard_url = directorypress_dashboardUrl();
-
             fpn_send_push($listing_author_id, array(
-                'title' => 'Объявление деактивировано',
-                'body' => sprintf('Ваше объявление "%s" деактивировано по истечении срока', $listing_title),
+                'title' => __('Listing Expired', 'classiadspro'),
+                'body' => sprintf(__('Your listing "%s" has expired', 'classiadspro'), $listing_title),
                 'notification_type' => 'listing_expired',
                 'action_url' => $dashboard_url,
             ));
+        }
+
+        // Send email notification
+        $user = get_user_by('id', $listing_author_id);
+        if ($user && $user->user_email) {
+            $subject = sprintf(__('Your listing "%s" has expired', 'classiadspro'), $listing_title);
+            $body = sprintf(
+                '<p>%s</p><p>%s</p><p><a href="%s">%s</a></p>',
+                sprintf(__('Hello, %s!', 'classiadspro'), esc_html($user->display_name)),
+                sprintf(__('Your listing "%s" has expired. You can renew or repost it from your dashboard.', 'classiadspro'), esc_html($listing_title)),
+                esc_url($dashboard_url),
+                __('Go to Dashboard', 'classiadspro')
+            );
+            $headers = array(
+                'Content-Type: text/html; charset=UTF-8',
+                'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
+            );
+            wp_mail($user->user_email, $subject, $body, $headers);
         }
     }
 }

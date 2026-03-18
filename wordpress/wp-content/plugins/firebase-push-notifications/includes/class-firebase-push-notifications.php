@@ -101,6 +101,9 @@ class Firebase_Push_Notifications
         // Schedule cleanup of old guest tokens
         add_action('wp', array($this, 'schedule_guest_token_cleanup'));
         add_action('firebase_cleanup_guest_tokens', array($this, 'cleanup_old_guest_tokens'));
+        
+        // Migrate old token format to new format (run once)
+        add_action('admin_init', array($this, 'migrate_tokens_format'));
     }
 
     /**
@@ -175,6 +178,8 @@ class Firebase_Push_Notifications
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('firebase_push_nonce'),
             'config' => $this->get_firebase_config(),
+            'userId' => get_current_user_id(),
+            'isLoggedIn' => is_user_logged_in(),
         ));
     }
 
@@ -437,6 +442,7 @@ class Firebase_Push_Notifications
         check_ajax_referer('firebase_push_nonce', 'nonce');
 
         $token = sanitize_text_field($_POST['token']);
+        $user_agent = sanitize_text_field($_SERVER['HTTP_USER_AGENT'] ?? '');
 
         if (empty($token)) {
             wp_send_json_error('Token is required');
@@ -452,9 +458,26 @@ class Firebase_Push_Notifications
                 $existing_tokens = array();
             }
 
-            // Add token if not exists
-            if (!in_array($token, $existing_tokens)) {
-                $existing_tokens[] = $token;
+            // Check if token already exists (supports both old and new format)
+            $token_exists = false;
+            foreach ($existing_tokens as $existing_token) {
+                if ($this->get_token_value($existing_token) === $token) {
+                    $token_exists = true;
+                    break;
+                }
+            }
+
+            if (!$token_exists) {
+                // Create new token entry with metadata
+                $token_data = array(
+                    'token' => $token,
+                    'device_name' => $this->get_device_name($user_agent),
+                    'created_at' => current_time('mysql'),
+                    'user_agent' => $user_agent,
+                    'ip_address' => $this->get_client_ip(),
+                );
+
+                $existing_tokens[] = $token_data;
                 update_user_meta($user_id, '_fcm_device_tokens', $existing_tokens);
 
                 // Remove token from guest tokens if it exists there
@@ -483,9 +506,10 @@ class Firebase_Push_Notifications
             if (!$token_exists) {
                 $guest_tokens[] = array(
                     'token' => $token,
+                    'device_name' => $this->get_device_name($user_agent),
                     'created_at' => current_time('mysql'),
                     'ip_address' => $this->get_client_ip(),
-                    'user_agent' => sanitize_text_field($_SERVER['HTTP_USER_AGENT'] ?? '')
+                    'user_agent' => $user_agent
                 );
 
                 update_option('firebase_guest_tokens', $guest_tokens);
@@ -536,6 +560,65 @@ class Firebase_Push_Notifications
     }
 
     /**
+     * Get device name from user agent
+     */
+    private function get_device_name($user_agent)
+    {
+        // Detect browser
+        $browser = 'Unknown Browser';
+        if (strpos($user_agent, 'Edg') !== false) {
+            $browser = 'Edge';
+        } elseif (strpos($user_agent, 'Chrome') !== false && strpos($user_agent, 'Safari') !== false) {
+            $browser = 'Chrome';
+        } elseif (strpos($user_agent, 'Safari') !== false && strpos($user_agent, 'Chrome') === false) {
+            $browser = 'Safari';
+        } elseif (strpos($user_agent, 'Firefox') !== false) {
+            $browser = 'Firefox';
+        } elseif (strpos($user_agent, 'Opera') !== false || strpos($user_agent, 'OPR') !== false) {
+            $browser = 'Opera';
+        } elseif (strpos($user_agent, 'MSIE') !== false || strpos($user_agent, 'Trident') !== false) {
+            $browser = 'Internet Explorer';
+        }
+
+        // Detect OS
+        $os = 'Unknown OS';
+        if (strpos($user_agent, 'iPhone') !== false) {
+            $os = 'iPhone';
+        } elseif (strpos($user_agent, 'iPad') !== false) {
+            $os = 'iPad';
+        } elseif (strpos($user_agent, 'Android') !== false) {
+            $os = 'Android';
+        } elseif (strpos($user_agent, 'Windows') !== false) {
+            $os = 'Windows';
+        } elseif (strpos($user_agent, 'Macintosh') !== false || strpos($user_agent, 'Mac OS X') !== false) {
+            $os = 'macOS';
+        } elseif (strpos($user_agent, 'Linux') !== false) {
+            $os = 'Linux';
+        }
+
+        return $browser . ' on ' . $os;
+    }
+
+    /**
+     * Check if token entry is old format (string) or new format (array)
+     */
+    private function is_token_entry_new_format($token_entry)
+    {
+        return is_array($token_entry) && isset($token_entry['token']);
+    }
+
+    /**
+     * Get token value from entry (supports both formats)
+     */
+    private function get_token_value($token_entry)
+    {
+        if ($this->is_token_entry_new_format($token_entry)) {
+            return $token_entry['token'];
+        }
+        return $token_entry; // Old format - just a string
+    }
+
+    /**
      * Sync guest token to user when they log in
      */
     public function sync_guest_token_on_login($user_login, $user)
@@ -555,7 +638,7 @@ class Firebase_Push_Notifications
 
         foreach ($guest_tokens as $guest_token) {
             if ($guest_token['ip_address'] === $user_ip && $guest_token['user_agent'] === $user_agent) {
-                $matching_tokens[] = $guest_token['token'];
+                $matching_tokens[] = $guest_token;
             } else {
                 $remaining_guest_tokens[] = $guest_token;
             }
@@ -568,10 +651,28 @@ class Firebase_Push_Notifications
                 $existing_tokens = array();
             }
 
-            // Add matching tokens to user
-            foreach ($matching_tokens as $token) {
-                if (!in_array($token, $existing_tokens)) {
-                    $existing_tokens[] = $token;
+            // Add matching tokens to user (with metadata)
+            foreach ($matching_tokens as $guest_token) {
+                $token_value = $guest_token['token'];
+                
+                // Check if token already exists
+                $token_exists = false;
+                foreach ($existing_tokens as $existing_token) {
+                    if ($this->get_token_value($existing_token) === $token_value) {
+                        $token_exists = true;
+                        break;
+                    }
+                }
+                
+                if (!$token_exists) {
+                    // Add with metadata from guest token
+                    $existing_tokens[] = array(
+                        'token' => $token_value,
+                        'device_name' => isset($guest_token['device_name']) ? $guest_token['device_name'] : $this->get_device_name($guest_token['user_agent']),
+                        'created_at' => isset($guest_token['created_at']) ? $guest_token['created_at'] : current_time('mysql'),
+                        'user_agent' => $guest_token['user_agent'],
+                        'ip_address' => $guest_token['ip_address'],
+                    );
                 }
             }
 
@@ -614,10 +715,17 @@ class Firebase_Push_Notifications
             wp_send_json_error('No tokens found');
         }
 
-        // Remove token if exists
-        $key = array_search($token, $existing_tokens);
-        if ($key !== false) {
-            unset($existing_tokens[$key]);
+        // Find and remove token (supports both old string and new array format)
+        $found_key = null;
+        foreach ($existing_tokens as $key => $token_entry) {
+            if ($this->get_token_value($token_entry) === $token) {
+                $found_key = $key;
+                break;
+            }
+        }
+
+        if ($found_key !== null) {
+            unset($existing_tokens[$found_key]);
             $existing_tokens = array_values($existing_tokens); // Re-index array
 
             if (empty($existing_tokens)) {
@@ -666,28 +774,78 @@ class Firebase_Push_Notifications
         }
     ?>
         <h3><?php _e('Firebase Push Notifications', 'firebase-push-notifications'); ?></h3>
+        <style>
+            .fcm-tokens-admin { margin-top: 10px; }
+            .fcm-token-item {
+                background: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+            .fcm-token-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+            }
+            .fcm-token-actions { display: flex; gap: 5px; }
+            .fcm-token-value { margin-top: 5px; }
+            .fcm-token-meta {
+                font-size: 12px;
+                color: #666;
+                margin-top: 8px;
+                padding-top: 8px;
+                border-top: 1px solid #eee;
+            }
+            .fcm-token-meta span { margin-right: 15px; }
+            .fcm-device-icon { font-size: 18px; margin-right: 5px; }
+        </style>
         <table class="form-table">
             <tr>
                 <th scope="row"><?php _e('Registered Devices', 'firebase-push-notifications'); ?></th>
                 <td>
-                    <div class="fcm-device-count"><?php echo count($tokens); ?></div>
+                    <div class="fcm-device-count"><?php echo count($tokens); ?> <?php _e('devices', 'firebase-push-notifications'); ?></div>
                     <div class="fcm-tokens-admin">
-                        <?php foreach ($tokens as $index => $token): ?>
+                        <?php foreach ($tokens as $index => $token_entry): 
+                            // Support both old (string) and new (array) format
+                            $token_value = $this->get_token_value($token_entry);
+                            $device_name = $this->is_token_entry_new_format($token_entry) ? $token_entry['device_name'] : __('Unknown Device', 'firebase-push-notifications');
+                            $created_at = $this->is_token_entry_new_format($token_entry) ? $token_entry['created_at'] : '';
+                            
+                            // Device icon based on device name
+                            $device_icon = '💻';
+                            if (strpos($device_name, 'iPhone') !== false || strpos($device_name, 'iPad') !== false) {
+                                $device_icon = '📱';
+                            } elseif (strpos($device_name, 'Android') !== false) {
+                                $device_icon = '📱';
+                            } elseif (strpos($device_name, 'macOS') !== false) {
+                                $device_icon = '🖥️';
+                            }
+                        ?>
                             <div class="fcm-token-item">
                                 <div class="fcm-token-header">
-                                    <strong><?php printf(__('Device %d:', 'firebase-push-notifications'), $index + 1); ?></strong>
+                                    <strong>
+                                        <span class="fcm-device-icon"><?php echo $device_icon; ?></span>
+                                        <?php echo esc_html($device_name); ?>
+                                    </strong>
                                     <div class="fcm-token-actions">
-                                        <button type="button" class="button button-small copy-fcm-token" data-token="<?php echo esc_attr($token); ?>">
-                                            <?php _e('Copy', 'firebase-push-notifications'); ?>
+                                        <button type="button" class="button button-small copy-fcm-token" data-token="<?php echo esc_attr($token_value); ?>">
+                                            <?php _e('Copy Token', 'firebase-push-notifications'); ?>
                                         </button>
-                                        <button type="button" class="button button-small button-link-delete delete-fcm-token" data-token="<?php echo esc_attr($token); ?>" data-user-id="<?php echo $user->ID; ?>">
+                                        <button type="button" class="button button-small button-link-delete delete-fcm-token" data-token="<?php echo esc_attr($token_value); ?>" data-user-id="<?php echo $user->ID; ?>">
                                             <?php _e('Delete', 'firebase-push-notifications'); ?>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="fcm-token-value">
-                                    <code><?php echo esc_html(substr($token, 0, 50) . '...'); ?></code>
+                                    <code><?php echo esc_html(substr($token_value, 0, 50) . '...'); ?></code>
                                 </div>
+                                <?php if ($created_at): ?>
+                                <div class="fcm-token-meta">
+                                    <span>📅 <?php _e('Registered:', 'firebase-push-notifications'); ?> <?php echo esc_html($created_at); ?></span>
+                                </div>
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -705,7 +863,7 @@ class Firebase_Push_Notifications
                         navigator.clipboard.writeText(token).then(function() {
                             button.textContent = '<?php _e('Copied!', 'firebase-push-notifications'); ?>';
                             setTimeout(function() {
-                                button.textContent = '<?php _e('Copy', 'firebase-push-notifications'); ?>';
+                                button.textContent = '<?php _e('Copy Token', 'firebase-push-notifications'); ?>';
                             }, 2000);
                         });
                     });
@@ -745,7 +903,8 @@ class Firebase_Push_Notifications
                                         tokenItem.remove();
                                         const deviceCountElement = document.querySelector('.fcm-device-count');
                                         if (deviceCountElement) {
-                                            deviceCountElement.textContent = parseInt(deviceCountElement.textContent) - 1;
+                                            const count = parseInt(deviceCountElement.textContent);
+                                            deviceCountElement.textContent = (count - 1) + ' <?php _e('devices', 'firebase-push-notifications'); ?>';
                                         }
                                         if (document.querySelectorAll('.fcm-token-item').length === 0) {
                                             window.location.reload();
@@ -981,6 +1140,71 @@ class Firebase_Push_Notifications
         if ($removed_count > 0) {
             update_option('firebase_guest_tokens', $cleaned_tokens);
             error_log("Firebase: Cleaned up {$removed_count} old guest tokens");
+        }
+    }
+
+    /**
+     * Migrate old token format (string) to new format (array with metadata)
+     * Runs once on admin_init
+     */
+    public function migrate_tokens_format()
+    {
+        // Check if migration already done
+        if (get_option('firebase_tokens_migrated', false)) {
+            return;
+        }
+
+        // Get all users with FCM tokens
+        $users_with_tokens = get_users(array(
+            'meta_query' => array(
+                array(
+                    'key' => '_fcm_device_tokens',
+                    'compare' => 'EXISTS'
+                )
+            )
+        ));
+
+        $migrated_count = 0;
+
+        foreach ($users_with_tokens as $user) {
+            $tokens = get_user_meta($user->ID, '_fcm_device_tokens', true);
+            
+            if (!is_array($tokens) || empty($tokens)) {
+                continue;
+            }
+
+            $needs_migration = false;
+            $new_tokens = array();
+
+            foreach ($tokens as $token_entry) {
+                // Check if this is old format (string) or new format (array)
+                if ($this->is_token_entry_new_format($token_entry)) {
+                    // Already new format
+                    $new_tokens[] = $token_entry;
+                } else {
+                    // Old format - migrate to new format
+                    $needs_migration = true;
+                    $new_tokens[] = array(
+                        'token' => $token_entry,
+                        'device_name' => 'Unknown Device',
+                        'created_at' => current_time('mysql'),
+                        'user_agent' => '',
+                        'ip_address' => '',
+                    );
+                    $migrated_count++;
+                }
+            }
+
+            if ($needs_migration) {
+                update_user_meta($user->ID, '_fcm_device_tokens', $new_tokens);
+            }
+        }
+
+        // Mark migration as done
+        update_option('firebase_tokens_migrated', true);
+
+        if ($migrated_count > 0) {
+            error_log("Firebase: Migrated {$migrated_count} tokens to new format");
         }
     }
 }
