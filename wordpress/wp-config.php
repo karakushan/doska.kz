@@ -98,6 +98,9 @@ error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
+// Disable default WP-Cron (we use external cron via Docker)
+define( 'DISABLE_WP_CRON', true );
+
 // Dynamically set WP_HOME and WP_SITEURL based on current HTTP_HOST
 // This ensures static assets (icons, flags, CSS, JS) load correctly on subdomains
 if ( ! defined( 'WP_HOME' ) ) {

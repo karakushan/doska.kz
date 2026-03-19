@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Plugins - Query Monitor &#8211; The developer tools panel for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-09-30 17:52:07+0000\n"
+"PO-Revision-Date: 2025-12-04 07:20:03+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : ((n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 1 : 2);\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.0.3\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Query Monitor &#8211; The developer tools panel for WordPress - Stable (latest release)\n"
 
@@ -90,11 +90,11 @@ msgstr "Нет вхождений."
 #: output/html/doing_it_wrong.php:43
 msgctxt "Doing it Wrong"
 msgid "Doing it Wrong (%s)"
-msgstr "Неверные действия (%s)"
+msgstr "Неправильное использование (%s)"
 
 #: output/html/doing_it_wrong.php:41
 msgid "Doing it Wrong occurrences"
-msgstr "Случаи неверных действий"
+msgstr "Случаи неправильного использования"
 
 #. translators: %s: Total number of Doing it Wrong occurrences
 #: output/html/doing_it_wrong.php:40
@@ -104,7 +104,7 @@ msgstr "Всего: %s"
 
 #: output/html/doing_it_wrong.php:31
 msgid "Doing it Wrong"
-msgstr "Неверное действие"
+msgstr "Неправильное использование"
 
 #. translators: %s: Name of WordPress filter
 #: dispatchers/Html.php:608
@@ -190,7 +190,7 @@ msgstr[2] "Всего: %s"
 
 #: output/html/theme.php:84
 msgid "Block Template"
-msgstr "Шаблон блока"
+msgstr "Блочная тема"
 
 #: output/html/timing.php:216
 msgid "Timings"
@@ -380,7 +380,7 @@ msgstr "Расширенная информация о запросе, така�
 #. translators: %s: Dependency name
 #: classes/Component_Altis_Vendor.php:12
 msgid "Dependency: %s"
-msgstr "Зависимости: %s"
+msgstr "Зависимость: %s"
 
 #. translators: %s: Link to help article
 #: output/html/logger.php:46
@@ -562,7 +562,7 @@ msgstr "Файл перевода"
 #. translators: %s: Name of cache driver
 #: output/html/overview.php:349
 msgid "Opcode cache in use: %s"
-msgstr "Используемый драйвер для Opcode: %s"
+msgstr "Используемый Opcode драйвер: %s"
 
 #: output/html/overview.php:212
 msgctxt "database queries"
@@ -571,7 +571,7 @@ msgstr "Всего"
 
 #: output/html/block_editor.php:206
 msgid "None (Classic block)"
-msgstr "Нет (классический блок)"
+msgstr "Ничего (классический блок)"
 
 #: output/html/block_editor.php:70
 msgid "Render Time"
@@ -583,7 +583,7 @@ msgstr "Файлы шаблонов Twig"
 
 #: dispatchers/Html.php:491
 msgid "Toggle panel position"
-msgstr "Переключить положение панели панели"
+msgstr "Переключить положение панели"
 
 #. translators: %1$s: Erroneous post type name, %2$s: WordPress attachment post
 #. type name
@@ -630,7 +630,7 @@ msgstr "Связанная запись имеет тип %1$s вместо %2$s
 
 #: output/html/block_editor.php:133
 msgid "Referenced block does not exist."
-msgstr "Связанный блок не найден."
+msgstr "Связанный блок не существует."
 
 #: output/html/block_editor.php:73
 msgid "Inner HTML"
@@ -658,9 +658,9 @@ msgstr "Эта запись не содержит блоков."
 msgctxt "template parts"
 msgid "Included %s time"
 msgid_plural "Included %s times"
-msgstr[0] "Включен %s раз"
-msgstr[1] "Включен %s раза"
-msgstr[2] "Включен %s раз"
+msgstr[0] "Подключен %s раз"
+msgstr[1] "Подключен %s раза"
+msgstr[2] "Подключен %s раз"
 
 #: output/html/block_editor.php:30 output/html/block_editor.php:339
 msgid "Blocks"
@@ -777,11 +777,11 @@ msgstr "Полностью отключить Query Monitor."
 
 #: dispatchers/Html.php:632
 msgid "If an individual database query takes longer than this time to execute, it's considered \"slow\" and triggers a warning."
-msgstr "Если выполнение отдельного запроса к базе данных занимает больше времени, чем это время, он считается \"медленным\" и выдает предупреждение."
+msgstr "Если выполнение отдельного запроса к базе данных занимает больше времени, чем это, то он считается \"медленным\" и вызывает предупреждение."
 
 #: dispatchers/Html.php:567
 msgid "Authentication cookie is set"
-msgstr "Cookie аутентификации установлен"
+msgstr "Аутентификационный cookie установлен"
 
 #: dispatchers/Html.php:560
 msgid "You can set an authentication cookie which allows you to view Query Monitor output when you&rsquo;re not logged in, or when you&rsquo;re logged in as a different user."
@@ -803,7 +803,7 @@ msgstr "Панель инструментов разработчика для Wo
 #. translators: %s: Number of function timing results that are available
 #: output/html/timing.php:214
 msgid "Timings (%s)"
-msgstr "%s тайминг"
+msgstr "Тайминги (%s)"
 
 #. translators: %s: Approximate memory used in kilobytes
 #: output/html/timing.php:110 output/html/timing.php:142
@@ -842,36 +842,36 @@ msgstr "Ошибки PHP (%s)"
 msgctxt "PHP error level"
 msgid "%s Warning"
 msgid_plural "%s Warnings"
-msgstr[0] "%s Предупреждение"
-msgstr[1] "%s Предупреждения"
-msgstr[2] "%s Предупреждений"
+msgstr[0] "%s предупреждение"
+msgstr[1] "%s предупреждения"
+msgstr[2] "%s предупреждений"
 
 #. translators: %s: Number of PHP notices
 #: output/html/php_errors.php:244
 msgctxt "PHP error level"
 msgid "%s Notice"
 msgid_plural "%s Notices"
-msgstr[0] "%s Уведомление"
-msgstr[1] "%s Уведомления"
-msgstr[2] "%s Уведомлений"
+msgstr[0] "%s уведомление"
+msgstr[1] "%s уведомления"
+msgstr[2] "%s уведомлений"
 
 #. translators: %s: Number of strict PHP errors
 #: output/html/php_errors.php:242
 msgctxt "PHP error level"
 msgid "%s Strict"
 msgid_plural "%s Stricts"
-msgstr[0] "%s Требование"
-msgstr[1] "%s Требования"
-msgstr[2] "%s Требований"
+msgstr[0] "%s строгая"
+msgstr[1] "%s строгие"
+msgstr[2] "%s строгих"
 
 #. translators: %s: Number of deprecated PHP errors
 #: output/html/php_errors.php:240
 msgctxt "PHP error level"
 msgid "%s Deprecated"
 msgid_plural "%s Deprecated"
-msgstr[0] "%s Устаревшая"
-msgstr[1] "%s Устаревшие"
-msgstr[2] "%s Устаревших"
+msgstr[0] "%s устаревшая"
+msgstr[1] "%s устаревшие"
+msgstr[2] "%s устаревших"
 
 #: output/html/doing_it_wrong.php:69 output/html/logger.php:85
 #: output/html/php_errors.php:79
@@ -933,15 +933,15 @@ msgstr "ОС"
 
 #: output/html/db_queries.php:78
 msgid "No database queries were logged."
-msgstr "Запросы к базе данных не были зарегистрированы."
+msgstr "Нет зарегистрированных запросов к базе данных."
 
 #: output/html/conditionals.php:57
 msgid "False Conditionals"
-msgstr "Условия со значением Ложь (false)"
+msgstr "Условные теги (ложь/false)"
 
 #: output/html/conditionals.php:44
 msgid "True Conditionals"
-msgstr "Условия со значением Истина (true)"
+msgstr "Условные теги (истина/true)"
 
 #. translators: %s: Configuration file name.
 #: output/html/caps.php:47
@@ -1002,22 +1002,22 @@ msgstr "Текущая сеть: #%d"
 #: output/html/php_errors.php:63
 msgctxt "Silenced PHP error level"
 msgid "Deprecated (Silenced)"
-msgstr "Устаревшие"
+msgstr "Устаревший (скрыто)"
 
 #: output/html/php_errors.php:62
 msgctxt "Silenced PHP error level"
 msgid "Strict (Silenced)"
-msgstr "Строгий"
+msgstr "Строгий (скрыто)"
 
 #: output/html/php_errors.php:61
 msgctxt "Silenced PHP error level"
 msgid "Notice (Silenced)"
-msgstr "Уведомление"
+msgstr "Уведомление (скрыто)"
 
 #: output/html/php_errors.php:60
 msgctxt "Silenced PHP error level"
 msgid "Warning (Silenced)"
-msgstr "Предупреждение"
+msgstr "Предупреждение (скрыто)"
 
 #. translators: A non-blocking HTTP API request
 #: output/html/http.php:57 output/html/http.php:119
@@ -1094,7 +1094,7 @@ msgstr "Обновленный транзиент"
 
 #: output/html/transients.php:146
 msgid "Transient Updates"
-msgstr "Транзиентный кэш"
+msgstr "Обновления транзиентов"
 
 #: output/html/request.php:107
 msgid "View Main Query"
@@ -1124,7 +1124,7 @@ msgstr "Отчет об ошибках"
 
 #: output/html/hooks.php:33
 msgid "Hooks & Actions"
-msgstr "События и фильтры"
+msgstr "Хуки и события"
 
 #: output/html/db_queries.php:237 output/html/db_queries.php:423
 msgid "Main Query"
@@ -1143,22 +1143,22 @@ msgstr "Иерархия шаблонов"
 #: output/html/php_errors.php:57
 msgctxt "Suppressed PHP error level"
 msgid "Deprecated (Suppressed)"
-msgstr "Устаревшее (скрытое)"
+msgstr "Устаревший (подавлено)"
 
 #: output/html/php_errors.php:56
 msgctxt "Suppressed PHP error level"
 msgid "Strict (Suppressed)"
-msgstr "Строгие (скрытое)"
+msgstr "Строгий (подавлено)"
 
 #: output/html/php_errors.php:55
 msgctxt "Suppressed PHP error level"
 msgid "Notice (Suppressed)"
-msgstr "Уведомления (скрытые)"
+msgstr "Уведомления (подавлено)"
 
 #: output/html/php_errors.php:54
 msgctxt "Suppressed PHP error level"
 msgid "Warning (Suppressed)"
-msgstr "Предупреждения (скрытые)"
+msgstr "Предупреждения (подавлено)"
 
 #: output/html/assets.php:68
 msgid "Position"
@@ -1197,22 +1197,22 @@ msgstr "Текущий сайт: #%d"
 #: output/html/php_errors.php:51
 msgctxt "PHP error level"
 msgid "Deprecated"
-msgstr "Устаревшее"
+msgstr "Устаревший"
 
 #: output/html/php_errors.php:50
 msgctxt "PHP error level"
 msgid "Strict"
-msgstr "Строгие"
+msgstr "Строгий"
 
 #: output/html/php_errors.php:49
 msgctxt "PHP error level"
 msgid "Notice"
-msgstr "Уведомления"
+msgstr "Уведомление"
 
 #: output/html/php_errors.php:48
 msgctxt "PHP error level"
 msgid "Warning"
-msgstr "Предупреждения"
+msgstr "Предупреждение"
 
 #. translators: An HTTP API request was not executed. %s: Hook name
 #: output/html/http.php:103
@@ -1226,7 +1226,7 @@ msgstr "не определено"
 
 #: output/html/theme.php:140
 msgid "Template Parts"
-msgstr "Части шаблонов"
+msgstr "Части шаблона"
 
 #: output/html/overview.php:261 output/raw/cache.php:21
 msgid "Object Cache"
@@ -1265,7 +1265,7 @@ msgstr "Источники вызова"
 
 #: output/html/db_dupes.php:31
 msgid "Duplicate Queries"
-msgstr "Дубли запросов"
+msgstr "Дублирующиеся запросы"
 
 #. translators: %s: Plugin name
 #: classes/Component_MU_Plugin.php:12 classes/Component_MU_Vendor.php:12
@@ -1305,7 +1305,7 @@ msgstr "База данных"
 #. translators: 1: Name of PHP constant, 2: Value of PHP constant
 #: output/html/db_queries.php:73
 msgid "No database queries were logged because the %1$s constant is set to %2$s."
-msgstr "Запросы базы данных не регистрировались, поскольку константа %1$s установлена в  %2$s."
+msgstr "Запросы к базе данных не регистрировались, поскольку константа %1$s установлена в %2$s."
 
 #: output/html/languages.php:30
 msgid "Languages"
@@ -1466,7 +1466,7 @@ msgstr "Источник вызова"
 #. translators: %s: Database query time in seconds
 #: output/html/db_queries.php:121
 msgid "Slow Database Queries (above %ss)"
-msgstr "Медленные запросы к базе данных (свыше %s с.)"
+msgstr "Медленные запросы к базе данных (свыше %sс)"
 
 #: output/Html.php:178 output/html/caps.php:96 output/html/db_components.php:51
 #: output/html/db_queries.php:96 output/html/db_queries.php:132
@@ -1544,7 +1544,7 @@ msgstr "Все"
 
 #: dispatchers/Html.php:549
 msgid "Clear authentication cookie"
-msgstr "Очистить файл cookie для проверки подлинности"
+msgstr "Очистить аутентификационный cookie"
 
 #: dispatchers/Html.php:550
 msgid "Set authentication cookie"
@@ -1591,7 +1591,7 @@ msgstr "Архив автора: %s"
 #: output/html/request.php:30 output/html/request.php:49
 #: output/html/request.php:223
 msgid "Request"
-msgstr "HTTP запрос"
+msgstr "Запрос"
 
 #: output/html/php_errors.php:32 output/html/php_errors.php:304
 msgid "PHP Errors"
@@ -1618,7 +1618,7 @@ msgstr "Системная среда"
 #: output/html/db_queries.php:38 output/html/db_queries.php:553
 #: output/html/overview.php:183 output/raw/db_queries.php:26
 msgid "Database Queries"
-msgstr "Запросы базы данных"
+msgstr "Запросы к базе данных"
 
 #: output/html/db_components.php:30 output/html/db_components.php:127
 msgid "Queries by Component"
@@ -1635,13 +1635,13 @@ msgstr "Условные теги"
 
 #: output/html/admin.php:30
 msgid "Admin Screen"
-msgstr "Консоль"
+msgstr "Экран администратора"
 
 #. translators: A closure is an anonymous PHP function. 1: Line number, 2: File
 #. name
 #: classes/Util.php:414 output/Html.php:508
 msgid "Closure on line %1$d of %2$s"
-msgstr "Замыкание в строке %1$d %2$s"
+msgstr "Замыкание в %2$s на строке %1$d"
 
 #: classes/Component_Unknown.php:10 output/html/db_queries.php:346
 #: output/html/db_queries.php:442 output/html/environment.php:70

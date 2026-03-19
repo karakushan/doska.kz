@@ -39,6 +39,7 @@ services:
       XDEBUG_CLIENT_PORT: 9003
       XDEBUG_START_WITH_REQUEST: "yes"
       # XDEBUG_IDEKEY: doska
+      DOCKER_ENV: "true"
     volumes:
       - ./wordpress:/var/www/html
     networks:
@@ -57,6 +58,28 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     networks:
       - wordpress_network
+
+  wp-cron:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: doska_wp_cron
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      DOCKER_ENV: "true"
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - wordpress_network
+    entrypoint: |
+      /bin/sh -c '
+      while true; do
+        echo "[$(date)] Running wp-cron.php...";
+        php /var/www/html/wp-cron.php;
+        sleep 60;
+      done'
 
 volumes:
   db_data:

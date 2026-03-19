@@ -591,14 +591,16 @@ function pacz_add_image_size($name = '', $width = '', $height = '', $crop = fals
 
 // Looking to send emails in production? Check out our Email API/SMTP product!
 function mailtrap($phpmailer) {
-	// Check if we're on localhost
-	$is_localhost = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1', 'localhost:8000', 'localhost:8080']) 
-		|| strpos($_SERVER['HTTP_HOST'], '.local') !== false
-		|| strpos($_SERVER['HTTP_HOST'], 'localhost') !== false;
+	// Check if we're on localhost or running from CLI (cron)
+	$http_host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+	$is_localhost = in_array($http_host, ['localhost', '127.0.0.1', 'localhost:8000', 'localhost:8080']) 
+		|| strpos($http_host, '.local') !== false
+		|| strpos($http_host, 'localhost') !== false
+		|| (php_sapi_name() === 'cli' && getenv('DOCKER_ENV')); // CLI mode in Docker
 
-	if (!$is_localhost) {
-		return;
-	}
+	// if (!$is_localhost) {
+	// 	return;
+	// }
 
 	$phpmailer->isSMTP();
 	$phpmailer->Host = 'sandbox.smtp.mailtrap.io';
