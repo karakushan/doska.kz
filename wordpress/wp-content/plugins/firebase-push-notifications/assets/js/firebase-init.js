@@ -225,28 +225,43 @@
     isInitialized = true;
     log("Firebase initialization complete");
 
-      // Set up notification permission button listener
+      // Set up notification permission button listener (only for logged in users)
       setupNotificationButton();
 
       // Show permission request ONLY for logged in users
       // This prevents showing the dialog to guest users
       if (!isUserLoggedIn()) {
         log("User not logged in, skipping permission dialog");
+        // Mark that we need to show dialog after login
+        setCrossDomainCookie('fcm_show_after_login', '1', 1);
         return;
       }
 
+      // Check if this is a fresh login (should show permission dialog)
+      const showAfterLogin = getCookie('fcm_show_after_login');
+      if (showAfterLogin === '1') {
+        log("Fresh login detected, will show permission dialog");
+        // Clear the flag
+        deleteCookie('fcm_show_after_login');
+        
+        // Show permission dialog after a short delay
+        if (Notification.permission === "default") {
+          setTimeout(function () {
+            showPermissionDialog();
+          }, 1500);
+          return;
+        }
+      }
+
       // Show permission request if permission is default (not yet decided)
-      // Only show custom dialog for Safari (requires interactive user engagement)
-      // For other browsers, native permission request is triggered on first interaction
-      if (Notification.permission === "default" && isSafari()) {
-        // Safari requires interactive user engagement for permission request
-        // Check if we should show the dialog (not asked in last 24 hours)
+      // Check if we should show the dialog (not asked in last 24 hours)
+      if (Notification.permission === "default") {
         const lastAskedTime = getCookie('fcm_permission_asked_time');
         const now = Date.now();
         const twentyFourHours = 24 * 60 * 60 * 1000;
         
         if (!lastAskedTime || (now - parseInt(lastAskedTime)) > twentyFourHours) {
-          log("Safari detected, showing custom permission dialog");
+          log("Permission not yet asked, showing custom permission dialog");
           // Small delay to ensure UI is ready
           setTimeout(function () {
             showPermissionDialog();
@@ -255,7 +270,6 @@
           log("Permission dialog was shown recently, skipping");
         }
       }
-      // For non-Safari browsers, native permission request will be triggered on first interaction (see setupNotificationButton)
       
       if (Notification.permission === "granted") {
         // If permission already granted, handle existing tokens
@@ -275,8 +289,15 @@
 
   /**
    * Set up notification permission button
+   * Only sets up listeners for logged in users
    */
   function setupNotificationButton() {
+    // CRITICAL: Only set up notification buttons for logged in users
+    if (!isUserLoggedIn()) {
+      log("User not logged in, skipping notification button setup");
+      return;
+    }
+
     const button = document.getElementById("firebase-enable-notifications");
     if (button) {
       button.addEventListener("click", requestPermission);
@@ -317,20 +338,9 @@
       }
     }
 
-    // For Safari, don't auto-request on first interaction
-    // Instead, let the banner handle it
-    if (!isSafari()) {
-      // Also listen for first user interaction as fallback for non-Safari browsers
-      const requestOnFirstInteraction = function () {
-        if (Notification.permission === "default") {
-          document.removeEventListener("click", requestOnFirstInteraction);
-          log("User interaction detected, requesting permission");
-          requestPermission();
-        }
-      };
-
-      document.addEventListener("click", requestOnFirstInteraction);
-    }
+    // NOTE: Removed automatic permission request on first interaction
+    // Permission should only be requested after user explicitly clicks
+    // on the custom dialog or notification button
   }
 
   /**

@@ -272,15 +272,11 @@ Your custom css
   background: transparent !important;
 }
 
-.directorypress-search-form
-  .default-search-fields-wrapper.collapsed
-  .default-search-fields-section-label::after {
+.directorypress-search-form .default-search-fields-wrapper.collapsed .default-search-fields-section-label::after {
   content: "\F0142";
 }
 
-.directorypress-search-form
-  .default-search-fields-wrapper.collapsed
-  .default-search-fields-content-box {
+.directorypress-search-form .default-search-fields-wrapper.collapsed .default-search-fields-content-box {
   display: none;
 }
 
@@ -309,12 +305,17 @@ Your custom css
   text-align: center;
 }
 
-.main-search-bar
-  .search-element-col.pull-right.directorypress-search-submit-button-wrap {
+.main-search-bar .search-element-col.pull-right.directorypress-search-submit-button-wrap {
   padding-top: 43px !important;
 }
 
 /* Firebase Push Notifications Styles */
+
+/* Hide auto-generated notification button in footer */
+#firebase-enable-notifications.firebase-notifications-btn {
+  display: none !important;
+}
+
 .firebase-notification-settings {
   background: #fff;
   border-radius: 8px;
@@ -1157,7 +1158,7 @@ input:disabled + .toggle-slider {
   }
 }
 .search-filters-wrapper.collapsed {
-    margin: 0;
+  margin: 0;
 }
 /* Cancel Button Styles */
 .btn-secondary {
@@ -1183,10 +1184,7 @@ input:disabled + .toggle-slider {
   box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }
 
-.elementor-11767
-  .elementor-element.elementor-element-6fa48092
-  .hfb-login-menu-link
-  svg {
+.elementor-11767 .elementor-element.elementor-element-6fa48092 .hfb-login-menu-link svg {
   max-width: 42px;
   height: 42px !important;
 }
@@ -1249,13 +1247,21 @@ input:disabled + .toggle-slider {
   cursor: default !important;
 }
 
+.directorypress-single-mobile .trp-switcher-position-top {
+  display: none !important;
+}
+
 /* Стили для мобильных устройств */
 @media (max-width: 768px) {
+  .elementor-11767 .elementor-element.elementor-element-6fa48092 .hfb-login-menu-link svg {
+    max-width: 30px;
+    height: 30px !important;
+  }
 
-    .directorypress-search-holder {
-        margin: 0;
-        padding: 0!important;
-    }
+  .directorypress-search-holder {
+    margin: 0;
+    padding: 0 !important;
+  }
   .custom-filters-header {
     padding: 12px 15px;
     font-size: 15px;
@@ -1431,14 +1437,13 @@ input:disabled + .toggle-slider {
 }
 
 .hfb-nav-menu__layout-horizontal .hfb-nav-menu {
-  
-    align-items: center;
+  align-items: center;
 }
 
-.elementor-12637 .elementor-element.elementor-element-4b405885 p{
+.elementor-12637 .elementor-element.elementor-element-4b405885 p {
   margin: 0;
 }
 
 .elementor-12637 .elementor-element.elementor-element-87ec07a .hfb-login-menu-link svg {
-    margin-right: 8px;
+  margin-right: 8px;
 }

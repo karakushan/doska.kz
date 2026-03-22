@@ -765,7 +765,10 @@ if ( !function_exists( 'pacz_main_navigation' ) ) {
 			ob_end_clean();
 		}
 
-		echo wp_kses_post($output);
+		// Используем прямой вывод вместо wp_kses_post, так как wp_kses_post удаляет <script> теги
+		// Это ломает шорткод [rs_region_selector] в меню - JavaScript код выводится как текст
+		// Меню генерируется WordPress и контролируется администратором, поэтому безопасно выводить напрямую
+		echo $output;
 
 	}
 }

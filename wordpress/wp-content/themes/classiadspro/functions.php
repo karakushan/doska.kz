@@ -1946,50 +1946,10 @@ function add_mobile_chat_counter()
 		return;
 	}
 
-	$current_user_id = get_current_user_id();
+	// Используем ту же функцию подсчёта, что и плагин directorypress-frontend-messages
 	$unread_count = 0;
-
-	// Проверяем разные возможные таблицы сообщений
-	global $wpdb;
-
-	// Возможные названия таблиц
-	$possible_tables = array(
-		$wpdb->prefix . 'directorypress_messages',
-		$wpdb->prefix . 'directorypress_frontend_messages',
-		$wpdb->prefix . 'dp_messages'
-	);
-
-	foreach ($possible_tables as $table_name) {
-		$table_exists = $wpdb->get_var("SHOW TABLES LIKE '{$table_name}'");
-		if ($table_exists) {
-			// Получаем структуру таблицы
-			$columns = $wpdb->get_results("SHOW COLUMNS FROM {$table_name}");
-			$column_names = array_column($columns, 'Field');
-
-			// Пробуем разные варианты структуры
-			if (in_array('recipient_id', $column_names) && in_array('is_read', $column_names)) {
-				$unread_count = $wpdb->get_var($wpdb->prepare(
-					"SELECT COUNT(*) FROM {$table_name} 
-                     WHERE recipient_id = %d AND is_read = 0",
-					$current_user_id
-				));
-			} elseif (in_array('to_user', $column_names) && in_array('read_status', $column_names)) {
-				$unread_count = $wpdb->get_var($wpdb->prepare(
-					"SELECT COUNT(*) FROM {$table_name} 
-                     WHERE to_user = %d AND read_status = 0",
-					$current_user_id
-				));
-			}
-
-			if ($unread_count > 0) {
-				break;
-			}
-		}
-	}
-
-	// Для тестирования - показываем счетчик всегда (уберите эту строку после тестирования)
-	if ($unread_count == 0) {
-		$unread_count = 5; // Тестовое значение
+	if (function_exists('difp_get_user_message_count')) {
+		$unread_count = difp_get_user_message_count('unread');
 	}
 
 	if ($unread_count > 0) {
@@ -2009,8 +1969,6 @@ function add_mobile_chat_counter()
 						'.hfb-button:contains("Chat")',
 						'[class*="chat"]',
 						'[id*="chat"]',
-						'[class*="message"]',
-						'[id*="message"]',
 						'i.dicode-material-icons-message-minus-outline'
 					];
 
@@ -2020,9 +1978,15 @@ function add_mobile_chat_counter()
 					for (var i = 0; i < selectors.length; i++) {
 						var found = $(selectors[i]);
 						if (found.length > 0) {
-							console.log('Найден элемент чата:', selectors[i], found);
-							chatLink = found.first();
-							break;
+							// Пропускаем элементы, у которых уже есть badge (в sidebar menu)
+							var hasExistingBadge = found.find('.badge, .bg-danger').length > 0 || 
+							                   found.closest('li').find('.badge, .bg-danger').length > 0 ||
+							                   found.parent().find('.badge, .bg-danger').length > 0;
+							if (!hasExistingBadge) {
+								console.log('Найден элемент чата:', selectors[i], found);
+								chatLink = found.first();
+								break;
+							}
 						}
 					}
 
