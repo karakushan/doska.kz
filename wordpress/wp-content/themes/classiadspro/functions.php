@@ -344,9 +344,20 @@ class Classiadspro_Theme
 	}
 }
 
+/**
+ * Preconnect для Google Fonts - ускоряет загрузку шрифтов
+ */
+function pacz_google_fonts_preconnect() {
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}
+
 function pacz_theme_enqueue_scripts()
 {
 	if (!is_admin()) {
+
+		// Preconnect для Google Fonts - ускоряет загрузку шрифтов
+		add_action('wp_head', 'pacz_google_fonts_preconnect', 1);
 
 		global $pacz_settings;
 		$theme_data = wp_get_theme("classiadspro");
@@ -446,7 +457,7 @@ function pacz_theme_enqueue_scripts()
 
 		if (!class_exists('Pacz_Static_Files')) {
 			$font_family = $pacz_settings['body-font']['font-family'];
-			wp_enqueue_style($font_family, 'https://fonts.googleapis.com/css?family=' . $font_family . ':100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,100,200,300,400,500,600,700,800,900', false, false, 'all');
+			wp_enqueue_style($font_family, 'https://fonts.googleapis.com/css?family=' . $font_family . ':100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,100,200,300,400,500,600,700,800,900&display=swap', false, false, 'all');
 			wp_enqueue_style('pacz-dynamic-css', PACZ_THEME_STYLES . '/classiadspro-dynamic.css', false, $theme_data['Version'], 'all');
 			wp_add_inline_style('pacz-dynamic-css', pacz_enqueue_font_icons());
 		}

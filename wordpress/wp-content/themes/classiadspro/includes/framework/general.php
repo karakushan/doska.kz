@@ -675,7 +675,7 @@ function pacz_get_fontfamily( $element_name, $id, $font_family, $font_type ) {
                 else return substr( $haystack, 0, strpos( $haystack, $needle ) );
             }
         }
-        wp_enqueue_style( $font_family, '//fonts.googleapis.com/css?family=' .$font_family.':100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,100,200,300,400,500,600,700,800,900' , false, false, 'all' );
+        wp_enqueue_style( $font_family, '//fonts.googleapis.com/css?family=' .$font_family.':100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic,100,200,300,400,500,600,700,800,900&display=swap' , false, false, 'all' );
         $format_name = strpos( $font_family, ':' );
         if ( $format_name !== false ) {
             $google_font =  my_strstr( str_replace( '+', ' ', $font_family ), ':', true );
