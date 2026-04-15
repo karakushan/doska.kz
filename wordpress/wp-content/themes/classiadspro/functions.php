@@ -2292,7 +2292,7 @@ function rs_get_currency_map() {
  */
 function rs_get_current_currency() {
 	$host = strtolower($_SERVER['HTTP_HOST']);
-	$map = rs_get_currency_map();
+	$map = rs_get_currency_map_with_rates();
 	
 	// Точное совпадение
 	if (isset($map[$host])) {
@@ -2322,48 +2322,49 @@ function rs_get_current_currency() {
 	];
 }
 
-/**
- * Обновление курсов валют через API
- */
+function rs_is_api_enabled() {
+	$settings = get_option('rs_currency_settings', []);
+	return !empty($settings['api_enabled']);
+}
+
 function rs_update_exchange_rates() {
+	if (!rs_is_api_enabled()) {
+		return false;
+	}
+
 	$response = wp_remote_get('https://open.er-api.com/v6/latest/USD', [
 		'timeout' => 30,
 	]);
-	
+
 	if (!is_wp_error($response) && wp_remote_retrieve_response_code($response) === 200) {
 		$body = json_decode(wp_remote_retrieve_body($response), true);
-		
+
 		if (isset($body['rates'])) {
 			$rates = $body['rates'];
-			
-			$saved_rates = [
-				'EUR' => $rates['EUR'] ?? 0.92,
-				'TRY' => $rates['TRY'] ?? 32.50,
-				'UAH' => $rates['UAH'] ?? 41.00,
-				'updated' => time(),
-				'source' => 'open.er-api.com',
-			];
-			
+
+			$saved_rates = get_option('rs_exchange_rates', []);
+			$saved_rates['EUR'] = $rates['EUR'] ?? ($saved_rates['EUR'] ?? 0.92);
+			$saved_rates['TRY'] = $rates['TRY'] ?? ($saved_rates['TRY'] ?? 32.50);
+			$saved_rates['UAH'] = $rates['UAH'] ?? ($saved_rates['UAH'] ?? 41.00);
+			$saved_rates['updated'] = time();
+			$saved_rates['source'] = 'open.er-api.com';
+
 			update_option('rs_exchange_rates', $saved_rates);
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 
-/**
- * Получить актуальный курс валюты
- */
 function rs_get_exchange_rate($currency_code) {
 	$saved = get_option('rs_exchange_rates', []);
-	
-	// Если курсы устарели (более 24 часов) - обновляем
-	if (empty($saved['updated']) || (time() - $saved['updated'] > 86400)) {
+
+	if (rs_is_api_enabled() && (empty($saved['updated']) || (time() - $saved['updated'] > 86400))) {
 		rs_update_exchange_rates();
 		$saved = get_option('rs_exchange_rates', []);
 	}
-	
+
 	return $saved[$currency_code] ?? 1;
 }
 
@@ -2491,8 +2492,11 @@ add_filter('woocommerce_product_variation_get_price', function($price, $product)
 
 // Запуск обновления курсов по крону
 add_action('wp', function() {
-	if (!wp_next_scheduled('rs_update_rates_event')) {
+	if (rs_is_api_enabled() && !wp_next_scheduled('rs_update_rates_event')) {
 		wp_schedule_event(time(), 'daily', 'rs_update_rates_event');
+	}
+	if (!rs_is_api_enabled() && wp_next_scheduled('rs_update_rates_event')) {
+		wp_clear_scheduled_hook('rs_update_rates_event');
 	}
 });
 add_action('rs_update_rates_event', 'rs_update_exchange_rates');
@@ -2509,9 +2513,11 @@ add_action('wp_ajax_rs_refresh_rates', function() {
 	if (!current_user_can('manage_options')) {
 		wp_send_json_error('No permission');
 	}
-	
+
+	check_ajax_referer('rs_refresh_rates_nonce');
+
 	$result = rs_update_exchange_rates();
-	
+
 	if ($result) {
 		$rates = get_option('rs_exchange_rates', []);
 		wp_send_json_success([
@@ -2519,6 +2525,176 @@ add_action('wp_ajax_rs_refresh_rates', function() {
 			'rates' => $rates,
 		]);
 	} else {
-		wp_send_json_error('Ошибка обновления');
+		wp_send_json_error('Ошибка обновления. Проверьте что API включено.');
 	}
 });
+
+// ==================== ADMIN PAGE ====================
+
+add_action('admin_menu', function() {
+	add_menu_page(
+		'Курсы валют',
+		'Курсы валют',
+		'manage_options',
+		'rs-exchange-rates',
+		'rs_exchange_rates_admin_page',
+		'dashicons-money-alt',
+		56
+	);
+});
+
+function rs_exchange_rates_admin_page() {
+	if (!current_user_can('manage_options')) {
+		return;
+	}
+
+	if (isset($_POST['rs_save_rates']) && check_admin_referer('rs_exchange_rates_save')) {
+		$settings = [
+			'api_enabled' => !empty($_POST['api_enabled']),
+		];
+		update_option('rs_currency_settings', $settings);
+
+		$saved_rates = get_option('rs_exchange_rates', []);
+		if (!empty($_POST['rate_eur'])) {
+			$saved_rates['EUR'] = floatval($_POST['rate_eur']);
+		}
+		if (!empty($_POST['rate_try'])) {
+			$saved_rates['TRY'] = floatval($_POST['rate_try']);
+		}
+		if (!empty($_POST['rate_uah'])) {
+			$saved_rates['UAH'] = floatval($_POST['rate_uah']);
+		}
+		if (empty($saved_rates['updated'])) {
+			$saved_rates['updated'] = time();
+			$saved_rates['source'] = 'manual';
+		}
+		if (!empty($saved_rates['source']) && $saved_rates['source'] !== 'open.er-api.com') {
+			$saved_rates['source'] = 'manual';
+		}
+		update_option('rs_exchange_rates', $saved_rates);
+
+		echo '<div class="notice notice-success is-dismissible"><p>Настройки сохранены.</p></div>';
+	}
+
+	$settings = get_option('rs_currency_settings', ['api_enabled' => true]);
+	$rates = get_option('rs_exchange_rates', [
+		'EUR' => 0.92,
+		'TRY' => 32.50,
+		'UAH' => 41.00,
+		'updated' => null,
+		'source' => 'manual',
+	]);
+
+	$last_updated = !empty($rates['updated'])
+		? date('d.m.Y H:i:s', $rates['updated']) . ' (UTC+' . date('P', $rates['updated']) . ')'
+		: 'никогда';
+	?>
+	<div class="wrap">
+		<h1>Курсы валют</h1>
+
+		<form method="post" action="">
+			<?php wp_nonce_field('rs_exchange_rates_save'); ?>
+
+			<table class="form-table">
+				<tr>
+					<th scope="row">Автообновление через API</th>
+					<td>
+						<label>
+							<input type="checkbox" name="api_enabled" value="1" <?php checked(!empty($settings['api_enabled'])); ?>>
+							Включить автоматическое получение курсов с <code>open.er-api.com</code>
+						</label>
+						<p class="description">
+							При включении курсы обновляются автоматически раз в сутки.<br>
+							При выключении используются только ручные значения ниже.
+						</p>
+					</td>
+				</tr>
+			</table>
+
+			<hr>
+
+			<h2>Курсы валют (относительно 1 USD)</h2>
+
+			<table class="widefat striped" style="max-width: 500px;">
+				<thead>
+					<tr>
+						<th>Валюта</th>
+						<th>Курс</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>EUR</strong> &euro;</td>
+						<td>
+							<input type="number" name="rate_eur" value="<?php echo esc_attr($rates['EUR'] ?? 0.92); ?>" step="0.0001" min="0" class="regular-text" style="width:150px;">
+						</td>
+					</tr>
+					<tr>
+						<td><strong>TRY</strong> &#8378;</td>
+						<td>
+							<input type="number" name="rate_try" value="<?php echo esc_attr($rates['TRY'] ?? 32.50); ?>" step="0.0001" min="0" class="regular-text" style="width:150px;">
+						</td>
+					</tr>
+					<tr>
+						<td><strong>UAH</strong> &#8372;</td>
+						<td>
+							<input type="number" name="rate_uah" value="<?php echo esc_attr($rates['UAH'] ?? 41.00); ?>" step="0.0001" min="0" class="regular-text" style="width:150px;">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<p class="description" style="margin-top:10px;">
+				Источник: <strong><?php echo esc_html($rates['source'] ?? 'manual'); ?></strong> |
+				Последнее обновление: <strong><?php echo esc_html($last_updated); ?></strong>
+			</p>
+
+			<?php submit_button('Сохранить настройки', 'primary', 'rs_save_rates'); ?>
+		</form>
+
+		<hr>
+
+		<h2>Ручное обновление с API</h2>
+		<p>Нажмите кнопку, чтобы принудительно обновить курсы с API (независимо от времени последнего обновления).</p>
+		<p>
+			<button type="button" id="rs-refresh-btn" class="button button-secondary">
+				<span class="dashicons dashicons-update" style="vertical-align:middle;"></span>
+				Обновить курсы сейчас
+			</button>
+			<span id="rs-refresh-status"></span>
+		</p>
+
+		<script>
+		jQuery(document).ready(function($) {
+			$('#rs-refresh-btn').on('click', function() {
+				var $btn = $(this);
+				var $status = $('#rs-refresh-status');
+				$btn.prop('disabled', true);
+				$status.text('Обновление...');
+
+				$.post(ajaxurl, {
+					action: 'rs_refresh_rates',
+					_wp_ajax_nonce: '<?php echo esc_js(wp_create_nonce("rs_refresh_rates_nonce")); ?>'
+				}, function(response) {
+					$btn.prop('disabled', false);
+					if (response.success) {
+						$status.html('<span style="color:green;">&#10003; ' + response.data.message + '</span>');
+						if (response.data.rates) {
+							var r = response.data.rates;
+							$('[name="rate_eur"]').val(r.EUR);
+							$('[name="rate_try"]').val(r.TRY);
+							$('[name="rate_uah"]').val(r.UAH);
+						}
+					} else {
+						$status.html('<span style="color:red;">&#10007; ' + (response.data || 'Ошибка') + '</span>');
+					}
+				}).fail(function() {
+					$btn.prop('disabled', false);
+					$status.html('<span style="color:red;">&#10007; Ошибка запроса</span>');
+				});
+			});
+		});
+		</script>
+	</div>
+	<?php
+}
