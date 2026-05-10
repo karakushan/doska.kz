@@ -38,3 +38,6 @@ backups/*.json
 # WordPress uploads
 wordpress/wp-content/uploads/
 
+# WordPress updraft backups
+wordpress/wp-content/updraft/
+
