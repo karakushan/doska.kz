@@ -4507,3 +4507,97 @@ function classiadspro_refresh_directorypress_ajax_nonce() {
 }
 add_action('wp_ajax_directorypress_handler_request', 'classiadspro_refresh_directorypress_ajax_nonce', 1);
 add_action('wp_ajax_nopriv_directorypress_handler_request', 'classiadspro_refresh_directorypress_ajax_nonce', 1);
+
+function classiadspro_get_directorypress_category_term_for_seo() {
+    if (!function_exists('directorypress_get_term_by_path')) {
+        return null;
+    }
+
+    $category_path = get_query_var('category-directorypress');
+    if (!$category_path) {
+        return null;
+    }
+
+    $term = directorypress_get_term_by_path($category_path);
+    if (!$term || is_wp_error($term) || empty($term->term_id) || empty($term->taxonomy)) {
+        return null;
+    }
+
+    return $term;
+}
+
+function classiadspro_get_directorypress_category_yoast_value($term, $type = 'title') {
+    if (!$term || !class_exists('WPSEO_Replace_Vars')) {
+        return '';
+    }
+
+    $replace_vars = new WPSEO_Replace_Vars();
+
+    if ($type === 'description') {
+        $custom_value = class_exists('WPSEO_Taxonomy_Meta')
+            ? WPSEO_Taxonomy_Meta::get_term_meta($term->term_id, $term->taxonomy, 'desc')
+            : '';
+
+        if ($custom_value === '' && class_exists('WPSEO_Options')) {
+            $custom_value = WPSEO_Options::get('metadesc-tax-' . $term->taxonomy);
+        }
+
+        if ($custom_value === '') {
+            $term_description = term_description($term->term_id, $term->taxonomy);
+            $term_description = wp_strip_all_tags($term_description);
+            $term_description = trim(preg_replace('/\s+/', ' ', $term_description));
+
+            $custom_value = $term_description;
+        }
+    } else {
+        $custom_value = class_exists('WPSEO_Taxonomy_Meta')
+            ? WPSEO_Taxonomy_Meta::get_term_meta($term->term_id, $term->taxonomy, 'title')
+            : '';
+
+        if ($custom_value === '' && class_exists('WPSEO_Options')) {
+            $custom_value = WPSEO_Options::get('title-tax-' . $term->taxonomy);
+
+            if ($custom_value === '') {
+                $custom_value = WPSEO_Options::get_title_default('title-tax-' . $term->taxonomy);
+            }
+        }
+
+        if ($custom_value === '') {
+            $custom_value = $term->name;
+        }
+    }
+
+    if ($custom_value === '') {
+        return '';
+    }
+
+    return $replace_vars->replace($custom_value, array(
+        'name' => $term->name,
+        'term_id' => $term->term_id,
+        'taxonomy' => $term->taxonomy,
+    ));
+}
+
+function classiadspro_directorypress_category_wpseo_title($title) {
+    $term = classiadspro_get_directorypress_category_term_for_seo();
+    if (!$term) {
+        return $title;
+    }
+
+    $yoast_title = classiadspro_get_directorypress_category_yoast_value($term, 'title');
+
+    return $yoast_title !== '' ? $yoast_title : $title;
+}
+add_filter('wpseo_title', 'classiadspro_directorypress_category_wpseo_title', 20);
+
+function classiadspro_directorypress_category_wpseo_metadesc($description) {
+    $term = classiadspro_get_directorypress_category_term_for_seo();
+    if (!$term) {
+        return $description;
+    }
+
+    $yoast_description = classiadspro_get_directorypress_category_yoast_value($term, 'description');
+
+    return $yoast_description !== '' ? $yoast_description : $description;
+}
+add_filter('wpseo_metadesc', 'classiadspro_directorypress_category_wpseo_metadesc', 20);
