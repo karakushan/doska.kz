@@ -2643,7 +2643,7 @@ add_shortcode('rs_region_selector', function($atts){
 
 		<script>
 		(function(){
-			const dropdown = document.querySelector('.rs-dropdown');
+			const dropdown = document.querySelector('.rs-dropdown:not(.rs-currency-dropdown)');
 			if(!dropdown) return;
 
 			const btn = dropdown.querySelector('.rs-dropdown-btn');
@@ -2685,7 +2685,105 @@ add_shortcode('rs_region_selector', function($atts){
 	return ob_get_clean();
 });
 
-/* ========================= NAV MENU SHORTCODE SUPPORT ========================= */
+/* ========================= SHORTCODE: CURRENCY SELECTOR ========================= */
+
+/**
+ * Получить список уникальных валют из карты валют
+ */
+function rs_get_unique_currencies() {
+	$map = rs_get_currency_map_with_rates();
+	$unique = [];
+	$seen_codes = [];
+
+	foreach ($map as $country_code => $currency) {
+		$code = $currency['code'];
+		// Пропускаем KZT — определяется автоматически по региону Казахстан
+		if ($code === 'KZT') continue;
+		if (!in_array($code, $seen_codes)) {
+			$seen_codes[] = $code;
+			$unique[] = [
+				'code' => $code,
+				'symbol' => $currency['symbol'],
+				'rate' => $currency['rate'],
+				'position' => $currency['position'],
+				'decimal_sep' => $currency['decimal_sep'],
+				'thousand_sep' => $currency['thousand_sep'],
+			];
+		}
+	}
+
+	return $unique;
+}
+
+add_shortcode('rs_currency_selector', function($atts){
+	$currencies = rs_get_unique_currencies();
+	if(!$currencies) return '';
+
+	$current = rs_get_current_currency();
+	$current_code = $current['code'];
+
+	ob_start();
+
+	/* ======================= MOBILE ======================= */
+	if ( wp_is_mobile() ) : ?>
+
+		<select class="rs-currency-select" onchange="rsSelectCurrency(this)" style="padding:6px 10px;border-radius:6px;border:1px solid #ccc;font-size:14px;">
+			<option value="">Currency</option>
+			<?php foreach($currencies as $c): ?>
+				<option value="<?= esc_attr($c['code']) ?>" <?= selected($c['code'], $current_code, false) ?>>
+					<?= esc_html($c['symbol'] . ' ' . $c['code']) ?>
+				</option>
+			<?php endforeach; ?>
+		</select>
+
+		<script>
+		function rsSelectCurrency(select){
+			const code = select.value;
+			if(!code) return;
+			document.cookie = "rs_currency=" + encodeURIComponent(code) + ";path=/;max-age=2592000";
+			location.reload();
+		}
+		</script>
+
+	<?php
+	/* ======================= DESKTOP ======================= */
+	else : ?>
+
+		<div class="rs-dropdown rs-currency-dropdown">
+			<button class="rs-dropdown-btn rs-currency-btn"><?= esc_html($current['symbol'] . ' ' . $current['code']) ?> <span class="arrowx">&gt;</span></button>
+			<ul class="rs-dropdown-list rs-currency-list">
+				<?php foreach($currencies as $c): ?>
+					<li data-code="<?= esc_attr($c['code']) ?>" class="<?= ($c['code'] === $current_code) ? 'rs-active' : '' ?>">
+						<span class="rs-currency-symbol"><?= esc_html($c['symbol']) ?></span>
+						<span class="rs-currency-code"><?= esc_html($c['code']) ?></span>
+						<?php if($c['code'] === $current_code): ?>
+							<span class="rs-check">✓</span>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+
+		<style>
+		/* Currency selector — same arrow & button style as region selector */
+		.rs-currency-dropdown .rs-dropdown-btn {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.rs-currency-dropdown .arrowx {
+			display: inline-block;
+			transform: rotate(90deg) scaleX(0.6);
+			font-size: 18px;
+			margin-left: 6px;
+			font-weight: bolder;
+		}
+		</style>
+
+	<?php endif;
+
+	return ob_get_clean();
+});
 
 add_filter('wp_nav_menu_items', function($items, $args){
 	return do_shortcode($items);
@@ -2947,6 +3045,17 @@ function rs_get_currency_map() {
  */
 function rs_get_current_currency() {
 	$map = rs_get_currency_map_with_rates();
+
+	// 0. Сначала проверяем куку ручного выбора валюты
+	if (!empty($_COOKIE['rs_currency'])) {
+		$manual_code = strtoupper(trim($_COOKIE['rs_currency']));
+		// Ищем валюту по коду в карте
+		foreach ($map as $country_currency) {
+			if ($country_currency['code'] === $manual_code) {
+				return $country_currency;
+			}
+		}
+	}
 
 	// 1. Сначала проверяем куку — там код страны (kz, us, ua...)
 	$cookie_name = rs_get_cookie_name();

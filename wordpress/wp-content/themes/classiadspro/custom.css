@@ -1447,3 +1447,84 @@ input:disabled + .toggle-slider {
 .elementor-12637 .elementor-element.elementor-element-87ec07a .hfb-login-menu-link svg {
   margin-right: 8px;
 }
+
+/* ============================================
+   Region & Currency Selector Dropdown Styles
+   ============================================ */
+
+/* Both dropdowns inline-block in header */
+#pacz-header .rs-dropdown {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+/* Currency dropdown wrapper */
+.rs-currency-dropdown {
+}
+
+/* Currency dropdown button - match region selector */
+.rs-currency-btn {
+  font-family: inherit;
+}
+
+/* Currency list items */
+.rs-currency-list .rs-currency-symbol {
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 6px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.rs-currency-list .rs-currency-code {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Active/selected currency */
+.rs-currency-list li.rs-active {
+  background: #e8f4f8;
+  font-weight: 600;
+}
+
+/* Checkmark for selected */
+.rs-currency-list .rs-check {
+  margin-left: auto;
+  color: #0073aa;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Align items in currency list */
+.rs-currency-list li {
+  justify-content: flex-start;
+}
+
+/* Ensure dropdowns are on the same line in menu */
+#pacz-main-navigation .rs-dropdown {
+  display: inline-block;
+}
+
+/* Unified spacing for language, region and currency selectors */
+#pacz-main-navigation > ul > li.trp-language-switcher-container,
+#pacz-main-navigation > ul > li.menu-item:has(.rs-dropdown) {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+/* Reduce padding on menu links containing rs-dropdown to tighten spacing */
+#pacz-main-navigation > ul > li.menu-item:has(.rs-dropdown) > a.menu-item-link {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+/* Currency dropdown list - smaller width since no country names */
+.rs-currency-dropdown .rs-currency-list {
+  min-width: 130px;
+}
+
+.rs-currency-dropdown .rs-currency-list li {
+  padding: 8px 12px;
+}

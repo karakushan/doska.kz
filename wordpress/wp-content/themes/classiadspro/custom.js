@@ -128,3 +128,49 @@ If you are using a child theme and you have added custom scripts into this file,
   });
 
 })(jQuery);
+
+/**
+ * Currency Selector Dropdown
+ * Handles the rs-currency-dropdown toggle and selection
+ */
+(function() {
+	'use strict';
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var currencyDropdown = document.querySelector('.rs-currency-dropdown');
+		if (!currencyDropdown) return;
+
+		var btn = currencyDropdown.querySelector('.rs-currency-btn');
+		var list = currencyDropdown.querySelector('.rs-currency-list');
+
+		if (!btn || !list) return;
+
+		btn.addEventListener('click', function(e) {
+			e.stopPropagation();
+			// Close region dropdown if open
+			var regionList = document.querySelector('.rs-dropdown:not(.rs-currency-dropdown) .rs-dropdown-list');
+			if (regionList) regionList.style.display = 'none';
+			// Toggle current
+			list.style.display = list.style.display === 'block' ? 'none' : 'block';
+		});
+
+		// Handle currency selection
+		list.querySelectorAll('li').forEach(function(li) {
+			li.addEventListener('click', function(e) {
+				e.stopPropagation();
+				var code = li.dataset.code;
+				if (code) {
+					document.cookie = 'rs_currency=' + encodeURIComponent(code) + ';path=/;max-age=2592000';
+					location.reload();
+				}
+			});
+		});
+
+		// Close when clicking outside
+		document.addEventListener('click', function(e) {
+			if (!currencyDropdown.contains(e.target)) {
+				list.style.display = 'none';
+			}
+		});
+	});
+})();
