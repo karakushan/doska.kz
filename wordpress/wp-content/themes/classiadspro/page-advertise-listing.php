@@ -169,7 +169,7 @@ $prices = classiadspro_get_advertising_prices();
                                                         <input type="radio" name="advertising_period" value="1_day" required>
                                                         <div class="period-card">
                                                             <div class="period-duration">1 day</div>
-                                                            <div class="period-price">$<?php echo number_format($prices['1_day'], 2, '.', ''); ?></div>
+                                                            <div class="period-price"><?php echo rs_format_price($prices['1_day']); ?></div>
                                                         </div>
                                                     </label>
                                                 </div>
@@ -179,7 +179,7 @@ $prices = classiadspro_get_advertising_prices();
                                                         <input type="radio" name="advertising_period" value="3_days" required checked>
                                                         <div class="period-card">
                                                             <div class="period-duration">3 days</div>
-                                                            <div class="period-price">$<?php echo number_format($prices['3_days'], 2, '.', ''); ?></div>
+                                                            <div class="period-price"><?php echo rs_format_price($prices['3_days']); ?></div>
                                                         </div>
                                                     </label>
                                                 </div>
@@ -189,7 +189,7 @@ $prices = classiadspro_get_advertising_prices();
                                                         <input type="radio" name="advertising_period" value="7_days" required>
                                                         <div class="period-card">
                                                             <div class="period-duration">7 days</div>
-                                                            <div class="period-price">$<?php echo number_format($prices['7_days'], 2, '.', ''); ?></div>
+                                                            <div class="period-price"><?php echo rs_format_price($prices['7_days']); ?></div>
                                                         </div>
                                                     </label>
                                                 </div>
