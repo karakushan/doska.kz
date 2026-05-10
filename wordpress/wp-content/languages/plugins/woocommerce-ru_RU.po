@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-03-20 13:18:44+0000\n"
+"PO-Revision-Date: 2026-03-31 05:53:54+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9340,18 +9340,6 @@ msgstr "Искусство и ремёсла"
 msgid "Sports and recreation"
 msgstr "Спорт и активный отдых"
 
-#: src/Blocks/Shipping/PickupLocation.php:41
-#: src/Blocks/Shipping/ShippingController.php:576
-#: src/StoreApi/Utilities/LocalPickupUtils.php:20
-#: src/StoreApi/Utilities/LocalPickupUtils.php:27
-#: assets/client/blocks/checkout-frontend.js:2
-#: assets/client/blocks/checkout-frontend.js:5
-#: assets/client/blocks/checkout.js:28 assets/client/blocks/checkout.js:33
-#: assets/client/blocks/wc-shipping-method-pickup-location.js:80
-#: assets/client/blocks/wc-shipping-method-pickup-location.js:83
-msgid "Pickup"
-msgstr "Подобрать"
-
 #. translators: 1) product name 3) URL to My Subscriptions page 4) Renew
 #. product price string
 #: src/Admin/PluginsHelper.php:995
@@ -9369,6 +9357,18 @@ msgstr "Создавайте и используйте индексы полно
 #: src/Internal/DataStores/Orders/CustomOrdersTableController.php:364
 msgid "Failed to create FTS index on orders table. This feature is only available when High-performance order storage is enabled."
 msgstr "Не удалось создать индекс FTS в таблице заказов. Доступно только при использовании высокопроизводительного хранилища заказов."
+
+#: src/Blocks/Shipping/PickupLocation.php:41
+#: src/Blocks/Shipping/ShippingController.php:576
+#: src/StoreApi/Utilities/LocalPickupUtils.php:20
+#: src/StoreApi/Utilities/LocalPickupUtils.php:27
+#: assets/client/blocks/checkout-frontend.js:2
+#: assets/client/blocks/checkout-frontend.js:5
+#: assets/client/blocks/checkout.js:28 assets/client/blocks/checkout.js:33
+#: assets/client/blocks/wc-shipping-method-pickup-location.js:80
+#: assets/client/blocks/wc-shipping-method-pickup-location.js:83
+msgid "Pickup"
+msgstr "Самовывоз"
 
 #. translators: 1) product name 3) URL to My Subscriptions page 4) Renew
 #. product price string

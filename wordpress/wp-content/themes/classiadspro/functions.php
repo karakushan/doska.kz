@@ -2698,3 +2698,772 @@ function rs_exchange_rates_admin_page() {
 	</div>
 	<?php
 }
+/*
+add_action('admin_footer', function() {
+    global $post;
+    if (!$post) return;
+
+    $taxonomies = get_object_taxonomies($post->post_type);
+
+    echo '<pre>';
+
+    foreach ($taxonomies as $taxonomy) {
+        echo "TAXONOMY: " . $taxonomy . "\n";
+
+        $terms = wp_get_post_terms($post->ID, $taxonomy);
+
+        if (!empty($terms) && !is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                echo " - ID: " . $term->term_id . " | Name: " . $term->name . "\n";
+            }
+        } else {
+            echo " - нет значений\n";
+        }
+
+        echo "\n";
+    }
+
+    echo '</pre>';
+});
+*/
+
+add_action('admin_footer', function() {
+    global $post;
+    if (!$post) return;
+
+    /*echo '<pre>';
+    print_r(get_post_meta($post->ID));
+    echo '</pre>';
+	
+	echo '<pre>';
+    print_r(wp_get_object_terms($post->ID, 'directorypress-location'));
+    echo '</pre>';
+	
+	echo '<pre>';
+	print_r([
+		'ID' => $post->ID,
+		'type' => $post->post_type,
+		'title' => $post->post_title,
+		'meta' => get_post_meta($post->ID),
+		'taxonomies' => get_object_taxonomies($post->post_type),
+		'terms' => wp_get_post_terms($post->ID, get_object_taxonomies($post->post_type)),
+	]);
+	echo '</pre>';
+	*/
+});
+
+
+add_action('init', function () {
+
+    if (!is_admin())
+        return;
+    if (empty($_GET['add_tex_location']))
+        return;
+    if (!current_user_can('manage_options'))
+        wp_die('Нет доступа.');
+
+    $post_id    = intval($_GET['post'] ?? 0);
+    $good_id    = intval($_GET['good'] ?? 0);
+    $term_id    = intval($_GET['add_tex_location']);
+    $do_process = intval($_GET['do_process'] ?? 0);
+
+    if (!$post_id || !$term_id) {
+        wp_die('Ошибка: не указан post или add_tex_location');
+    }
+
+    global $wpdb, $directorypress_object;
+
+    if (!isset($directorypress_object) || !is_object($directorypress_object)) {
+        wp_die('DirectoryPress не загружен.');
+    }
+
+    $validation_results = null;
+
+    // =====================================================
+    // ОБРАБОТКА — только если do_process=1
+    // =====================================================
+    if ($do_process) {
+
+        // -------------------------------------------------------
+        // 1. Симулируем POST данные формы DirectoryPress
+        // -------------------------------------------------------
+        $_POST['directorypress_location'] = [$term_id];
+        $_POST['selected_tax'] = [$term_id];
+        $_POST['address_line_1'] = [''];
+        $_POST['address_line_2'] = [''];
+        $_POST['zip_or_postal_index'] = [''];
+        $_POST['additional_info'] = [''];
+        $_POST['manual_coords'] = [''];
+        $_POST['map_coords_1'] = [''];
+        $_POST['map_coords_2'] = [''];
+        $_POST['map_zoom'] = '';
+
+        // -------------------------------------------------------
+        // 2. Инициализируем листинг
+        // -------------------------------------------------------
+        $listing = new directorypress_listing();
+        $listing->directorypress_init_lpost_listing($post_id);
+
+        if (!$listing->post) {
+            wp_die("Пост $post_id не найден");
+        }
+
+        $package = $listing->package;
+        if (!$package) {
+            $packages = $directorypress_object->packages->packages_array;
+            $package = reset($packages);
+            $listing->package = $package;
+        }
+
+        // -------------------------------------------------------
+        // 3. Вызываем DirectoryPress save_locations
+        // -------------------------------------------------------
+        $errors = [];
+        $validation_results = $directorypress_object->locations_handler->validate_locations($package, $errors);
+
+        if ($validation_results) {
+            $directorypress_object->locations_handler->save_locations($package, $post_id, $validation_results);
+        }
+
+        // -------------------------------------------------------
+        // 4. Обновляем _listing_status
+        // -------------------------------------------------------
+        if (!get_post_meta($post_id, '_listing_created', true)) {
+            add_post_meta($post_id, '_listing_created', true);
+        }
+        if (!get_post_meta($post_id, '_order_date', true)) {
+            add_post_meta($post_id, '_order_date', time());
+        }
+        update_post_meta($post_id, '_listing_status', 'active|active');
+        if (!metadata_exists('post', $post_id, '_listing_status')) {
+            add_post_meta($post_id, '_listing_status', 'active');
+        }
+
+        // -------------------------------------------------------
+        // 5. ОЧИСТКА ВСЕХ КЭШЕЙ
+        // -------------------------------------------------------
+
+        // a) WordPress post cache
+        clean_post_cache($post_id);
+        wp_cache_delete($post_id, 'posts');
+        wp_cache_delete($post_id, 'post_meta');
+
+        // b) Term cache
+        $term_taxonomy_ids = $wpdb->get_col($wpdb->prepare(
+            "SELECT term_taxonomy_id FROM {$wpdb->term_relationships} WHERE object_id = %d",
+            $post_id
+        ));
+        if ($term_taxonomy_ids) {
+            wp_update_term_count_now($term_taxonomy_ids, 'directorypress-location');
+            wp_update_term_count_now($term_taxonomy_ids, 'directorypress-category');
+        }
+        clean_term_cache([$term_id], 'directorypress-location');
+        clean_object_term_cache($post_id, 'dp_listing');
+
+        // c) WordPress object cache
+        wp_cache_flush();
+
+        // d) Transients DirectoryPress
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '%transient%directorypress%'");
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '%transient%dp_listing%'");
+
+        // e) Кэши популярных плагинов кэширования
+        if (function_exists('wp_cache_clear_cache'))
+            wp_cache_clear_cache();
+        if (function_exists('w3tc_flush_all'))
+            w3tc_flush_all();
+        if (function_exists('rocket_clean_domain'))
+            rocket_clean_domain();
+        if (function_exists('wpfc_clear_all_cache'))
+            wpfc_clear_all_cache();
+        if (class_exists('LiteSpeed_Cache_API') && method_exists('LiteSpeed_Cache_API', 'purge_all')) {
+            LiteSpeed_Cache_API::purge_all();
+        }
+        if (function_exists('litespeed_purge_all'))
+            litespeed_purge_all();
+
+        // f) Обновляем post_modified
+        $wpdb->update(
+            $wpdb->posts,
+            [
+                'post_modified' => current_time('mysql'),
+                'post_modified_gmt' => current_time('mysql', 1),
+            ],
+            ['ID' => $post_id],
+            ['%s', '%s'],
+            ['%d']
+        );
+        clean_post_cache($post_id);
+
+    } // end if ($do_process)
+
+    // -------------------------------------------------------
+    // 6. СБОР ДАННЫХ ДЛЯ СРАВНЕНИЯ (всегда выполняется)
+    // -------------------------------------------------------
+    $table_lr = $wpdb->prefix . 'directorypress_locations_relation';
+    $table_pr = $wpdb->prefix . 'directorypress_packages_relation';
+
+    function collect_post_data($pid, $wpdb, $table_lr, $table_pr) {
+        $data = [];
+        $post = get_post($pid);
+        $data['post_status'] = $post ? $post->post_status : 'NOT FOUND';
+        $data['post_type'] = $post ? $post->post_type : '';
+        $data['post_modified'] = $post ? $post->post_modified : '';
+
+        $data['locations_relation'] = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM {$table_lr} WHERE post_id = %d", $pid), ARRAY_A
+        );
+        $data['packages_relation'] = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM {$table_pr} WHERE post_id = %d", $pid), ARRAY_A
+        );
+
+        $data['tax_location'] = wp_get_object_terms($pid, 'directorypress-location', ['fields' => 'all']);
+        $data['tax_category'] = wp_get_object_terms($pid, 'directorypress-category', ['fields' => 'all']);
+
+        $all_meta = get_post_meta($pid);
+        $dp_keys = [
+            '_listing_status', '_listing_created', '_order_date', '_directory_id',
+            '_location_id', '_address_line_1', '_address_line_2',
+            '_zip_or_postal_index', '_additional_info',
+            '_manual_coords', '_map_coords_1', '_map_coords_2', '_map_zoom',
+            '_map_icon_file', '_expiration_date',
+            '_attached_image', '_attached_image_as_logo', '_thumbnail_id',
+            '_contact_email', '_notice_to_admin',
+            'directorypress-location', '_wp_page_template',
+        ];
+        $data['meta'] = [];
+        foreach ($dp_keys as $key) {
+            $data['meta'][$key] = isset($all_meta[$key]) ? $all_meta[$key] : '--- ОТСУТСТВУЕТ ---';
+        }
+        $data['all_meta_keys'] = array_keys($all_meta);
+        sort($data['all_meta_keys']);
+
+        // Сохраняем все значения meta для показа в секции "Все meta ключи"
+        $data['all_meta_values'] = $all_meta;
+
+        return $data;
+    }
+
+    $bad_data = collect_post_data($post_id, $wpdb, $table_lr, $table_pr);
+    $good_data = $good_id ? collect_post_data($good_id, $wpdb, $table_lr, $table_pr) : null;
+    $cols = $good_data ? 4 : 2;
+
+    // -------------------------------------------------------
+    // Режим работы — определяем для отображения
+    // -------------------------------------------------------
+    $mode_label = $do_process ? '⚙️ ОБРАБОТКА + СРАВНЕНИЕ' : '👁️ ТОЛЬКО СРАВНЕНИЕ (без изменений)';
+    $mode_color = $do_process ? '#f0883e' : '#58a6ff';
+
+    // Формируем ссылки переключения режима
+    $current_url_params = $_GET;
+    $current_url_params['do_process'] = $do_process ? 0 : 1;
+    $toggle_url = admin_url('?' . http_build_query($current_url_params));
+    $toggle_label = $do_process ? '🔄 Переключить на: только сравнение' : '🔄 Переключить на: обработка + сравнение';
+
+    echo '<style>
+    body{font-family:monospace;padding:20px;background:#0d1117;color:#c9d1d9;font-size:13px;}
+    h2{color:#58a6ff;margin-top:30px;}
+    h3{color:#d2a8ff;border-bottom:1px solid #30363d;padding-bottom:5px;}
+    table{border-collapse:collapse;width:100%;margin:10px 0 20px;}
+    th,td{border:1px solid #30363d;padding:6px 10px;text-align:left;vertical-align:top;}
+    th{background:#161b22;color:#79c0ff;}
+    .diff{background:#3b1d1d;}
+    .match{background:#1a2e1a;}
+    pre{background:#161b22;padding:8px;border-radius:4px;overflow-x:auto;max-height:200px;margin:0;}
+    .mode-badge{display:inline-block;padding:6px 14px;border-radius:6px;font-weight:bold;font-size:14px;margin-bottom:10px;}
+    .toggle-btn{display:inline-block;padding:6px 14px;border-radius:6px;font-size:13px;
+                text-decoration:none;color:#c9d1d9;border:1px solid #30363d;margin-left:10px;
+                background:#21262d;transition:background 0.2s;}
+    .toggle-btn:hover{background:#30363d;color:#fff;}
+    </style>';
+
+    echo '<h2>🔍 Сравнение постов</h2>';
+    echo '<p><span class="mode-badge" style="background:' . $mode_color . '22;border:1px solid ' . $mode_color . ';color:' . $mode_color . ';">' . $mode_label . '</span>';
+    echo '<a href="' . esc_url($toggle_url) . '" class="toggle-btn">' . $toggle_label . '</a></p>';
+
+    if ($do_process) {
+        echo "<p>validate_locations: " . ($validation_results ? '✅ OK' : '❌ FAIL') . "</p>";
+    }
+
+    echo '<table><tr><th>Параметр</th><th>❌ Нерабочий (ID: '.$post_id.')</th>';
+    if ($good_data) echo '<th>✅ Рабочий (ID: '.$good_id.')</th><th>?</th>';
+    echo '</tr>';
+
+    // --- Основные поля ---
+    foreach (['post_status', 'post_type', 'post_modified'] as $field) {
+        $bv = $bad_data[$field]; $gv = $good_data ? $good_data[$field] : '';
+        $m = ($bv === $gv); $c = $m ? 'match' : 'diff';
+        echo "<tr class='$c'><td><b>$field</b></td><td>$bv</td>";
+        if ($good_data) echo "<td>$gv</td><td>".($m?'✅':'❌')."</td>";
+        echo '</tr>';
+    }
+
+    // --- Meta ---
+    echo '<tr><td colspan="'.$cols.'"><h3>Post Meta</h3></td></tr>';
+    foreach ($bad_data['meta'] as $key => $bv) {
+        $bs = is_array($bv) ? implode(' | ', $bv) : $bv;
+        $gs = ''; $m = true;
+        if ($good_data) {
+            $gv = $good_data['meta'][$key] ?? '--- ОТСУТСТВУЕТ ---';
+            $gs = is_array($gv) ? implode(' | ', $gv) : $gv;
+            $m = ($bs === $gs);
+        }
+        $c = $m ? 'match' : 'diff';
+        echo "<tr class='$c'><td><b>$key</b></td><td><pre>".htmlspecialchars($bs)."</pre></td>";
+        if ($good_data) echo "<td><pre>".htmlspecialchars($gs)."</pre></td><td>".($m?'✅':'❌')."</td>";
+        echo '</tr>';
+    }
+
+    // --- locations_relation ---
+    echo '<tr><td colspan="'.$cols.'"><h3>directorypress_locations_relation</h3></td></tr>';
+    $blr = !empty($bad_data['locations_relation']) ? print_r($bad_data['locations_relation'], true) : 'ПУСТО';
+    $glr = $good_data && !empty($good_data['locations_relation']) ? print_r($good_data['locations_relation'], true) : 'ПУСТО';
+    $bc = $bad_data['locations_relation']; $gc = $good_data ? $good_data['locations_relation'] : [];
+    foreach ($bc as &$r) unset($r['id']); foreach ($gc as &$r) unset($r['id']);
+    $m = ($bc === $gc); $c = $m ? 'match' : 'diff';
+    echo "<tr class='$c'><td><b>rows</b></td><td><pre>".htmlspecialchars($blr)."</pre></td>";
+    if ($good_data) echo "<td><pre>".htmlspecialchars($glr)."</pre></td><td>".($m?'✅':'❌')."</td>";
+    echo '</tr>';
+
+    // --- packages_relation ---
+    echo '<tr><td colspan="'.$cols.'"><h3>directorypress_packages_relation</h3></td></tr>';
+    $bpr = !empty($bad_data['packages_relation']) ? print_r($bad_data['packages_relation'], true) : 'ПУСТО';
+    $gpr = $good_data && !empty($good_data['packages_relation']) ? print_r($good_data['packages_relation'], true) : 'ПУСТО';
+    $m = ($bad_data['packages_relation'] == ($good_data['packages_relation'] ?? [])); $c = $m ? 'match' : 'diff';
+    echo "<tr class='$c'><td><b>rows</b></td><td><pre>".htmlspecialchars($bpr)."</pre></td>";
+    if ($good_data) echo "<td><pre>".htmlspecialchars($gpr)."</pre></td><td>".($m?'✅':'❌')."</td>";
+    echo '</tr>';
+
+    // --- Taxonomy ---
+    foreach (['tax_location' => 'directorypress-location', 'tax_category' => 'directorypress-category'] as $tk => $tl) {
+        echo '<tr><td colspan="'.$cols.'"><h3>Taxonomy: '.$tl.'</h3></td></tr>';
+        $bt = array_map(function($t){return $t->term_id.':'.$t->name;}, $bad_data[$tk]);
+        $gt = $good_data ? array_map(function($t){return $t->term_id.':'.$t->name;}, $good_data[$tk]) : [];
+        $m = ($bt === $gt); $c = $m ? 'match' : 'diff';
+        echo "<tr class='$c'><td><b>terms</b></td><td>".implode(', ',$bt)."</td>";
+        if ($good_data) echo "<td>".implode(', ',$gt)."</td><td>".($m?'✅':'❌')."</td>";
+        echo '</tr>';
+    }
+
+    // --- Все ключи meta С ЗНАЧЕНИЯМИ ---
+    echo '<tr><td colspan="'.$cols.'"><h3>Все meta ключи и значения</h3></td></tr>';
+    $ak = array_unique(array_merge($bad_data['all_meta_keys'], $good_data ? $good_data['all_meta_keys'] : []));
+    sort($ak);
+    $bks = array_flip($bad_data['all_meta_keys']);
+    $gks = $good_data ? array_flip($good_data['all_meta_keys']) : [];
+
+    foreach ($ak as $key) {
+        $ib = isset($bks[$key]);
+        $ig = isset($gks[$key]);
+
+        // Получаем значения
+        $bval_raw = $ib && isset($bad_data['all_meta_values'][$key]) ? $bad_data['all_meta_values'][$key] : null;
+        $gval_raw = $ig && $good_data && isset($good_data['all_meta_values'][$key]) ? $good_data['all_meta_values'][$key] : null;
+
+        // Форматируем значения для отображения
+        $bval_str = '';
+        if ($bval_raw !== null) {
+            if (is_array($bval_raw)) {
+                $parts = [];
+                foreach ($bval_raw as $v) {
+                    $sv = is_array($v) || is_object($v) ? print_r($v, true) : (string)$v;
+                    // Обрезаем слишком длинные значения
+                    if (mb_strlen($sv) > 120) $sv = mb_substr($sv, 0, 120) . '…';
+                    $parts[] = $sv;
+                }
+                $bval_str = implode(' | ', $parts);
+            } else {
+                $bval_str = (string)$bval_raw;
+                if (mb_strlen($bval_str) > 120) $bval_str = mb_substr($bval_str, 0, 120) . '…';
+            }
+        }
+
+        $gval_str = '';
+        if ($gval_raw !== null) {
+            if (is_array($gval_raw)) {
+                $parts = [];
+                foreach ($gval_raw as $v) {
+                    $sv = is_array($v) || is_object($v) ? print_r($v, true) : (string)$v;
+                    if (mb_strlen($sv) > 120) $sv = mb_substr($sv, 0, 120) . '…';
+                    $parts[] = $sv;
+                }
+                $gval_str = implode(' | ', $parts);
+            } else {
+                $gval_str = (string)$gval_raw;
+                if (mb_strlen($gval_str) > 120) $gval_str = mb_substr($gval_str, 0, 120) . '…';
+            }
+        }
+
+        // Статусы наличия
+        $ib_icon = $ib ? '✅' : '❌';
+        $ig_icon = $ig ? '✅' : '❌';
+
+        // Сравниваем значения (не только наличие)
+        $values_match = ($bval_raw == $gval_raw);
+        $presence_match = ($ib === $ig);
+        $full_match = $presence_match && $values_match;
+        $c = $full_match ? 'match' : 'diff';
+
+        // Формируем вывод: имя ключа + значение
+        $bad_cell = $ib_icon . ' <pre style="display:inline;background:transparent;padding:2px 4px;">' . htmlspecialchars($bval_str ?: '—') . '</pre>';
+        $good_cell = $ig_icon . ' <pre style="display:inline;background:transparent;padding:2px 4px;">' . htmlspecialchars($gval_str ?: '—') . '</pre>';
+
+        echo "<tr class='$c'><td><b>$key</b></td><td>$bad_cell</td>";
+        if ($good_data) echo "<td>$good_cell</td><td>".($full_match?'✅':'❌')."</td>";
+        echo '</tr>';
+    }
+
+    echo '</table>';
+    exit;
+});
+
+
+
+add_action('init', function () {
+
+    // 🔒 защита: запускается только по URL параметру
+    if (!isset($_GET['add_attached_image']) || $_GET['add_attached_image'] != '1') {
+        return;
+    }
+
+    // путь к CSV
+    $csv_file = __DIR__ . '/listings-export-2026-april-25-1028.csv';
+
+    if (!file_exists($csv_file)) {
+        die('CSV файл не найден');
+    }
+
+    if (($handle = fopen($csv_file, 'r')) === false) {
+        die('Не удалось открыть CSV');
+    }
+
+    $row = 0;
+
+    while (($data = fgetcsv($handle, 0, ',')) !== false) {
+
+        // пропуск заголовка
+        if ($row === 0) {
+            $row++;
+            continue;
+        }
+
+        $post_id = intval($data[0]);
+
+        if (!$post_id) {
+            continue;
+        }
+
+        // получаем старые изображения (если нужно НЕ затирать)
+        $existing = get_post_meta($post_id, '_attached_image', true);
+
+        var_dump($existing);
+
+        // добавляем новое изображение
+        $existing = 18752;
+		delete_post_meta($post_id, '_attached_image');
+        //update_post_meta($post_id, '_attached_image', $existing);
+		$existing = get_post_meta($post_id, '_attached_image', true);
+
+        var_dump($existing);
+        echo "Updated post ID: {$post_id}<br>";
+    }
+
+    fclose($handle);
+
+    exit('Done');
+
+});
+
+add_action('init', function () {
+
+    // 🔒 запуск только по URL
+    if (!isset($_GET['trash_posts']) || $_GET['trash_posts'] != '1') {
+        return;
+    }
+
+    $csv_file = __DIR__ . '/listings-export-2026-april-25-1028.csv';
+
+    if (!file_exists($csv_file)) {
+        die('CSV файл не найден');
+    }
+
+    $handle = fopen($csv_file, 'r');
+
+    if (!$handle) {
+        die('Не удалось открыть CSV');
+    }
+
+    $row = 0;
+
+    while (($data = fgetcsv($handle, 0, ',')) !== false) {
+
+        // пропускаем заголовок
+        if ($row === 0) {
+            $row++;
+            continue;
+        }
+
+        $post_id = intval($data[0]);
+
+        if (!$post_id) {
+            continue;
+        }
+
+        // перенос в корзину
+        $result = wp_trash_post($post_id);
+
+        if ($result) {
+            echo "Trashed post ID: {$post_id}<br>";
+        } else {
+            echo "Failed: {$post_id}<br>";
+        }
+
+        $row++;
+    }
+
+    fclose($handle);
+
+    exit('Done');
+
+});
+
+add_action('init', function () {
+
+
+    if (!isset($_GET['reset_some_meta'])) {
+        return;
+    }
+        $post_id = intval($_GET['reset_some_meta']);
+		$post = get_post($post_id);
+		/*delete_post_meta($post_id, '_manual_coords');
+		delete_post_meta($post_id, '_address_line_1');
+		delete_post_meta($post_id, '_address_line_2');
+		delete_post_meta($post_id, '_zip_or_postal_index');
+		delete_post_meta($post_id, '_additional_info');
+		delete_post_meta($post_id, '_map_coords_1');
+		delete_post_meta($post_id, '_map_coords_2');
+		delete_post_meta($post_id, '_map_zoom');
+        //update_post_meta($post_id, '_manual_coords', '');
+		//update_post_meta($post_id, '_listing_status', 'active');
+		delete_post_meta($post_id, '_elementor_page_assets');
+		delete_post_meta($post_id, '_clicks_data');
+		update_post_meta($post_id, '_elementor_page_assets', []);
+		update_post_meta($post_id, '_clicks_data', [0 => '', date('n-Y') => 4]);
+		update_post_meta($post_id, '_total_clicks', 2);
+        echo "Updated post ID: {$post_id}<br>";*/
+		echo '<pre>';
+			print_r([
+				'ID' => $post_id,
+				'type' => $post->post_type,
+				'title' => $post->post_title,
+				'meta' => get_post_meta($post_id),
+				'taxonomies' => get_object_taxonomies($post->post_type),
+				'terms' => wp_get_post_terms($post_id, get_object_taxonomies($post->post_type)),
+			]);
+		echo '</pre>';
+    exit('Done');
+
+});
+
+add_action('init', function () {
+    if (!is_admin() || empty($_GET['show_cat_limit']))
+        return;
+    if (!current_user_can('manage_options'))
+        wp_die('Нет доступа.');
+
+    global $wpdb;
+    $results = $wpdb->get_results(
+        "SELECT id, name, category_number_allowed FROM {$wpdb->prefix}directorypress_packages ORDER BY id"
+    );
+
+    echo '<pre style="background:#0d1117;color:#c9d1d9;padding:20px;font-family:monospace;">';
+    echo "📦 DirectoryPress Packages — Category Limit\n\n";
+    foreach ($results as $row) {
+        echo "ID: {$row->id} | Name: {$row->name} | Max categories: {$row->category_number_allowed}\n";
+    }
+    echo '</pre>';
+    exit;
+});
+
+ 
+add_action('pmxi_saved_post', 'dpfix_after_import', 10, 1);
+
+function dpfix_after_import($post_id)
+{
+    if (get_post_type($post_id) !== 'dp_listing')
+        return;
+
+    global $wpdb;
+    $tax = 'directorypress-location';
+
+    error_log("DPFIX v4: === СТАРТ post_id=$post_id ===");
+
+
+    $raw = trim(get_post_meta($post_id, '_location_chain', true));
+    error_log("DPFIX v4: _location_chain='$raw'");
+
+    $names = array();
+    if (!empty($raw)) {
+        if (strpos($raw, '|') !== false) {
+            $names = explode('|', $raw);
+        } elseif (strpos($raw, '>') !== false) {
+            $names = explode('>', $raw);
+        } elseif (strpos($raw, ',') !== false) {
+            $names = explode(',', $raw);
+        } else {
+            $names = array($raw);
+        }
+        $names = array_map('trim', $names);
+        $names = array_values(array_filter($names));
+    }
+
+    error_log("DPFIX v4: names=" . implode(', ', $names));
+
+    $term_ids = array();
+    $parent_id = 0;
+
+    foreach ($names as $i => $name) {
+        if (empty($name))
+            continue;
+
+        $found_term = null;
+
+
+        $args = array(
+            'taxonomy' => $tax,
+            'hide_empty' => false,
+            'parent' => $parent_id,
+        );
+        $children = get_terms($args);
+
+        if (!is_wp_error($children) && !empty($children)) {
+            foreach ($children as $child) {
+                if (mb_strtolower(trim($child->name)) === mb_strtolower(trim($name))) {
+                    $found_term = $child;
+                    error_log("DPFIX v4: [$i] '$name' найден среди детей parent=$parent_id → term_id={$child->term_id}");
+                    break;
+                }
+            }
+        }
+
+    
+        if (!$found_term) {
+            $global = get_term_by('name', $name, $tax);
+            if ($global && !is_wp_error($global)) {
+                $found_term = $global;
+                error_log("DPFIX v4: [$i] '$name' найден глобально → term_id={$global->term_id} (parent={$global->parent})");
+            }
+        }
+
+        if (!$found_term) {
+            $by_slug = get_term_by('slug', sanitize_title($name), $tax);
+            if ($by_slug && !is_wp_error($by_slug)) {
+                $found_term = $by_slug;
+                error_log("DPFIX v4: [$i] '$name' найден по slug → term_id={$by_slug->term_id}");
+            }
+        }
+
+    
+        if (!$found_term) {
+            error_log("DPFIX v4: [$i] '$name' НЕ найден, создаём (parent=$parent_id)...");
+
+            $result = wp_insert_term($name, $tax, array(
+                'parent' => $parent_id,
+                'slug' => sanitize_title($name),
+            ));
+
+            if (is_wp_error($result)) {
+              
+                $err_data = $result->get_error_data('term_exists');
+                if ($err_data) {
+                    $found_term = get_term(intval($err_data), $tax);
+                    error_log("DPFIX v4: [$i] '$name' уже существует → term_id=" . intval($err_data));
+                } else {
+                    error_log("DPFIX v4: [$i] ОШИБКА создания '$name': " . $result->get_error_message());
+                    continue;
+                }
+            } else {
+                $found_term = get_term($result['term_id'], $tax);
+                error_log("DPFIX v4: [$i] '$name' СОЗДАН → term_id={$result['term_id']}");
+            }
+        }
+
+        if ($found_term && !is_wp_error($found_term)) {
+            $term_ids[] = $found_term->term_id;
+            $parent_id = $found_term->term_id;
+        }
+    }
+
+    error_log("DPFIX v4: term_ids=[" . implode(', ', $term_ids) . "]");
+
+    if (empty($term_ids)) {
+        $term_ids = array(461);
+        error_log("DPFIX v4: фолбэк на дефолт [461]");
+    }
+
+    $leaf = end($term_ids);
+    error_log("DPFIX v4: leaf=$leaf");
+
+    $table = $wpdb->prefix . 'directorypress_locations_relation';
+    $exists = $wpdb->get_var($wpdb->prepare(
+        "SELECT id FROM {$table} WHERE post_id = %d",
+        $post_id
+    ));
+
+    if ($exists) {
+        $wpdb->update($table, array('location_id' => $leaf), array('post_id' => $post_id));
+        error_log("DPFIX v4: locations_relation ОБНОВЛЕНА (id=$exists, location_id=$leaf)");
+    } else {
+        $wpdb->insert($table, array(
+            'post_id' => $post_id,
+            'location_id' => $leaf,
+            'address_line_1' => '',
+            'address_line_2' => '',
+            'zip_or_postal_index' => '',
+            'additional_info' => '',
+            'manual_coords' => 0,
+            'map_coords_1' => 0.000000,
+            'map_coords_2' => 0.000000,
+            'map_icon_file' => '',
+        ));
+        error_log("DPFIX v4: locations_relation СОЗДАНА (location_id=$leaf)");
+    }
+
+
+    $res = wp_set_object_terms($post_id, $term_ids, $tax);
+
+
+    if (!get_post_meta($post_id, '_order_date', true)) {
+        add_post_meta($post_id, '_order_date', time());
+    }
+    if (!get_post_meta($post_id, '_listing_created', true)) {
+        add_post_meta($post_id, '_listing_created', true);
+    }
+    if (!get_post_meta($post_id, '_listing_status', true)) {
+        add_post_meta($post_id, '_listing_status', 'active');
+    }
+
+    update_post_meta($post_id, '_location_id', $leaf);
+  
+
+    clean_term_cache($term_ids, $tax);
+    clean_object_term_cache($post_id, 'dp_listing');
+
+   
+}
+
+add_action('wp_head', function() {
+    echo '<script>var odd_even_label = 2;</script>';
+}, 1);
+
+add_filter('nonce_life', function() {
+    return 12 * HOUR_IN_SECONDS;
+});
+
+add_filter('wp_ajax_directorypress_handler_request', function() {
+    if (!wp_verify_nonce($_POST['dp_ajax_nonce'], 'dp_ajax_nonce')) {
+        // регенерируем nonce и продолжаем
+        $_POST['dp_ajax_nonce'] = wp_create_nonce('dp_ajax_nonce');
+    }
+}, 1);
+

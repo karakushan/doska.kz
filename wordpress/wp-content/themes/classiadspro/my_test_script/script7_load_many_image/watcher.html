@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watcher — script7</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        #status-bar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #161b22;
+            border-bottom: 2px solid #30363d;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 100;
+        }
+
+        #status-indicator {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #3fb950;
+            flex-shrink: 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        #status-indicator.error   { background: #f85149; animation: none; }
+        #status-indicator.waiting { background: #d29922; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.4; }
+        }
+
+        #status-text { flex: 1; color: #58a6ff; }
+        #run-count   { color: #8b949e; font-size: 12px; }
+        #progress-bar-wrap {
+            position: fixed;
+            top: 44px; left: 0; right: 0;
+            height: 3px;
+            background: #21262d;
+        }
+        #progress-bar {
+            height: 100%;
+            background: #58a6ff;
+            width: 0%;
+            transition: width 1s linear;
+        }
+
+        #output-wrap {
+            margin-top: 55px;
+            padding: 16px 20px;
+        }
+
+        #output {
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+
+        .log-ok      { color: #3fb950; }
+        .log-error   { color: #f85149; }
+        .log-info    { color: #58a6ff; }
+        .log-warning { color: #d29922; }
+        .log-sep     { color: #30363d; }
+    </style>
+</head>
+<body>
+
+<div id="status-bar">
+    <div id="status-indicator"></div>
+    <div id="status-text">Запуск...</div>
+    <div id="run-count">Запусков: 0</div>
+</div>
+<div id="progress-bar-wrap">
+    <div id="progress-bar"></div>
+</div>
+
+<div id="output-wrap">
+    <div id="output"></div>
+</div>
+
+<script>
+// ===================== НАСТРОЙКИ =====================
+const SCRIPT_URL     = 'script7.php';
+const RETRY_DELAY_MS = 1000;
+const TIMEOUT_MS     = 90000;
+// =====================================================
+
+let runCount  = 0;
+let isRunning = false;
+
+const outputEl    = document.getElementById('output');
+const statusText  = document.getElementById('status-text');
+const statusDot   = document.getElementById('status-indicator');
+const runCountEl  = document.getElementById('run-count');
+const progressBar = document.getElementById('progress-bar');
+
+function log(msg, cls = '') {
+    const line = document.createElement('span');
+    line.className = cls;
+    line.innerHTML = msg + '\n';
+    outputEl.appendChild(line);
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function setStatus(text, state = 'running') {
+    statusText.textContent = text;
+    statusDot.className = state === 'error' ? 'error'
+                        : state === 'wait'  ? 'waiting'
+                        : '';
+}
+
+function animateProgress(durationMs) {
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            progressBar.style.transition = `width ${durationMs}ms linear`;
+            progressBar.style.width = '100%';
+        });
+    });
+}
+
+async function runScript() {
+    if (isRunning) return;
+    isRunning = true;
+    runCount++;
+    runCountEl.textContent = `Запусков: ${runCount}`;
+
+    // НЕ очищаем здесь — старый лог остаётся видимым пока ждём ответ
+    setStatus(`Выполняется запуск #${runCount}...`);
+    animateProgress(TIMEOUT_MS);
+
+    const controller = new AbortController();
+    const timeoutId  = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+    try {
+        const response = await fetch(SCRIPT_URL + '?run=' + runCount + '&t=' + Date.now(), {
+            signal: controller.signal,
+            cache:  'no-store',
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            const statusMsg = response.status === 504 ? '504 Gateway Timeout'
+                            : response.status === 502 ? '502 Bad Gateway'
+                            : response.status === 503 ? '503 Service Unavailable'
+                            : `HTTP ${response.status} ${response.statusText}`;
+            throw new Error(statusMsg);
+        }
+
+        // ✅ Очищаем ТОЛЬКО после успешного ответа сервера
+        outputEl.innerHTML = '';
+        log('─'.repeat(60), 'log-sep');
+        log(`🚀 Запуск #${runCount}`, 'log-info');
+
+        // Читаем стриминг ответа построчно
+        const reader  = response.body.getReader();
+        const decoder = new TextDecoder();
+        let   buffer  = '';
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split(/<\/br>|<br\s*\/?>/i);
+            buffer = lines.pop();
+
+            for (const line of lines) {
+                const clean = line.replace(/<[^>]+>/g, '').trim();
+                if (!clean) continue;
+
+                let cls = '';
+                if (clean.includes('[OK]') || clean.includes('Загружено в WordPress'))  cls = 'log-ok';
+                else if (clean.includes('[ОШИБКА]') || clean.includes('[ПРОПУСК]'))       cls = 'log-error';
+                else if (clean.includes('===') || clean.includes('Запуск'))              cls = 'log-info';
+                else if (clean.includes('[ПРОГРЕСС]'))                                   cls = 'log-warning';
+
+                log(clean, cls);
+            }
+        }
+
+        const fullText = outputEl.textContent;
+        if (fullText.includes('Готово!') || fullText.includes('Достигнут лимит')) {
+            setStatus(`✅ Цикл #${runCount} завершён. Перезапуск через ${RETRY_DELAY_MS / 1000}с...`, 'wait');
+            log(`⏳ Следующий запуск через ${RETRY_DELAY_MS / 1000} сек...`, 'log-info');
+        } else {
+            setStatus(`⚠️ Ответ получен, но завершение не обнаружено. Перезапуск...`, 'wait');
+        }
+
+    } catch (err) {
+        clearTimeout(timeoutId);
+        const msg = err.name === 'AbortError'
+            ? `⏱ Таймаут ${TIMEOUT_MS / 1000}с — сервер не ответил. Перезапуск...`
+            : `❌ ${err.message} — Перезапуск через ${RETRY_DELAY_MS / 1000}с...`;
+
+        log(msg, 'log-error');
+        setStatus(msg, 'error');
+    } finally {
+        clearTimeout(timeoutId);
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+    }
+
+    isRunning = false;
+    setTimeout(runScript, RETRY_DELAY_MS);
+}
+
+runScript();
+</script>
+
+
+</body>
+</html>

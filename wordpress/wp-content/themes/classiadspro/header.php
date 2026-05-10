@@ -13,6 +13,16 @@
 			<?php endif; ?>
 			
 		<?php wp_head(); ?>
+		
+		<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CR63ZZE8Q7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CR63ZZE8Q7');
+</script>
 	</head>
 <body <?php body_class('skin-blue'); ?>>
 	<?php wp_body_open(); ?>

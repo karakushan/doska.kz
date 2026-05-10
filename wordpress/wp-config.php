@@ -101,11 +101,17 @@ error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE );
 // Disable default WP-Cron (we use external cron via Docker)
 define( 'DISABLE_WP_CRON', true );
 
-// Dynamically set WP_HOME and WP_SITEURL based on current HTTP_HOST
-// This ensures static assets (icons, flags, CSS, JS) load correctly on subdomains
+// Dynamically set WP_HOME and WP_SITEURL based on current HTTP_HOST.
+// In local Docker, normalize *.localhost to localhost to avoid lingering
+// subdomain-based URLs such as us.localhost:8080 after disabling region logic.
 if ( ! defined( 'WP_HOME' ) ) {
 	$rs_protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ? 'https' : 'http';
 	$rs_host     = $_SERVER['HTTP_HOST'] ?? 'adshelppro.com';
+
+	if ( strpos( $rs_host, '.localhost' ) !== false ) {
+		$rs_host = preg_replace( '/^[^.]+\.localhost(?::(\d+))?$/', 'localhost$1', $rs_host );
+	}
+
 	define( 'WP_HOME',    $rs_protocol . '://' . $rs_host );
 	define( 'WP_SITEURL', $rs_protocol . '://' . $rs_host );
 }
