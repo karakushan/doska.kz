@@ -4494,9 +4494,16 @@ add_filter('nonce_life', function() {
     return 12 * HOUR_IN_SECONDS;
 });
 
-add_filter('wp_ajax_directorypress_handler_request', function() {
-    if (!wp_verify_nonce($_POST['dp_ajax_nonce'], 'dp_ajax_nonce')) {
-        // регенерируем nonce и продолжаем
-        $_POST['dp_ajax_nonce'] = wp_create_nonce('dp_ajax_nonce');
+function classiadspro_refresh_directorypress_ajax_nonce() {
+    if (empty($_POST['action']) || $_POST['action'] !== 'directorypress_handler_request') {
+        return;
     }
-}, 1);
+
+    $nonce = isset($_POST['dp_ajax_nonce']) ? sanitize_text_field(wp_unslash($_POST['dp_ajax_nonce'])) : '';
+
+    if (!wp_verify_nonce($nonce, 'directorypress-ajax-nonce')) {
+        $_POST['dp_ajax_nonce'] = wp_create_nonce('directorypress-ajax-nonce');
+    }
+}
+add_action('wp_ajax_directorypress_handler_request', 'classiadspro_refresh_directorypress_ajax_nonce', 1);
+add_action('wp_ajax_nopriv_directorypress_handler_request', 'classiadspro_refresh_directorypress_ajax_nonce', 1);
