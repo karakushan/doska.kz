@@ -2313,6 +2313,121 @@ function rs_cookie_exists(){
 	return isset($_COOKIE[$cookie_name]);
 }
 
+function rs_get_current_language_code() {
+	if (function_exists('trp_get_current_language')) {
+		$language_code = (string) trp_get_current_language();
+		if ($language_code !== '') {
+			return strtolower(substr($language_code, 0, 2));
+		}
+	}
+
+	$locale = function_exists('determine_locale') ? determine_locale() : get_locale();
+	if (!is_string($locale) || $locale === '') {
+		return 'en';
+	}
+
+	return strtolower(substr($locale, 0, 2));
+}
+
+function rs_get_region_selector_label($label_key) {
+	$language_code = rs_get_current_language_code();
+
+	$translations = [
+		'en' => [
+			'choose_region' => 'Choose region',
+			'select_region' => 'Select region',
+			'select_your_region' => 'Select your region',
+		],
+		'ru' => [
+			'choose_region' => 'Выберите регион',
+			'select_region' => 'Выбрать регион',
+			'select_your_region' => 'Выберите ваш регион',
+		],
+		'uk' => [
+			'choose_region' => 'Оберіть регіон',
+			'select_region' => 'Обрати регіон',
+			'select_your_region' => 'Оберіть свій регіон',
+		],
+		'tr' => [
+			'choose_region' => 'Bolge secin',
+			'select_region' => 'Bolge secin',
+			'select_your_region' => 'Bolgenizi secin',
+		],
+		'kk' => [
+			'choose_region' => 'Onirdi tandanyz',
+			'select_region' => 'Onirdi tandau',
+			'select_your_region' => 'Oz onirinizdi tandanyz',
+		],
+	];
+
+	if (!isset($translations[$language_code])) {
+		$language_code = 'en';
+	}
+
+	return $translations[$language_code][$label_key] ?? $translations['en'][$label_key] ?? '';
+}
+
+function rs_get_region_display_name($country_code, $fallback_name = '') {
+	$language_code = rs_get_current_language_code();
+	$country_code = strtolower(trim((string) $country_code));
+	$fallback_name = trim((string) $fallback_name);
+
+	$translations = [
+		'kz' => [
+			'en' => 'Kazakhstan',
+			'ru' => 'Казахстан',
+			'uk' => 'Казахстан',
+			'tr' => 'Kazakistan',
+			'kk' => 'Qazaqstan',
+		],
+		'us' => [
+			'en' => 'USA',
+			'ru' => 'США',
+			'uk' => 'США',
+			'tr' => 'ABD',
+			'kk' => 'AQSh',
+		],
+		'es' => [
+			'en' => 'Spain',
+			'ru' => 'Испания',
+			'uk' => 'Іспанія',
+			'tr' => 'Ispanya',
+			'kk' => 'Ispaniya',
+		],
+		'de' => [
+			'en' => 'Germany',
+			'ru' => 'Германия',
+			'uk' => 'Німеччина',
+			'tr' => 'Almanya',
+			'kk' => 'Germaniya',
+		],
+		'tr' => [
+			'en' => 'Turkey',
+			'ru' => 'Турция',
+			'uk' => 'Туреччина',
+			'tr' => 'Turkiye',
+			'kk' => 'Turkiya',
+		],
+		'ua' => [
+			'en' => 'Ukraine',
+			'ru' => 'Украина',
+			'uk' => 'Україна',
+			'tr' => 'Ukrayna',
+			'kk' => 'Ukraina',
+		],
+	];
+
+	if (isset($translations[$country_code][$language_code])) {
+		return $translations[$country_code][$language_code];
+	}
+
+	if ($fallback_name !== '') {
+		return $fallback_name;
+	}
+
+	return strtoupper($country_code);
+}
+
 /* ========================= ADMIN ========================= */
 
 add_action('admin_menu', function(){
@@ -2466,14 +2581,14 @@ add_action('wp_footer', function(){
 
 	<div id="rs-overlay">
 		<div class="rs-modal">
-			<h3>Select your region</h3>
+			<h3><?php echo esc_html(rs_get_region_selector_label('select_your_region')); ?></h3>
 			<div class="rs-grid">
 				<?php foreach($countries as $host => $c): ?>
 					<button class="rs-btn"
 						data-host="<?= esc_attr($host) ?>"
 						data-url="<?= esc_attr($c['url']) ?>"
 						data-code="<?= esc_attr($c['code']) ?>">
-						<?= esc_html($c['emoji'].' '.$c['name']) ?>
+						<?= esc_html($c['emoji'].' '.rs_get_region_display_name($c['code'], $c['name'])) ?>
 					</button>
 				<?php endforeach; ?>
 			</div>
@@ -2546,8 +2661,8 @@ add_shortcode('rs_region_selector', function($atts){
 	/* ======================= MOBILE ======================= */
 	if ( wp_is_mobile() ) : ?>
 
-	   🌍Choose region <select class="rs-region-select" onchange="rsSelectRegionMobile(this)">
-			<option value="">Select region</option>
+	   🌍<?php echo esc_html(rs_get_region_selector_label('choose_region')); ?> <select class="rs-region-select" onchange="rsSelectRegionMobile(this)">
+			<option value=""><?php echo esc_html(rs_get_region_selector_label('select_region')); ?></option>
 			<?php foreach($countries as $host => $c): ?>
 				<option
 					value="<?= esc_attr($host) ?>"
@@ -2555,7 +2670,7 @@ add_shortcode('rs_region_selector', function($atts){
 					data-code="<?= esc_attr($c['code']) ?>"
 					<?= selected($host, $current_key, false) ?>
 				>
-					<?= esc_html($c['emoji'].' '.$c['name']) ?>
+					<?= esc_html($c['emoji'].' '.rs_get_region_display_name($c['code'], $c['name'])) ?>
 				</option>
 			<?php endforeach; ?>
 		</select>
@@ -2595,12 +2710,12 @@ add_shortcode('rs_region_selector', function($atts){
 	else : ?>
 
 		<div class="rs-dropdown">
-			<button class="rs-dropdown-btn">🌍 Select region <span class="arrowx">&gt;</span></button>
+			<button class="rs-dropdown-btn">🌍 <?php echo esc_html(rs_get_region_selector_label('select_region')); ?> <i class="rs-dropdown-caret fas fa-angle-down" aria-hidden="true"></i></button>
 			<ul class="rs-dropdown-list">
 				<?php foreach($countries as $host => $c): ?>
 					<li data-host="<?= esc_attr($host) ?>" data-url="<?= esc_attr($c['url']) ?>" data-code="<?= esc_attr($c['code']) ?>">
 						<span class="rs-flag"><?= esc_html($c['emoji']) ?></span>
-						<span class="rs-name"><?= esc_html($c['name']) ?></span>
+						<span class="rs-name"><?= esc_html(rs_get_region_display_name($c['code'], $c['name'])) ?></span>
 					</li>
 				<?php endforeach; ?>
 			</ul>
@@ -2608,13 +2723,12 @@ add_shortcode('rs_region_selector', function($atts){
 
 		<style>
 		.rs-dropdown { position: relative; display: inline-block; font-family: sans-serif; }
-		.arrowx {
+		.rs-dropdown-caret {
 			display: inline-block;
-			transform: rotate(90deg) scaleX(0.6);
 			font-size: 14px;
 			margin-left: 6px;
-			font-weight: bolder;
-			font-size: 18px;
+			line-height: 1;
+			vertical-align: middle;
 		}
 		.rs-dropdown-btn {
 			background: transparent; color:gray; border: none;
@@ -2750,7 +2864,7 @@ add_shortcode('rs_currency_selector', function($atts){
 	else : ?>
 
 		<div class="rs-dropdown rs-currency-dropdown">
-			<button class="rs-dropdown-btn rs-currency-btn"><?= esc_html($current['symbol'] . ' ' . $current['code']) ?> <span class="arrowx">&gt;</span></button>
+			<button class="rs-dropdown-btn rs-currency-btn"><?= esc_html($current['symbol'] . ' ' . $current['code']) ?> <i class="rs-dropdown-caret fas fa-angle-down" aria-hidden="true"></i></button>
 			<ul class="rs-dropdown-list rs-currency-list">
 				<?php foreach($currencies as $c): ?>
 					<li data-code="<?= esc_attr($c['code']) ?>" class="<?= ($c['code'] === $current_code) ? 'rs-active' : '' ?>">
@@ -2771,12 +2885,8 @@ add_shortcode('rs_currency_selector', function($atts){
 			align-items: center;
 			gap: 6px;
 		}
-		.rs-currency-dropdown .arrowx {
-			display: inline-block;
-			transform: rotate(90deg) scaleX(0.6);
-			font-size: 18px;
-			margin-left: 6px;
-			font-weight: bolder;
+		.rs-currency-dropdown .rs-dropdown-caret {
+			font-size: 14px;
 		}
 		</style>
 
@@ -2797,6 +2907,83 @@ add_filter('wp_nav_menu_items', function($items, $args){
  * missing in the menu data, TranslatePress won't render that language in the
  * header switcher even though the language itself is still published.
  */
+function classiadspro_get_trp_language_switcher_label($language_code) {
+	if (!class_exists('TRP_Translate_Press')) {
+		return strtoupper($language_code);
+	}
+
+	$trp = TRP_Translate_Press::get_trp_instance();
+	if (!is_object($trp) || !method_exists($trp, 'get_component')) {
+		return strtoupper($language_code);
+	}
+
+	$languages_component = $trp->get_component('languages');
+	if (!is_object($languages_component) || !method_exists($languages_component, 'get_wp_languages')) {
+		return strtoupper($language_code);
+	}
+
+	$wp_languages = $languages_component->get_wp_languages();
+	if (!is_array($wp_languages) || empty($wp_languages[$language_code])) {
+		return strtoupper($language_code);
+	}
+
+	$language = $wp_languages[$language_code];
+
+	if (!empty($language['native_name'])) {
+		return $language['native_name'];
+	}
+
+	if (!empty($language['english_name'])) {
+		return $language['english_name'];
+	}
+
+	return !empty($language['name']) ? $language['name'] : strtoupper($language_code);
+}
+
+function classiadspro_ensure_trp_language_switcher_posts($language_codes) {
+	$language_codes = array_values(array_unique(array_filter(array_map('strval', (array) $language_codes))));
+	if (empty($language_codes)) {
+		return [];
+	}
+
+	$existing_posts = get_posts([
+		'post_type'        => 'language_switcher',
+		'post_status'      => ['publish', 'draft', 'private'],
+		'numberposts'      => -1,
+		'suppress_filters' => false,
+	]);
+
+	$switchers_by_code = [];
+	foreach ($existing_posts as $switcher_post) {
+		$code = trim((string) $switcher_post->post_content);
+		if ($code !== '') {
+			$switchers_by_code[$code] = $switcher_post;
+		}
+	}
+
+	foreach ($language_codes as $language_code) {
+		if (isset($switchers_by_code[$language_code])) {
+			continue;
+		}
+
+		$new_post_id = wp_insert_post([
+			'post_type'    => 'language_switcher',
+			'post_status'  => 'publish',
+			'post_title'   => classiadspro_get_trp_language_switcher_label($language_code),
+			'post_content' => $language_code,
+			'post_name'    => sanitize_title('trp-language-' . $language_code),
+		], true);
+
+		if (is_wp_error($new_post_id) || !$new_post_id) {
+			continue;
+		}
+
+		$switchers_by_code[$language_code] = get_post($new_post_id);
+	}
+
+	return $switchers_by_code;
+}
+
 function classiadspro_sync_trp_menu_switcher_languages() {
 	global $wpdb;
 
@@ -2817,24 +3004,7 @@ function classiadspro_sync_trp_menu_switcher_languages() {
 		return;
 	}
 
-	$language_switchers = get_posts([
-		'post_type'      => 'language_switcher',
-		'post_status'    => 'publish',
-		'numberposts'    => -1,
-		'suppress_filters' => false,
-	]);
-
-	if (empty($language_switchers)) {
-		return;
-	}
-
-	$switchers_by_code = [];
-	foreach ($language_switchers as $switcher_post) {
-		$code = trim((string) $switcher_post->post_content);
-		if ($code !== '') {
-			$switchers_by_code[$code] = $switcher_post;
-		}
-	}
+	$switchers_by_code = classiadspro_ensure_trp_language_switcher_posts($settings['publish-languages']);
 
 	if (empty($switchers_by_code['current_language'])) {
 		return;
@@ -3039,25 +3209,84 @@ function rs_get_currency_map() {
 	];
 }
 
+function rs_get_default_currency_code() {
+	return 'TRY';
+}
+
+function rs_get_currency_by_code($currency_code) {
+	$currency_code = strtoupper(trim((string) $currency_code));
+	if ($currency_code === '') {
+		return null;
+	}
+
+	foreach (rs_get_currency_map_with_rates() as $currency) {
+		if (!empty($currency['code']) && strtoupper($currency['code']) === $currency_code) {
+			return $currency;
+		}
+	}
+
+	return null;
+}
+
+function rs_set_currency_cookie($currency_code) {
+	$currency_code = strtoupper(trim((string) $currency_code));
+	if ($currency_code === '') {
+		return;
+	}
+
+	$expires = time() + MONTH_IN_SECONDS;
+	$domain = rs_get_cookie_domain();
+	$options = [
+		'expires'  => $expires,
+		'path'     => '/',
+		'secure'   => is_ssl(),
+		'httponly' => false,
+		'samesite' => 'Lax',
+	];
+
+	if ($domain !== '') {
+		$options['domain'] = $domain;
+	}
+
+	setcookie('rs_currency', $currency_code, $options);
+	$_COOKIE['rs_currency'] = $currency_code;
+}
+
+function rs_bootstrap_default_currency() {
+	if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+		return;
+	}
+
+	if (!empty($_COOKIE['rs_currency'])) {
+		return;
+	}
+
+	$region_cookie_name = rs_get_cookie_name();
+	if (!empty($_COOKIE[$region_cookie_name])) {
+		return;
+	}
+
+	rs_set_currency_cookie(rs_get_default_currency_code());
+}
+add_action('init', 'rs_bootstrap_default_currency', 1);
+
 /**
  * Получить текущую валюту по куке страны
  * Язык определяется по префиксу URL (TranslatePress), страна — по куке
  */
 function rs_get_current_currency() {
 	$map = rs_get_currency_map_with_rates();
+	$manual_currency = null;
 
 	// 0. Сначала проверяем куку ручного выбора валюты
 	if (!empty($_COOKIE['rs_currency'])) {
-		$manual_code = strtoupper(trim($_COOKIE['rs_currency']));
-		// Ищем валюту по коду в карте
-		foreach ($map as $country_currency) {
-			if ($country_currency['code'] === $manual_code) {
-				return $country_currency;
-			}
+		$manual_currency = rs_get_currency_by_code($_COOKIE['rs_currency']);
+		if ($manual_currency) {
+			return $manual_currency;
 		}
 	}
 
-	// 1. Сначала проверяем куку — там код страны (kz, us, ua...)
+	// Иначе уже учитываем региональную куку как вторичный сигнал
 	$cookie_name = rs_get_cookie_name();
 	if (!empty($_COOKIE[$cookie_name])) {
 		$country_code = strtolower(trim($_COOKIE[$cookie_name]));
@@ -3080,20 +3309,14 @@ function rs_get_current_currency() {
 		}
 	}
 
-	// 3. Для localhost — KZT
+	// 3. Для localhost — лира
 	if (strpos($host, 'localhost') !== false) {
-		return $map['kz'];
+		return $map['tr'];
 	}
 
-	// 4. Дефолт - USD
-	return [
-		'symbol' => '$',
-		'code' => 'USD',
-		'rate' => 1,
-		'position' => 1,
-		'decimal_sep' => '.',
-		'thousand_sep' => ',',
-	];
+	// 4. Общий дефолт - лира
+	$default_currency = rs_get_currency_by_code(rs_get_default_currency_code());
+	return $default_currency ?: $map['tr'];
 }
 
 function rs_is_api_enabled() {
