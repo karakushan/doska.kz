@@ -324,9 +324,7 @@ class directorypress_ajax {
 					);
 				}
 				
-				echo json_encode($out);
-
-				break;
+				wp_send_json($out);
 		}
 		
 		die();

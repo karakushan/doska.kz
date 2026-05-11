@@ -248,7 +248,7 @@ function field_output( $field, $errors )
 				case 'number' :
 				case 'hidden' :
 				case 'submit' :
-					?><input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" type="<?php esc_attr_e( $field['type'] ); ?>" name="<?php esc_attr_e( $field['name'] ); ?>" placeholder="<?php esc_attr_e( $field['placeholder'] ); ?>" value="<?php esc_attr_e( $field['posted-value' ] ); ?>" <?php echo $attrib; ?> /><?php
+					?><input id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" type="<?php echo esc_attr( $field['type'] ); ?>" name="<?php echo esc_attr( $field['name'] ); ?>" placeholder="<?php echo esc_attr( $field['placeholder'] ); ?>" value="<?php echo esc_attr( $field['posted-value' ] ); ?>" <?php echo $attrib; ?> /><?php
 
 					break;
 				case 'message_to' :
@@ -310,7 +310,7 @@ function field_output( $field, $errors )
 					break;
 				case "textarea" :
 
-							?><textarea id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" cols="50" name="<?php esc_attr_e( $field['name'] ); ?>" placeholder="<?php esc_attr_e( $field['placeholder'] ); ?>" <?php echo $attrib; ?>><?php echo esc_textarea( $field['posted-value' ] ); ?></textarea><?php
+							?><textarea id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" cols="50" name="<?php echo esc_attr( $field['name'] ); ?>" placeholder="<?php echo esc_attr( $field['placeholder'] ); ?>" <?php echo $attrib; ?>><?php echo esc_textarea( $field['posted-value' ] ); ?></textarea><?php
 
 					break;
 					
@@ -329,37 +329,37 @@ function field_output( $field, $errors )
 
 							if( ! empty( $field['multiple' ] ) ) {
 								foreach( $field['options' ] as $key => $name ) {
-								?><label><input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" name="<?php esc_attr_e( $field['name'] ); ?>[]" type="checkbox" value="<?php esc_attr_e( $key ); ?>" <?php if( in_array( $key, $field['posted-value' ] ) ) { echo 'checked="checked"';} ?> /> <?php esc_attr_e( $name ); ?></label><br /><?php
+								?><label><input id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" name="<?php echo esc_attr( $field['name'] ); ?>[]" type="checkbox" value="<?php echo esc_attr( $key ); ?>" <?php if( in_array( $key, $field['posted-value' ] ) ) { echo 'checked="checked"';} ?> /> <?php echo esc_html( $name ); ?></label><br /><?php
 								}
 							} else {
 
-							?><label><input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" name="<?php esc_attr_e( $field['name'] ); ?>" type="checkbox" value="1" <?php checked( '1', $field['posted-value' ] ); ?> /> <?php esc_attr_e( $field['cb_label'] ); ?></label><?php
+							?><label><input id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" name="<?php echo esc_attr( $field['name'] ); ?>" type="checkbox" value="1" <?php checked( '1', $field['posted-value' ] ); ?> /> <?php echo esc_html( $field['cb_label'] ); ?></label><?php
 							}
 
 					break;
 					
 				case "select" :
 
-							?><select id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" name="<?php esc_attr_e( $field['name'] ); ?>" <?php echo $attrib; ?>><?php
+							?><select id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" name="<?php echo esc_attr( $field['name'] ); ?>" <?php echo $attrib; ?>><?php
 									foreach( $field['options'] as $key => $name ) {
-										?><option value="<?php esc_attr_e( $key ); ?>" <?php selected( $field['posted-value' ], $key ); ?>><?php esc_attr_e( $name ); ?></option><?php }
+										?><option value="<?php echo esc_attr( $key ); ?>" <?php selected( $field['posted-value' ], $key ); ?>><?php echo esc_html( $name ); ?></option><?php }
 							?></select><?php
 					break;
 				
 				case "radio" :
 
 						foreach( $field['options'] as $key => $name ) {
-							?><label><input type="radio" class="<?php echo $field['class']; ?>" name="<?php esc_attr_e( $field['name'] ); ?>" value="<?php esc_attr_e( $key ); ?>" <?php checked( $field['posted-value' ], $key ); ?> /> <?php esc_attr_e( $name ); ?></label><br /><?php }
+							?><label><input type="radio" class="<?php echo esc_attr( $field['class'] ); ?>" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $field['posted-value' ], $key ); ?> /> <?php echo esc_html( $name ); ?></label><br /><?php }
 					break;
 					
 				case 'token' :
 				case 'wp_token' :
 				case 'shortcode-message-to' :
-					?><input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" type="hidden" name="<?php esc_attr_e( $field['name'] ); ?>" value="<?php esc_attr_e( $field['value' ] ); ?>" <?php echo $attrib; ?> /><?php
+					?><input id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo esc_attr( $field['value' ] ); ?>" <?php echo $attrib; ?> /><?php
 
 					break;
 				case 'difp_parent_id' :
-					?><input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" type="hidden" name="<?php esc_attr_e( $field['name'] ); ?>" value="<?php esc_attr_e( $field['posted-value' ] ); ?>" <?php echo $attrib; ?> /><?php
+					?><input id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" type="hidden" name="<?php echo esc_attr( $field['name'] ); ?>" value="<?php echo esc_attr( $field['posted-value' ] ); ?>" <?php echo $attrib; ?> /><?php
 
 					break;
 					
@@ -368,7 +368,7 @@ function field_output( $field, $errors )
 					?>
 						<div id="difp_upload">
 							<div id="p-0">
-								<input id="<?php esc_attr_e( $field['id'] ); ?>" class="<?php echo $field['class']; ?>" type="file" name="<?php esc_attr_e( $field['name'] ); ?>[]" /><a href="#" onclick="difp_remove_element('p-0'); return false;" class="difp-attachment-field"><?php echo __('Remove', 'directorypress-frontend-messages') ; ?></a>
+								<input id="<?php echo esc_attr( $field['id'] ); ?>" class="<?php echo esc_attr( $field['class'] ); ?>" type="file" name="<?php echo esc_attr( $field['name'] ); ?>[]" /><a href="#" onclick="difp_remove_element('p-0'); return false;" class="difp-attachment-field"><?php echo __('Remove', 'directorypress-frontend-messages') ; ?></a>
 							</div>
 						</div>
 						<a id="difp-attachment-field-add" href="#" onclick="difp_add_new_file_field(); return false;"><?php echo __('Add new field', 'directorypress-frontend-messages') ; ?></a>
@@ -699,4 +699,3 @@ public function validate_form_field( $where = 'newmessage' )
 	
   } //END CLASS
 } //ENDIF
-

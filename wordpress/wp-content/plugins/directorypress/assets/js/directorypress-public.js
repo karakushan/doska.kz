@@ -1191,6 +1191,21 @@ function directorypress_GDouglasPeucker(source, kink) {
 			directorypress_mobile_search_modal_close();
 		}
 		var directorypress_search_requests_counter = 0;
+		var directorypress_handleAJAXSearchFailure = function(post_params, search_button_obj, jqXHR, textStatus) {
+			if (window.console && console.error) {
+				console.error('DirectoryPress AJAX search failed', textStatus, jqXHR && jqXHR.responseText ? jqXHR.responseText : '');
+			}
+
+			if (post_params && post_params.hash) {
+				directorypress_ajax_loader_target_hide("directorypress-handler-"+post_params.hash);
+				directorypress_ajax_loader_target_hide("directorypress-map-search-panel-wrapper-"+post_params.hash);
+				directorypress_map_spinner_hide("directorypress-maps-canvas-"+post_params.hash);
+			}
+
+			if (search_button_obj) {
+				directorypress_delete_iloader_from_element(search_button_obj);
+			}
+		}
 		var directorypress_startAJAXSearch = function(post_params, search_button_obj) {
 			
 			window.history.pushState("", "", "?"+$.param(post_params));
@@ -1204,12 +1219,17 @@ function directorypress_GDouglasPeucker(source, kink) {
 			}
 			
 			directorypress_search_requests_counter++;
-			$.post(
-				directorypress_js_instance.ajaxurl,
-				post_params,
-				directorypress_completeAJAXSearch(search_button_obj),
-				'json'
-			);
+			$.ajax({
+				url: directorypress_js_instance.ajaxurl,
+				type: 'POST',
+				data: post_params,
+				dataType: 'json'
+			}).done(
+				directorypress_completeAJAXSearch(search_button_obj)
+			).fail(function(jqXHR, textStatus) {
+				directorypress_search_requests_counter = Math.max(0, directorypress_search_requests_counter - 1);
+				directorypress_handleAJAXSearchFailure(post_params, search_button_obj, jqXHR, textStatus);
+			});
 		}
 		var directorypress_completeAJAXSearch = function(search_button_obj) {
 			return function(response_from_the_action_function) {

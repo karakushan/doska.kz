@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 6.9.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2026-05-10 04:27:38+0000\n"
+"PO-Revision-Date: 2026-05-11 02:25:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -7498,6 +7498,12 @@ msgstr ""
 "Das Team von ###SITENAME###\n"
 "###SITEURL###"
 
+#. translators: %s: Name of parameter being updated:
+#. font_family_settings[slug]".
+#: wp-includes/rest-api/endpoints/class-wp-rest-font-families-controller.php:114
+msgid "%s cannot be updated."
+msgstr "%s konnte nicht aktualisiert werden."
+
 #. translators: Do not translate USERNAME, ADMIN_EMAIL, NEW_EMAIL, EMAIL,
 #. SITENAME, SITEURL: those are placeholders.
 #: wp-includes/user.php:2820
@@ -7557,12 +7563,6 @@ msgstr ""
 "Viele Grüße\n"
 "Das Team von ###SITENAME###\n"
 "###SITEURL###"
-
-#. translators: %s: Name of parameter being updated:
-#. font_family_settings[slug]".
-#: wp-includes/rest-api/endpoints/class-wp-rest-font-families-controller.php:114
-msgid "%s cannot be updated."
-msgstr "%s konnte nicht aktualisiert werden."
 
 #: wp-includes/theme.php:2469
 msgctxt "Theme starter content"
@@ -10343,6 +10343,14 @@ msgstr "Aktuelle Seite der Sammlung."
 msgid "Maximum number of items to be returned in result set."
 msgstr "Maximale Anzahl der im Ergebnissatz zurückzugebenden Elemente."
 
+#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:362
+msgid "Limit results to those matching a string."
+msgstr "Ergebnisse auf alle begrenzen, die mit einer Zeichenfolge übereinstimmen."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:382
+msgid "Scope under which the request is made; determines fields present in response."
+msgstr "Geltungsbereich der Anfrage; ermittelt in der Antwort vorhandene Felder."
+
 #. translators: %s: Method name.
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:70
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:87
@@ -10358,14 +10366,6 @@ msgstr "Maximale Anzahl der im Ergebnissatz zurückzugebenden Elemente."
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:258
 msgid "Method '%s' not implemented. Must be overridden in subclass."
 msgstr "Die Methode ‚%s‘ wurde nicht implementiert. Sie muss in der Unterklasse überschrieben werden."
-
-#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:362
-msgid "Limit results to those matching a string."
-msgstr "Ergebnisse auf alle begrenzen, die mit einer Zeichenfolge übereinstimmen."
-
-#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:382
-msgid "Scope under which the request is made; determines fields present in response."
-msgstr "Geltungsbereich der Anfrage; ermittelt in der Antwort vorhandene Felder."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1795
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:108
@@ -13284,6 +13284,34 @@ msgstr ""
 "Das Team von ###SITENAME###\n"
 "###SITEURL###"
 
+#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
+#. are placeholders.
+#: wp-includes/functions.php:8167
+msgid ""
+"Hi,\n"
+"\n"
+"This notice confirms that the admin email address was changed on ###SITENAME###.\n"
+"\n"
+"The new admin email address is ###NEW_EMAIL###.\n"
+"\n"
+"This email has been sent to ###OLD_EMAIL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hallo,\n"
+"\n"
+"diese Mitteilung bestätigt die Änderung der E-Mail-Adresse des Administrators auf ###SITENAME###.\n"
+"\n"
+"Die neue E-Mail-Adresse des Administrators lautet ###NEW_EMAIL###.\n"
+"\n"
+"Diese E-Mail wurde an ###OLD_EMAIL### gesendet.\n"
+"\n"
+"Viele Grüße\n"
+"Das Team von ###SITENAME###\n"
+"###SITEURL###"
+
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
 #: wp-includes/ms-functions.php:2796
@@ -13315,34 +13343,6 @@ msgstr ""
 "Du kannst diese E-Mail ruhig ignorieren und löschen, wenn du das nicht tun möchtest.\n"
 "\n"
 "Diese E-Mail wurde an ###EMAIL### gesendet.\n"
-"\n"
-"Viele Grüße\n"
-"Das Team von ###SITENAME###\n"
-"###SITEURL###"
-
-#. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
-#. are placeholders.
-#: wp-includes/functions.php:8167
-msgid ""
-"Hi,\n"
-"\n"
-"This notice confirms that the admin email address was changed on ###SITENAME###.\n"
-"\n"
-"The new admin email address is ###NEW_EMAIL###.\n"
-"\n"
-"This email has been sent to ###OLD_EMAIL###\n"
-"\n"
-"Regards,\n"
-"All at ###SITENAME###\n"
-"###SITEURL###"
-msgstr ""
-"Hallo,\n"
-"\n"
-"diese Mitteilung bestätigt die Änderung der E-Mail-Adresse des Administrators auf ###SITENAME###.\n"
-"\n"
-"Die neue E-Mail-Adresse des Administrators lautet ###NEW_EMAIL###.\n"
-"\n"
-"Diese E-Mail wurde an ###OLD_EMAIL### gesendet.\n"
 "\n"
 "Viele Grüße\n"
 "Das Team von ###SITENAME###\n"
@@ -15884,32 +15884,6 @@ msgstr "Widget hinzufügen"
 msgid "Reorder"
 msgstr "Umordnen"
 
-#. translators: Hidden accessibility text.
-#: wp-includes/class-wp-customize-nav-menus.php:1103
-#: wp-includes/class-wp-customize-widgets.php:723
-#: wp-includes/js/dist/block-editor.js:45799
-#: wp-includes/js/dist/block-editor.js:45800
-#: wp-includes/js/dist/block-editor.js:48849
-#: wp-includes/js/dist/block-library.js:31739
-#: wp-includes/js/dist/edit-site.js:24571
-#: wp-admin/includes/class-walker-nav-menu-edit.php:165
-#: wp-admin/includes/template.php:1411
-msgid "Move down"
-msgstr "Nach unten"
-
-#. translators: Hidden accessibility text.
-#: wp-includes/class-wp-customize-nav-menus.php:1102
-#: wp-includes/class-wp-customize-widgets.php:724
-#: wp-includes/js/dist/block-editor.js:45774
-#: wp-includes/js/dist/block-editor.js:45775
-#: wp-includes/js/dist/block-editor.js:48844
-#: wp-includes/js/dist/block-library.js:31728
-#: wp-includes/js/dist/edit-site.js:24560
-#: wp-admin/includes/class-walker-nav-menu-edit.php:148
-#: wp-admin/includes/template.php:1398
-msgid "Move up"
-msgstr "Nach oben"
-
 #: wp-includes/class-wp-customize-widgets.php:730
 msgid "Select an area to move this widget into:"
 msgstr "Wähle einen Bereich, in den das Widget verschoben werden soll:"
@@ -16747,16 +16721,6 @@ msgstr "Eins nach unten verschieben"
 #: wp-includes/class-wp-customize-nav-menus.php:562 wp-admin/nav-menus.php:574
 msgid "Move to the top"
 msgstr "Nach ganz oben verschieben"
-
-#. translators: %s: Previous item name.
-#: wp-includes/class-wp-customize-nav-menus.php:564 wp-admin/nav-menus.php:576
-msgid "Move under %s"
-msgstr "Unter %s verschieben"
-
-#. translators: %s: Previous item name.
-#: wp-includes/class-wp-customize-nav-menus.php:566 wp-admin/nav-menus.php:578
-msgid "Move out from under %s"
-msgstr "Unter %s heraus verschieben"
 
 #. translators: %s: Previous item name.
 #: wp-includes/class-wp-customize-nav-menus.php:568 wp-admin/nav-menus.php:580
@@ -18065,10 +18029,6 @@ msgstr "WordPress.org-Themes"
 msgid "Homepage Settings"
 msgstr "Homepage-Einstellungen"
 
-#: wp-includes/class-wp-customize-manager.php:5642
-msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
-msgstr "Du kannst auswählen, was auf der Homepage deiner Website angezeigt wird. Das können Beiträge in umgekehrter chronologischer Reihenfolge (klassischer Blog) oder eine feststehende/statische Seite sein. Um eine statische Homepage festzulegen, musst du erst zwei Seiten erstellen. Eine wird die Homepage und die andere wird die, auf der deine Beiträge angezeigt werden."
-
 #: wp-includes/class-wp-customize-manager.php:5659
 #: wp-admin/options-reading.php:85
 msgid "Your homepage displays"
@@ -18089,6 +18049,10 @@ msgstr "Bei der Navigation mit der Tastatur:"
 #: wp-admin/plugin-editor.php:146 wp-admin/theme-editor.php:35
 msgid "In the editing area, the Tab key enters a tab character."
 msgstr "Im Bearbeitungsbereich fügt die Tab-Taste ein Tab-Zeichen ein."
+
+#: wp-includes/class-wp-customize-manager.php:5642
+msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
+msgstr "Du kannst auswählen, was auf der Homepage deiner Website angezeigt wird. Das können Beiträge in umgekehrter chronologischer Reihenfolge (klassischer Blog) oder eine feststehende/statische Seite sein. Um eine statische Homepage festzulegen, musst du erst zwei Seiten erstellen. Eine wird die Homepage und die andere wird die, auf der deine Beiträge angezeigt werden."
 
 #: wp-includes/class-wp-customize-manager.php:5720
 #: wp-includes/widgets/class-wp-widget-custom-html.php:327
@@ -18558,6 +18522,11 @@ msgstr "Bei einem nicht geschützten Endpunkt ist ein Fehler aufgetreten."
 msgid "Please contact your host for assistance with investigating this issue further."
 msgstr "Bitte kontaktiere dein Hosting-Unternehmen, um Unterstützung bei der weiteren Untersuchung dieses Problems zu erhalten."
 
+#. translators: %s: Plugin name.
+#: wp-includes/class-wp-recovery-mode-email-service.php:280
+msgid "In this case, WordPress caught an error with one of your plugins, %s."
+msgstr "In diesem Fall hat WordPress einen Fehler in einem deiner Plugins, %s, abgefangen."
+
 #. translators: Do not translate LINK, EXPIRES, CAUSE, DETAILS, SITEURL,
 #. PAGEURL, SUPPORT. DEBUG: those are placeholders.
 #: wp-includes/class-wp-recovery-mode-email-service.php:153
@@ -18599,11 +18568,6 @@ msgstr ""
 "###DEBUG###\n"
 "\n"
 "###DETAILS###"
-
-#. translators: %s: Plugin name.
-#: wp-includes/class-wp-recovery-mode-email-service.php:280
-msgid "In this case, WordPress caught an error with one of your plugins, %s."
-msgstr "In diesem Fall hat WordPress einen Fehler in einem deiner Plugins, %s, abgefangen."
 
 #. translators: %s: Theme name.
 #: wp-includes/class-wp-recovery-mode-email-service.php:286
@@ -18760,27 +18724,6 @@ msgstr "Benachrichtigungen"
 msgid "This theme does not work with your versions of WordPress and PHP."
 msgstr "Dieses Theme funktioniert nicht mit deinen Versionen von WordPress und PHP."
 
-#: wp-includes/customize/class-wp-customize-theme-control.php:209
-#: wp-admin/includes/theme.php:1013 wp-admin/theme-install.php:366
-#: wp-admin/theme-install.php:571 wp-admin/themes.php:554
-#: wp-admin/themes.php:949 wp-admin/themes.php:1129
-msgid "This theme does not work with your version of WordPress."
-msgstr "Dieses Theme funktioniert nicht mit deiner WordPress-Version."
-
-#: wp-includes/customize/class-wp-customize-theme-control.php:220
-#: wp-admin/includes/theme.php:1024 wp-admin/theme-install.php:377
-#: wp-admin/theme-install.php:582 wp-admin/themes.php:563
-#: wp-admin/themes.php:960 wp-admin/themes.php:1140
-msgid "This theme does not work with your version of PHP."
-msgstr "Dieses Theme funktioniert nicht mit deiner PHP-Version."
-
-#. translators: %s: Theme name.
-#: wp-includes/customize/class-wp-customize-theme-control.php:116
-#: wp-admin/includes/theme.php:908 wp-admin/includes/update.php:766
-#: wp-admin/themes.php:464 wp-admin/themes.php:857 wp-admin/themes.php:1168
-msgid "There is a new version of %s available, but it does not work with your versions of WordPress and PHP."
-msgstr "Es gibt eine neue Version von %s, aber sie funktioniert nicht mit deiner PHP- und WordPress-Version."
-
 #. translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page.
 #: wp-includes/customize/class-wp-customize-theme-control.php:122
 #: wp-includes/customize/class-wp-customize-theme-control.php:187
@@ -18816,6 +18759,27 @@ msgstr "<a href=\"%1$s\">Bitte aktualisiere WordPress</a> und dann <a href=\"%2$
 #: wp-admin/update-core.php:716 wp-admin/update-core.php:737
 msgid "<a href=\"%s\">Please update WordPress</a>."
 msgstr "<a href=\"%s\">Bitte aktualisiere WordPress</a>."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:209
+#: wp-admin/includes/theme.php:1013 wp-admin/theme-install.php:366
+#: wp-admin/theme-install.php:571 wp-admin/themes.php:554
+#: wp-admin/themes.php:949 wp-admin/themes.php:1129
+msgid "This theme does not work with your version of WordPress."
+msgstr "Dieses Theme funktioniert nicht mit deiner WordPress-Version."
+
+#: wp-includes/customize/class-wp-customize-theme-control.php:220
+#: wp-admin/includes/theme.php:1024 wp-admin/theme-install.php:377
+#: wp-admin/theme-install.php:582 wp-admin/themes.php:563
+#: wp-admin/themes.php:960 wp-admin/themes.php:1140
+msgid "This theme does not work with your version of PHP."
+msgstr "Dieses Theme funktioniert nicht mit deiner PHP-Version."
+
+#. translators: %s: Theme name.
+#: wp-includes/customize/class-wp-customize-theme-control.php:116
+#: wp-admin/includes/theme.php:908 wp-admin/includes/update.php:766
+#: wp-admin/themes.php:464 wp-admin/themes.php:857 wp-admin/themes.php:1168
+msgid "There is a new version of %s available, but it does not work with your versions of WordPress and PHP."
+msgstr "Es gibt eine neue Version von %s, aber sie funktioniert nicht mit deiner PHP- und WordPress-Version."
 
 #. translators: %s: Theme name.
 #: wp-includes/customize/class-wp-customize-theme-control.php:146
@@ -20075,6 +20039,42 @@ msgstr "Im Papierkorb wurden keine Beiträge gefunden."
 #: wp-includes/class-wp-taxonomy.php:631
 msgid "Choose from the most used tags"
 msgstr "Aus den meistgenutzten Schlagwörtern auswählen"
+
+#. translators: %s: Previous item name.
+#: wp-includes/class-wp-customize-nav-menus.php:564 wp-admin/nav-menus.php:576
+msgid "Move under %s"
+msgstr "Unter %s einordnen"
+
+#. translators: %s: Previous item name.
+#: wp-includes/class-wp-customize-nav-menus.php:566 wp-admin/nav-menus.php:578
+msgid "Move out from under %s"
+msgstr "Einordnung unter %s aufheben"
+
+#. translators: Hidden accessibility text.
+#: wp-includes/class-wp-customize-nav-menus.php:1102
+#: wp-includes/class-wp-customize-widgets.php:724
+#: wp-includes/js/dist/block-editor.js:45774
+#: wp-includes/js/dist/block-editor.js:45775
+#: wp-includes/js/dist/block-editor.js:48844
+#: wp-includes/js/dist/block-library.js:31728
+#: wp-includes/js/dist/edit-site.js:24560
+#: wp-admin/includes/class-walker-nav-menu-edit.php:148
+#: wp-admin/includes/template.php:1398
+msgid "Move up"
+msgstr "Nach oben verschieben"
+
+#. translators: Hidden accessibility text.
+#: wp-includes/class-wp-customize-nav-menus.php:1103
+#: wp-includes/class-wp-customize-widgets.php:723
+#: wp-includes/js/dist/block-editor.js:45799
+#: wp-includes/js/dist/block-editor.js:45800
+#: wp-includes/js/dist/block-editor.js:48849
+#: wp-includes/js/dist/block-library.js:31739
+#: wp-includes/js/dist/edit-site.js:24571
+#: wp-admin/includes/class-walker-nav-menu-edit.php:165
+#: wp-admin/includes/template.php:1411
+msgid "Move down"
+msgstr "Nach unten verschieben"
 
 #: wp-activate.php:126
 msgid "Activation Key Required"
@@ -21949,6 +21949,10 @@ msgstr "Zeigt ein Archiv für Beiträge eines einzelnen Autors an. Dieses Templa
 msgid "Displays a post category archive. This template will serve as a fallback when a more specific template (e.g. Category: Recipes) cannot be found."
 msgstr "Zeigt ein Archiv für eine Beitragskategorie an. Dieses Template wird als Fallback ausgeliefert, wenn kein spezifischeres Template (z. B. Kategorie: Rezepte) gefunden werden kann."
 
+#: wp-includes/block-template-utils.php:181
+msgid "Displays a custom taxonomy archive. Like categories and tags, taxonomies have terms which you use to classify things. For example: a taxonomy named \"Art\" can have multiple terms, such as \"Modern\" and \"18th Century.\" This template will serve as a fallback when a more specific template (e.g. Taxonomy: Art) cannot be found."
+msgstr "Zeigt ein Archiv für eine individuelle Taxonomie an. Wie Kategorien und Schlagwörter haben Taxonomien Begriffe, die du benutzt, um Dinge zu klassifizieren. Zum Beispiel: Eine Taxonomie namens „Kunst“ kann mehrere Begriffe beinhalten, wie „Modern“ und „18. Jahrhundert“. Dieses Template wird als Fallback ausgeliefert, wenn kein spezifischeres Template (z. B. Taxonomie: Kunst) gefunden werden kann."
+
 #: wp-includes/block-template-utils.php:185
 msgid "Displays a post archive when a specific date is visited (e.g., example.com/2023/)."
 msgstr "Zeigt ein Beitragsarchiv an, wenn ein spezifisches Datum angegeben ist (z. B. example.com/2023/)."
@@ -21964,10 +21968,6 @@ msgstr "Wird angezeigt, wenn ein Besucher die zugehörige Seite anzeigt, die fü
 #: wp-includes/block-template-utils.php:197
 msgid "Displays when a visitor performs a search on your website."
 msgstr "Wird angezeigt, wenn ein Besucher auf deiner Website eine Suche durchführt."
-
-#: wp-includes/block-template-utils.php:181
-msgid "Displays a custom taxonomy archive. Like categories and tags, taxonomies have terms which you use to classify things. For example: a taxonomy named \"Art\" can have multiple terms, such as \"Modern\" and \"18th Century.\" This template will serve as a fallback when a more specific template (e.g. Taxonomy: Art) cannot be found."
-msgstr "Zeigt ein Archiv für eine individuelle Taxonomie an. Wie Kategorien und Schlagwörter haben Taxonomien Begriffe, die du benutzt, um Dinge zu klassifizieren. Zum Beispiel: Eine Taxonomie namens „Kunst“ kann mehrere Begriffe beinhalten, wie „Modern“ und „18. Jahrhundert“. Dieses Template wird als Fallback ausgeliefert, wenn kein spezifischeres Template (z. B. Taxonomie: Kunst) gefunden werden kann."
 
 #: wp-includes/block-template-utils.php:201
 msgid "Displays your site's Privacy Policy page."

@@ -1433,7 +1433,6 @@ function difp_form_posted()
 			}
 			
 			Difp_Form::init()->validate_form_field( 'shortcode-newmessage' );
-			Difp_Form::init()->validate_form_field( 'shortcode-newbidding' );
 			if( count( difp_errors()->get_error_messages()) == 0 ){
 				if( $message_id = difp_send_message() ) {
 					$message = get_post( $message_id );
@@ -1600,4 +1599,3 @@ function difp_get_message_view(){
 	
 	return $message_view;
 }
-
