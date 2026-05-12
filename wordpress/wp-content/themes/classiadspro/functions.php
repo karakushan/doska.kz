@@ -4326,3 +4326,112 @@ function classiadspro_translatepress_translate_listing_content($content) {
 	return classiadspro_translatepress_translate_listing_string($content, true);
 }
 add_filter('the_content', 'classiadspro_translatepress_translate_listing_content', 1);
+
+function classiadspro_translatepress_ui_overrides() {
+	return [
+		'Home' => 'Главная',
+		'Listing' => 'Объявления',
+		'Pages' => 'Страницы',
+		'Blog' => 'Блог',
+		'Contact' => 'Контакты',
+		'Post Free Ad' => 'Разместить объявление',
+		'View All Listings' => 'Посмотреть все объявления',
+		'Our News' => 'Наши новости',
+		'Contact Us' => 'Свяжитесь с нами',
+	];
+}
+
+function classiadspro_translatepress_start_ui_output_buffer() {
+	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
+		return;
+	}
+
+	ob_start('classiadspro_translatepress_translate_ui_output_buffer');
+}
+add_action('template_redirect', 'classiadspro_translatepress_start_ui_output_buffer', 0);
+
+function classiadspro_translatepress_translate_ui_output_buffer($html) {
+	if (!is_string($html) || $html === '') {
+		return $html;
+	}
+
+	if (!class_exists('DOMDocument')) {
+		return classiadspro_translatepress_translate_ui_output_buffer_fallback($html);
+	}
+
+	$dom = new DOMDocument();
+	$previous_state = libxml_use_internal_errors(true);
+	$loaded = $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+	libxml_clear_errors();
+	libxml_use_internal_errors($previous_state);
+
+	if (!$loaded) {
+		return classiadspro_translatepress_translate_ui_output_buffer_fallback($html);
+	}
+
+	$xpath = new DOMXPath($dom);
+	$text_nodes = $xpath->query('//text()[normalize-space(.) != ""]');
+	$replace_pairs = classiadspro_translatepress_ui_overrides();
+
+	if (!$text_nodes instanceof DOMNodeList || empty($replace_pairs)) {
+		return $html;
+	}
+
+	foreach ($text_nodes as $text_node) {
+		if (!($text_node instanceof DOMText)) {
+			continue;
+		}
+
+		if (classiadspro_translatepress_text_node_has_excluded_ancestor($text_node)) {
+			continue;
+		}
+
+		$value = trim($text_node->nodeValue);
+		if ($value === '' || !isset($replace_pairs[$value])) {
+			continue;
+		}
+
+		$text_node->nodeValue = str_replace($value, $replace_pairs[$value], $text_node->nodeValue);
+	}
+
+	$result = $dom->saveHTML();
+	if (!is_string($result) || $result === '') {
+		return $html;
+	}
+
+	return preg_replace('/^<\?xml.+?\?>/i', '', $result);
+}
+
+function classiadspro_translatepress_translate_ui_output_buffer_fallback($html) {
+	$replace_pairs = [];
+
+	foreach (classiadspro_translatepress_ui_overrides() as $original => $translated) {
+		$replace_pairs['>' . $original . '<'] = '>' . $translated . '<';
+	}
+
+	return strtr($html, $replace_pairs);
+}
+
+function classiadspro_translatepress_text_node_has_excluded_ancestor($node) {
+	$excluded_classes = [
+		'trp-language-switcher-container',
+		'trp-menu-ls-item',
+	];
+
+	while ($node && $node->parentNode instanceof DOMElement) {
+		$node = $node->parentNode;
+		$class_name = $node->getAttribute('class');
+
+		if ($class_name === '') {
+			continue;
+		}
+
+		foreach ($excluded_classes as $excluded_class) {
+			if (preg_match('/(^|\s)' . preg_quote($excluded_class, '/') . '(\s|$)/', $class_name)) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
