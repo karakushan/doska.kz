@@ -4164,6 +4164,21 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 		if (is_string($translation) && $translation !== '' && $translation !== $original) {
 			return $translation;
 		}
+
+		$translation = $wpdb->get_var($wpdb->prepare(
+			"SELECT translated
+			FROM {$table_name}
+			WHERE status = 1
+				AND LOWER(original) = LOWER(%s)
+				AND translated <> ''
+			ORDER BY (translated <> original) DESC, id DESC
+			LIMIT 1",
+			$original
+		));
+
+		if (is_string($translation) && $translation !== '' && strcasecmp($translation, $original) !== 0) {
+			return $translation;
+		}
 	}
 
 	return null;
@@ -4299,6 +4314,16 @@ function classiadspro_translatepress_localize_directorypress_field_definitions()
 
 			if (!empty($field->description) && is_string($field->description)) {
 				$field->description = classiadspro_translatepress_translate_listing_string($field->description, false);
+			}
+
+			if (!empty($field->selection_items) && is_array($field->selection_items)) {
+				foreach ($field->selection_items as $selection_key => $selection_item) {
+					if (!is_string($selection_item) || $selection_item === '') {
+						continue;
+					}
+
+					$field->selection_items[$selection_key] = classiadspro_translatepress_translate_listing_string($selection_item, false);
+				}
 			}
 		}
 	}
@@ -4473,4 +4498,70 @@ function classiadspro_translatepress_text_node_has_excluded_ancestor($node) {
 	}
 
 	return false;
+}
+
+function classiadspro_translatepress_start_single_listing_output_buffer() {
+	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
+		return;
+	}
+
+	if (!classiadspro_is_directorypress_listing_request()) {
+		return;
+	}
+
+	ob_start('classiadspro_translatepress_translate_single_listing_output_buffer');
+}
+add_action('template_redirect', 'classiadspro_translatepress_start_single_listing_output_buffer', 1);
+
+function classiadspro_translatepress_translate_single_listing_output_buffer($html) {
+	if (!is_string($html) || $html === '' || !class_exists('DOMDocument')) {
+		return $html;
+	}
+
+	$dom = new DOMDocument();
+	$previous_state = libxml_use_internal_errors(true);
+	$loaded = $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+	libxml_clear_errors();
+	libxml_use_internal_errors($previous_state);
+
+	if (!$loaded) {
+		return $html;
+	}
+
+	$xpath = new DOMXPath($dom);
+	$text_nodes = $xpath->query('//*[contains(concat(" ", normalize-space(@class), " "), " single-listing ")]//text()[normalize-space(.) != ""]');
+
+	if (!$text_nodes instanceof DOMNodeList) {
+		return $html;
+	}
+
+	foreach ($text_nodes as $text_node) {
+		if (!($text_node instanceof DOMText)) {
+			continue;
+		}
+
+		$parent_node = $text_node->parentNode;
+		if ($parent_node instanceof DOMElement) {
+			$tag_name = strtolower($parent_node->tagName);
+			if (in_array($tag_name, array('script', 'style'), true)) {
+				continue;
+			}
+		}
+
+		$original_text = trim($text_node->nodeValue);
+		if ($original_text === '') {
+			continue;
+		}
+
+		$translated_text = classiadspro_translatepress_translate_string($original_text, false);
+		if (!is_string($translated_text) || $translated_text === '' || $translated_text === $original_text) {
+			continue;
+		}
+
+		$text_node->nodeValue = preg_replace('/' . preg_quote($original_text, '/') . '/u', $translated_text, $text_node->nodeValue, 1);
+	}
+
+	$result = $dom->saveHTML();
+
+	return is_string($result) && $result !== '' ? preg_replace('/^<\?xml.+?\?>/i', '', $result) : $html;
 }

@@ -1,4 +1,6 @@
-<?php if ($field->value): ?>
+<?php if ($field->value):
+	$field_name = function_exists('classiadspro_translatepress_translate_listing_string') ? classiadspro_translatepress_translate_listing_string($field->name, false) : $field->name;
+?>
 <div class="directorypress-field-item directorypress-field-type-<?php echo esc_attr($field->type); ?>">
 	<?php if ($field->icon_image || !$field->is_hide_name): ?>
 	<span class="field-label">
@@ -6,7 +8,7 @@
 		<span class="directorypress-field-icon directorypress-fa directorypress-fa-lg <?php echo esc_attr($field->icon_image); ?>"></span>
 		<?php endif; ?>
 		<?php if (!$field->is_hide_name): ?>
-		<span class="directorypress-field-title"><?php echo esc_html($field->name); ?>:</span>
+		<span class="directorypress-field-title"><?php echo esc_html($field_name); ?>:</span>
 		<?php endif; ?>
 	</span>
 	<?php endif; ?>
