@@ -64,20 +64,6 @@ class WPSEO_Metabox extends WPSEO_Meta {
 	protected $is_advanced_metadata_enabled;
 
 	/**
-	 * Whether the insights feature is enabled.
-	 *
-	 * @var bool
-	 */
-	protected $is_insights_enabled;
-
-	/**
-	 * Whether the cornerstone content feature is enabled.
-	 *
-	 * @var bool
-	 */
-	protected $is_cornerstone_enabled;
-
-	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
@@ -99,8 +85,6 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		$this->seo_analysis                = new WPSEO_Metabox_Analysis_SEO();
 		$this->readability_analysis        = new WPSEO_Metabox_Analysis_Readability();
 		$this->inclusive_language_analysis = new WPSEO_Metabox_Analysis_Inclusive_Language();
-		$this->is_insights_enabled         = WPSEO_Options::get( 'enable_metabox_insights', false, [ 'wpseo' ] );
-		$this->is_cornerstone_enabled      = WPSEO_Options::get( 'enable_cornerstone_content', false, [ 'wpseo' ] );
 	}
 
 	/**
@@ -147,7 +131,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 				$post_type,
 				'normal',
 				apply_filters( 'wpseo_metabox_prio', 'high' ),
-				[ '__block_editor_compatible_meta_box' => true ]
+				[ '__block_editor_compatible_meta_box' => true ],
 			);
 		}
 	}
@@ -164,7 +148,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'<a href="https://www.mozilla.org/firefox/new/">',
 			'<a href="https://www.google.com/chrome/">',
 			'<a href="https://www.microsoft.com/windows/microsoft-edge">',
-			'</a>'
+			'</a>',
 		);
 
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped above.
@@ -218,7 +202,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			/* translators: 1: link open tag; 2: link close tag. */
 			__( 'The canonical URL that this page should point to. Leave empty to default to permalink. %1$sCross domain canonical%2$s supported too.', 'wordpress-seo' ),
 			'<a href="https://googlewebmastercentral.blogspot.com/2009/12/handling-legitimate-cross-domain.html" target="_blank" rel="noopener">',
-			WPSEO_Admin_Utils::get_new_tab_message() . '</a>'
+			WPSEO_Admin_Utils::get_new_tab_message() . '</a>',
 		);
 
 		WPSEO_Meta::$meta_fields['advanced']['redirect']['title']       = __( '301 Redirect', 'wordpress-seo' );
@@ -267,7 +251,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 				$post_type,
 				'normal',
 				apply_filters( 'wpseo_metabox_prio', 'high' ),
-				[ '__block_editor_compatible_meta_box' => true ]
+				[ '__block_editor_compatible_meta_box' => true ],
 			);
 		}
 	}
@@ -294,7 +278,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		$permalink = $this->get_permalink();
 
 		$post_formatter = new WPSEO_Metabox_Formatter(
-			new WPSEO_Post_Metabox_Formatter( $this->get_metabox_post(), [], $permalink )
+			new WPSEO_Post_Metabox_Formatter( $this->get_metabox_post(), [], $permalink ),
 		);
 
 		$values = $post_formatter->get_values();
@@ -438,7 +422,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			$tabs[] = new WPSEO_Metabox_Section_React(
 				'schema',
 				'<span class="wpseo-schema-icon"></span>' . __( 'Schema', 'wordpress-seo' ),
-				''
+				'',
 			);
 		}
 
@@ -449,7 +433,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 				'',
 				[
 					'html_after' => '<div id="wpseo-section-social"></div>',
-				]
+				],
 			);
 		}
 
@@ -500,7 +484,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 					$tab['name'],
 					$tab['link_content'],
 					$tab['content'],
-					$options
+					$options,
 				);
 			}
 		}
@@ -742,7 +726,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			WPSEO_Meta::get_meta_field_defs( 'general', $post->post_type ),
 			WPSEO_Meta::get_meta_field_defs( 'advanced' ),
 			$social_fields,
-			WPSEO_Meta::get_meta_field_defs( 'schema', $post->post_type )
+			WPSEO_Meta::get_meta_field_defs( 'schema', $post->post_type ),
 		);
 
 		foreach ( $meta_boxes as $key => $meta_box ) {
@@ -905,6 +889,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'postId'                     => $post_id,
 			'postStatus'                 => get_post_status( $post_id ),
 			'postType'                   => get_post_type( $post_id ),
+			'isPage'                     => get_post_type( $post_id ) === 'page',
 			'usedKeywordsNonce'          => wp_create_nonce( 'wpseo-keyword-usage-and-post-types' ),
 			'analysis'                   => [
 				'plugins' => $plugins_script_data,
@@ -928,10 +913,6 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		}
 
 		$asset_manager->localize_script( $post_edit_handle, 'wpseoScriptData', $script_data );
-
-		if ( $this->readability_analysis->is_enabled() || $this->inclusive_language_analysis->is_enabled() || $this->seo_analysis->is_enabled() || $this->is_insights_enabled || $this->is_cornerstone_enabled ) {
-			$asset_manager->enqueue_user_language_script();
-		}
 	}
 
 	/**
@@ -1120,7 +1101,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			[
 				$meta->presentation->title,
 				$meta->presentation->meta_description,
-			]
+			],
 		);
 
 		preg_match_all( '/%%cf_([A-Za-z0-9_]+)%%/', $replace_vars_fields, $matches );

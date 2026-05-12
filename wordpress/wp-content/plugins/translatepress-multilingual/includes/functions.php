@@ -200,7 +200,8 @@ function trp_add_affiliate_id_to_link( $link ){
  * Do not confuse with trim.
  */
 function trp_sanitize_string( $filtered, $execute_wp_kses = true ){
-    if (!is_string($filtered)) return '';
+    // Numbers and strings are ok. Unexpected arrays, objects or null are not ok.
+    if (!is_scalar($filtered)) return '';
 
 	$filtered = preg_replace( '/<script\b[^>]*>(.*?)<\/script>/is', '', $filtered );
 
@@ -600,6 +601,48 @@ function trp_is_paid_version() {
 	}
 
 	return false;
+}
+
+/**
+ * Whether the current TranslatePress installation can still upgrade to a higher plan.
+ *
+ * Free, Personal, and Business can still upgrade. Developer is the top tier and
+ * should not show plan-upgrade CTAs in the settings UI.
+ *
+ * @return bool
+ */
+function trp_can_show_upgrade_now_button() {
+    if ( defined( 'TRANSLATE_PRESS' ) ) {
+        return in_array(
+            TRANSLATE_PRESS,
+            array(
+                'TranslatePress',
+                'TranslatePress - Personal',
+                'TranslatePress - Business',
+            ),
+            true
+        );
+    }
+
+    if ( class_exists( 'TRP_Translate_Press' ) ) {
+        $trp = TRP_Translate_Press::get_trp_instance();
+
+        if ( ! empty( $trp->tp_product_name ) && is_array( $trp->tp_product_name ) ) {
+            $product_slug = key( $trp->tp_product_name );
+
+            return in_array(
+                $product_slug,
+                array(
+                    'translatepress-multilingual',
+                    'translatepress-personal',
+                    'translatepress-business',
+                ),
+                true
+            );
+        }
+    }
+
+    return true;
 }
 
 /**
@@ -1051,4 +1094,19 @@ function trp_obfuscate_sensitive_data_in_json_response( $string ) {
         $string = json_encode( $response_data );
     }
     return $string;
+}
+
+/**
+ * Get the original request URI before SEO Pack rewrites translated slugs.
+ *
+ * @param string|null $fallback Used as the filtered value when we hook this function to redirection_request_url and redirection_url_source
+ * @return string
+ */
+function trp_get_original_request_uri( $fallback = null ) {
+    global $TRP_ORIGINAL_REQUEST_URI;
+
+    if ( empty( $TRP_ORIGINAL_REQUEST_URI ) )
+        return $fallback; // Can happen if something goes wrong in translate_request_uri or SEO Pack is not updated
+
+    return $TRP_ORIGINAL_REQUEST_URI;
 }

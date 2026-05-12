@@ -20,7 +20,7 @@ class directorypress_post {
 	public function title() {
 		$title = get_the_title($this->post);
 		
-		$is_map = apply_filters('directorypress_post_title', $title, $this);
+		$title = apply_filters('directorypress_post_title', $title, $this);
 		
 		return $title;
 	}

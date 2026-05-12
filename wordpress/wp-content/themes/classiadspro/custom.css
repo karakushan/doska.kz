@@ -1416,10 +1416,9 @@ input:disabled + .toggle-slider {
   align-items: center;
 }
 
-/* Элементы выбора языка и региона в хедере */
+/* Элементы выбора языка в хедере */
 #pacz-header.header-style-v12 .wpml-ls,
-#pacz-header.header-style-v12 .language-selector,
-#pacz-header.header-style-v12 .region-selector {
+#pacz-header.header-style-v12 .language-selector {
   display: flex;
   align-items: center;
 }
@@ -1449,82 +1448,189 @@ input:disabled + .toggle-slider {
 }
 
 /* ============================================
-   Region & Currency Selector Dropdown Styles
+   Currency Selector Dropdown Styles
    ============================================ */
 
-/* Both dropdowns inline-block in header */
 #pacz-header .rs-dropdown {
   display: inline-block;
   vertical-align: middle;
   margin-left: 8px;
   margin-right: 8px;
+  position: relative;
 }
 
-/* Currency dropdown wrapper */
-.rs-currency-dropdown {
+.rs-currency-selector {
+  position: relative;
+  z-index: 30;
 }
 
-/* Currency dropdown button - match region selector */
 .rs-currency-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: auto;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
   font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+  transition: color .2s ease;
 }
 
-/* Currency list items */
+.rs-currency-btn:hover,
+.rs-currency-dropdown.is-open .rs-currency-btn {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.rs-currency-current-symbol,
 .rs-currency-list .rs-currency-symbol {
-  font-size: 16px;
-  font-weight: 600;
-  margin-right: 6px;
-  min-width: 20px;
+  min-width: 16px;
+  font-size: 18px;
+  font-weight: 700;
   text-align: center;
 }
 
+.rs-currency-current-code,
 .rs-currency-list .rs-currency-code {
-  font-size: 13px;
-  color: #555;
+  letter-spacing: 0.02em;
+}
+
+.rs-currency-dropdown .rs-dropdown-caret {
+  font-size: 16px;
+  color: inherit;
+  transition: transform .2s ease;
+}
+
+.rs-currency-dropdown.is-open .rs-dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.rs-currency-dropdown .rs-currency-list {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 160px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border: 1px solid #dce5ee;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 40px rgba(24, 38, 56, 0.14);
+}
+
+.rs-currency-dropdown .rs-currency-list[hidden] {
+  display: none;
+}
+
+.rs-currency-list li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.rs-currency-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #26323d;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.rs-currency-option:hover {
+  background: #f4f8fc;
 }
 
 /* Active/selected currency */
 .rs-currency-list li.rs-active {
-  background: #e8f4f8;
+  background: transparent;
+  font-weight: inherit;
+}
+
+.rs-currency-list li.rs-active .rs-currency-option {
+  background: #eaf3ff;
+  color: #1a5ed8;
   font-weight: 600;
 }
 
 /* Checkmark for selected */
 .rs-currency-list .rs-check {
   margin-left: auto;
-  color: #0073aa;
-  font-weight: bold;
+  color: #1a73e8;
+  font-weight: 700;
   font-size: 14px;
 }
 
-/* Align items in currency list */
-.rs-currency-list li {
-  justify-content: flex-start;
-}
-
-/* Ensure dropdowns are on the same line in menu */
 #pacz-main-navigation .rs-dropdown {
   display: inline-block;
 }
 
-/* Unified spacing for language, region and currency selectors */
+#pacz-main-navigation > ul > li.rs-currency-menu-item {
+  display: flex;
+  align-items: center;
+}
+
+#pacz-main-navigation > ul > li.rs-currency-menu-item > a.menu-item-link {
+  display: none;
+}
+
+/* Unified spacing for language and currency selectors */
 #pacz-main-navigation > ul > li.trp-language-switcher-container,
-#pacz-main-navigation > ul > li.menu-item:has(.rs-dropdown) {
+#pacz-main-navigation > ul > li.rs-currency-menu-item {
   margin-left: 4px;
   margin-right: 4px;
 }
 
-/* Reduce padding on menu links containing rs-dropdown to tighten spacing */
-#pacz-main-navigation > ul > li.menu-item:has(.rs-dropdown) > a.menu-item-link {
-  padding-left: 6px;
-  padding-right: 6px;
+#pacz-main-navigation > ul > li.rs-currency-menu-item .rs-currency-btn {
+  min-height: auto;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
-/* Currency dropdown list - smaller width since no country names */
-.rs-currency-dropdown .rs-currency-list {
-  min-width: 130px;
+#pacz-main-navigation > ul > li.rs-currency-menu-item .rs-currency-current-symbol {
+  font-size: 16px;
 }
 
-.rs-currency-dropdown .rs-currency-list li {
-  padding: 8px 12px;
+#pacz-main-navigation > ul > li.rs-currency-menu-item .rs-currency-current-code {
+  font-size: 14px;
+}
+
+.rs-currency-selector--mobile .rs-currency-select {
+  min-height: 42px;
+  min-width: 132px;
+  padding: 0 36px 0 14px;
+  border: 1px solid #d7e1ea;
+  border-radius: 12px;
+  background: #fff;
+  color: #26323d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  #pacz-main-navigation > ul > li.rs-currency-menu-item {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .rs-currency-dropdown .rs-currency-list {
+    left: 0;
+    right: auto;
+  }
 }

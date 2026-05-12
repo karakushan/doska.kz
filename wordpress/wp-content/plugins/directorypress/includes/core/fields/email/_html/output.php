@@ -1,6 +1,7 @@
 <?php if ($field->value):
 
 	global $post; 
+	$field_name = function_exists('classiadspro_translatepress_translate_listing_string') ? classiadspro_translatepress_translate_listing_string($field->name, false) : $field->name;
 	$toogle_id =  $field->id .'-'. $post->ID;
 	
 	$tooltip_attr = '';
@@ -15,12 +16,12 @@
 				if(!directorypress_is_listing_page()){
 					if($listing->listing_view == 'show_grid_style'){
 						if($field->is_hide_name_on_grid == 'show_only_label'){
-							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field->name) .':</span>';
+							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field_name) .':</span>';
 						}elseif($field->is_hide_name_on_grid == 'show_icon_label'){
 							if ($field->icon_image){
 								echo '<span class="directorypress-field-icon '. esc_attr($field->icon_image) .'" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto"></span>';
 							}
-							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field->name) .':</span>';
+							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field_name) .':</span>';
 						}elseif($field->is_hide_name_on_grid == 'show_only_icon'){
 							if ($field->icon_image){
 								echo '<span class="directorypress-field-icon '. esc_attr($field->icon_image) .'" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto"></span>';
@@ -28,12 +29,12 @@
 						}
 					}elseif($listing->listing_view == 'show_list_style'){
 						if($field->is_hide_name_on_list == 'show_only_label'){
-							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field->name) .':</span>';
+							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field_name) .':</span>';
 						}elseif($field->is_hide_name_on_list == 'show_icon_label'){
 							if ($field->icon_image){
 								echo '<span class="directorypress-field-icon '. esc_attr($field->icon_image) .'" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto"></span>';
 							}
-							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field->name) .':</span>';
+							echo '<span class="directorypress-field-title" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto">'. esc_html($field_name) .':</span>';
 						}elseif($field->is_hide_name_on_list == 'show_only_icon'){
 							if ($field->icon_image){
 								echo '<span class="directorypress-field-icon '. esc_attr($field->icon_image) .'" data-bs-toggle="tooltip" title="'.antispambot(esc_attr($field->value)).'" data-placement="auto"></span>';
@@ -45,7 +46,7 @@
 						echo '<span class="directorypress-field-icon '. esc_attr($field->icon_image) .'"></span>';
 					}
 					if(!$field->is_hide_name){
-						echo '<span class="directorypress-field-title">'. esc_html($field->name) .':</span>';
+						echo '<span class="directorypress-field-title">'. esc_html($field_name) .':</span>';
 					}
 				}
 			?>

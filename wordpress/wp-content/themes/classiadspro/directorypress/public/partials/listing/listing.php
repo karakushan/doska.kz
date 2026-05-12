@@ -338,8 +338,11 @@
 					do_action('directorypress_listing_user_verification_tag', $listing);
 					echo'</a></h2>';
 				}else{
+					$trimmed_title = function_exists('mb_substr')
+						? mb_substr($listing->title(), 0, $title_limit, 'UTF-8')
+						: substr($listing->title(), 0, $title_limit);
 					echo '<h2><a href="'.get_permalink().'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
-					echo substr($listing->title(), 0, $title_limit);
+					echo esc_html($trimmed_title);
 					do_action('directorypress_listing_user_verification_tag', $listing);
 					echo '</a></h2>';
 					

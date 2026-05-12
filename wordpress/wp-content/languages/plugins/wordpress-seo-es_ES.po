@@ -2,90 +2,561 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO &#8211; Advanced SEO with real-time guidance and built-in AI - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-09-09 13:02:43+0000\n"
+"PO-Revision-Date: 2026-05-08 21:19:05+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.0.3\n"
 "Language: es\n"
 "Project-Id-Version: Plugins - Yoast SEO &#8211; Advanced SEO with real-time guidance and built-in AI - Stable (latest release)\n"
 
-#: src/presenters/admin/sidebar-presenter.php:90 js/dist/ai-consent.js:9
-#: js/dist/ai-generator.js:9 js/dist/block-editor.js:24
-#: js/dist/classic-editor.js:9 js/dist/editor-modules.js:258
-#: js/dist/elementor.js:10 js/dist/externals-components.js:131
-#: js/dist/general-page.js:11 js/dist/integrations-page.js:45
-#: js/dist/new-settings.js:11 js/dist/redirects.js:9 js/dist/support.js:11
+#: src/abilities/user-interface/ability-categories-integration.php:44
+msgid "SEO analysis capabilities provided by Yoast SEO."
+msgstr "Capacidades de análisis SEO que ofrece Yoast SEO."
+
+#: src/abilities/user-interface/abilities-integration.php:252
+msgid "A human-readable label for the score."
+msgstr "Una etiqueta legible de la puntuación."
+
+#: src/abilities/user-interface/abilities-integration.php:248
+msgid "The score slug."
+msgstr "El slug de la puntuación."
+
+#: src/abilities/user-interface/abilities-integration.php:243
+msgid "The post title."
+msgstr "El título de la entrada."
+
+#: src/abilities/user-interface/abilities-integration.php:194
+msgid "The number of recently modified posts to retrieve scores for. Defaults to 10."
+msgstr "El número de entradas modificadas recientemente de las que se van a recuperar las puntuaciones. El valor por defecto es 10."
+
+#: src/abilities/user-interface/abilities-integration.php:167
+msgid "Get the inclusive language scores for the most recently modified posts."
+msgstr "Obtiene las puntuaciones de lenguaje inclusivo de las entradas modificadas más recientemente."
+
+#: src/abilities/user-interface/abilities-integration.php:166
+msgid "Get Inclusive Language Scores"
+msgstr "Obtiene puntuaciones de lenguaje inclusivo"
+
+#: src/abilities/user-interface/abilities-integration.php:148
+msgid "Get the readability scores for the most recently modified posts."
+msgstr "Obtiene las puntuaciones de legibilidad de las entradas modificadas más recientemente."
+
+#: src/abilities/user-interface/abilities-integration.php:147
+msgid "Get Readability Scores"
+msgstr "Obtiene las puntuaciones de legibilidad"
+
+#: src/abilities/user-interface/abilities-integration.php:129
+msgid "Get the SEO scores for the most recently modified posts."
+msgstr "Obtiene las puntuaciones SEO de las entradas modificadas más recientemente."
+
+#: src/abilities/user-interface/abilities-integration.php:128
+msgid "Get SEO Scores"
+msgstr "Obtiene puntuaciones SEO"
+
+#: src/abilities/user-interface/abilities-integration.php:121
+msgid "The focus keyphrase for the post, or null if not set."
+msgstr "La frase clave principal de la publicación, o «null» si no se ha establecido."
+
+#: src/task-list/domain/exceptions/complete-sample-page-task-exception.php:17
+msgid "Failed to delete the Sample Page."
+msgstr "No se ha podido borrar la página de ejemplo."
+
+#: src/task-list/application/tasks/delete-sample-page.php:124
+msgid "Remove the \"Sample Page\""
+msgstr "Elimina la «Página de ejemplo»"
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:37
+msgid "Improve SEO"
+msgstr "Mejorar SEO"
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:37
+msgid "Improve readability"
+msgstr "Mejorar la legibilidad"
+
+#: src/plugins-tab/application/plugins-list-handler.php:71
+msgctxt "plugin status"
+msgid "Yoast"
+msgid_plural "Yoast"
+msgstr[0] "Yoast"
+msgstr[1] "Yoast"
+
+#. translators: %1$s expands to an opening p tag, %2$s and %4$s expand to a
+#. closing p tag, %3$s expands to an opening p tag and opening strong tag, %5$s
+#. expands to a closing strong tag, %6$s expands to an opening strong tag, %7$s
+#. expands to a closing strong tag and closing p tag
+#: src/task-list/application/tasks/improve-content-seo.php:113
+msgid "%1$sBy aligning your content with search intent and focus keyphrases, you make it easier for people and AI systems to find your website, improving your organic visibility. Use the recommendations in the SEO analysis to strengthen your technical performance and ranking potential.%2$s%3$sPro tip%5$s: Use %6$sAI Generate%7$s to quickly generate high quality meta descriptions and keyphrase-rich headers that rank well.%4$s"
+msgstr "%1$sAl adaptar tu contenido a la intención de búsqueda y centrarte en las frases clave, facilitas que tanto las personas como los sistemas de IA encuentren tu sitio web, mejorando así tu visibilidad orgánica. Aprovecha las recomendaciones del análisis SEO para reforzar tu rendimiento técnico y tu potencial de posicionamiento.%2$s%3$sConsejo de experto%5$s: Usa %6$sAI Generate%7$s para generar rápidamente metadescripciones de alta calidad y encabezados ricos en frases clave que se posicionen bien.%4$s"
+
+#. translators: %s expands to the post type name this task is about
+#: src/task-list/application/tasks/set-search-appearance-templates.php:134
+msgid "Generic titles and descriptions make your results unclear in search. Templates ensure every %s has a clear, click-worthy snippet automatically. Go to Search appearance, choose your post type, and set default title and meta description patterns."
+msgstr "Los títulos y descripciones genéricos hacen que tus resultados no sean claros en las búsquedas. Las plantillas garantizan que cada %s tenga automáticamente un fragmento claro y atractivo para hacer clic. Ve a «Apariencia de búsqueda», elige tu tipo de entrada y configura los patrones predeterminados para el título y la metadescripción."
+
+#. translators: %1$s expands to an opening p tag, %2$s and %4$s expand to a
+#. closing p tag, %3$s expands to an opening p tag and opening strong tag, %5$s
+#. expands to a closing strong tag, %6$s expands to an opening strong tag, %7$s
+#. expands to a closing strong tag and closing p tag
+#: src/task-list/application/tasks/improve-content-readability.php:112
+msgid "%1$sChecking your recent content's readability ensures it stays clear and easy to follow, improving your user experience. Follow the feedback to refine your sentence structure and word choice and maintain a high standard of engagement and comprehension.%2$s%3$sPro tip%5$s: Use %6$sAI Optimize%7$s to automatically simplify complex sentences and improve the flow of your writing.%4$s"
+msgstr "%1$sRevisar la legibilidad de tus contenidos recientes garantiza que sigan siendo claros y fáciles de seguir, lo que mejora la experiencia del usuario. Ten en cuenta los comentarios para pulir la estructura de tus frases y la elección de palabras, y mantener un alto nivel de interés y comprensión.%2$s%3$sConsejo profesional%5$s: Usa %6$sAI Optimize%7$s para simplificar automáticamente las frases complejas y mejorar la fluidez de tu texto.%4$s"
+
+#. translators: %1$s expands to the post type label this task is about
+#: src/task-list/application/tasks/improve-content-seo.php:110
+msgid "Improve the SEO of your recent content: %1$s"
+msgstr "Mejora el SEO de tus contenidos recientes: %1$s"
+
+#. translators: %1$s and %3$s expands to an opening p tag, %2$s and %5$s expand
+#. to a closing p tag and %4$s expands to Yoast
+#: src/task-list/application/tasks/create-new-content.php:111
+msgid "%1$sLong gaps without new content slow down your traffic growth. Publishing regularly gives search engines and visitors a reason to return.%2$s%3$sPlan a topic, write your post, and use the %4$s SEO and Readability Analyses to refine it before publishing.%5$s"
+msgstr "%1$sLos largos periodos sin contenido nuevo frenan el crecimiento de tu tráfico. Publicar con regularidad da a los motores de búsqueda y a los visitantes un motivo para volver.%2$s%3$sPlanifica un tema, escribe tu entrada y usa los %4$s análisis de SEO y legibilidad para pulirla antes de publicarla.%5$s"
+
+#. translators: %1$s expands to the post type label this task is about
+#: src/task-list/application/tasks/improve-content-readability.php:109
+msgid "Improve the readability of your recent content: %1$s"
+msgstr "Mejora la legibilidad de tus últimas publicaciones: %1$s"
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:57
+msgid "Your content is readable but could be clearer. Consider simplifying a few sentences to improve the overall flow."
+msgstr "Tu texto se lee bien, pero podría ser más claro. Intenta simplificar algunas frases para mejorar la fluidez general."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:56
+msgid "Your content is clear and easy to read. This helps your audience stay engaged with your message."
+msgstr "Tu contenido es claro y fácil de leer. Esto ayuda a que tu público se mantenga interesado en tu mensaje."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:58
+msgid "Your content is not yet optimized for search. Follow the SEO recommendations to help search engines understand and rank your page."
+msgstr "Tu contenido aún no está optimizado para los motores de búsqueda. Sigue las recomendaciones de SEO para ayudar a los motores de búsqueda a entender y posicionar tu página."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:57
+msgid "Your content is partially optimized. Adding a few more SEO best practices will help you reach a wider audience."
+msgstr "Tu contenido está parcialmente optimizado. Si aplicas algunas prácticas recomendadas de SEO más, podrás llegar a un público más amplio."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:56
+msgid "Your content is well optimized for search engines. This increases your chances of ranking higher in search results."
+msgstr "Tu contenido está bien optimizado para los motores de búsqueda. Esto aumenta tus posibilidades de aparecer en los primeros puestos de los resultados de búsqueda."
+
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:58
+msgid "Your content is currently difficult to read. Check the analysis for specific ways to simplify your writing for a better user experience."
+msgstr "Tu contenido resulta difícil de leer en este momento. Echa un vistazo al análisis para ver cómo puedes simplificar tu redacción y mejorar la experiencia del usuario."
+
+#: src/schema-aggregator/user-interface/site-schema-aggregator-cli-command.php:103
+msgid "An error occurred while aggregating the site schema."
+msgstr "Se ha producido un error al agregar el esquema del sitio."
+
+#: src/schema-aggregator/user-interface/site-schema-aggregator-cli-command.php:95
+msgid "The value for 'per_page' must be a positive integer higher than equal to 1."
+msgstr "El valor de «per_page» debe ser un número entero positivo mayor o igual que 1."
+
+#: src/schema-aggregator/user-interface/site-schema-aggregator-cli-command.php:92
+msgid "The value for 'page' must be a positive integer higher than equal to 1."
+msgstr "El valor de «page» debe ser un número entero positivo mayor o igual a 1."
+
+#: src/schema-aggregator/user-interface/site-schema-aggregator-cache-cli-command.php:99
+msgid "All site schema cache has been cleared successfully."
+msgstr "Se ha borrado correctamente toda la caché del esquema del sitio."
+
+#: src/schema-aggregator/user-interface/site-schema-aggregator-cache-cli-command.php:90
+msgid "The site schema cache has been cleared successfully."
+msgstr "Se ha borrado correctamente la caché del esquema del sitio."
+
+#. translators: %1$s expands to "Yoast", %2$s expands to an opening anchor tag,
+#. %3$s expands to a closing anchor tag.
+#: src/alerts/application/indexables-disabled/indexables-disabled-alert.php:120
+msgid "%1$s indexables are disabled because your site is in a non-production environment or custom code is blocking them. This may affect your SEO features. %2$sLearn more about this%3$s."
+msgstr "%1$s Los elementos indexables están desactivados porque tu sitio se encuentra en un entorno que no es de producción o porque hay código personalizado que los bloquea. Esto puede afectar a tus funciones de SEO. %2$sMás información al respecto%3$s."
+
+#. translators: %1$s expands to the post type label this task is about
+#: src/task-list/application/tasks/set-search-appearance-templates.php:132
+msgid "Set search appearance templates for your content type: %1$s"
+msgstr "Configura las plantillas de presentación de búsqueda para tu tipo de contenido: %1$s"
+
+#: src/task-list/application/tasks/set-search-appearance-templates.php:116
+msgid "Set search templates"
+msgstr "Establecer plantillas de búsqueda"
+
+#: src/task-list/domain/exceptions/complete-llms-task-exception.php:17
+msgid "Failed to enable llms.txt option."
+msgstr "No se ha podido habilitar la opción llms.txt."
+
+#: src/task-list/domain/exceptions/complete-hello-world-task-exception.php:17
+msgid "Failed to delete the Hello World post."
+msgstr "No se ha podido eliminar la publicación «Hola, mundo»."
+
+#: src/task-list/application/tasks/enable-llms-txt.php:109
+msgid "Without llms.txt, AI platforms may not know how to treat your content. Enabling it helps communicate your preferences in a clearer way to AI tools."
+msgstr "Sin el archivo llms.txt, es posible que las plataformas de IA no sepan cómo tratar tu contenido. Al activarlo, ayudas a comunicar tus preferencias de forma más clara a las herramientas de IA."
+
+#: src/presenters/admin/sidebar-presenter.php:77 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Optimize your site faster, smarter, and with more confidence."
+msgstr "Optimiza tu sitio web de forma más rápida, inteligente y con mayor confianza."
+
+#: src/presenters/admin/sidebar-presenter.php:77 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Help ready-to-buy shoppers and search engines find your product."
+msgstr "Ayuda a los compradores dispuestos a comprar y a los motores de búsqueda a encontrar tu producto."
+
+#: src/presenters/admin/sidebar-presenter.php:72 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Spend less time on SEO tasks!"
+msgstr "¡Dedica menos tiempo a las tareas de SEO!"
+
+#: src/presenters/admin/sidebar-presenter.php:72 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Grow your store's visibility!"
+msgstr "¡Aumenta la visibilidad de tu tienda!"
+
+#: src/task-list/application/tasks/create-new-content.php:108
+msgid "Create new content"
+msgstr "Crear contenido nuevo"
+
+#: src/task-list/application/tasks/create-new-content.php:95
+msgid "Create new post"
+msgstr "Crear nueva entrada"
+
+#: src/presenters/admin/sidebar-presenter.php:115 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Less friction. Faster publishing."
+msgstr "Menos fricciones. Publicación más rápida."
+
+#: src/presenters/admin/sidebar-presenter.php:115 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Less friction. Smarter optimization."
+msgstr "Menos fricción. Optimización más inteligente."
+
+#: src/task-list/application/tasks/enable-llms-txt.php:95
+msgid "Enable llms.txt"
+msgstr "Habilitar llms.txt"
+
+#: src/task-list/application/tasks/delete-hello-world.php:117
+#: src/task-list/application/tasks/delete-sample-page.php:125
+msgid "Leaving placeholder content makes your site look unfinished and untrustworthy. Removing it keeps your site clean and professional for visitors and search engines."
+msgstr "Dejar contenido provisional hace que tu sitio web parezca incompleto y poco fiable. Eliminarlo mantiene tu sitio web limpio y profesional para los visitantes y los motores de búsqueda."
+
+#: src/task-list/application/tasks/delete-hello-world.php:116
+msgid "Remove the “Hello World” post"
+msgstr "Eliminar la publicación «Hola mundo»"
+
+#: src/task-list/application/tasks/delete-hello-world.php:103
+#: src/task-list/application/tasks/delete-sample-page.php:111
+msgid "Delete for me"
+msgstr "Borrar para mí"
+
+#. translators: %s expands to Yoast SEO
+#: src/task-list/application/tasks/complete-ftc.php:94
+msgid "Skipping setup limits how much %s can help you. Completing it makes sure the core settings are working in your favor."
+msgstr "Si te saltas la configuración, %s no te servirá de mucho. Si la completas, te asegurarás de que los ajustes básicos funcionen a tu favor."
+
+#: src/task-list/application/tasks/complete-ftc.php:91
+msgid "Complete the first time configuration"
+msgstr "Completa la configuración inicial"
+
+#: src/presenters/admin/sidebar-presenter.php:92 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Optimize pages for multiple keywords with guidance"
+msgstr "Optimiza las páginas para múltiples palabras clave con orientación"
+
+#: src/presenters/admin/sidebar-presenter.php:91 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Manage redirects with ease and without extra plugins"
+msgstr "Gestiona los redireccionamientos con facilidad y sin plugins adicionales"
+
+#: src/presenters/admin/sidebar-presenter.php:90 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Apply AI suggestions to improve content in 1 click"
+msgstr "Aplica las sugerencias de IA para mejorar el contenido con un solo clic"
+
+#: src/presenters/admin/sidebar-presenter.php:89 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Create optimized SEO titles & meta descriptions in seconds"
+msgstr "Crea títulos y metadescripciones optimizados para SEO en cuestión de segundos"
+
+#: src/presenters/admin/sidebar-presenter.php:86 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Receive clear SEO and readability guidance to optimize your products"
+msgstr "Recibe orientación clara sobre SEO y legibilidad para optimizar tus productos"
+
+#: src/presenters/admin/sidebar-presenter.php:85 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Create optimized SEO titles & meta descriptions with AI"
+msgstr "Crea títulos y metadescripciones optimizados para SEO con IA"
+
+#: src/presenters/admin/sidebar-presenter.php:84 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Make sure search engines show the right version of your product page"
+msgstr "Asegúrate de que los motores de búsqueda muestren la versión correcta de tu página de producto"
+
+#: src/presenters/admin/sidebar-presenter.php:83 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Add product details to help your listings stand out"
+msgstr "Añade detalles del producto para que tus anuncios destaquen"
+
+#: src/task-list/application/tasks/enable-llms-txt.php:108
+msgid "Create an llms.txt file"
+msgstr "Crea un archivo llms.txt"
+
+#. translators: %1$s expands to "Yoast SEO".
+#: src/alerts/application/ping-other-admins/ping-other-admins-alert.php:175
+msgid "Looks like you’re new here. %1$s makes it easy to optimize your website for search engines. Want to keep your site healthy and easier to find? Sign up below to receive practical emails to get you started!"
+msgstr "Parece que eres nuevo aquí. %1$s te ayuda a optimizar tu sitio web para los motores de búsqueda. ¿Quieres mantener tu sitio en buen estado y facilitar su búsqueda? ¡Regístrate a continuación para recibir correos electrónicos prácticos que te ayudarán a empezar!"
+
+#: src/task-list/application/tasks/complete-ftc.php:78
+#: js/dist/installation-success.js:3
+msgid "Start configuration"
+msgstr "Iniciar configuración"
+
+#: src/user-meta/framework/custom-meta/author-pronouns.php:97
+msgid "Pronouns to use"
+msgstr "Pronombres que debes usar"
+
+#: src/user-meta/framework/custom-meta/author-pronouns.php:108
+msgid "Enter the pronouns for the author, for example \"she/her\", \"he/him\", or \"they/them\"."
+msgstr "Introduce los pronombres del autor, por ejemplo, «ella/la», «él/lo» o «ellos/los»."
+
+#: src/plans/user-interface/upgrade-sidebar-menu-integration.php:130
+msgid "Get 30% off"
+msgstr "Consigue un 30 % de descuento"
+
+#. translators: %s: expands to Yoast
+#: src/integrations/admin/redirections-tools-page.php:60
+msgid "%s Redirects"
+msgstr "%s Redirects"
+
+#. translators: %1$s expands to "SEO title" or "meta description", %2$s expands
+#. to an opening link tag, %3$s expands to an opening strong tag, %4$s expands
+#. to a closing strong tag, %5$s expands to a closing link tag.
+#: src/alerts/application/default-seo-data/default-seo-data-alert.php:192
+msgid "Your recent posts are using default %1$s, which can make them easy to overlook in search results. Update them for better visibility or %2$stry %3$sYoast AI Generate%4$s for free to do it faster.%5$s"
+msgstr "Tus publicaciones recientes utilizan el valor predeterminado %1$s, lo que puede hacer que pasen desapercibidas en los resultados de búsqueda. Actualízalas para mejorar su visibilidad o %2$sprueba %3$sYoast AI Generate%4$s de forma gratuita para hacerlo más rápido.%5$s"
+
+#. translators: %1$s expands to "SEO title" or "meta description", %2$s expands
+#. to an opening link tag, %3$s expands to an opening strong tag, %4$s expands
+#. to a closing strong tag, %5$s expands to a closing link tag.
+#: src/alerts/application/default-seo-data/default-seo-data-alert.php:192
+msgid "Your recent posts are using default %1$s, which can make them easy to overlook in search results. Update them manually or %2$sfind out how %3$sYoast AI Generate%4$s can improve them for you.%5$s"
+msgstr "Tus publicaciones recientes utilizan el valor predeterminado %1$s, lo que puede hacer que pasen desapercibidas en los resultados de búsqueda. Actualízalas manualmente o %2$sdescubre cómo %3$sYoast AI Generate%4$s puede mejorarlas por ti.%5$s"
+
+#: src/alerts/application/default-seo-data/default-seo-data-alert.php:182
+msgid "SEO titles"
+msgstr "Títulos SEO"
+
+#: src/alerts/application/default-seo-data/default-seo-data-alert.php:179
+msgid "SEO titles and meta descriptions"
+msgstr "Títulos SEO y metadescripciones"
+
+#: src/alerts/application/default-seo-data/default-seo-data-alert.php:185
+msgid "meta descriptions"
+msgstr "metadescripciones"
+
+#: admin/class-premium-upsell-admin-block.php:62 js/dist/general-page.js:7
+#: js/dist/new-settings.js:7
+msgid "Google Docs add-on (1 seat)"
+msgstr "Extensión de Google Docs (1 licencia)"
+
+#: src/presenters/admin/sidebar-presenter.php:104 js/dist/general-page.js:7
+#: js/dist/new-settings.js:7 js/dist/support.js:6
 msgid "Buy now for 30% off"
 msgstr "Comprar ahora con un 30% de descuento"
 
-#: src/presenters/admin/sidebar-presenter.php:72 js/dist/ai-consent.js:7
-#: js/dist/ai-generator.js:7 js/dist/block-editor.js:22
-#: js/dist/classic-editor.js:7 js/dist/editor-modules.js:256
-#: js/dist/elementor.js:8 js/dist/externals-components.js:129
-#: js/dist/general-page.js:9 js/dist/integrations-page.js:43
-#: js/dist/new-settings.js:9 js/dist/redirects.js:7 js/dist/support.js:9
-msgid "SEO that scales with your product catalog."
-msgstr "SEO que se adapta a tu catálogo de productos."
+#. translators: 1: Link start tag to the WordPress Reading Settings page, 2:
+#. Link closing tag.
+#. translators: %1$s and %2$s are replaced by opening and closing <a> tags
+#: src/llms-txt/application/file/file-failure-notification-presenter.php:39
+#: js/dist/new-settings.js:43
+msgid "An existing llms.txt file wasn't created by Yoast or has been edited manually. Yoast won't overwrite it. %1$sDelete it manually%2$s or turn off this feature."
+msgstr "El archivo llms.txt existente no fue creado por Yoast o se ha editado manualmente. Yoast no lo sobrescribirá. %1$sElimínalo manualmente%2$s o desactiva esta función."
 
-#: inc/class-wpseo-admin-bar-menu.php:600
-#: src/plans/user-interface/upgrade-sidebar-menu-integration.php:107
+#: inc/class-wpseo-admin-bar-menu.php:607
+#: src/plans/user-interface/upgrade-sidebar-menu-integration.php:127
 msgid "Upgrade"
 msgstr "Mejorar"
 
-#: src/presenters/admin/sidebar-presenter.php:74 js/dist/ai-consent.js:6
-#: js/dist/ai-generator.js:6 js/dist/block-editor.js:21
-#: js/dist/classic-editor.js:6 js/dist/editor-modules.js:255
-#: js/dist/elementor.js:7 js/dist/externals-components.js:128
-#: js/dist/general-page.js:8 js/dist/integrations-page.js:42
-#: js/dist/new-settings.js:8 js/dist/redirects.js:6 js/dist/support.js:8
-msgid "AI tools included"
-msgstr "Herramientas de IA incluidas"
+#: inc/class-wpseo-admin-bar-menu.php:610
+#: src/plans/user-interface/upgrade-sidebar-menu-integration.php:130
+msgid "30% off - BF Sale"
+msgstr "30% de descuento - Oferta BF"
 
-#: src/ai-consent/user-interface/ai-consent-integration.php:109
+#. translators: %1$s is the plugin name, %2$s and %3$s are a link.
+#: inc/class-addon-manager.php:420
+msgid "Your %1$s plugin cannot be updated as your subscription has expired. %2$sRenew your product subscription%3$s to restore updates and full feature access."
+msgstr "Tu plugin %1$s no puede actualizarse porque tu suscripción ha caducado. %2$sRenueva tu suscripción al producto%3$s para recuperar las actualizaciones y el acceso a todas las funciones."
+
+#. translators: %1$s and %2$s are a <span> opening and closing tag.
+#: inc/class-addon-manager.php:411
+msgid "%1$s30%% OFF - Black Friday %2$s"
+msgstr "%1$s30%% de descuento - Black Friday %2$s"
+
+#: admin/class-premium-upsell-admin-block.php:213 js/dist/general-page.js:9
+#: js/dist/new-settings.js:9
+msgid "Get 30% off now!"
+msgstr "¡Consigue un descuento del 30%!"
+
+#: src/presenters/admin/sidebar-presenter.php:122 js/dist/general-page.js:7
+#: js/dist/new-settings.js:7 js/dist/support.js:6
+msgid "30-day money back guarantee"
+msgstr "Garantía de devolución de dinero de 30 días"
+
+#: inc/class-my-yoast-api-request.php:161
+msgid "Not all needed fields are present."
+msgstr "No están presentes todos los campos necesarios."
+
+#: admin/class-premium-upsell-admin-block.php:155 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Make your articles visible, be seen in Google News"
+msgstr "Haz que tus artículos sean visibles, que te vean en Google News"
+
+#: admin/class-premium-upsell-admin-block.php:158 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Internal links and redirect management, easy"
+msgstr "Gestión de enlaces internos y redirecciones, fácil"
+
+#: admin/class-premium-upsell-admin-block.php:157 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Easy Local SEO. Show up in Google Maps results"
+msgstr "SEO local fácil. Aparecer en los resultados de Google Maps"
+
+#: admin/class-premium-upsell-admin-block.php:163 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
+msgid "Boost visibility for your products, from 10 or 10,000+"
+msgstr "Aumenta la visibilidad de tus productos, de 10 a más de 10.000"
+
+#: admin/class-premium-upsell-admin-block.php:156 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Built to get found by search, AI, and real users"
+msgstr "Creado para ser encontrado por las búsquedas, la IA y los usuarios reales"
+
+#: admin/class-premium-upsell-admin-block.php:159 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Access to friendly help when you need it, day or night"
+msgstr "Acceso a nuestra servicial ayuda cuando la necesites, de día o de noche"
+
+#. translators: %1$s and %2$s expand to a span wrap to avoid linebreaks. %3$s
+#. expands to "Yoast SEO Premium".
+#: src/presenters/admin/sidebar-presenter.php:66 js/dist/general-page.js:6
+#: js/dist/general-page.js:7 js/dist/new-settings.js:6
+#: js/dist/new-settings.js:7 js/dist/support.js:5 js/dist/support.js:6
+msgid "%1$s%2$s %3$s"
+msgstr "%1$s%2$s %3$s"
+
+#: admin/class-premium-upsell-admin-block.php:154 js/dist/ai-consent.js:2
+#: js/dist/ai-generator.js:2 js/dist/block-editor.js:18
+#: js/dist/classic-editor.js:1 js/dist/editor-modules.js:116
+#: js/dist/externals-components.js:127 js/dist/general-page.js:5
+#: js/dist/integrations-page.js:28 js/dist/new-settings.js:5
+#: js/dist/redirects.js:1 js/dist/support.js:4
+msgid "Generate SEO optimized metadata in seconds with AI"
+msgstr "Genera automáticamente metadatos SEO usando IA"
+
+#: src/ai-consent/user-interface/ai-consent-integration.php:121
+#: src/ai/consent/user-interface/ai-consent-integration.php:123
 msgid "AI features"
 msgstr "Características de IA"
 
-#: src/plans/user-interface/plans-page-integration.php:130 js/dist/plans.js:7
+#: admin/class-premium-upsell-admin-block.php:100 js/dist/general-page.js:11
+#: js/dist/new-settings.js:11 js/dist/plans.js:2 js/dist/plans.js:7
+msgid "Now includes:"
+msgstr "Ahora incluye:"
+
+#: src/plans/user-interface/plans-page-integration.php:141 js/dist/plans.js:8
 msgid "Plans"
 msgstr "Planes"
 
+#: src/llms-txt/application/file/file-failure-notification-presenter.php:46
+#: js/dist/new-settings.js:43
+msgid "You have activated the Yoast llms.txt feature, but we couldn't generate an llms.txt file. It looks like there aren't sufficient permissions on the web server's filesystem."
+msgstr "Has activado la función llms.txt de Yoast, pero no hemos podido generar un archivo llms.txt. Parece que no hay permisos suficientes en el sistema de archivos del servidor web."
+
 #. translators: 1,3,5: expand to opening paragraph tag, 2,4,6: expand to
 #. opening paragraph tag.
-#: src/llms-txt/user-interface/health-check/file-reports.php:64
+#: src/llms-txt/user-interface/health-check/file-reports.php:65
 msgid "%1$sYou have activated the Yoast llms.txt feature, but we couldn't generate an llms.txt file.%2$s%3$sIt looks like there is an llms.txt file already that wasn't created by Yoast, or the llms.txt file created by Yoast has been edited manually.%4$s%5$sWe don't want to overwrite this file's content, so if you want to let Yoast keep auto-generating the llms.txt file, you can manually delete the existing one. Otherwise, consider disabling the Yoast feature.%6$s"
 msgstr "%1$sHas activado la función llms.txt de Yoast, pero no hemos podido generar un archivo llms.txt.%2$s%3$sParece que ya existe un archivo llms.txt que no ha sido creado por Yoast, o que el archivo llms.txt creado por Yoast ha sido editado manualmente.%4$s%5$sNo queremos sobrescribir el contenido de este archivo, por lo que, si quieres que Yoast siga generando automáticamente el archivo llms.txt, puedes eliminar manualmente el que ya existe. De lo contrario, considera la posibilidad de desactivar la función de Yoast.%6$s"
 
 #: src/llms-txt/application/file/file-failure-notification-presenter.php:49
-#: src/llms-txt/user-interface/health-check/file-reports.php:86
+#: src/llms-txt/user-interface/health-check/file-reports.php:87
 msgid "You have activated the Yoast llms.txt feature, but we couldn't generate an llms.txt file, for unknown reasons."
 msgstr "Has activado la función llms.txt de Yoast, pero no hemos podido generar un archivo llms.txt por motivos desconocidos."
 
 #. translators: 1,3: expand to opening paragraph tag, 2,4: expand to opening
 #. paragraph tag.
-#: src/llms-txt/user-interface/health-check/file-reports.php:77
+#: src/llms-txt/user-interface/health-check/file-reports.php:78
 msgid "%1$sYou have activated the Yoast llms.txt feature, but we couldn't generate an llms.txt file.%2$s%3$sIt looks like there aren't sufficient permissions on the web server's filesystem.%4$s"
 msgstr "%1$sHas activado la función llms.txt de Yoast, pero no hemos podido generar un archivo llms.txt.%2$s%3$sParece que no hay permisos suficientes en el sistema de archivos del servidor web.%4$s"
 
 #: src/llms-txt/application/file/file-failure-notification-presenter.php:55
-#: src/llms-txt/user-interface/health-check/file-reports.php:61
-#: src/llms-txt/user-interface/health-check/file-reports.php:74
-#: src/llms-txt/user-interface/health-check/file-reports.php:85
+#: src/llms-txt/user-interface/health-check/file-reports.php:62
+#: src/llms-txt/user-interface/health-check/file-reports.php:75
+#: src/llms-txt/user-interface/health-check/file-reports.php:86
 msgid "Your llms.txt file couldn't be auto-generated"
 msgstr "No se ha podido generar automáticamente tu archivo llms.txt"
 
 #. translators: %s: Yoast SEO.
-#: src/llms-txt/user-interface/health-check/file-reports.php:40
+#: src/llms-txt/user-interface/health-check/file-reports.php:41
 msgid "%s keeps your llms.txt file up-to-date. This helps LLMs access and provide your site's information more easily."
 msgstr "%s mantiene tu archivo llms.txt actualizado. Esto ayuda a los LLM a acceder y proporcionar la información de tu sitio web más fácilmente."
 
 #. translators: %s: Yoast SEO.
-#: src/llms-txt/user-interface/health-check/file-reports.php:34
+#: src/llms-txt/user-interface/health-check/file-reports.php:35
 msgid "Your llms.txt file is auto-generated by %s"
-msgstr "Tu archivo llms.txt lo genera automáticamente %s."
+msgstr "Tu archivo llms.txt lo genera automáticamente %s"
 
-#: src/dashboard/user-interface/tracking/setup-steps-tracking-route.php:149
+#: src/dashboard/user-interface/tracking/setup-steps-tracking-route.php:143
 msgid "No valid parameters were passed."
 msgstr "No se han pasado parámetros válidos."
 
@@ -102,7 +573,7 @@ msgid "Not analyzed"
 msgstr "Sin analizar"
 
 #. translators: %s: Yoast SEO.
-#: wp-seo-main.php:564
+#: wp-seo-main.php:566
 msgid "%s activation failed"
 msgstr "La activación de %s ha fallado"
 
@@ -111,12 +582,8 @@ msgstr "La activación de %s ha fallado"
 msgid "%s is unable to create database tables"
 msgstr "%s no puede crear tablas de base de datos"
 
-#: src/presenters/admin/sidebar-presenter.php:93 js/dist/ai-consent.js:7
-#: js/dist/ai-generator.js:7 js/dist/block-editor.js:22
-#: js/dist/classic-editor.js:7 js/dist/editor-modules.js:256
-#: js/dist/elementor.js:8 js/dist/externals-components.js:129
-#: js/dist/general-page.js:9 js/dist/integrations-page.js:43
-#: js/dist/new-settings.js:9 js/dist/redirects.js:7 js/dist/support.js:9
+#: src/presenters/admin/sidebar-presenter.php:107 js/dist/general-page.js:5
+#: js/dist/new-settings.js:5 js/dist/support.js:4
 msgid "Buy now"
 msgstr "Comprar ahora"
 
@@ -138,7 +605,7 @@ msgstr "La versión de Yoast SEO en tu sitio es la %1$s; sin embargo, el plugin 
 msgid "Do not allow search engines to show this author's archives in search results."
 msgstr "No permitir que los motores de búsqueda muestren los archivos de este autor en los resultados de búsqueda."
 
-#: admin/menu/class-base-menu.php:260 admin/menu/class-base-menu.php:264
+#: admin/menu/class-base-menu.php:257 admin/menu/class-base-menu.php:260
 msgid "Upgrades"
 msgstr "Actualizaciones"
 
@@ -226,10 +693,6 @@ msgstr "FAQ de Yoast"
 msgid "X username (without @)"
 msgstr "Nombre de usuario de X (sin @)"
 
-#: src/presenters/admin/sidebar-presenter.php:101
-msgid "30-day money back guarantee."
-msgstr "Garantía de devolución del dinero de 30 días."
-
 #. translators: 1: PHP class name, 2: PHP variable name
 #: inc/class-yoast-dynamic-rewrites.php:67
 msgid "The %1$s class must not be instantiated before the %2$s global is set."
@@ -239,19 +702,10 @@ msgstr "La clase %1$s no debe ser solicitada antes de establecer la global %2$s.
 #. translators: %s expands to Yoast SEO Premium
 #. translators: %s expands to "Yoast WooCommerce SEO"
 #. translators: %s expands to "Yoast SEO" Premium
-#: admin/class-premium-upsell-admin-block.php:208
-#: admin/class-premium-upsell-admin-block.php:210 js/dist/ai-consent.js:10
-#: js/dist/ai-consent.js:11 js/dist/ai-generator.js:10
-#: js/dist/ai-generator.js:11 js/dist/block-editor.js:25
-#: js/dist/block-editor.js:26 js/dist/classic-editor.js:10
-#: js/dist/classic-editor.js:11 js/dist/editor-modules.js:259
-#: js/dist/editor-modules.js:260 js/dist/elementor.js:11
-#: js/dist/elementor.js:12 js/dist/externals-components.js:132
-#: js/dist/externals-components.js:133 js/dist/general-page.js:12
-#: js/dist/general-page.js:13 js/dist/integrations-page.js:46
-#: js/dist/integrations-page.js:47 js/dist/new-settings.js:12
-#: js/dist/new-settings.js:13 js/dist/redirects.js:10 js/dist/redirects.js:11
-#: js/dist/support.js:12 js/dist/support.js:13
+#: admin/class-premium-upsell-admin-block.php:219
+#: admin/class-premium-upsell-admin-block.php:221 js/dist/general-page.js:8
+#: js/dist/general-page.js:9 js/dist/new-settings.js:8
+#: js/dist/new-settings.js:9
 msgid "Explore %s now!"
 msgstr "¡Explora %s ahora!"
 
@@ -269,49 +723,39 @@ msgstr "La interfaz de %1$s no está disponible actualmente en el editor de prod
 msgid "Compatibility issue: Yoast SEO is incompatible with the beta WooCommerce product editor."
 msgstr "Problema de compatibilidad: Yoast SEO es incompatible con el editor de productos beta de WooCommerce."
 
-#: admin/class-premium-upsell-admin-block.php:84
-#: admin/menu/class-base-menu.php:264 js/dist/ai-consent.js:11
-#: js/dist/ai-generator.js:11 js/dist/block-editor.js:26
-#: js/dist/block-editor.js:490 js/dist/classic-editor.js:11
-#: js/dist/classic-editor.js:475 js/dist/editor-modules.js:260
-#: js/dist/elementor.js:12 js/dist/elementor.js:17
-#: js/dist/externals-components.js:133 js/dist/general-page.js:13
-#: js/dist/integrations-page.js:47 js/dist/new-settings.js:13
-#: js/dist/redirects.js:11 js/dist/support.js:13
+#: admin/class-premium-upsell-admin-block.php:90
+#: admin/menu/class-base-menu.php:260 js/dist/block-editor.js:498
+#: js/dist/classic-editor.js:481 js/dist/general-page.js:9
+#: js/dist/new-settings.js:9
 msgid "30% OFF"
 msgstr "30 % DE DESCUENTO"
 
-#: admin/class-premium-upsell-admin-block.php:83 js/dist/ai-consent.js:11
-#: js/dist/ai-generator.js:11 js/dist/block-editor.js:26
-#: js/dist/block-editor.js:490 js/dist/classic-editor.js:11
-#: js/dist/classic-editor.js:475 js/dist/editor-modules.js:260
-#: js/dist/elementor.js:12 js/dist/elementor.js:17
-#: js/dist/externals-components.js:133 js/dist/general-page.js:13
-#: js/dist/integrations-page.js:47 js/dist/new-settings.js:13
-#: js/dist/redirects.js:11 js/dist/support.js:13
+#: admin/class-premium-upsell-admin-block.php:89 js/dist/block-editor.js:498
+#: js/dist/classic-editor.js:481 js/dist/general-page.js:9
+#: js/dist/new-settings.js:9
 msgid "BLACK FRIDAY"
 msgstr "BLACK FRIDAY"
 
-#: admin/views/class-yoast-feature-toggles.php:209
+#: admin/views/class-yoast-feature-toggles.php:205
 msgid "Use the power of Yoast AI to automatically generate compelling titles and descriptions for your posts and pages."
 msgstr "Usa el poder de la IA de Yoast para generar automáticamente títulos y descripciones atractivos para tus entradas y páginas."
 
-#: admin/views/class-yoast-feature-toggles.php:206 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:202 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "AI title & description generator"
 msgstr "Genrador IA de título y descripción"
 
 #. translators: %s expands to a unit of time (e.g. 1 day).
 #. translators: %1$s, %2$s and %3$s expand to units of time (e.g. 1 day).
 #: src/integrations/blocks/structured-data-blocks.php:178
-#: js/dist/how-to-block.js:10 js/dist/how-to-block.js:16
+#: js/dist/how-to-block.js:6 js/dist/how-to-block.js:12
 msgid "%1$s, %2$s and %3$s"
 msgstr "%1$s, %2$s y %3$s"
 
 #. translators: %s expands to a unit of time (e.g. 1 day).
 #. translators: %1$s and %2$s expand to units of time (e.g. 1 day).
 #: src/integrations/blocks/structured-data-blocks.php:172
-#: js/dist/how-to-block.js:9 js/dist/how-to-block.js:15
+#: js/dist/how-to-block.js:5 js/dist/how-to-block.js:11
 msgid "%1$s and %2$s"
 msgstr "%1$s y %2$s"
 
@@ -345,12 +789,12 @@ msgstr "El tipo de contenido ya no es nuevo."
 msgid "Post type is not new."
 msgstr "El tipo de contenido no es nuevo."
 
-#: src/integrations/support-integration.php:119 js/dist/support.js:17
+#: src/integrations/support-integration.php:130 js/dist/support.js:7
 msgid "Support"
 msgstr "Soporte"
 
 #: src/integrations/admin/crawl-settings-integration.php:163
-#: js/dist/new-settings.js:32 js/dist/new-settings.js:178
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:271
 msgid "Prevent Google AdsBot from crawling"
 msgstr "Evitar el rastreo de Google AdsBot"
 
@@ -386,7 +830,7 @@ msgstr "Academia"
 #. %3$s expands to a closing strong tag, %4$s expands to an a tag. %5$s expands
 #. to MyYoast, %6$s expands to a closing a tag,  %7$s expands to the product
 #. name
-#: inc/class-addon-manager.php:523
+#: inc/class-addon-manager.php:532
 msgid "%1$s %2$s isn't working as expected %3$s and you are not receiving updates or support! Make sure to %4$s activate your product subscription in %5$s%6$s to unlock all the features of %7$s."
 msgstr "¡%1$s %2$s no está funcionando como se espera %3$s y no estás recibiendo actualizaciones ni soporte! Asegúrate de %4$s activar la suscripción a tu producto en %5$s%6$s para acceder a todas las características de %7$s."
 
@@ -415,11 +859,10 @@ msgid "It looks like you've enabled media pages. We recommend that you help us t
 msgstr "Parece ser que has activado las páginas de medios. Recomendamos que nos ayudes a volver a analizar tu sitio ejecutando la optimización de datos SEO."
 
 #: inc/class-wpseo-rank.php:156 inc/class-wpseo-rank.php:245
-#: js/dist/block-editor.js:492 js/dist/editor-modules.js:250
-#: js/dist/editor-modules.js:514 js/dist/elementor.js:18
-#: js/dist/externals-components.js:123 js/dist/externals-components.js:449
-#: js/dist/frontend-inspector-resources.js:1 js/dist/post-edit.js:1
-#: js/dist/term-edit.js:1
+#: js/dist/block-editor.js:498 js/dist/editor-modules.js:115
+#: js/dist/editor-modules.js:384 js/dist/externals-components.js:122
+#: js/dist/externals-components.js:438
+#: js/dist/frontend-inspector-resources.js:1
 msgid "Potentially non-inclusive"
 msgstr "Potencialmente no inclusivo"
 
@@ -429,44 +872,44 @@ msgstr "Potencialmente no inclusivo"
 msgid "Finish your %s"
 msgstr "Completa tu %s"
 
-#: inc/class-wpseo-admin-bar-menu.php:548
+#: inc/class-wpseo-admin-bar-menu.php:542
 msgid "Help"
 msgstr "Ayuda"
 
-#: inc/class-wpseo-admin-bar-menu.php:529
+#: inc/class-wpseo-admin-bar-menu.php:523
 msgid "Write better content"
 msgstr "Escribe mejor contenido"
 
-#: inc/class-wpseo-admin-bar-menu.php:474
+#: inc/class-wpseo-admin-bar-menu.php:468
 msgid "SEO Tools"
 msgstr "Herramientas SEO"
 
-#: inc/class-wpseo-admin-bar-menu.php:573
+#: inc/class-wpseo-admin-bar-menu.php:567
 msgid "WordPress.org support forums"
 msgstr "Foros de soporte de WordPress.org"
 
-#: inc/class-wpseo-admin-bar-menu.php:568
+#: inc/class-wpseo-admin-bar-menu.php:562
 msgid "Yoast Premium support"
 msgstr "Soporte de Yoast Premium"
 
-#: inc/class-wpseo-admin-bar-menu.php:237
+#: inc/class-wpseo-admin-bar-menu.php:232
 msgid "Focus keyphrase: "
 msgstr "Frase clave objetivo: "
 
-#: inc/class-wpseo-admin-bar-menu.php:563
+#: inc/class-wpseo-admin-bar-menu.php:557
 msgid "Yoast.com help section"
 msgstr "Sección de ayuda de Yoast.com"
 
-#: inc/class-wpseo-admin-bar-menu.php:524
+#: inc/class-wpseo-admin-bar-menu.php:518
 msgid "Improve your blog post"
 msgstr "Mejora tu entrada del blog"
 
-#: inc/class-wpseo-admin-bar-menu.php:519
-#: inc/class-wpseo-admin-bar-menu.php:578
+#: inc/class-wpseo-admin-bar-menu.php:513
+#: inc/class-wpseo-admin-bar-menu.php:572
 msgid "Learn more SEO"
 msgstr "Apende más SEO"
 
-#: inc/class-wpseo-admin-bar-menu.php:231
+#: inc/class-wpseo-admin-bar-menu.php:226
 msgid "not set"
 msgstr "no establecido"
 
@@ -505,14 +948,6 @@ msgstr "El valor de 'batch-size' debe ser un número entero positivo mayor que o
 msgid "The value for 'interval' must be a positive integer."
 msgstr "El valor de 'interval' debe ser un número entero positivo."
 
-#: src/presenters/admin/indexing-notification-presenter.php:90
-msgid "We need to re-analyze some of your SEO data because of a change in the visibility of your taxonomies. Please help us do that by running the SEO data optimization."
-msgstr "Necesitamos volver a analizar algunos de tus datos SEO debido a un cambio en la visibilidad de tus taxonomías. Por favor, ayúdanos a hacerlo ejecutando la optimización de datos SEO."
-
-#: src/presenters/admin/indexing-notification-presenter.php:87
-msgid "We need to re-analyze some of your SEO data because of a change in the visibility of your post types. Please help us do that by running the SEO data optimization."
-msgstr "Necesitamos volver a analizar algunos de tus datos SEO debido a un cambio en la visibilidad de tus tipos de contenido. Por favor, ayúdanos a hacerlo ejecutando la optimización de datos SEO."
-
 #. translators: %s: expands to the term id
 #: src/exceptions/indexable/term-not-built-exception.php:20
 msgid "The term %s could not be built because it's not indexable."
@@ -528,23 +963,26 @@ msgstr "La publicación %s no se pudo indexar debido a que su tipo de contenido 
 msgid "The post %s could not be indexed because it does not meet indexing requirements."
 msgstr "La entrada %s no se pudo indexar debido a que no reúne los requisitos de indexado."
 
-#: src/presenters/admin/sidebar-presenter.php:21 js/dist/ai-consent.js:9
-#: js/dist/ai-generator.js:9 js/dist/block-editor.js:24
-#: js/dist/block-editor.js:237 js/dist/classic-editor.js:9
-#: js/dist/classic-editor.js:222 js/dist/editor-modules.js:111
-#: js/dist/editor-modules.js:258 js/dist/elementor.js:10
-#: js/dist/elementor.js:15 js/dist/externals-components.js:118
-#: js/dist/externals-components.js:131 js/dist/general-page.js:11
-#: js/dist/integrations-page.js:45 js/dist/new-settings.js:11
-#: js/dist/redirects.js:9 js/dist/support.js:11
+#: src/presenters/admin/indexing-notification-presenter.php:90
+msgid "We need to re-analyze some of your SEO data because of a change in the visibility of your taxonomies. Please help us do that by running the SEO data optimization."
+msgstr "Necesitamos volver a analizar algunos de tus datos SEO debido a un cambio en la visibilidad de tus taxonomías. Por favor, ayúdanos a hacerlo ejecutando la optimización de datos SEO."
+
+#: src/presenters/admin/indexing-notification-presenter.php:87
+msgid "We need to re-analyze some of your SEO data because of a change in the visibility of your post types. Please help us do that by running the SEO data optimization."
+msgstr "Necesitamos volver a analizar algunos de tus datos SEO debido a un cambio en la visibilidad de tus tipos de contenido. Por favor, ayúdanos a hacerlo ejecutando la optimización de datos SEO."
+
+#: src/presenters/admin/sidebar-presenter.php:21 js/dist/block-editor.js:247
+#: js/dist/classic-editor.js:230 js/dist/editor-modules.js:111
+#: js/dist/externals-components.js:118 js/dist/general-page.js:7
+#: js/dist/new-settings.js:7 js/dist/support.js:6
 msgid "BLACK FRIDAY | 30% OFF"
 msgstr "VIERNES NEGRO | 30% DE DESCUENTO"
 
-#: admin/views/class-yoast-feature-toggles.php:210 js/dist/general-page.js:16
-#: js/dist/general-page.js:28 js/dist/integrations-page.js:3
+#: admin/views/class-yoast-feature-toggles.php:206 js/dist/general-page.js:12
+#: js/dist/general-page.js:24 js/dist/integrations-page.js:3
 #: js/dist/integrations-page.js:6 js/dist/integrations-page.js:18
-#: js/dist/integrations-page.js:50 js/dist/new-settings.js:324
-#: js/dist/plans.js:2 js/dist/post-edit.js:4
+#: js/dist/integrations-page.js:28 js/dist/introductions.js:13
+#: js/dist/new-settings.js:56 js/dist/plans.js:3 js/dist/plans.js:7
 msgid "Learn more"
 msgstr "Saber más"
 
@@ -559,6 +997,10 @@ msgstr "Redirigir URLs bonitas de las páginas de búsqueda a formato simple"
 msgid "These are expert features, so make sure you know what you're doing before removing the parameters. %1$sRead more about how your site can be affected%2$s."
 msgstr "Estas son características para expertos, así que asegúrate de saber lo que estás haciendo antes de eliminar los parámetros. %1$sLee más sobre cómo puede verse afectado tu sitio%2$s."
 
+#: src/task-list/application/tasks/child-tasks/improve-default-meta-descriptions-child.php:75
+msgid "Open editor"
+msgstr "Abrir el editor"
+
 #. translators: %1$s expands to Yoast SEO, %2$s expands to the name of the
 #. class that could not be found.
 #: src/loader.php:258
@@ -566,7 +1008,7 @@ msgid "%1$s attempted to load the class %2$s but it could not be found."
 msgstr "%1$s intentó cargar la clase %2$s pero no se pudo encontrar."
 
 #: src/integrations/admin/crawl-settings-integration.php:189
-#: js/dist/new-settings.js:178
+#: js/dist/new-settings.js:271
 msgid "Remove unused resources"
 msgstr "Eliminar recursos no utilizados"
 
@@ -578,39 +1020,37 @@ msgstr "Evitar que los motores de búsqueda rastreen /wp-json/"
 msgid "Prevent search engines from crawling site search URLs"
 msgstr "Evitar que los motores de búsqueda rastreen las URLs de búsqueda del sitio"
 
-#: admin/views/user-profile.php:71
 #: src/user-meta/framework/custom-meta/inclusive-language-analysis-disable.php:109
 msgid "Disable inclusive language analysis"
 msgstr "Desactivar el análisis del lenguaje inclusivo"
 
-#: admin/views/class-yoast-feature-toggles.php:94
+#: admin/views/class-yoast-feature-toggles.php:90
 msgid "The inclusive language analysis offers suggestions to write more inclusive copy."
 msgstr "El análisis del lenguaje inclusivo ofrece sugerencias para escribir textos más inclusivos."
 
-#: admin/views/class-yoast-feature-toggles.php:91 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:87 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "Inclusive language analysis"
 msgstr "Análisis del lenguaje inclusivo"
 
 #: admin/metabox/class-metabox-section-inclusive-language.php:30
-#: js/dist/externals-components.js:451
+#: js/dist/externals-components.js:440
 msgid "Inclusive language"
 msgstr "Lenguaje inclusivo"
 
-#: admin/views/user-profile.php:74
 #: src/user-meta/framework/custom-meta/inclusive-language-analysis-disable.php:115
 msgid "Removes the inclusive language analysis section from the metabox and disables all inclusive language-related suggestions."
 msgstr "Elimina la sección de análisis de lenguaje inclusivo de la caja meta y desactiva todas las sugerencias relacionadas con el lenguaje inclusivo."
 
-#: admin/views/class-yoast-feature-toggles.php:95
+#: admin/views/class-yoast-feature-toggles.php:91
 msgid "Discover why inclusive language is important for SEO."
 msgstr "Descubre por qué el lenguaje inclusivo es importante para el SEO."
 
-#: inc/class-wpseo-admin-bar-menu.php:270
+#: inc/class-wpseo-admin-bar-menu.php:265
 msgid "Front-end SEO inspector"
 msgstr "Inspector SEO en portada"
 
-#: admin/class-yoast-form.php:933
+#: admin/class-yoast-form.php:931
 msgid "Unlock with Premium!"
 msgstr "¡Desbloquear con la versión Premium!"
 
@@ -623,17 +1063,17 @@ msgid "Search cleanup settings"
 msgstr "Ajustes de limpieza de búsquedas"
 
 #: src/integrations/admin/crawl-settings-integration.php:155
-#: js/dist/new-settings.js:32 js/dist/new-settings.js:179
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:272
 msgid "Filter searches with common spam patterns"
 msgstr "Filtra búsquedas con patrones de spam habituales"
 
 #: src/integrations/admin/crawl-settings-integration.php:154
-#: js/dist/new-settings.js:32 js/dist/new-settings.js:179
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:272
 msgid "Filter searches with emojis and other special characters"
 msgstr "Filtrar búsquedas con emojis y otros caracteres especiales"
 
 #: src/integrations/admin/crawl-settings-integration.php:153
-#: js/dist/new-settings.js:32 js/dist/new-settings.js:179
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:272
 msgid "Filter search terms"
 msgstr "Filtrar términos de búsqueda"
 
@@ -645,16 +1085,12 @@ msgstr "Parámetros de URL no registrados"
 msgid "Campaign tracking URL parameters"
 msgstr "Parámetros de URL de seguimiento de campañas"
 
-#: src/deprecated/src/config/wordproof-translations.php:129
-msgid "Contact WordProof support"
-msgstr "Contacta con el soporte de WordProof"
-
-#: admin/views/class-yoast-feature-toggles.php:199
+#: admin/views/class-yoast-feature-toggles.php:195
 msgid "Find out how IndexNow can help your site."
 msgstr "Descubre cómo IndexNow puede ayudar a tu sitio."
 
-#: admin/views/class-yoast-feature-toggles.php:195 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:328
+#: admin/views/class-yoast-feature-toggles.php:191 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:529
 msgid "IndexNow"
 msgstr "IndexNow"
 
@@ -669,7 +1105,7 @@ msgstr "¡Activa %1$s!"
 msgid "You've installed %1$s but it's not activated yet. %2$sActivate %1$s now!%3$s"
 msgstr "Has instalado %1$s pero todavía no está activado. %2$s¡Activa %1$s ahora!%3$s"
 
-#: admin/views/class-yoast-feature-toggles.php:198 js/dist/new-settings.js:328
+#: admin/views/class-yoast-feature-toggles.php:194 js/dist/new-settings.js:529
 msgid "Automatically ping search engines like Bing and Yandex whenever you publish, update or delete a post."
 msgstr "Haz ping automático a los motores de búsqueda como Bing y Yandex cuando publiques, actualices o borres una entrada."
 
@@ -696,7 +1132,7 @@ msgid "Powered by HTTP header"
 msgstr "Creado por cabeceras HTTP"
 
 #: src/integrations/admin/crawl-settings-integration.php:143
-#: js/dist/new-settings.js:32 js/dist/new-settings.js:178
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:271
 msgid "Pingback HTTP header"
 msgstr "Pingback de cabeceras HTTP"
 
@@ -775,7 +1211,7 @@ msgid "Crawl settings"
 msgstr "Ajustes de rastreo"
 
 #: src/integrations/admin/first-time-configuration-integration.php:128
-#: js/dist/general-page.js:48
+#: js/dist/general-page.js:62 js/dist/general-page.js:65
 msgid "First-time configuration"
 msgstr "Configuración inicial"
 
@@ -804,48 +1240,6 @@ msgstr "La importación de AIOSEO se canceló debido a que no están disponibles
 #: src/exceptions/importing/aioseo-validation-exception.php:17
 msgid "The validation of the AIOSEO data structure has failed."
 msgstr "La validación de la estructura de datos de AIOSEO ha fallado."
-
-#. translators: %s expands to WordProof
-#: src/deprecated/src/integrations/third-party/wordproof-integration-toggle.php:116
-msgid "Currently, the %s integration is not available for multisites."
-msgstr "Actualmente, la integración de %s no está disponible para multisitios."
-
-#: src/deprecated/src/integrations/third-party/wordproof-integration-toggle.php:122
-msgid "The WordProof Timestamp plugin needs to be disabled before you can activate this integration."
-msgstr "El plugin de marca temporal de WordProof necesita desactivarse antes de que puedas activar esta integración."
-
-#: src/deprecated/src/config/wordproof-translations.php:115
-msgid "Open settings"
-msgstr "Abrir ajustes"
-
-#: src/deprecated/src/config/wordproof-translations.php:101
-msgid "Open authentication"
-msgstr "Abrir identificación"
-
-#. translators: %s expands to WordProof.
-#: src/deprecated/src/config/wordproof-translations.php:87
-msgid "The timestamp is not created because you need to authenticate with %s first."
-msgstr "La marca temporal no se ha creado porque primero tienes que identificarte en %s."
-
-#. translators: %s expands to WordProof.
-#: src/deprecated/src/config/wordproof-translations.php:72
-msgid "The timestamp is not retrieved by your site. Please try again or contact %1$s support."
-msgstr "La marca temporal no se ha obtenido para tu sitio. Por favor, inténtalo de nuevo o contacta con el soporte de %1$s."
-
-#. translators: %s expands to WordProof.
-#: src/deprecated/src/config/wordproof-translations.php:57
-msgid "%1$s failed to timestamp this page. Please check if you're correctly authenticated with %1$s and try to save this page again."
-msgstr "%1$s falló al tratar de crear la marca temporal para esta página. Por favor, comprueba si te has identificado correctamente en %1$s y prueba a guardar de nuevo esta página."
-
-#. translators: %s expands to WordProof.
-#: src/deprecated/src/config/wordproof-translations.php:42
-msgid "%s has successfully timestamped this page."
-msgstr "%s ha añadido correctamente la marca temporal a esta página."
-
-#. translators: %s expands to WordProof.
-#: src/deprecated/src/config/wordproof-translations.php:27
-msgid "You are out of timestamps. Please upgrade your account by opening the %s settings."
-msgstr "Ya no te quedan marcas temporales. Por favor, actualiza tu cuenta abriendo los ajustes de %s."
 
 #: src/integrations/admin/import-integration.php:236
 msgid "Cleanup failed with the following error:"
@@ -912,7 +1306,7 @@ msgstr "Seleccionar plugin SEO"
 msgid "The import can take a long time depending on your site's size."
 msgstr "La importación puede durar mucho tiempo dependiendo del tamaño de tu sitio."
 
-#: src/integrations/admin/installation-success-integration.php:104
+#: src/integrations/admin/installation-success-integration.php:127
 msgid "Installation Successful"
 msgstr "Instalación correcta"
 
@@ -922,8 +1316,9 @@ msgstr "Entrada de blog"
 
 #. translators: %s: expands to 'Yoast SEO Premium'.
 #. translators: 1: Yoast WooCommerce SEO
+#. translators: %s: Yoast WooCommerce SEO
 #: src/integrations/admin/workouts-integration.php:315
-#: js/dist/integrations-page.js:11
+#: js/dist/integrations-page.js:11 js/dist/new-settings.js:53
 msgid "Activate %s"
 msgstr "Activar %s"
 
@@ -1072,40 +1467,39 @@ msgstr "A continuación están los detalles técnicos del error. Mira %1$sesta p
 msgid "Workouts"
 msgstr "Ejercicios"
 
-#: admin/views/class-yoast-integration-toggles.php:81
+#: admin/views/class-yoast-integration-toggles.php:77
 msgid "Improve the quality of your site search! Automatically helps your users find your cornerstone and most important content in your internal search results. It also removes noindexed posts & pages from your site’s search results."
 msgstr "¡Mejora la calidad de las búsquedas en tu sitio! Ayuda automáticamente a tus usuarios a encontrar el contenido esencial y más importante en tus resultados de búsqueda internos. También quita las entradas y páginas noindex de los resultados de búsqueda de tu sitio."
 
 #. translators: %s: Algolia.
-#: admin/views/class-yoast-integration-toggles.php:83
+#: admin/views/class-yoast-integration-toggles.php:79
 msgid "Find out more about our %s integration."
 msgstr "Descubre más sobre nuestra integración con %s."
 
-#: admin/views/class-yoast-feature-toggles.php:128
+#: admin/views/class-yoast-feature-toggles.php:124
 msgid "Get relevant internal linking suggestions — while you’re writing! The link suggestions metabox shows a list of posts on your blog with similar content that might be interesting to link to. "
 msgstr "¡Consigue sugerencias relevantes de enlazado interno – mientras escribes! La caja meta de sugerencias de enlaces muestra una lista de entradas de tu blog con contenido similar al que podría ser interesante enlazar. "
 
-#: admin/views/class-yoast-feature-toggles.php:129
+#: admin/views/class-yoast-feature-toggles.php:125
 msgid "Read more about how internal linking can improve your site structure."
 msgstr "Lee más sobre cómo el enlazado interno puede mejorar la estructura de tu sitio."
 
-#: admin/views/class-yoast-feature-toggles.php:119
+#: admin/views/class-yoast-feature-toggles.php:115
 msgid "Find out how Insights can help you improve your content."
 msgstr "Descubre cómo las estadísticas pueden ayudarte a mejorar tu contenido."
 
-#: admin/views/class-yoast-feature-toggles.php:118
+#: admin/views/class-yoast-feature-toggles.php:114
 msgid "Find relevant data about your content right in the Insights section in the Yoast SEO metabox. You’ll see what words you use most often and if they’re a match with your keywords! "
 msgstr "Descubre datos relevantes sobre tu contenido en la sección de estadísticas de la caja meta de Yoast SEO. ¡Verás qué palabras usas más a menudo y si coinciden con tus palabras clave!"
 
-#: admin/views/class-yoast-feature-toggles.php:125 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:121 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "Link suggestions"
 msgstr "Sugerencias de enlaces"
 
-#: admin/views/class-yoast-feature-toggles.php:116 js/dist/block-editor.js:237
-#: js/dist/block-editor.js:500 js/dist/classic-editor.js:222
-#: js/dist/elementor.js:44 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:112 js/dist/block-editor.js:247
+#: js/dist/block-editor.js:514 js/dist/classic-editor.js:230
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:526
 msgid "Insights"
 msgstr "Estadísticas"
 
@@ -1178,9 +1572,9 @@ msgstr "Las actualizaciones automáticas están activadas en base a este ajuste 
 
 #: src/presenters/admin/badge-presenter.php:80
 #: src/presenters/admin/badge-presenter.php:87
-#: js/dist/externals/componentsNew.js:1081 js/dist/integrations-page.js:3
-#: js/dist/integrations-page.js:6 js/dist/integrations-page.js:18
-#: js/dist/new-settings.js:366
+#: js/dist/externals-components.js:440 js/dist/externals/componentsNew.js:563
+#: js/dist/integrations-page.js:3 js/dist/integrations-page.js:6
+#: js/dist/integrations-page.js:18 js/dist/new-settings.js:592
 msgid "New"
 msgstr "Nuevo"
 
@@ -1197,7 +1591,7 @@ msgstr "El término no se considera válido. WordPress ha dado la siguiente raz�
 msgid "The post could not be found."
 msgstr "No se ha podido encontrar la entrada."
 
-#: admin/class-yoast-form.php:1068 js/dist/general-page.js:45
+#: admin/class-yoast-form.php:1066 js/dist/general-page.js:58
 msgid "This feature has been disabled since subsites never send tracking data."
 msgstr "Esta característica ha sido desactivada, ya que los subsitios nunca envían datos de seguimiento."
 
@@ -1211,11 +1605,11 @@ msgstr "Hemos visto que has instalado WPML. Para asegurar que tus URL canónicas
 msgid "Because of a change in your category base setting, some of your SEO data needs to be reprocessed."
 msgstr "Debido a un cambio en tu ajuste de la categoría base, algunos de tus datos SEO tienen que volver a ser procesados."
 
-#: admin/views/class-yoast-feature-toggles.php:190
+#: admin/views/class-yoast-feature-toggles.php:186
 msgid "Find out how a rich snippet can improve visibility and click-through-rate."
 msgstr "Descubre cómo puedes usar los fragmentos enriquecidos para aumentar tu visibilidad y tu tasa de clics."
 
-#: admin/views/class-yoast-feature-toggles.php:189 js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:185 js/dist/new-settings.js:529
 msgid "This adds an author byline and reading time estimate to the article’s snippet when shared on Slack."
 msgstr "Añade una línea de autor y tiempo de lectura estimado al extracto del artículo cuando se comparte por Slack."
 
@@ -1240,11 +1634,11 @@ msgstr "Tiempo de lectura"
 msgid "Written by"
 msgstr "Escrito por"
 
-#: inc/class-wpseo-admin-bar-menu.php:445
+#: inc/class-wpseo-admin-bar-menu.php:439
 msgid "Google Rich Results Test"
 msgstr "Prueba de resultados enriquecidos de Google"
 
-#: admin/views/class-yoast-feature-toggles.php:187
+#: admin/views/class-yoast-feature-toggles.php:183
 msgid "Enhanced Slack sharing"
 msgstr "Compartir en Slack"
 
@@ -1253,7 +1647,7 @@ msgid "Because of a change in your tag base setting, some of your SEO data needs
 msgstr "Debido a un cambio en tu ajuste de la etiqueta base, algunos de tus datos SEO tienen que volver a ser procesados."
 
 #. translators: %s: 'Semrush'
-#: admin/views/class-yoast-integration-toggles.php:71
+#: admin/views/class-yoast-integration-toggles.php:67
 msgid "The %s integration offers suggestions and insights for keywords related to the entered focus keyphrase."
 msgstr "La integración con %s ofrece sugerencias y estadísticas de palabras clave relacionadas con la frase clave objetivo introducida."
 
@@ -1278,18 +1672,18 @@ msgstr "Aprende más sobre los beneficios de los datos SEO optimizados."
 msgid "All permalinks were successfully reset"
 msgstr "Todos los enlaces permanentes se han restablecido correctamente"
 
-#: src/presenters/admin/indexing-notification-presenter.php:96
-msgid "You can speed up your site and get insight into your internal linking structure by letting us perform a few optimizations to the way SEO data is stored."
-msgstr "Puedes acelerar tu sitio y obtener mejoras en la estructura de enlazado interno permitiéndonos realizar unas pocas optimizaciones en el modo en el que se almacenan los datos SEO."
-
 #: src/presenters/admin/indexing-notification-presenter.php:59
-#: js/dist/general-page.js:41 js/dist/indexation.js:8
+#: js/dist/general-page.js:48 js/dist/indexation.js:8
 msgid "Start SEO data optimization"
 msgstr "Empezar la optimización de datos de SEO"
 
 #: src/presenters/admin/indexing-list-item-presenter.php:40
 msgid "You can speed up your site and get insight into your internal linking structure by letting us perform a few optimizations to the way SEO data is stored. If you have a lot of content it might take a while, but trust us, it's worth it."
 msgstr "Puedes acelerar tu sitio y obtener mejoras en la estructura de enlazado interno permitiéndonos realizar unas pocas optimizaciones en el modo en el que se almacenan los datos SEO. Si tienes mucho contenido, puede que tarde un rato, pero fíate de nosotros, merece la pena."
+
+#: src/presenters/admin/indexing-notification-presenter.php:96
+msgid "You can speed up your site and get insight into your internal linking structure by letting us perform a few optimizations to the way SEO data is stored."
+msgstr "Puedes acelerar tu sitio y obtener mejoras en la estructura de enlazado interno permitiéndonos realizar unas pocas optimizaciones en el modo en el que se almacenan los datos SEO."
 
 #: src/presenters/admin/indexing-list-item-presenter.php:37
 msgid "Optimize SEO Data"
@@ -1308,31 +1702,31 @@ msgstr "Vaya, algo ha ido mal y no pudimos completar la optimización de tus dat
 
 #. translators: %1$s: expands to an opening anchor tag, %2$s: expands to a
 #. closing anchor tag
-#: admin/views/class-yoast-feature-toggles.php:241
+#: admin/views/class-yoast-feature-toggles.php:237
 msgid "Disabling Yoast SEO's XML sitemaps will not disable WordPress' core sitemaps. In some cases, this %1$s may result in SEO errors on your site%2$s. These may be reported in Google Search Console and other tools."
 msgstr "Desactivar los mapas de sitio XML de Yoast SEO no desactivará los mapas de sitio del núcleo de WordPress. En algunos casos, esto %1$spuede generar errores de SEO en tu sitio%2$s. Estos errores pueden aparecer reflejados en Google Search Console y en otras herramientas."
 
 #. translators: %s expands to a mailto support link.
-#: inc/class-addon-manager.php:878
+#: inc/class-addon-manager.php:887
 msgid "If you still need support and have an active subscription for this product, please email %s."
 msgstr "Si aún necesitas ayuda y tienes una suscripción activa para este producto, por favor, envía un correo electrónico a %s."
 
 #. translators: 1: expands to <a> that refers to the help page, 2: </a> closing
 #. tag.
-#: inc/class-addon-manager.php:875
+#: inc/class-addon-manager.php:884
 msgid "You can probably find an answer to your question in our %1$shelp center%2$s."
 msgstr "Es probable que encuentres una respuesta a tu pregunta en nuestro %1$scentro de ayuda%2$s."
 
-#: inc/class-addon-manager.php:872
+#: inc/class-addon-manager.php:881
 msgid "Need support?"
 msgstr "¿Necesitas ayuda?"
 
 #. translators: 1: Yoast SEO, 2: translated version of "Off"
-#: admin/views/class-yoast-feature-toggles.php:158
+#: admin/views/class-yoast-feature-toggles.php:154
 msgid "The advanced section of the %1$s meta box allows a user to remove posts from the search results or change the canonical. The settings in the schema tab allows a user to change schema meta data for a post. These are things you might not want any author to do. That's why, by default, only editors and administrators can do this. Setting to \"%2$s\" allows all users to change these settings."
 msgstr "La sección avanzada de la caja meta %1$s permite a un usuario eliminar entradas de los resultados de búsqueda o cambiar el canónico. Estos ajustes en la pestaña del esquema permite a un usuario cambiar los datos meta de Schema para una entrada. Son cosas que quizá no quieras que haga un autor. Por eso, por defecto, solo pueden hacerlo los editores y administradores. Establecer esto como «%2$s» permitirá a todos los usuarios cambiar estos ajustes."
 
-#: admin/views/class-yoast-feature-toggles.php:154
+#: admin/views/class-yoast-feature-toggles.php:150
 msgid "Security: no advanced or schema settings for authors"
 msgstr "Seguridad: ningún ajuste avanzado o de Schema para los autores"
 
@@ -1408,8 +1802,8 @@ msgstr "Página de FAQ"
 msgid "About Page"
 msgstr "Página «Acerca de»"
 
-#: src/config/schema-types.php:64 js/dist/block-editor.js:481
-#: js/dist/classic-editor.js:466 js/dist/elementor.js:315
+#: src/config/schema-types.php:64 js/dist/block-editor.js:493
+#: js/dist/classic-editor.js:476
 msgid "Item Page"
 msgstr "Página de artículo"
 
@@ -1418,13 +1812,13 @@ msgid "Web Page"
 msgstr "Página web"
 
 #. translators: 1: Yoast SEO
-#: admin/views/class-yoast-feature-toggles.php:170
+#: admin/views/class-yoast-feature-toggles.php:166
 msgid "Allow us to track some data about your site to improve our plugin."
 msgstr "Nos permite realizar seguimiento de algunos datos de tu sitio para mejorar nuestro plugin."
 
-#: admin/views/class-yoast-feature-toggles.php:165
-#: admin/views/class-yoast-feature-toggles.php:166 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:321
+#: admin/views/class-yoast-feature-toggles.php:161
+#: admin/views/class-yoast-feature-toggles.php:162 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:525
 msgid "Usage tracking"
 msgstr "Seguimiento de uso"
 
@@ -1476,14 +1870,6 @@ msgstr "Hemos escrito un artículo sobre cómo %1$susar la puntuación de SEO y 
 msgid "%1$s adds several columns to this page."
 msgstr "%1$s añade varias columnas a esta página."
 
-#: src/presenters/admin/indexing-notification-presenter.php:117
-msgid " We estimate this will take less than a minute."
-msgstr " Estimamos que esto llevará menos de un minuto."
-
-#: src/presenters/admin/indexing-notification-presenter.php:121
-msgid " We estimate this will take a couple of minutes."
-msgstr " Estimamos que esto llevará un par de minutos."
-
 #: src/presenters/admin/migration-error-presenter.php:64
 msgid "Show debug information"
 msgstr "Mostrar información de depuración"
@@ -1508,15 +1894,27 @@ msgstr "No quiero que este sitio se muestre en los resultados de búsqueda."
 msgid "If you want search engines to show this site in their results, you must %1$sgo to your Reading Settings%2$s and uncheck the box for Search Engine Visibility."
 msgstr "Si quieres que los motores de búsqueda muestren este sitio en sus resultados debes %1$sir a tus ajustes de lectura%2$s y desmarcar la casilla de visibilidad en los motores de búsqueda."
 
-#: src/presenters/admin/indexing-notification-presenter.php:124
-msgid " We estimate this could take a long time, due to the size of your site. As an alternative to waiting, you could:"
-msgstr " Estimamos que esto llevará mucho tiempo, debido al tamaño de tu sitio. Como alternativa a esperar podrías:"
+#: src/presenters/admin/indexing-notification-presenter.php:117
+msgid " We estimate this will take less than a minute."
+msgstr " Estimamos que esto llevará menos de un minuto."
+
+#: src/presenters/admin/indexing-notification-presenter.php:121
+msgid " We estimate this will take a couple of minutes."
+msgstr " Estimamos que esto llevará un par de minutos."
+
+#: src/alerts/application/default-seo-data/default-seo-data-alert.php:188
+msgid "SEO data"
+msgstr "Datos SEO"
 
 #. translators: 1: Link to article about indexation command, 2: Anchor closing
 #. tag, 3: Link to WP CLI.
 #: src/presenters/admin/indexing-notification-presenter.php:136
 msgid "%1$sRun the indexation process on your server%2$s using %3$sWP CLI%2$s."
 msgstr "%1$sEjecuta el proceso de indexación en tu servidor%2$s usando %3$sWP CLI%2$s."
+
+#: src/presenters/admin/indexing-notification-presenter.php:124
+msgid " We estimate this could take a long time, due to the size of your site. As an alternative to waiting, you could:"
+msgstr " Estimamos que esto llevará mucho tiempo, debido al tamaño de tu sitio. Como alternativa a esperar podrías:"
 
 #. translators: %1$s: link to help article about solving table issue. %2$s: is
 #. anchor closing.
@@ -1533,11 +1931,11 @@ msgid "Replaced with the term ancestors hierarchy"
 msgstr "Reemplazado con la jerarquía de antecesores del término"
 
 #. translators: 1: Yoast SEO
-#: admin/views/class-yoast-feature-toggles.php:181
+#: admin/views/class-yoast-feature-toggles.php:177
 msgid "This %1$s REST API endpoint gives you all the metadata you need for a specific URL. This will make it very easy for headless WordPress sites to use %1$s for all their SEO meta output."
 msgstr "La variable %1$s de la API REST te da todos los metadatos que necesitas para una URL específica. Esto hará que para los sitios WordPress descabezados utilicen %1$s para la salida de todos sus meta SEO."
 
-#: admin/views/class-yoast-feature-toggles.php:177
+#: admin/views/class-yoast-feature-toggles.php:173
 msgid "REST API: Head endpoint"
 msgstr "API REST: Variable de cabecera"
 
@@ -1614,11 +2012,11 @@ msgstr "%1$sIr a la página de ajustes de comentarios%2$s"
 #. translators: 1: Link start tag to the Firefox website, 2: Link start tag to
 #. the Chrome website, 3: Link start tag to the Edge website, 4: Link closing
 #. tag.
-#: admin/metabox/class-metabox.php:150 admin/taxonomy/class-taxonomy.php:113
+#: admin/metabox/class-metabox.php:147 admin/taxonomy/class-taxonomy.php:113
 msgid "The browser you are currently using is unfortunately rather dated. Since we strive to give you the best experience possible, we no longer support this browser. Instead, please use %1$sFirefox%4$s, %2$sChrome%4$s or %3$sMicrosoft Edge%4$s."
 msgstr "Lamentablemente, el navegador que estás usando actualmente está bastante anticuado. Dado que nos esforzamos para ofrecerte la mejor experiencia posible, ya no tenemos compatibilidad con este navegador. En su lugar, usa %1$sFirefox%4$s, %2$sChrome%4$s o %3$sMicrosoft Edge%4$s."
 
-#: admin/metabox/class-metabox.php:194
+#: admin/metabox/class-metabox.php:191
 msgid "If you want to apply advanced <code>meta</code> robots settings for this page, please define them in the following field."
 msgstr "Si deseas aplicar ajustes avanzados de <code>meta</code> robots para esta página, por favor, defínelos en el siguiente campo."
 
@@ -1637,34 +2035,34 @@ msgstr "Importa los ajustes desde otra instalación de %1$s pegándolos aquí y 
 msgid "Your %1$s settings:"
 msgstr "Tus ajustes de %1$s:"
 
-#: src/presenters/admin/sidebar-presenter.php:146 js/dist/general-page.js:2
+#: src/presenters/admin/sidebar-presenter.php:147 js/dist/general-page.js:2
 #: js/dist/new-settings.js:2 js/dist/support.js:2
 msgid "We have both free and premium online courses to learn everything you need to know about SEO."
 msgstr "Tenemos cursos online gratuitos y premium para aprender todo lo que necesitas saber acerca de SEO."
 
 #. translators: %1$s expands to Yoast SEO academy
 #. translators: %1$s expands to "Yoast SEO academy".
-#: src/presenters/admin/sidebar-presenter.php:153 js/dist/general-page.js:3
+#: src/presenters/admin/sidebar-presenter.php:154 js/dist/general-page.js:3
 #: js/dist/new-settings.js:3 js/dist/support.js:3
 msgid "Check out %1$s"
 msgstr "Consulta %1$s"
 
 #. translators: %1$s expands to Yoast SEO academy, which is a clickable link.
 #. translators: %1$s expands to "Yoast SEO" academy, which is a clickable link.
-#: src/presenters/admin/sidebar-presenter.php:144 js/dist/general-page.js:2
+#: src/presenters/admin/sidebar-presenter.php:145 js/dist/general-page.js:2
 #: js/dist/new-settings.js:2 js/dist/support.js:2
 msgid "Want to learn SEO from Team Yoast? Check out our %1$s!"
 msgstr "¿Quieres aprender SEO del equipo Yoast? ¡Consulta nuestros %1$s!"
 
-#: src/presenters/admin/sidebar-presenter.php:136 js/dist/general-page.js:2
+#: src/presenters/admin/sidebar-presenter.php:137 js/dist/general-page.js:2
 #: js/dist/new-settings.js:2 js/dist/support.js:2
 msgid "Learn SEO"
 msgstr "Aprender SEO"
 
-#: admin/metabox/class-metabox.php:427 js/dist/block-editor.js:525
-#: js/dist/elementor.js:488 js/dist/new-settings.js:27
-#: js/dist/new-settings.js:34 js/dist/new-settings.js:38
-#: js/dist/new-settings.js:68 js/dist/new-settings.js:266
+#: admin/metabox/class-metabox.php:424 js/dist/block-editor.js:539
+#: js/dist/new-settings.js:24 js/dist/new-settings.js:34
+#: js/dist/new-settings.js:38 js/dist/new-settings.js:43
+#: js/dist/new-settings.js:95 js/dist/new-settings.js:412
 msgid "Schema"
 msgstr "Schema"
 
@@ -1742,7 +2140,7 @@ msgstr "Google ha eliminado la API de errores de rastreo, así que ya no es posi
 
 #: src/integrations/admin/first-time-configuration-integration.php:480
 #: src/integrations/admin/first-time-configuration-integration.php:493
-#: js/dist/new-settings.js:336
+#: js/dist/new-settings.js:542
 msgid "Organization"
 msgstr "Organización"
 
@@ -1782,7 +2180,7 @@ msgstr "URL del perfil en SoundCloud"
 msgid "MySpace profile URL"
 msgstr "URL del perfil en MySpace"
 
-#: src/generators/schema/article.php:141
+#: src/generators/schema/article.php:136
 msgid "Uncategorized"
 msgstr "Sin categoría"
 
@@ -1815,9 +2213,8 @@ msgstr "Enlaces internos recibidos"
 msgid "Outgoing internal links"
 msgstr "Enlaces salientes internos"
 
-#: admin/class-meta-columns.php:132 js/dist/block-editor.js:163
-#: js/dist/classic-editor.js:148 js/dist/editor-modules.js:226
-#: js/dist/elementor.js:460 js/dist/wincher-dashboard-widget.js:117
+#: admin/class-meta-columns.php:132 js/dist/block-editor.js:104
+#: js/dist/classic-editor.js:87 js/dist/wincher-dashboard-widget.js:130
 msgid "Keyphrase"
 msgstr "Frase clave"
 
@@ -1860,7 +2257,7 @@ msgid "Import of settings is only supported on servers that run PHP 5.3 or highe
 msgstr "La importación de los ajustes solo es compatible en servidores que ejecuten PHP 5.3 o superior."
 
 #. translators: %s expands to Yoast SEO Premium
-#: admin/watchers/class-slug-change-watcher.php:226
+#: admin/watchers/class-slug-change-watcher.php:224
 msgid "With %s, you can easily create such redirects."
 msgstr "Con %s puedes crear esas redirecciones fácilmente."
 
@@ -1888,20 +2285,12 @@ msgstr "Aprende sobre por qué los enlaces permanentes son importantes para el S
 
 #. translators: %s expands to Yoast WooCommerce SEO
 #. translators: %s expands to Yoast SEO Premium
+#. translators: %s expands to "Yoast WooCommerce SEO
 #. translators: %s expands to "Yoast SEO" Premium
-#: admin/class-premium-upsell-admin-block.php:168
-#: admin/class-premium-upsell-admin-block.php:180 js/dist/ai-consent.js:12
-#: js/dist/ai-consent.js:13 js/dist/ai-generator.js:12
-#: js/dist/ai-generator.js:13 js/dist/block-editor.js:27
-#: js/dist/block-editor.js:28 js/dist/classic-editor.js:12
-#: js/dist/classic-editor.js:13 js/dist/editor-modules.js:261
-#: js/dist/editor-modules.js:262 js/dist/elementor.js:13
-#: js/dist/elementor.js:14 js/dist/externals-components.js:134
-#: js/dist/externals-components.js:135 js/dist/general-page.js:14
-#: js/dist/general-page.js:15 js/dist/integrations-page.js:48
-#: js/dist/integrations-page.js:49 js/dist/new-settings.js:14
-#: js/dist/new-settings.js:15 js/dist/redirects.js:12 js/dist/redirects.js:13
-#: js/dist/support.js:14 js/dist/support.js:15
+#: admin/class-premium-upsell-admin-block.php:181
+#: admin/class-premium-upsell-admin-block.php:192 js/dist/general-page.js:10
+#: js/dist/general-page.js:11 js/dist/new-settings.js:10
+#: js/dist/new-settings.js:11
 msgid "Upgrade to %s"
 msgstr "Actualizar a %s"
 
@@ -1934,7 +2323,7 @@ msgstr "Esta pestaña te permite desactivar selectivamente características de %
 msgid "%s is a required feature toggle argument."
 msgstr "%s es un argumento obligatorio de activación de la característica."
 
-#: admin/class-yoast-form.php:1064 js/dist/general-page.js:45
+#: admin/class-yoast-form.php:1062 js/dist/general-page.js:58
 msgid "This feature has been disabled by the network admin."
 msgstr "Esta característica la ha desactivado el administrador de la red."
 
@@ -1944,8 +2333,10 @@ msgid "Focus keyphrase not set."
 msgstr "La frase clave objetivo no está establecida."
 
 #. translators: %s expands to Yoast SEO Premium
+#. translators: WooCommerce SEO
 #: admin/class-premium-popup.php:81
-#: admin/watchers/class-slug-change-watcher.php:230
+#: admin/watchers/class-slug-change-watcher.php:228
+#: js/dist/externals-components.js:413
 msgid "Get %s"
 msgstr "Consigue %s"
 
@@ -1955,20 +2346,20 @@ msgstr "Consigue %s"
 msgid "Both %1$s and %2$s manage the SEO of your site. Running two SEO plugins at the same time is detrimental."
 msgstr "Tanto %1$s como %2$s gestionan el SEO de tu sitio. Ejecutar dos plugins SEO al mismo tiempo es perjudicial."
 
-#: inc/class-wpseo-admin-bar-menu.php:890
+#: inc/class-wpseo-admin-bar-menu.php:935
 msgid "There is a new notification."
 msgid_plural "There are new notifications."
 msgstr[0] "Hay un nuevo aviso."
 msgstr[1] "Hay nuevos avisos."
 
-#: inc/options/class-wpseo-option-titles.php:949
+#: inc/options/class-wpseo-option-titles.php:948
 msgid "Colon"
 msgstr "Dos puntos"
 
 #. translators: %d expands to the number of minute/minutes.
 #. translators: %d expands to the number of minutes.
 #: src/integrations/blocks/structured-data-blocks.php:146
-#: js/dist/how-to-block.js:8 js/dist/how-to-block.js:14
+#: js/dist/how-to-block.js:4 js/dist/how-to-block.js:10
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d minuto"
@@ -1977,7 +2368,7 @@ msgstr[1] "%d minutos"
 #. translators: %d expands to the number of hour/hours.
 #. translators: %d expands to the number of hours.
 #: src/integrations/blocks/structured-data-blocks.php:139
-#: js/dist/how-to-block.js:7 js/dist/how-to-block.js:13
+#: js/dist/how-to-block.js:3 js/dist/how-to-block.js:9
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d hora"
@@ -1986,10 +2377,9 @@ msgstr[1] "%d horas"
 #. translators: %d expands to the number of day/days.
 #. translators: %d expands to the number of days.
 #: src/integrations/blocks/structured-data-blocks.php:132
-#: js/dist/block-editor.js:142 js/dist/classic-editor.js:127
-#: js/dist/editor-modules.js:205 js/dist/elementor.js:439
-#: js/dist/how-to-block.js:6 js/dist/how-to-block.js:12
-#: js/dist/wincher-dashboard-widget.js:43
+#: js/dist/block-editor.js:83 js/dist/classic-editor.js:66
+#: js/dist/how-to-block.js:2 js/dist/how-to-block.js:8
+#: js/dist/wincher-dashboard-widget.js:72
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d día"
@@ -2006,11 +2396,11 @@ msgid "%1$s Structured Data Blocks"
 msgstr "Bloques de %1$s de datos estructurados"
 
 #: src/integrations/blocks/structured-data-blocks.php:197
-#: js/dist/how-to-block.js:5 js/dist/how-to-block.js:16
+#: js/dist/how-to-block.js:1 js/dist/how-to-block.js:12
 msgid "Time needed:"
 msgstr "Tiempo necesario:"
 
-#: inc/class-wpseo-admin-bar-menu.php:440
+#: inc/class-wpseo-admin-bar-menu.php:434
 msgid "Check links to this URL"
 msgstr "Comprueba los enlaces a esta URL"
 
@@ -2053,7 +2443,7 @@ msgstr "No se encontró el sitio con ID %d."
 msgid "No site has been selected to restore."
 msgstr "No se seleccionó un sitio para ser restaurado."
 
-#: inc/class-wpseo-admin-bar-menu.php:511
+#: inc/class-wpseo-admin-bar-menu.php:505
 msgid "How to"
 msgstr "Cómo hacer"
 
@@ -2066,14 +2456,12 @@ msgstr "Descripción corta del sitio"
 msgid "Not all required fields are given. Missing field %1$s"
 msgstr "No se dan todos los campos obligatorios. Falta el campo %1$s"
 
-#: inc/class-wpseo-replace-vars.php:1489 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1489 js/dist/externals-redux.js:1
 msgid "Current year"
 msgstr "Año actual"
 
-#: inc/class-wpseo-replace-vars.php:1475 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:318
+#: inc/class-wpseo-replace-vars.php:1475 js/dist/externals-redux.js:1
+#: js/dist/new-settings.js:31 js/dist/new-settings.js:522
 msgid "Tagline"
 msgstr "Descripción corta"
 
@@ -2109,8 +2497,7 @@ msgstr "Pagetotal"
 msgid "User description"
 msgstr "Descripción del usuario"
 
-#: inc/class-wpseo-replace-vars.php:1517 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1517 js/dist/externals-redux.js:1
 msgid "ID"
 msgstr "ID"
 
@@ -2126,13 +2513,12 @@ msgstr "Tipo de contenido (plural)"
 msgid "Post type (singular)"
 msgstr "Tipo de contenido (singular)"
 
-#: inc/class-wpseo-replace-vars.php:1487 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1 js/dist/new-settings.js:34
+#: inc/class-wpseo-replace-vars.php:1487 js/dist/externals-redux.js:1
+#: js/dist/new-settings.js:34
 msgid "Separator"
 msgstr "Separador"
 
-#: inc/class-wpseo-replace-vars.php:1485 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1485 js/dist/externals-redux.js:1
 msgid "Search phrase"
 msgstr "Frase de búsqueda"
 
@@ -2140,28 +2526,23 @@ msgstr "Frase de búsqueda"
 msgid "Term title"
 msgstr "Título del término"
 
-#: inc/class-wpseo-replace-vars.php:1483 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1483 js/dist/externals-redux.js:1
 msgid "Term description"
 msgstr "Descripción del término"
 
-#: inc/class-wpseo-replace-vars.php:1482 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1482 js/dist/externals-redux.js:1
 msgid "Tag description"
 msgstr "Descripción de la etiqueta"
 
-#: inc/class-wpseo-replace-vars.php:1481 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1481 js/dist/externals-redux.js:1
 msgid "Category description"
 msgstr "Descripción de la categoría"
 
-#: inc/class-wpseo-replace-vars.php:1480 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1480 js/dist/externals-redux.js:1
 msgid "Primary category"
 msgstr "Categoría principal"
 
-#: inc/class-wpseo-replace-vars.php:1479 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1479 js/dist/externals-redux.js:1
 msgid "Category"
 msgstr "Categoría"
 
@@ -2169,18 +2550,15 @@ msgstr "Categoría"
 msgid "Tag"
 msgstr "Etiqueta"
 
-#: inc/class-wpseo-replace-vars.php:1477 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1477 js/dist/externals-redux.js:1
 msgid "Excerpt only"
 msgstr "Solo el extracto"
 
-#: inc/class-wpseo-replace-vars.php:1476 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1476 js/dist/externals-redux.js:1
 msgid "Excerpt"
 msgstr "Extracto"
 
-#: inc/class-wpseo-replace-vars.php:1474 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1474 js/dist/externals-redux.js:1
 msgid "Site title"
 msgstr "Título del sitio"
 
@@ -2188,21 +2566,19 @@ msgstr "Título del sitio"
 msgid "Archive title"
 msgstr "Título del archivo"
 
-#: inc/class-wpseo-replace-vars.php:1472 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1472 js/dist/externals-redux.js:1
 msgid "Parent title"
 msgstr "Título superior"
 
-#: inc/class-wpseo-replace-vars.php:1470 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1470 js/dist/externals-redux.js:1
 msgid "Date"
 msgstr "Fecha"
 
-#: admin/watchers/class-slug-change-watcher.php:224
+#: admin/watchers/class-slug-change-watcher.php:222
 msgid "You should create a redirect to ensure your visitors do not get a 404 error when they click on the no longer working URL."
 msgstr "Deberías crear una redirección para asegurarte de que tus visitantes no obtienen un error 404 cuando hagan clic en la URL que ya no funciona."
 
-#: admin/watchers/class-slug-change-watcher.php:220
+#: admin/watchers/class-slug-change-watcher.php:218
 msgid "Make sure you don't miss out on traffic!"
 msgstr "¡Asegúrate de no perder tráfico!"
 
@@ -2218,8 +2594,7 @@ msgstr "Acabas de borrar una %1$s."
 msgid "You just trashed a %1$s."
 msgstr "Acabas de enviar a la papelera una %1$s."
 
-#: inc/class-wpseo-replace-vars.php:1520 js/dist/elementor.js:488
-#: js/dist/externals-redux.js:1
+#: inc/class-wpseo-replace-vars.php:1520 js/dist/externals-redux.js:1
 msgid "Page"
 msgstr "Página"
 
@@ -2333,23 +2708,14 @@ msgstr "%s no detectó ningún dato de plugins desde los que pueda hacer una imp
 msgid "Plugin: "
 msgstr "Plugin: "
 
-#. translators: %s expands to "this author's archives".
-#: admin/views/user-profile.php:16
-msgid "Do not allow search engines to show %s in search results."
-msgstr "No permitir a los motores de búsqueda mostrar %s en los resultados."
-
-#: admin/views/user-profile.php:17
-msgid "this author's archives"
-msgstr "archivos de este autor"
-
-#: admin/class-yoast-form.php:960 admin/class-yoast-form.php:1000
-#: js/dist/externals/componentsNew.js:766
+#: admin/class-yoast-form.php:958 admin/class-yoast-form.php:998
+#: js/dist/externals/componentsNew.js:532
 msgid "On"
 msgstr "Activo"
 
-#: admin/class-yoast-form.php:961 admin/class-yoast-form.php:1001
-#: admin/views/class-yoast-feature-toggles.php:160
-#: js/dist/externals/componentsNew.js:766
+#: admin/class-yoast-form.php:959 admin/class-yoast-form.php:999
+#: admin/views/class-yoast-feature-toggles.php:156
+#: js/dist/externals/componentsNew.js:532
 msgid "Off"
 msgstr "Inactivo"
 
@@ -2360,16 +2726,16 @@ msgstr "Inactivo"
 msgid "Help on: %s"
 msgstr "Ayuda sobre: %s"
 
-#: admin/views/class-yoast-feature-toggles.php:140
+#: admin/views/class-yoast-feature-toggles.php:136
 msgid "Read why XML Sitemaps are important for your site."
 msgstr "Lee por qué los mapas del sitio XML son importantes para tu sitio."
 
 #. translators: %s: Yoast SEO
-#: admin/views/class-yoast-feature-toggles.php:139
+#: admin/views/class-yoast-feature-toggles.php:135
 msgid "Enable the XML sitemaps that %s generates."
 msgstr "Activar los mapas del sitio XML que genera %s."
 
-#: admin/views/class-yoast-feature-toggles.php:70
+#: admin/views/class-yoast-feature-toggles.php:66
 msgid "See the XML sitemap."
 msgstr "Ver el mapa del sitio XML."
 
@@ -2385,67 +2751,68 @@ msgstr "Alternar mapa del sitio XML de %1$s"
 
 #. translators: %s expands to an indexable object's name, like a post type or
 #. taxonomy
-#: admin/class-yoast-form.php:971
+#: admin/class-yoast-form.php:969
 msgid "Show %s in search results?"
 msgstr "¿Mostramos %s en los resultados de búsqueda?"
 
 #. translators: %1$s expands to Yes or No,  %2$s expands to the post type name.
-#: admin/metabox/class-metabox.php:184
+#: admin/metabox/class-metabox.php:181
 msgid "Default for %2$s, currently: %1$s"
 msgstr "Por defecto es %2$s, actualmente: %1$s"
 
 #. translators: %s expands to the post type name.
-#: admin/metabox/class-metabox.php:179
+#: admin/metabox/class-metabox.php:176
 msgid "Allow search engines to show this %s in search results?"
 msgstr "¿Permitir a los motores de búsqueda mostrar esta %s en los resultados?"
 
 #. translators: %1$s expands to the post type name.
-#: admin/metabox/class-metabox.php:189
+#: admin/metabox/class-metabox.php:186
 msgid "Should search engines follow links on this %1$s?"
 msgstr "¿Deberían los motores de búsqueda seguir los enlaces que hay en esta %1$s?"
 
-#: admin/views/class-yoast-feature-toggles.php:102
+#: admin/views/class-yoast-feature-toggles.php:98
 msgid "The cornerstone content feature lets you to mark and filter cornerstone content on your website."
 msgstr "La característica de contenido esencial te permite marcar y filtrar contenido esencial de tu web."
 
-#: admin/views/class-yoast-feature-toggles.php:75
-#: js/dist/externals-components.js:431 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:71
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:64
+#: js/dist/externals-components.js:420 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "SEO analysis"
 msgstr "Análisis SEO"
 
-#: admin/views/class-yoast-feature-toggles.php:77
+#: admin/views/class-yoast-feature-toggles.php:73
 msgid "The SEO analysis offers suggestions to improve the SEO of your text."
 msgstr "El análisis SEO ofrece sugerencias para mejorar el SEO de tu texto."
 
-#: admin/views/class-yoast-feature-toggles.php:78
+#: admin/views/class-yoast-feature-toggles.php:74
 msgid "Learn how the SEO analysis can help you rank."
 msgstr "Aprende cómo puede el análisis SEO mejorar tu posicionamiento."
 
-#: admin/views/class-yoast-feature-toggles.php:85 js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:81 js/dist/new-settings.js:526
 msgid "The readability analysis offers suggestions to improve the structure and style of your text."
 msgstr "El análisis de legibilidad ofrece sugerencias para mejorar la estructura y estilo de tu texto."
 
-#: admin/views/class-yoast-feature-toggles.php:110
+#: admin/views/class-yoast-feature-toggles.php:106
 msgid "The text link counter helps you improve your site structure."
 msgstr "El contador de enlaces de texto te ayuda a mejorar la estructura de tu sitio."
 
 #. translators: %s: 'Semrush'
 #. translators: %s: Algolia.
-#: admin/views/class-yoast-integration-toggles.php:67
-#: admin/views/class-yoast-integration-toggles.php:78
+#: admin/views/class-yoast-integration-toggles.php:63
+#: admin/views/class-yoast-integration-toggles.php:74
 msgid "%s integration"
 msgstr "Integración con %s"
 
-#: admin/views/class-yoast-feature-toggles.php:86
+#: admin/views/class-yoast-feature-toggles.php:82
 msgid "Discover why readability is important for SEO."
 msgstr "Descubre por qué la legibilidad es importante para el SEO."
 
-#: admin/views/class-yoast-feature-toggles.php:111
+#: admin/views/class-yoast-feature-toggles.php:107
 msgid "Find out how the text link counter can enhance your SEO."
 msgstr "Descubre cómo el contador de enlaces de texto puede mejorar tu SEO."
 
-#: admin/views/class-yoast-feature-toggles.php:103
+#: admin/views/class-yoast-feature-toggles.php:99
 msgid "Find out how cornerstone content can help you improve your site structure."
 msgstr "Descubre cómo el contenido esencial puede ayudarte a mejorar la estructura de tu sitio."
 
@@ -2460,7 +2827,7 @@ msgid "https://yoa.st/1uj"
 msgstr "https://yoa.st/1uj"
 
 #. translators: %1$s resolves to Yoast.com
-#: admin/class-yoast-dashboard-widget.php:130
+#: admin/class-yoast-dashboard-widget.php:128
 msgid "Latest blog posts on %1$s"
 msgstr "Últimos artículos del blog de %1$s"
 
@@ -2523,35 +2890,34 @@ msgstr "Marca la %1$s más importante como 'contenido esencial' para mejorar la 
 
 #. translators: Hidden accessibility text.
 #: admin/class-admin-utils.php:79 admin/class-premium-popup.php:83
-#: admin/class-premium-upsell-admin-block.php:70 admin/class-yoast-form.php:935
-#: admin/watchers/class-slug-change-watcher.php:232
+#: admin/class-premium-upsell-admin-block.php:76 admin/class-yoast-form.php:933
+#: admin/watchers/class-slug-change-watcher.php:230
 #: src/integrations/admin/workouts-integration.php:215
 #: src/integrations/admin/workouts-integration.php:245
-#: src/presenters/admin/help-link-presenter.php:76 js/dist/academy.js:9
-#: js/dist/ai-consent.js:4 js/dist/ai-consent.js:6 js/dist/ai-generator.js:4
-#: js/dist/ai-generator.js:6 js/dist/ai-generator.js:56
-#: js/dist/ai-generator.js:271 js/dist/block-editor.js:19
-#: js/dist/block-editor.js:21 js/dist/block-editor.js:493
-#: js/dist/block-editor.js:494 js/dist/classic-editor.js:4
-#: js/dist/classic-editor.js:6 js/dist/editor-modules.js:253
-#: js/dist/editor-modules.js:255 js/dist/editor-modules.js:513
-#: js/dist/elementor.js:5 js/dist/elementor.js:7
-#: js/dist/externals-components.js:21 js/dist/externals-components.js:126
-#: js/dist/externals-components.js:128 js/dist/externals-components.js:386
-#: js/dist/externals/componentsNew.js:1044 js/dist/externals/helpers.js:6
+#: src/presenters/admin/help-link-presenter.php:76
+#: src/presenters/admin/sidebar-presenter.php:159 js/dist/academy.js:12
+#: js/dist/ai-consent.js:2 js/dist/ai-generator.js:2 js/dist/ai-generator.js:61
+#: js/dist/ai-generator.js:276 js/dist/block-editor.js:499
+#: js/dist/block-editor.js:500 js/dist/editor-modules.js:116
+#: js/dist/editor-modules.js:383 js/dist/externals-components.js:21
+#: js/dist/externals-components.js:126 js/dist/externals-components.js:127
+#: js/dist/externals-components.js:394 js/dist/externals/componentsNew.js:675
+#: js/dist/externals/helpers.js:11
 #: js/dist/externals/relatedKeyphraseSuggestions.js:3
-#: js/dist/externals/relatedKeyphraseSuggestions.js:7 js/dist/general-page.js:6
-#: js/dist/general-page.js:8 js/dist/general-page.js:29
-#: js/dist/integrations-page.js:3 js/dist/integrations-page.js:4
-#: js/dist/integrations-page.js:5 js/dist/integrations-page.js:6
-#: js/dist/integrations-page.js:7 js/dist/integrations-page.js:8
-#: js/dist/integrations-page.js:13 js/dist/integrations-page.js:18
-#: js/dist/integrations-page.js:19 js/dist/integrations-page.js:20
-#: js/dist/integrations-page.js:40 js/dist/integrations-page.js:42
-#: js/dist/introductions.js:3 js/dist/introductions.js:7
-#: js/dist/new-settings.js:6 js/dist/new-settings.js:8 js/dist/plans.js:2
-#: js/dist/redirects.js:4 js/dist/redirects.js:6 js/dist/support.js:6
-#: js/dist/support.js:8 js/dist/support.js:17
+#: js/dist/externals/relatedKeyphraseSuggestions.js:7 js/dist/general-page.js:4
+#: js/dist/general-page.js:5 js/dist/general-page.js:12
+#: js/dist/general-page.js:25 js/dist/general-page.js:62
+#: js/dist/installation-success.js:5 js/dist/integrations-page.js:3
+#: js/dist/integrations-page.js:4 js/dist/integrations-page.js:5
+#: js/dist/integrations-page.js:6 js/dist/integrations-page.js:7
+#: js/dist/integrations-page.js:8 js/dist/integrations-page.js:13
+#: js/dist/integrations-page.js:18 js/dist/integrations-page.js:19
+#: js/dist/integrations-page.js:20 js/dist/integrations-page.js:28
+#: js/dist/introductions.js:2 js/dist/introductions.js:4
+#: js/dist/introductions.js:8 js/dist/introductions.js:13
+#: js/dist/introductions.js:14 js/dist/new-settings.js:4
+#: js/dist/new-settings.js:5 js/dist/new-settings.js:12 js/dist/plans.js:2
+#: js/dist/redirects.js:5 js/dist/support.js:4 js/dist/support.js:7
 msgid "(Opens in a new browser tab)"
 msgstr "(Se abre en una nueva pestaña del navegador)"
 
@@ -2569,7 +2935,7 @@ msgstr "No tienes ninguna entrada publicada. ¡Tus puntuaciones SEO aparecerán 
 msgid "Posts %1$swithout%2$s a focus keyphrase"
 msgstr "Entradas %1$ssin%2$s frase clave objetivo"
 
-#: admin/class-yoast-dashboard-widget.php:133
+#: admin/class-yoast-dashboard-widget.php:131
 msgid "Read more like this on our SEO blog"
 msgstr "Lee más como esto en nuestro blog de SEO"
 
@@ -2598,8 +2964,8 @@ msgstr "Legibilidad: %s"
 msgid "Request method %1$s is not valid."
 msgstr "El método de petición %1$s no es válido."
 
-#: admin/views/class-yoast-feature-toggles.php:108 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:104 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "Text link counter"
 msgstr "Contador de enlaces en textos"
 
@@ -2615,9 +2981,9 @@ msgid "Readability score"
 msgstr "Puntuación de legibilidad"
 
 #: admin/filters/class-cornerstone-filter.php:87
-#: admin/views/class-yoast-feature-toggles.php:100
-#: js/dist/externals-components.js:20 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:96
+#: js/dist/externals-components.js:20 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "Cornerstone content"
 msgstr "Contenido esencial"
 
@@ -2629,16 +2995,12 @@ msgid "The plugin %2$s changes your site's output and in doing that differentiat
 msgstr "El plugin %2$s cambia el código de tu sitio haciendo diferencias entre los motores de búsqueda y los usuarios normales, un proceso llamado cloaking. Recomendamos encarecidamente que lo desactives."
 
 #: admin/class-yoast-form.php:149 admin/class-yoast-form.php:154
-#: js/dist/general-page.js:41 js/dist/new-settings.js:16
+#: js/dist/general-page.js:48 js/dist/new-settings.js:12
 msgid "Save changes"
 msgstr "Guardar cambios"
 
-#: src/presenters/admin/sidebar-presenter.php:79 js/dist/ai-consent.js:7
-#: js/dist/ai-generator.js:7 js/dist/block-editor.js:22
-#: js/dist/classic-editor.js:7 js/dist/editor-modules.js:256
-#: js/dist/elementor.js:8 js/dist/externals-components.js:129
-#: js/dist/general-page.js:9 js/dist/integrations-page.js:43
-#: js/dist/new-settings.js:9 js/dist/redirects.js:7 js/dist/support.js:9
+#: src/presenters/admin/sidebar-presenter.php:127 js/dist/general-page.js:7
+#: js/dist/new-settings.js:7 js/dist/support.js:6
 msgid "24/7 support"
 msgstr "Soporte 24/7"
 
@@ -2650,7 +3012,7 @@ msgstr "¡1 año de soporte y actualizaciones gratuitas incluido!"
 msgid "Scroll to see the table content."
 msgstr "Navega para ver el contenido de la tabla."
 
-#: admin/views/partial-notifications-warnings.php:22 js/dist/general-page.js:29
+#: admin/views/partial-notifications-warnings.php:22 js/dist/general-page.js:32
 msgid "No new notifications."
 msgstr "No hay nuevos avisos."
 
@@ -2667,7 +3029,7 @@ msgstr "Guardar"
 msgid "%1$s, Author at %2$s"
 msgstr "%1$s, autor en %2$s"
 
-#: inc/class-wpseo-replace-vars.php:1518 js/dist/general-page.js:41
+#: inc/class-wpseo-replace-vars.php:1518 js/dist/general-page.js:49
 msgid "Name"
 msgstr "Nombre"
 
@@ -2699,6 +3061,7 @@ msgid "Warning: the variable %1$s cannot be used in this template. See the %2$s 
 msgstr "Advertencia: la variable `%1$s` no se puede usar en esta plantilla. Revisa %2$s para más información."
 
 #: admin/class-bulk-editor-list-table.php:829
+#: src/abilities/application/score-retriever.php:165
 msgid "(no title)"
 msgstr "(sin título)"
 
@@ -2709,12 +3072,12 @@ msgid "By the way, did you know we also have a %1$sPremium plugin%2$s? It offers
 msgstr "Por cierto, ¿sabías que también tenemos un %1$splugin Premium%2$s? Ofrece funcionalidades avanzadas, como un gestor de redirecciones y compatibilidad con múltiples frases clave. También incluye soporte personal 24/7."
 
 #. translators: 1: Yoast SEO
-#: admin/views/class-yoast-feature-toggles.php:150
+#: admin/views/class-yoast-feature-toggles.php:146
 msgid "The %1$s admin bar menu contains useful links to third-party tools for analyzing pages and makes it easy to see if you have new notifications."
 msgstr "El menú de la barra de administración de %1$s contiene enlaces útiles de herramientas de terceros con las que analizar páginas y facilitarte ver si tienes nuevos avisos."
 
-#: admin/views/class-yoast-feature-toggles.php:147 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324 js/dist/new-settings.js:326
+#: admin/views/class-yoast-feature-toggles.php:143 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:529 js/dist/new-settings.js:532
 msgid "Admin bar menu"
 msgstr "Menú de la barra de administración"
 
@@ -2722,80 +3085,77 @@ msgstr "Menú de la barra de administración"
 msgid "Features"
 msgstr "Características"
 
-#: admin/metabox/class-metabox.php:175 js/dist/externals/analysis.js:107
-#: js/dist/externals/analysis.js:207
-#: js/dist/externals/replacementVariableEditor.js:27
-#: js/dist/externals/searchMetadataPreviews.js:62 js/dist/new-settings.js:25
-#: js/dist/new-settings.js:29 js/dist/new-settings.js:32
+#: admin/metabox/class-metabox.php:172
+#: js/dist/externals/replacementVariableEditor.js:71
+#: js/dist/externals/searchMetadataPreviews.js:102 js/dist/new-settings.js:21
+#: js/dist/new-settings.js:27 js/dist/new-settings.js:31
 #: js/dist/new-settings.js:34 js/dist/new-settings.js:38
-#: js/dist/new-settings.js:65 js/dist/new-settings.js:79
-#: js/dist/new-settings.js:109 js/dist/new-settings.js:138
-#: js/dist/new-settings.js:203 js/dist/new-settings.js:220
-#: js/dist/new-settings.js:229 js/dist/new-settings.js:266
+#: js/dist/new-settings.js:91 js/dist/new-settings.js:111
+#: js/dist/new-settings.js:160 js/dist/new-settings.js:207
+#: js/dist/new-settings.js:312 js/dist/new-settings.js:339
+#: js/dist/new-settings.js:354 js/dist/new-settings.js:412
 msgid "SEO title"
 msgstr "Título SEO"
 
-#: inc/options/class-wpseo-option-titles.php:989
+#: inc/options/class-wpseo-option-titles.php:988
 msgid "Greater than sign"
 msgstr "Símbolo mayor que"
 
-#: inc/options/class-wpseo-option-titles.php:985
+#: inc/options/class-wpseo-option-titles.php:984
 msgid "Less than sign"
 msgstr "Símbolo de menor que"
 
-#: inc/options/class-wpseo-option-titles.php:981
+#: inc/options/class-wpseo-option-titles.php:980
 msgid "Right angle quotation mark"
 msgstr "Comilla inclinada a la derecha"
 
-#: inc/options/class-wpseo-option-titles.php:977
+#: inc/options/class-wpseo-option-titles.php:976
 msgid "Left angle quotation mark"
 msgstr "Comilla inclinada a la izquierda"
 
-#: inc/options/class-wpseo-option-titles.php:973
+#: inc/options/class-wpseo-option-titles.php:972
 msgid "Small tilde"
 msgstr "Tilde pequeña"
 
-#: inc/options/class-wpseo-option-titles.php:969
+#: inc/options/class-wpseo-option-titles.php:968
 msgid "Vertical bar"
 msgstr "Barra vertical"
 
-#: inc/options/class-wpseo-option-titles.php:965
+#: inc/options/class-wpseo-option-titles.php:964
 msgid "Low asterisk"
 msgstr "Asterisco bajo"
 
-#: inc/options/class-wpseo-option-titles.php:961
+#: inc/options/class-wpseo-option-titles.php:960
 msgid "Asterisk"
 msgstr "Asterisco"
 
-#: inc/options/class-wpseo-option-titles.php:957
+#: inc/options/class-wpseo-option-titles.php:956
 msgid "Bullet"
 msgstr "Viñeta"
 
-#: inc/options/class-wpseo-option-titles.php:953
+#: inc/options/class-wpseo-option-titles.php:952
 msgid "Middle dot"
 msgstr "Punto medio"
 
-#: inc/options/class-wpseo-option-titles.php:945
+#: inc/options/class-wpseo-option-titles.php:944
 msgid "Em dash"
 msgstr "Guión largo"
 
-#: inc/options/class-wpseo-option-titles.php:941
+#: inc/options/class-wpseo-option-titles.php:940
 msgid "En dash"
 msgstr "Guión corto"
 
-#: inc/options/class-wpseo-option-titles.php:937
+#: inc/options/class-wpseo-option-titles.php:936
 msgid "Dash"
 msgstr "Guión"
 
-#: admin/metabox/class-metabox.php:186 admin/metabox/class-metabox.php:191
-#: js/dist/block-editor.js:239 js/dist/classic-editor.js:224
-#: js/dist/elementor.js:319
+#: admin/metabox/class-metabox.php:183 admin/metabox/class-metabox.php:188
+#: js/dist/block-editor.js:249 js/dist/classic-editor.js:232
 msgid "No"
 msgstr "No"
 
-#: admin/metabox/class-metabox.php:185 admin/metabox/class-metabox.php:190
-#: js/dist/block-editor.js:239 js/dist/classic-editor.js:224
-#: js/dist/elementor.js:319
+#: admin/metabox/class-metabox.php:182 admin/metabox/class-metabox.php:187
+#: js/dist/block-editor.js:249 js/dist/classic-editor.js:232
 msgid "Yes"
 msgstr "Sí"
 
@@ -2816,7 +3176,7 @@ msgstr "Filtrar la lista de entradas"
 msgid "Edit &#8220;%s&#8221;"
 msgstr "Modificar &#8220;%s&#8221;"
 
-#: src/integrations/admin/menu-badge-integration.php:35 js/dist/academy.js:8
+#: src/integrations/admin/menu-badge-integration.php:35 js/dist/academy.js:11
 msgid "Premium"
 msgstr "Premium"
 
@@ -2825,23 +3185,21 @@ msgid "Get Premium"
 msgstr "Obtén la versión Premium"
 
 #: admin/views/partial-notifications-warnings.php:20
-#: inc/class-wpseo-admin-bar-menu.php:401 js/dist/general-page.js:29
+#: inc/class-wpseo-admin-bar-menu.php:395 js/dist/general-page.js:32
 msgid "Notifications"
 msgstr "Avisos"
 
-#: admin/views/user-profile.php:47
 #: src/user-meta/framework/custom-meta/keyword-analysis-disable.php:109
 msgid "Disable SEO analysis"
 msgstr "Desactivar análisis SEO"
 
-#: admin/views/user-profile.php:50
 #: src/user-meta/framework/custom-meta/keyword-analysis-disable.php:115
 msgid "Removes the focus keyphrase section from the metabox and disables all SEO-related suggestions."
 msgstr "Quita la pestaña de frase clave de la caja meta y desactiva todas las sugerencias relacionadas con el SEO."
 
 #. translators: Hidden accessibility text; %s: number of notifications.
-#: admin/menu/class-admin-menu.php:118 inc/class-wpseo-admin-bar-menu.php:865
-#: js/dist/general-page.js:49
+#: admin/menu/class-admin-menu.php:118 inc/class-wpseo-admin-bar-menu.php:910
+#: js/dist/general-page.js:66
 msgid "%s notification"
 msgid_plural "%s notifications"
 msgstr[0] "%s aviso"
@@ -2852,17 +3210,17 @@ msgid "Make primary"
 msgstr "Hacer principal"
 
 #: admin/metabox/class-metabox-section-readability.php:30
-#: inc/class-wpseo-admin-bar-menu.php:257
+#: inc/class-wpseo-admin-bar-menu.php:252
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:64
 msgid "Readability"
 msgstr "Legibilidad"
 
-#: admin/views/class-yoast-feature-toggles.php:83
-#: js/dist/externals-components.js:402 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:324
+#: admin/views/class-yoast-feature-toggles.php:79
+#: js/dist/externals-components.js:412 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526
 msgid "Readability analysis"
 msgstr "Análisis de legibilidad"
 
-#: admin/views/user-profile.php:59
 #: src/user-meta/framework/custom-meta/content-analysis-disable.php:109
 msgid "Disable readability analysis"
 msgstr "Desactivar el análisis de legibilidad"
@@ -2870,39 +3228,38 @@ msgstr "Desactivar el análisis de legibilidad"
 #: admin/statistics/class-statistics-service.php:217
 #: inc/class-wpseo-rank.php:140 inc/class-wpseo-rank.php:176
 #: inc/class-wpseo-rank.php:208 inc/class-wpseo-rank.php:240
-#: js/dist/block-editor.js:492 js/dist/editor-modules.js:250
-#: js/dist/editor-modules.js:514 js/dist/elementor.js:18
-#: js/dist/externals-components.js:123 js/dist/externals/analysis.js:15
-#: js/dist/externals/dashboardFrontend.js:4
-#: js/dist/frontend-inspector-resources.js:1 js/dist/post-edit.js:1
-#: js/dist/term-edit.js:1
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:52
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:52
+#: js/dist/block-editor.js:498 js/dist/editor-modules.js:115
+#: js/dist/editor-modules.js:384 js/dist/externals-components.js:122
+#: js/dist/externals/analysis.js:409 js/dist/externals/dashboardFrontend.js:4
+#: js/dist/frontend-inspector-resources.js:1
 msgid "Needs improvement"
 msgstr "Necesita mejorar"
 
-#: admin/views/user-profile.php:62
 #: src/user-meta/framework/custom-meta/content-analysis-disable.php:115
 msgid "Removes the readability analysis section from the metabox and disables all readability-related suggestions."
 msgstr "Quita la pestaña de legibilidad de la caja meta y desactiva todas las sugerencias relacionadas con la legibilidad."
 
-#: admin/views/partial-notifications-errors.php:21 js/dist/general-page.js:29
+#: admin/views/partial-notifications-errors.php:21 js/dist/general-page.js:32
 msgid "We have detected the following issues that affect the SEO of your site."
 msgstr "Hemos detectado los siguientes problemas que afectan al SEO de tu sitio."
 
-#: inc/class-wpseo-rank.php:138 js/dist/block-editor.js:492
-#: js/dist/editor-modules.js:250 js/dist/editor-modules.js:514
-#: js/dist/elementor.js:18 js/dist/externals-components.js:123
-#: js/dist/frontend-inspector-resources.js:1 js/dist/post-edit.js:1
-#: js/dist/term-edit.js:1
+#: inc/class-wpseo-rank.php:138
+#: src/abilities/application/score-retriever.php:140
+#: js/dist/block-editor.js:498 js/dist/editor-modules.js:115
+#: js/dist/editor-modules.js:384 js/dist/externals-components.js:122
+#: js/dist/frontend-inspector-resources.js:1
 msgid "Not available"
 msgstr "No disponible"
 
 #: admin/views/partial-notifications-errors.php:20
-#: js/dist/editor-modules.js:116 js/dist/externals-components.js:123
-#: js/dist/externals/analysisReport.js:39 js/dist/general-page.js:29
+#: js/dist/editor-modules.js:115 js/dist/externals-components.js:122
+#: js/dist/externals/analysisReport.js:38 js/dist/general-page.js:32
 msgid "Problems"
 msgstr "Problemas"
 
-#: admin/views/partial-notifications-errors.php:22 js/dist/general-page.js:29
+#: admin/views/partial-notifications-errors.php:22 js/dist/general-page.js:32
 msgid "Good job! We could detect no serious SEO problems."
 msgstr "¡Buen trabajo! No hemos podido detectar ningún problema grave de SEO."
 
@@ -2922,7 +3279,7 @@ msgstr "No se ha definido la meta description."
 msgid "Filter by SEO Score"
 msgstr "Filtrar por puntuación SEO"
 
-#: admin/menu/class-admin-menu.php:56 js/dist/general-page.js:48
+#: admin/menu/class-admin-menu.php:56 js/dist/general-page.js:65
 msgid "Dashboard"
 msgstr "Escritorio"
 
@@ -2948,8 +3305,8 @@ msgstr "Se ha intentado crear la clave de cache del mapa del sitio pero la combi
 msgid "Expected an integer as input."
 msgstr "Se esperaba un número entero."
 
-#: src/integrations/admin/redirects-page-integration.php:75
-#: js/dist/redirects.js:14 js/dist/redirects.js:24
+#: src/integrations/admin/redirects-page-integration.php:100
+#: js/dist/redirects.js:2 js/dist/redirects.js:23
 msgid "Redirects"
 msgstr "Redirecciones"
 
@@ -2963,8 +3320,8 @@ msgid "Keep"
 msgstr "Conservar"
 
 #: admin/pages/network.php:20 admin/views/tabs/network/integrations.php:22
-#: src/integrations/admin/integrations-page.php:131
-#: js/dist/integrations-page.js:56
+#: src/integrations/admin/integrations-page.php:126
+#: js/dist/integrations-page.js:45
 msgid "Integrations"
 msgstr "Integraciones"
 
@@ -3010,7 +3367,7 @@ msgstr "No indexar"
 #: admin/class-meta-columns.php:114 admin/class-meta-columns.php:116
 #: admin/taxonomy/class-taxonomy-columns.php:87
 #: admin/taxonomy/class-taxonomy-columns.php:88
-#: inc/class-wpseo-admin-bar-menu.php:245
+#: inc/class-wpseo-admin-bar-menu.php:240
 #: js/dist/externals/dashboardFrontend.js:4
 msgid "SEO score"
 msgstr "Puntuación SEO"
@@ -3044,15 +3401,15 @@ msgstr "Has buscado %s"
 msgid "%s Archive"
 msgstr "%s archivo"
 
-#: inc/class-wpseo-admin-bar-menu.php:639
-#: inc/class-wpseo-admin-bar-menu.php:687
+#: inc/class-wpseo-admin-bar-menu.php:679
+#: inc/class-wpseo-admin-bar-menu.php:732
 msgid "SEO Settings"
 msgstr "Ajustes SEO"
 
 #. translators: %1$s expands to Yoast SEO, %2$s / %3$s: links to the
 #. installation manual in the Readme for the Yoast SEO code repository on
 #. GitHub
-#: wp-seo-main.php:524
+#: wp-seo-main.php:526
 msgid "The %1$s plugin installation is incomplete. Please refer to %2$sinstallation instructions%3$s."
 msgstr "La instalación del plugin %1$s no se ha completado. Por favor, consulta las %2$sinstrucciones de instalación%3$s."
 
@@ -3071,11 +3428,12 @@ msgstr "La primera verdadera solución SEO todo en uno para WordPress, incluyend
 
 #. Plugin Name of the plugin
 #: wp-seo.php admin/capabilities/class-capability-manager-integration.php:74
-#: src/presenters/meta-description-presenter.php:36 js/dist/block-editor.js:561
+#: src/abilities/user-interface/ability-categories-integration.php:43
+#: src/presenters/meta-description-presenter.php:36 js/dist/block-editor.js:577
 msgid "Yoast SEO"
 msgstr "Yoast SEO"
 
-#: inc/class-wpseo-admin-bar-menu.php:455
+#: inc/class-wpseo-admin-bar-menu.php:449
 msgid "Google Page Speed Test"
 msgstr "Google Page Speed Test"
 
@@ -3084,7 +3442,7 @@ msgstr "Google Page Speed Test"
 msgid "Team Yoast"
 msgstr "Equipo Yoast"
 
-#: inc/class-wpseo-admin-bar-menu.php:450
+#: inc/class-wpseo-admin-bar-menu.php:444
 msgid "Facebook Debugger"
 msgstr "Depurador de Facebook"
 
@@ -3096,7 +3454,7 @@ msgstr "Error 404: Página no encontrada"
 msgid "Home"
 msgstr "Portada"
 
-#: inc/class-wpseo-admin-bar-menu.php:431
+#: inc/class-wpseo-admin-bar-menu.php:425
 msgid "Analyze this page"
 msgstr "Analizar esta página"
 
@@ -3108,12 +3466,12 @@ msgstr "La entrada %1$s se publicó primero en %2$s."
 #: admin/statistics/class-statistics-service.php:227
 #: inc/class-wpseo-rank.php:142 inc/class-wpseo-rank.php:186
 #: inc/class-wpseo-rank.php:218 inc/class-wpseo-rank.php:250
-#: js/dist/block-editor.js:492 js/dist/editor-modules.js:250
-#: js/dist/editor-modules.js:514 js/dist/elementor.js:18
-#: js/dist/externals-components.js:123 js/dist/externals/analysis.js:15
-#: js/dist/externals/dashboardFrontend.js:4
-#: js/dist/frontend-inspector-resources.js:1 js/dist/post-edit.js:1
-#: js/dist/term-edit.js:1
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:50
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:50
+#: js/dist/block-editor.js:498 js/dist/editor-modules.js:115
+#: js/dist/editor-modules.js:384 js/dist/externals-components.js:122
+#: js/dist/externals/analysis.js:409 js/dist/externals/dashboardFrontend.js:4
+#: js/dist/frontend-inspector-resources.js:1
 msgid "Good"
 msgstr "Bien"
 
@@ -3127,7 +3485,7 @@ msgstr "Por favor elige un tipo de contenido válido para la taxonomía «%s»"
 msgid "Please select a valid taxonomy for post type \"%s\""
 msgstr "Por favor, elige una taxonomía válida para el tipo de contenido «%s»"
 
-#: wp-seo-main.php:500
+#: wp-seo-main.php:502
 msgid "The Standard PHP Library (SPL) extension seem to be unavailable. Please ask your web host to enable it."
 msgstr "La extensión de librería estándar PHP (SPL) parece no estar disponible. Por favor, pide a tu proveedor de hosting que la active."
 
@@ -3148,12 +3506,10 @@ msgstr "&laquo; Volver a página de herramientas"
 msgid "Export your %1$s settings"
 msgstr "Exportar tus ajustes de %1$s"
 
-#: admin/views/user-profile.php:26
 #: src/user-meta/framework/custom-meta/author-title.php:97
 msgid "Title to use for Author page"
 msgstr "Título a usar en la página de autor"
 
-#: admin/views/user-profile.php:30
 #: src/user-meta/framework/custom-meta/author-metadesc.php:97
 msgid "Meta description to use for Author page"
 msgstr "Meta description a usar en la página de autor"
@@ -3251,7 +3607,6 @@ msgid "Import from other SEO plugins"
 msgstr "Importar de otros plugins SEO"
 
 #. translators: %1$s expands to Yoast SEO
-#: admin/views/user-profile.php:13
 #: src/user-meta/user-interface/custom-meta-integration.php:100
 msgid "%1$s settings"
 msgstr "Ajustes %1$s"
@@ -3286,7 +3641,7 @@ msgstr "Reemplazado por el slug que causó el 404"
 msgid "Replaced with a posts custom taxonomies, comma separated."
 msgstr "Reemplazado con taxonomías personalizadas de entradas, separados por comas."
 
-#: admin/views/tool-bulk-editor.php:113 js/dist/new-settings.js:268
+#: admin/views/tool-bulk-editor.php:113 js/dist/new-settings.js:415
 msgid "Description"
 msgstr "Descripción"
 
@@ -3457,7 +3812,7 @@ msgid "Creating redirects is a %s feature"
 msgstr "La creación de redirecciones es una característica de %s"
 
 #: src/integrations/admin/first-time-configuration-integration.php:485
-#: js/dist/new-settings.js:336
+#: js/dist/new-settings.js:542
 msgid "Person"
 msgstr "Persona"
 
@@ -3478,7 +3833,7 @@ msgid "public"
 msgstr "público"
 
 #: admin/views/tool-bulk-editor.php:111 inc/class-wpseo-replace-vars.php:1471
-#: js/dist/elementor.js:488 js/dist/externals-redux.js:1
+#: js/dist/externals-redux.js:1
 msgid "Title"
 msgstr "Título"
 
@@ -3522,12 +3877,12 @@ msgstr "Enlace permanente"
 
 #. translators: %1$s: 'Facebook & Open Graph' plugin name(s) of possibly
 #. conflicting plugin(s), %2$s to Yoast SEO
-#: admin/class-yoast-plugin-conflict.php:182
+#: admin/class-yoast-plugin-conflict.php:180
 msgid "The %1$s plugin might cause issues when used in conjunction with %2$s."
 msgstr "El plugin %1$s podría provocar problemas usado conjuntamente con %2$s."
 
 #. translators: %s: 'Facebook' plugin name of possibly conflicting plugin
-#: admin/class-yoast-plugin-conflict.php:186
+#: admin/class-yoast-plugin-conflict.php:184
 msgid "Deactivate %s"
 msgstr "Desactivar %s"
 
@@ -3536,28 +3891,26 @@ msgid "Meta Desc."
 msgstr "Meta Desc."
 
 #: admin/google_search_console/views/gsc-redirect-nopremium.php:27
-#: js/dist/ai-consent.js:4 js/dist/ai-consent.js:17 js/dist/ai-generator.js:4
-#: js/dist/ai-generator.js:17 js/dist/ai-generator.js:26
-#: js/dist/ai-generator.js:35 js/dist/ai-generator.js:50
-#: js/dist/ai-generator.js:56 js/dist/ai-generator.js:267
-#: js/dist/ai-generator.js:269 js/dist/ai-generator.js:271
-#: js/dist/block-editor.js:19 js/dist/classic-editor.js:4
-#: js/dist/editor-modules.js:253 js/dist/editor-modules.js:262
-#: js/dist/editor-modules.js:266 js/dist/editor-modules.js:275
-#: js/dist/editor-modules.js:284 js/dist/editor-modules.js:299
-#: js/dist/editor-modules.js:509 js/dist/editor-modules.js:511
-#: js/dist/editor-modules.js:513 js/dist/elementor.js:5
-#: js/dist/externals-components.js:126 js/dist/externals-components.js:139
-#: js/dist/externals-components.js:148 js/dist/externals-components.js:157
-#: js/dist/externals-components.js:172 js/dist/externals-components.js:382
-#: js/dist/externals-components.js:384 js/dist/externals-components.js:386
-#: js/dist/externals/componentsNew.js:790 js/dist/general-page.js:6
-#: js/dist/general-page.js:15 js/dist/general-page.js:16
-#: js/dist/general-page.js:29 js/dist/integrations-page.js:40
-#: js/dist/integrations-page.js:49 js/dist/integrations-page.js:50
-#: js/dist/introductions.js:3 js/dist/introductions.js:7
-#: js/dist/new-settings.js:6 js/dist/new-settings.js:15
-#: js/dist/new-settings.js:41 js/dist/redirects.js:4 js/dist/support.js:6
+#: js/dist/ai-consent.js:5 js/dist/ai-generator.js:6 js/dist/ai-generator.js:21
+#: js/dist/ai-generator.js:37 js/dist/ai-generator.js:55
+#: js/dist/ai-generator.js:61 js/dist/ai-generator.js:272
+#: js/dist/ai-generator.js:274 js/dist/ai-generator.js:276
+#: js/dist/editor-modules.js:116 js/dist/editor-modules.js:120
+#: js/dist/editor-modules.js:135 js/dist/editor-modules.js:151
+#: js/dist/editor-modules.js:169 js/dist/editor-modules.js:379
+#: js/dist/editor-modules.js:381 js/dist/editor-modules.js:383
+#: js/dist/externals-components.js:126 js/dist/externals-components.js:131
+#: js/dist/externals-components.js:146 js/dist/externals-components.js:162
+#: js/dist/externals-components.js:180 js/dist/externals-components.js:390
+#: js/dist/externals-components.js:392 js/dist/externals-components.js:394
+#: js/dist/externals/aiFrontend.js:170 js/dist/externals/aiFrontend.js:175
+#: js/dist/externals/componentsNew.js:626
+#: js/dist/externals/dashboardFrontend.js:6 js/dist/general-page.js:12
+#: js/dist/general-page.js:32 js/dist/integrations-page.js:28
+#: js/dist/introductions.js:2 js/dist/introductions.js:4
+#: js/dist/introductions.js:8 js/dist/introductions.js:12
+#: js/dist/introductions.js:13 js/dist/new-settings.js:12
+#: js/dist/new-settings.js:41
 msgid "Close"
 msgstr "Cerrar"
 
@@ -3568,7 +3921,7 @@ msgid "Both %1$s and %2$s can create XML sitemaps. Having two XML sitemaps is no
 msgstr "Tanto %1$s como %2$s pueden crear mapas de sitio XML. Tener dos mapas de sitio XML no es beneficioso para los motores de búsqueda, y podrían ralentizar tu sitio."
 
 #. translators: %s is the plugin name
-#: admin/class-yoast-dashboard-widget.php:79
+#: admin/class-yoast-dashboard-widget.php:77
 msgid "%s Posts Overview"
 msgstr "Información general de entradas de %s"
 
@@ -3578,12 +3931,13 @@ msgstr "Todas las puntuaciones SEO"
 
 #: admin/statistics/class-statistics-service.php:222
 #: inc/class-wpseo-rank.php:141 inc/class-wpseo-rank.php:181
-#: inc/class-wpseo-rank.php:213 js/dist/block-editor.js:492
-#: js/dist/editor-modules.js:250 js/dist/editor-modules.js:514
-#: js/dist/elementor.js:18 js/dist/externals-components.js:123
-#: js/dist/externals/analysis.js:15 js/dist/externals/dashboardFrontend.js:4
-#: js/dist/frontend-inspector-resources.js:1 js/dist/post-edit.js:1
-#: js/dist/term-edit.js:1
+#: inc/class-wpseo-rank.php:213
+#: src/task-list/application/tasks/child-tasks/improve-content-readability-child.php:51
+#: src/task-list/application/tasks/child-tasks/improve-content-seo-child.php:51
+#: js/dist/block-editor.js:498 js/dist/editor-modules.js:115
+#: js/dist/editor-modules.js:384 js/dist/externals-components.js:122
+#: js/dist/externals/analysis.js:409 js/dist/externals/dashboardFrontend.js:4
+#: js/dist/frontend-inspector-resources.js:1
 msgid "OK"
 msgstr "Aceptable"
 
@@ -3634,8 +3988,8 @@ msgstr "%1$s ha detectado que estás usando la versión %2$s de %3$s, por favor,
 msgid "Edit Files"
 msgstr "Editar archivos"
 
-#: admin/class-admin.php:224 src/integrations/settings-integration.php:358
-#: src/presenters/meta-description-presenter.php:37 js/dist/how-to-block.js:11
+#: admin/class-admin.php:224 src/integrations/settings-integration.php:380
+#: src/presenters/meta-description-presenter.php:37 js/dist/how-to-block.js:7
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -3677,35 +4031,35 @@ msgstr "Estado de publicación"
 msgid "Page URL/Slug"
 msgstr "URL/Slug de página"
 
-#: admin/metabox/class-metabox.php:181
+#: admin/metabox/class-metabox.php:178
 msgid "Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won't have an effect."
 msgstr "¡Aviso! Aunque puedes establecer aquí el meta robots, toda la web está establecida como noindex en los ajustes de privacidad para toda la web, por lo que estos ajustes no tendrán efecto."
 
-#: admin/metabox/class-metabox.php:197 js/dist/block-editor.js:243
-#: js/dist/classic-editor.js:228 js/dist/elementor.js:323
+#: admin/metabox/class-metabox.php:194 js/dist/block-editor.js:253
+#: js/dist/classic-editor.js:236
 msgid "No Snippet"
 msgstr "Sin snippet"
 
-#: admin/metabox/class-metabox.php:212
+#: admin/metabox/class-metabox.php:209
 msgid "The URL that this page should redirect to."
 msgstr "La URL a la que debe redirigir esta página."
 
-#: admin/metabox/class-metabox.php:199 js/dist/block-editor.js:244
-#: js/dist/classic-editor.js:229 js/dist/elementor.js:324
+#: admin/metabox/class-metabox.php:196 js/dist/block-editor.js:254
+#: js/dist/classic-editor.js:237
 msgid "Breadcrumbs Title"
 msgstr "Título de las migas de pan"
 
-#: admin/metabox/class-metabox.php:193 js/dist/block-editor.js:243
-#: js/dist/classic-editor.js:228 js/dist/elementor.js:323
+#: admin/metabox/class-metabox.php:190 js/dist/block-editor.js:253
+#: js/dist/classic-editor.js:236
 msgid "Meta robots advanced"
 msgstr "Meta robots avanzado"
 
-#: admin/menu/class-admin-menu.php:96 js/dist/new-settings.js:324
+#: admin/menu/class-admin-menu.php:96 js/dist/new-settings.js:532
 msgid "Tools"
 msgstr "Herramientas"
 
-#: admin/metabox/class-metabox.php:195 js/dist/block-editor.js:243
-#: js/dist/classic-editor.js:228 js/dist/elementor.js:323
+#: admin/metabox/class-metabox.php:192 js/dist/block-editor.js:253
+#: js/dist/classic-editor.js:236
 msgid "No Image Index"
 msgstr "Ningun Indice de imagen"
 
@@ -3713,17 +4067,15 @@ msgstr "Ningun Indice de imagen"
 msgid "Publication date"
 msgstr "Fecha de publicación"
 
-#: admin/class-bulk-editor-list-table.php:866 js/dist/block-editor.js:142
-#: js/dist/classic-editor.js:127 js/dist/editor-modules.js:205
-#: js/dist/elementor.js:439 js/dist/externals/dashboardFrontend.js:5
-#: js/dist/wincher-dashboard-widget.js:43
-#: js/dist/wincher-dashboard-widget.js:112
+#: admin/class-bulk-editor-list-table.php:866 js/dist/block-editor.js:83
+#: js/dist/classic-editor.js:66 js/dist/externals/dashboardFrontend.js:5
+#: js/dist/wincher-dashboard-widget.js:125
 msgid "View"
 msgstr "Ver"
 
 #: admin/class-bulk-editor-list-table.php:844
-#: js/dist/externals/dashboardFrontend.js:4 js/dist/general-page.js:41
-#: js/dist/general-page.js:48
+#: js/dist/externals/dashboardFrontend.js:4 js/dist/general-page.js:47
+#: js/dist/general-page.js:62
 msgid "Edit"
 msgstr "Editar"
 
@@ -3743,27 +4095,27 @@ msgstr "Entradas"
 msgid "Post is set to noindex."
 msgstr "Entrada está establecida como noindex."
 
-#: admin/metabox/class-metabox.php:435
-#: admin/taxonomy/class-taxonomy-metabox.php:160 js/dist/new-settings.js:38
+#: admin/metabox/class-metabox.php:432
+#: admin/taxonomy/class-taxonomy-metabox.php:159 js/dist/new-settings.js:38
 msgid "Social"
 msgstr "Social"
 
 #: admin/menu/class-network-admin-menu.php:56 admin/pages/network.php:18
-#: src/general/user-interface/general-page-integration.php:191
-#: js/dist/new-settings.js:366
+#: src/general/user-interface/general-page-integration.php:213
+#: js/dist/new-settings.js:592
 msgid "General"
 msgstr "General"
 
-#: admin/metabox/class-metabox.php:211
+#: admin/metabox/class-metabox.php:208
 msgid "301 Redirect"
 msgstr "Redirección 301"
 
-#: admin/metabox/class-metabox.php:202 js/dist/block-editor.js:245
-#: js/dist/classic-editor.js:230 js/dist/elementor.js:325
+#: admin/metabox/class-metabox.php:199 js/dist/block-editor.js:255
+#: js/dist/classic-editor.js:238
 msgid "Canonical URL"
 msgstr "URL canónica"
 
-#: admin/metabox/class-metabox.php:200
+#: admin/metabox/class-metabox.php:197
 msgid "Title to use for this page in breadcrumb paths"
 msgstr "Título a usar para esta página en la cadena de breadcrumbs"
 
@@ -3772,8 +4124,8 @@ msgid "SEO Title"
 msgstr "Título SEO"
 
 #: admin/class-yoast-network-admin.php:43 src/config/schema-types.php:163
-#: src/integrations/settings-integration.php:622 js/dist/new-settings.js:16
-#: js/dist/new-settings.js:368
+#: src/integrations/settings-integration.php:645 js/dist/new-settings.js:12
+#: js/dist/new-settings.js:594
 msgid "None"
 msgstr "Ninguno"
 
@@ -3785,9 +4137,9 @@ msgstr "Las configuraciones no pueden importarse:"
 msgid "Settings successfully imported."
 msgstr "Las configuraciones han sido importadas con éxito."
 
-#: admin/metabox/class-metabox.php:410
-#: admin/taxonomy/class-taxonomy-metabox.php:142
-#: inc/class-wpseo-admin-bar-menu.php:718
+#: admin/metabox/class-metabox.php:407
+#: admin/taxonomy/class-taxonomy-metabox.php:141
+#: inc/class-wpseo-admin-bar-menu.php:763
 #: src/services/health-check/report-builder.php:168
 msgid "SEO"
 msgstr "SEO"
@@ -3805,8 +4157,8 @@ msgstr "Search Console"
 msgid "Post has an invalid Content Type: %s."
 msgstr "La entrada tiene un tipo de contenido no válido: %s."
 
-#: admin/views/class-yoast-feature-toggles.php:136 js/dist/new-settings.js:32
-#: js/dist/new-settings.js:326 js/dist/new-settings.js:328
+#: admin/views/class-yoast-feature-toggles.php:132 js/dist/new-settings.js:31
+#: js/dist/new-settings.js:526 js/dist/new-settings.js:529
 msgid "XML sitemaps"
 msgstr "Mapas del sitio XML"
 
@@ -3814,8 +4166,8 @@ msgstr "Mapas del sitio XML"
 msgid "Huge SEO Issue: You're blocking access to robots."
 msgstr "Enorme problema de SEO: Estás bloqueando el acceso a los robots."
 
-#: admin/metabox/class-metabox.php:196 js/dist/block-editor.js:243
-#: js/dist/classic-editor.js:228 js/dist/elementor.js:323
+#: admin/metabox/class-metabox.php:193 js/dist/block-editor.js:253
+#: js/dist/classic-editor.js:236
 msgid "No Archive"
 msgstr "Aplicar atributo «No Archive»"
 
@@ -3824,23 +4176,23 @@ msgid "Focus keyword"
 msgstr "Frase clave objetivo"
 
 #. translators: 1: link open tag; 2: link close tag.
-#: admin/metabox/class-metabox.php:206
+#: admin/metabox/class-metabox.php:203
 msgid "The canonical URL that this page should point to. Leave empty to default to permalink. %1$sCross domain canonical%2$s supported too."
 msgstr "La URL canónica a la que esta página debería señalar. Déjala vacía para usar por defecto el enlace permanente. También es compatible con %1$scanonical entre dominios%2$s."
 
-#: admin/class-admin.php:229
+#: admin/class-admin.php:229 js/dist/externals-components.js:440
 msgid "FAQ"
 msgstr "FAQ"
 
-#: admin/metabox/class-metabox.php:176
-#: js/dist/externals/replacementVariableEditor.js:27
-#: js/dist/externals/searchMetadataPreviews.js:62 js/dist/new-settings.js:25
-#: js/dist/new-settings.js:29 js/dist/new-settings.js:34
-#: js/dist/new-settings.js:38 js/dist/new-settings.js:65
-#: js/dist/new-settings.js:79 js/dist/new-settings.js:109
-#: js/dist/new-settings.js:138 js/dist/new-settings.js:203
-#: js/dist/new-settings.js:220 js/dist/new-settings.js:229
-#: js/dist/new-settings.js:266
+#: admin/metabox/class-metabox.php:173
+#: js/dist/externals/replacementVariableEditor.js:71
+#: js/dist/externals/searchMetadataPreviews.js:102 js/dist/new-settings.js:21
+#: js/dist/new-settings.js:27 js/dist/new-settings.js:34
+#: js/dist/new-settings.js:38 js/dist/new-settings.js:91
+#: js/dist/new-settings.js:111 js/dist/new-settings.js:160
+#: js/dist/new-settings.js:207 js/dist/new-settings.js:312
+#: js/dist/new-settings.js:339 js/dist/new-settings.js:354
+#: js/dist/new-settings.js:412
 msgid "Meta description"
 msgstr "Meta description"
 

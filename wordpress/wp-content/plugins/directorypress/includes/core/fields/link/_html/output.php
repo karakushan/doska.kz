@@ -42,11 +42,17 @@
 		</span>
 		<?php if(directorypress_is_listing_page()): ?>
 			<span id="<?php echo esc_attr($field->id); ?>" class="field-content">
+				<?php
+				$link_text = ($field->value['text'] && $field->use_link_text) ? $field->value['text'] : $field->value['url'];
+				if (function_exists('classiadspro_translatepress_translate_listing_string') && $field->value['text'] && $field->use_link_text) {
+					$link_text = classiadspro_translatepress_translate_listing_string($link_text, false);
+				}
+				?>
 				<a itemprop="url"
 					href="<?php echo esc_url($field->value['url']); ?>"
 					<?php if ($field->is_blank) echo 'target="_blank"'; ?>
 					<?php if ($field->is_nofollow) echo 'rel="nofollow"'; ?>
-				><?php if ($field->value['text'] && $field->use_link_text) echo esc_html($field->value['text']); else echo esc_html($field->value['url']); ?></a>
+				><?php echo esc_html($link_text); ?></a>
 			</span>
 		<?php endif; ?>
 	</div>

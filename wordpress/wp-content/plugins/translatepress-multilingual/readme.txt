@@ -3,9 +3,9 @@ Contributors: cozmoslabs, razvan.mo, madalin.ungureanu, sareiodata, cristophor
 Donate link: https://www.translatepress.com/
 Tags: translate, translation, multilingual, automatic translation, bilingual, front-end translation, google translate, language
 Requires at least: 3.1.0
-Tested up to: 6.9
+Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 3.0.7
+Stable tag: 3.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,7 @@ TranslatePress - Multilingual has a range of [premium Add-ons](https://translate
 * Full [TranslatePress AI](https://translatepress.com/ai/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) access - automatically translate your entire website without extra platforms to sign up for, API keys, and additional translation costs. Each premium version includes a set number of AI translated words you can use to instantly translate your site, saving you both time and money.
 * [Extra Languages](https://translatepress.com/docs/addons/multiple-languages/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) - allows you to add an unlimited number of translation languages, with the possibility to publish languages later after you complete the translation
 * [SEO Pack](https://translatepress.com/docs/addons/seo-pack/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) - lets you translate meta information (like page title, description, url slug, image alt tag, Twitter and Facebook Social Graph tags & more) for boosting your multilingual SEO and increase traffic. Works with all popular SEO plugins.
+* [Different Domain per Language](https://translatepress.com/docs/developers/different-domain-per-language/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) - assign a different domain to each language you add (e.g. domain.de, domain.es) and improve international SEO by creating a fully local experience for your visitors
 * [Translator Accounts](https://translatepress.com/docs/addons/translator-accounts/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) - create or allow existing users to translate the site without admin rights
 * [Browse as User Role](https://translatepress.com/docs/addons/browse-as-role/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) - view and translate content that is visible only to a particular user role
 * [Navigation Based on Language](https://translatepress.com/docs/addons/navigate-based-language/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) - configure and display different menu items for different languages
@@ -142,14 +143,10 @@ For more information please check out our [documentation](https://translatepress
 
 
 == Changelog ==
-= 3.0.7 =
-* Improved security by adding nonces and capability checks to various ajax calls that lacked them
-* Fixed issue with breaking urls containing % when manually adding translations in Translation Editor
-* Fixed compatibility with DK PDF plugin
-* Fixed legacy language switcher inserted via Elementor shortcode widget having a fixed 300px width
-* In the language switcher configurator page, invert border radius values on vertical position change
-* Hide user inserted labels in the context of language switcher menu items if only flags option is selected
-* Make Powered by in language switcher less prominent
+= 3.1.8 =
+ * Fix gettext translations saved as regular default strings when "Disable translation of gettext strings" is enabled
+ * Prevent edge case fatal error from occurring in class-check-invalid-text.php
+ * Send WooCommerce emails in admin language instead of order language when there are multiple recipients
 
 = Older versions =
 [Click Here](https://translatepress.com/docs/translatepress-free-changelog/?utm_source=wp.org&utm_medium=tp-description-page&utm_campaign=TPFree) to view the full changelog, or you can find it in the changelog.txt file in the plugin folder.

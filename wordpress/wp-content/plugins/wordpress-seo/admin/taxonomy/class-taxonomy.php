@@ -42,20 +42,6 @@ class WPSEO_Taxonomy {
 	private $analysis_inclusive_language;
 
 	/**
-	 * Whether the insights feature is enabled.
-	 *
-	 * @var bool
-	 */
-	protected $is_insights_enabled;
-
-	/**
-	 * Whether the cornerstone content feature is enabled.
-	 *
-	 * @var bool
-	 */
-	protected $is_cornerstone_enabled;
-
-	/**
 	 * Class constructor.
 	 */
 	public function __construct() {
@@ -71,8 +57,6 @@ class WPSEO_Taxonomy {
 		$this->analysis_seo                = new WPSEO_Metabox_Analysis_SEO();
 		$this->analysis_readability        = new WPSEO_Metabox_Analysis_Readability();
 		$this->analysis_inclusive_language = new WPSEO_Metabox_Analysis_Inclusive_Language();
-		$this->is_insights_enabled         = WPSEO_Options::get( 'enable_metabox_insights', false, [ 'wpseo' ] );
-		$this->is_cornerstone_enabled      = WPSEO_Options::get( 'enable_cornerstone_content', false, [ 'wpseo' ] );
 	}
 
 	/**
@@ -130,7 +114,7 @@ class WPSEO_Taxonomy {
 			'<a href="https://www.mozilla.org/firefox/new/">',
 			'<a href="https://www.google.com/chrome/">',
 			'<a href="https://www.microsoft.com/windows/microsoft-edge">',
-			'</a>'
+			'</a>',
 		);
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped above.
 		echo new Alert_Presenter( $content );
@@ -217,10 +201,6 @@ class WPSEO_Taxonomy {
 			$script_data = array_merge_recursive( $term_information->get_legacy_site_information(), $script_data );
 
 			$asset_manager->localize_script( 'term-edit', 'wpseoScriptData', $script_data );
-
-			if ( $this->analysis_readability->is_enabled() || $this->analysis_inclusive_language->is_enabled() || $this->analysis_seo->is_enabled() || $this->is_insights_enabled || $this->is_cornerstone_enabled ) {
-				$asset_manager->enqueue_user_language_script();
-			}
 		}
 
 		if ( self::is_term_overview( $pagenow ) ) {
@@ -319,7 +299,7 @@ class WPSEO_Taxonomy {
 		$taxonomy = get_taxonomy( $term->taxonomy );
 
 		$term_formatter = new WPSEO_Metabox_Formatter(
-			new WPSEO_Term_Metabox_Formatter( $taxonomy, $term )
+			new WPSEO_Term_Metabox_Formatter( $taxonomy, $term ),
 		);
 
 		return $term_formatter->get_values();

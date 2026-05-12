@@ -1,3 +1,12 @@
+# Remote uploads fallback for local development
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^wp-content/uploads/(.*)$ https://adshelppro.com/wp-content/uploads/$1 [L,R=302,NC]
+</IfModule>
+
+
+
 # This file was updated by Duplicator on 2025-10-18 08:47:47.
 # See the original_files_ folder for the original source_site_htaccess file.
 # BEGIN WordPress

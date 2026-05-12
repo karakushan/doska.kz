@@ -131,45 +131,85 @@ If you are using a child theme and you have added custom scripts into this file,
 
 /**
  * Currency Selector Dropdown
- * Handles the rs-currency-dropdown toggle and selection
+ * Handles the currency selector toggle and selection
  */
 (function() {
 	'use strict';
 
 	document.addEventListener('DOMContentLoaded', function() {
-		var currencyDropdown = document.querySelector('.rs-currency-dropdown');
-		if (!currencyDropdown) return;
+		function setCurrency(code) {
+			if (!code) {
+				return;
+			}
 
-		var btn = currencyDropdown.querySelector('.rs-currency-btn');
-		var list = currencyDropdown.querySelector('.rs-currency-list');
+			document.cookie = 'rs_currency=' + encodeURIComponent(code) + ';path=/;max-age=2592000';
+			window.location.reload();
+		}
 
-		if (!btn || !list) return;
+		function closeDropdown(dropdown) {
+			var button = dropdown.querySelector('.rs-currency-btn');
+			var list = dropdown.querySelector('.rs-currency-list');
 
-		btn.addEventListener('click', function(e) {
-			e.stopPropagation();
-			// Close region dropdown if open
-			var regionList = document.querySelector('.rs-dropdown:not(.rs-currency-dropdown) .rs-dropdown-list');
-			if (regionList) regionList.style.display = 'none';
-			// Toggle current
-			list.style.display = list.style.display === 'block' ? 'none' : 'block';
+			if (!button || !list) {
+				return;
+			}
+
+			button.setAttribute('aria-expanded', 'false');
+			list.hidden = true;
+			dropdown.classList.remove('is-open');
+		}
+
+		document.querySelectorAll('.rs-currency-dropdown').forEach(function(dropdown) {
+			var btn = dropdown.querySelector('.rs-currency-btn');
+			var list = dropdown.querySelector('.rs-currency-list');
+
+			if (!btn || !list) {
+				return;
+			}
+
+			btn.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+
+				var isOpen = dropdown.classList.contains('is-open');
+
+				document.querySelectorAll('.rs-currency-dropdown.is-open').forEach(function(openDropdown) {
+					if (openDropdown !== dropdown) {
+						closeDropdown(openDropdown);
+					}
+				});
+
+				dropdown.classList.toggle('is-open', !isOpen);
+				btn.setAttribute('aria-expanded', String(!isOpen));
+				list.hidden = isOpen;
+			});
+
+			dropdown.querySelectorAll('.rs-currency-option').forEach(function(option) {
+				option.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					setCurrency(option.dataset.code);
+				});
+			});
 		});
 
-		// Handle currency selection
-		list.querySelectorAll('li').forEach(function(li) {
-			li.addEventListener('click', function(e) {
-				e.stopPropagation();
-				var code = li.dataset.code;
-				if (code) {
-					document.cookie = 'rs_currency=' + encodeURIComponent(code) + ';path=/;max-age=2592000';
-					location.reload();
+		document.querySelectorAll('.rs-currency-select').forEach(function(select) {
+			select.addEventListener('change', function() {
+				setCurrency(select.value);
+			});
+		});
+
+		document.addEventListener('click', function(e) {
+			document.querySelectorAll('.rs-currency-dropdown.is-open').forEach(function(dropdown) {
+				if (!dropdown.contains(e.target)) {
+					closeDropdown(dropdown);
 				}
 			});
 		});
 
-		// Close when clicking outside
-		document.addEventListener('click', function(e) {
-			if (!currencyDropdown.contains(e.target)) {
-				list.style.display = 'none';
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape') {
+				document.querySelectorAll('.rs-currency-dropdown.is-open').forEach(closeDropdown);
 			}
 		});
 	});

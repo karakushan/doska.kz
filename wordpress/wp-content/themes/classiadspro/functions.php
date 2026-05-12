@@ -2222,72 +2222,6 @@ add_action('wp', function () {
 	}
 });
 
-// ==================== REGION SELECTOR (из плагина) ====================
-
-define('RS_COOKIE_VERSION', 14);
-
-/* ========================= DEFAULT COUNTRIES ========================= */
-
-function rs_get_default_countries(){
-	return implode("\n", [
-		'KZ|Kazakhstan|https://doska.kz',
-		'US|USA|https://adshelppro.com',
-		'ES|Spain|https://adshelppro.com/es',
-		'DE|Germany|https://adshelppro.com/de',
-		'TR|Turkey|https://adshelppro.com/tr',
-		'UA|Ukraine|https://adshelppro.com/uk',
-	]);
-}
-
-// Инициализация стран при первом запуске или если пусто
-add_action('after_switch_theme', function(){
-	if(!get_option('rs_countries')){
-		update_option('rs_countries', rs_get_default_countries());
-	}
-});
-
-// Принудительно обновить список стран с правильными названиями (одноразово)
-add_action('admin_init', function(){
-	if(!get_option('rs_countries_updated_v2')){
-		update_option('rs_countries', rs_get_default_countries());
-		update_option('rs_countries_updated_v2', true);
-	}
-});
-
-/* ========================= HELPERS ========================= */
-
-function rs_flag_emoji($code){
-	$code = strtoupper(trim($code));
-	if(strlen($code)!==2) return '';
-	return mb_chr(127397 + ord($code[0])) . mb_chr(127397 + ord($code[1]));
-}
-
-function rs_parse_countries(){
-	$raw = get_option('rs_countries');
-	if(!$raw) return [];
-	$out = [];
-	foreach(explode("\n",$raw) as $line){
-		$p = array_map('trim', explode('|',$line));
-		if(count($p)<3) continue;
-		[$code,$name,$url] = $p;
-		$parts = parse_url(trim($url));
-		if(empty($parts['host'])) continue;
-		$key = strtolower($code); // ключ = код страны (kz, us, es...)
-		$out[$key] = [
-			'code'=>strtolower($code),
-			'name'=>$name,
-			'url'=>rtrim($url,'/'),
-			'emoji'=>rs_flag_emoji($code),
-		];
-	}
-	return $out;
-}
-
-function rs_get_cookie_name(){
-	$salt = get_option('rs_cookie_salt', time());
-	return 'rs_region_v'.RS_COOKIE_VERSION.'_'.$salt;
-}
-
 function rs_get_cookie_domain(){
 	$host = $_SERVER['HTTP_HOST'];
 	$host = preg_replace('/:\d+$/', '', $host);
@@ -2307,520 +2241,6 @@ function rs_get_cookie_domain(){
 
 	return '';
 }
-
-function rs_cookie_exists(){
-	$cookie_name = rs_get_cookie_name();
-	return isset($_COOKIE[$cookie_name]);
-}
-
-function rs_get_current_language_code() {
-	if (function_exists('trp_get_current_language')) {
-		$language_code = (string) trp_get_current_language();
-		if ($language_code !== '') {
-			return strtolower(substr($language_code, 0, 2));
-		}
-	}
-
-	$locale = function_exists('determine_locale') ? determine_locale() : get_locale();
-	if (!is_string($locale) || $locale === '') {
-		return 'en';
-	}
-
-	return strtolower(substr($locale, 0, 2));
-}
-
-function rs_get_region_selector_label($label_key) {
-	$language_code = rs_get_current_language_code();
-
-	$translations = [
-		'en' => [
-			'choose_region' => 'Choose region',
-			'select_region' => 'Select region',
-			'select_your_region' => 'Select your region',
-		],
-		'ru' => [
-			'choose_region' => 'Выберите регион',
-			'select_region' => 'Выбрать регион',
-			'select_your_region' => 'Выберите ваш регион',
-		],
-		'uk' => [
-			'choose_region' => 'Оберіть регіон',
-			'select_region' => 'Обрати регіон',
-			'select_your_region' => 'Оберіть свій регіон',
-		],
-		'es' => [
-			'choose_region' => 'Elige una región',
-			'select_region' => 'Selecciona una región',
-			'select_your_region' => 'Selecciona tu región',
-		],
-		'de' => [
-			'choose_region' => 'Region wählen',
-			'select_region' => 'Region auswählen',
-			'select_your_region' => 'Wählen Sie Ihre Region',
-		],
-		'tr' => [
-			'choose_region' => 'Bölgeyi seçin',
-			'select_region' => 'Bölgeyi seçin',
-			'select_your_region' => 'Bölgeyi seçin',
-		],
-		'kk' => [
-			'choose_region' => 'Onirdi tandanyz',
-			'select_region' => 'Onirdi tandau',
-			'select_your_region' => 'Oz onirinizdi tandanyz',
-		],
-	];
-
-	if (!isset($translations[$language_code])) {
-		$language_code = 'en';
-	}
-
-	return $translations[$language_code][$label_key] ?? $translations['en'][$label_key] ?? '';
-}
-
-function rs_get_region_display_name($country_code, $fallback_name = '') {
-	$language_code = rs_get_current_language_code();
-	$country_code = strtolower(trim((string) $country_code));
-	$fallback_name = trim((string) $fallback_name);
-
-	$translations = [
-		'kz' => [
-			'en' => 'Kazakhstan',
-			'ru' => 'Казахстан',
-			'uk' => 'Казахстан',
-			'es' => 'Kazajistán',
-			'de' => 'Kasachstan',
-			'tr' => 'Kazakistan',
-			'kk' => 'Qazaqstan',
-		],
-		'us' => [
-			'en' => 'USA',
-			'ru' => 'США',
-			'uk' => 'USA',
-			'es' => 'Estados Unidos',
-			'de' => 'USA',
-			'tr' => 'ABD',
-			'kk' => 'AQSh',
-		],
-		'es' => [
-			'en' => 'Spain',
-			'ru' => 'Испания',
-			'uk' => 'Іспанія',
-			'es' => 'España',
-			'de' => 'Spanien',
-			'tr' => 'Ispanya',
-			'kk' => 'Ispaniya',
-		],
-		'de' => [
-			'en' => 'Germany',
-			'ru' => 'Германия',
-			'uk' => 'Німеччина',
-			'es' => 'Alemania',
-			'de' => 'Deutschland',
-			'tr' => 'Almanya',
-			'kk' => 'Germaniya',
-		],
-		'tr' => [
-			'en' => 'Turkey',
-			'ru' => 'Турция',
-			'uk' => 'Туреччина',
-			'es' => 'Turquía',
-			'de' => 'Türkei',
-			'tr' => 'Türkiye',
-			'kk' => 'Turkiya',
-		],
-		'ua' => [
-			'en' => 'Ukraine',
-			'ru' => 'Украина',
-			'uk' => 'Україна',
-			'es' => 'Ucrania',
-			'de' => 'Ukraine',
-			'tr' => 'Ukrayna',
-			'kk' => 'Ukraina',
-		],
-	];
-
-	if (isset($translations[$country_code][$language_code])) {
-		return $translations[$country_code][$language_code];
-	}
-
-	if ($fallback_name !== '') {
-		return $fallback_name;
-	}
-
-	return strtoupper($country_code);
-}
-
-/* ========================= ADMIN ========================= */
-
-add_action('admin_menu', function(){
-	add_options_page('Region Selector','Region Selector','manage_options','region-selector','rs_admin_page');
-});
-
-function rs_admin_page(){
-	if(isset($_POST['rs_save'])){
-		update_option('rs_countries', wp_unslash($_POST['countries']));
-		if(!empty($_POST['homepages'])){
-			update_option('rs_homepages', array_map('intval', $_POST['homepages']));
-		}
-	}
-	$countries = get_option('rs_countries');
-	$parsed = rs_parse_countries();
-	$saved = get_option('rs_homepages',[]);
-	$pages = get_pages(['sort_column'=>'post_title']);
-	?>
-	<div class="wrap" style="max-width:900px;margin:auto">
-		<h1>🌍 Region Selector</h1>
-		<form method="post">
-			<h2>Countries / Domains</h2>
-			<textarea name="countries" rows="8" style="width:100%;font-family:monospace"><?= esc_textarea($countries ? $countries : rs_get_default_countries()) ?></textarea>
-			<p class="description">Формат: <code>Код|Название страны|URL</code> — по одной записи на строку. Используйте название <strong>страны</strong>, а не язык. Например: <code>KZ|Казахстан|https://doska.kz</code></p>
-			<p style="margin-top:10px;"><button type="button" class="button button-secondary" onclick="if(confirm('Сбросить список стран к значениям по умолчанию?')){document.getElementsByName('countries')[0].value=<?= esc_attr(rs_get_default_countries()) ?>;}">🔄 Сбросить к значениям по умолчанию</button></p>
-			<h2 style="margin-top:30px;">Homepage per Domain</h2>
-			<?php foreach($parsed as $host => $c): ?>
-				<p>
-					<label>
-						<?= esc_html($c['emoji'].' '.$c['name'].' ('.$host.')') ?><br>
-						<select name="homepages[<?= esc_attr($host) ?>]" style="min-width:260px">
-							<option value="0">— default WordPress homepage —</option>
-							<?php foreach($pages as $p): ?>
-								<option value="<?= $p->ID ?>" <?= selected($saved[$host] ?? 0, $p->ID) ?>>
-									<?= esc_html($p->post_title) ?>
-								</option>
-							<?php endforeach; ?>
-						</select>
-					</label>
-				</p>
-			<?php endforeach; ?>
-
-			<p style="margin-top:30px"><button class="button button-primary" name="rs_save">💾 Save settings</button></p>
-		</form>
-	</div>
-	<?php
-}
-
-/* ========================= HANDLE REGION SELECTION ========================= */
-
-add_action('init', function(){
-	$cookie_name = rs_get_cookie_name();
-	$cookie_domain = rs_get_cookie_domain();
-	$countries = rs_parse_countries();
-
-	if(isset($_GET['rs_region']) && $countries){
-		$selected_code = strtolower($_GET['rs_region']);
-		foreach($countries as $key => $c){
-			if($c['code'] === $selected_code){
-				$cookie_value = $key;
-				$cookie_path = '/';
-				$cookie_expire = time() + 2592000; // 30 дней
-
-				if($cookie_domain){
-					setcookie($cookie_name, $cookie_value, $cookie_expire, $cookie_path, $cookie_domain);
-				} else {
-					setcookie($cookie_name, $cookie_value, $cookie_expire, $cookie_path);
-				}
-				$_COOKIE[$cookie_name] = $cookie_value;
-
-				// Редирект на URL региона если мы не на нём
-				$current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-				$target_url = $c['url'] . '/';
-				if(rtrim($current_url, '/') !== rtrim($target_url, '/')){
-					wp_redirect($target_url);
-					exit;
-				}
-				break;
-			}
-		}
-	}
-});
-
-/* ========================= TEMPLATE REDIRECT FOR HOMEPAGE ========================= */
-
-add_action('pre_get_posts', function ($q) {
-
-	if (is_admin() || !$q->is_main_query()) {
-		return;
-	}
-
-	$host = strtolower($_SERVER['HTTP_HOST']);
-	$path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-
-	$map = get_option('rs_homepages', []);
-
-	// Сначала проверяем host + path (например adshelppro.com/uk)
-	$key = $host;
-	$region_path = '';
-	if ($path !== '') {
-		$key = $host . '/' . $path;
-		$region_path = $path;
-	}
-
-	// Ищем совпадение: host/path или host
-	$page_id = 0;
-	if (!empty($map[$key])) {
-		$page_id = (int) $map[$key];
-	} elseif (!empty($map[$host])) {
-		$page_id = (int) $map[$host];
-	}
-	if ($page_id <= 0) return;
-
-	$q->set('page_id', $page_id);
-	$q->set('post_type', 'page');
-
-	$q->is_page       = true;
-	$q->is_singular   = true;
-	$q->is_front_page = true;
-	$q->is_home       = false;
-	$q->is_archive    = false;
-	$q->is_404        = false;
-});
-
-/* ========================= FRONTEND MODAL ========================= */
-
-add_action('wp_footer', function(){
-	if(rs_cookie_exists()) return;
-
-	$countries = rs_parse_countries();
-	if(!$countries) return;
-
-	$cookie_name = rs_get_cookie_name();
-	$cookie_domain = rs_get_cookie_domain();
-
-	?>
-	<!-- Проверка localStorage ДО рендера модального окна -->
-	<script>
-	if(localStorage.getItem('rs_region_selected')){
-		window._rs_region_already_selected = true;
-	}
-	</script>
-
-	<style>
-	#rs-overlay {position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:center;justify-content:center}
-	#rs-overlay.show {display:flex}
-	.rs-modal {background:#fff;padding:30px;border-radius:14px;text-align:center;max-width:520px;width:90%}
-	.rs-btn {padding:12px 18px;border-radius:8px;border:none;background:#0073aa;color:#fff;font-size:16px;cursor:pointer;margin:5px}
-	.rs-grid {display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-	</style>
-
-	<div id="rs-overlay">
-		<div class="rs-modal">
-			<h3><?php echo esc_html(rs_get_region_selector_label('select_your_region')); ?></h3>
-			<div class="rs-grid">
-				<?php foreach($countries as $host => $c): ?>
-					<button class="rs-btn"
-						data-host="<?= esc_attr($host) ?>"
-						data-url="<?= esc_attr($c['url']) ?>"
-						data-code="<?= esc_attr($c['code']) ?>">
-						<?= esc_html($c['emoji'].' '.rs_get_region_display_name($c['code'], $c['name'])) ?>
-					</button>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</div>
-
-	<script>
-	(function(){
-		const cookieName = "<?= esc_js($cookie_name) ?>";
-		const cookieDomain = "<?= esc_js($cookie_domain) ?>";
-		const maxAge = 30*24*60*60;
-		const localStorageKey = "rs_region_selected";
-		const overlay = document.getElementById('rs-overlay');
-
-		if(window._rs_region_already_selected){
-			return;
-		}
-
-		overlay.classList.add('show');
-
-		function setCookie(name, value, domain, maxAgeSec){
-			let cookieStr = name + "=" + encodeURIComponent(value) + ";path=/;max-age=" + maxAgeSec;
-			if(domain){
-				cookieStr += ";domain=" + domain;
-			}
-			document.cookie = cookieStr;
-		}
-
-		document.querySelectorAll('.rs-btn').forEach(btn => {
-			btn.addEventListener('click', function(){
-				const code = this.dataset.code; // код страны для куки
-				const url  = this.dataset.url;
-
-				localStorage.setItem(localStorageKey, code);
-				setCookie(cookieName, code, cookieDomain, maxAge);
-
-				// Редирект если текущий URL не совпадает с целевым
-				const targetUrl = url.replace(/\/+$/, '');
-				const currentUrl = location.origin + location.pathname.replace(/\/+$/, '');
-				if(currentUrl !== targetUrl){
-					location.href = url;
-				} else {
-					overlay.classList.remove('show');
-				}
-			});
-		});
-	})();
-	</script>
-	<?php
-});
-
-/* ========================= SHORTCODE: COUNTRY SELECTOR ========================= */
-
-add_shortcode('rs_region_selector', function($atts){
-	$countries = rs_parse_countries();
-	if(!$countries) return '';
-
-	$cookie_name = rs_get_cookie_name();
-	$cookie_domain = rs_get_cookie_domain();
-
-	$current_host = strtolower($_SERVER['HTTP_HOST']);
-	$current_path = '/' . trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-	$current_key = $current_host;
-	if ($current_path !== '/') {
-		$current_key = $current_host . $current_path;
-	}
-
-	ob_start();
-
-	/* ======================= MOBILE ======================= */
-	if ( wp_is_mobile() ) : ?>
-
-	   🌍<?php echo esc_html(rs_get_region_selector_label('choose_region')); ?> <select class="rs-region-select" onchange="rsSelectRegionMobile(this)">
-			<option value=""><?php echo esc_html(rs_get_region_selector_label('select_region')); ?></option>
-			<?php foreach($countries as $host => $c): ?>
-				<option
-					value="<?= esc_attr($host) ?>"
-					data-url="<?= esc_attr($c['url']) ?>"
-					data-code="<?= esc_attr($c['code']) ?>"
-					<?= selected($host, $current_key, false) ?>
-				>
-					<?= esc_html($c['emoji'].' '.rs_get_region_display_name($c['code'], $c['name'])) ?>
-				</option>
-			<?php endforeach; ?>
-		</select>
-
-		<script>
-		function rsSelectRegionMobile(select){
-			const option = select.options[select.selectedIndex];
-			if(!option || !option.value) return;
-
-			const code = option.dataset.code; // код страны для куки
-			const url  = option.dataset.url;
-			const cookieName = "<?= esc_js($cookie_name) ?>";
-			const cookieDomain = "<?= esc_js($cookie_domain) ?>";
-			const localStorageKey = "rs_region_selected";
-
-			localStorage.setItem(localStorageKey, code);
-
-			let cookieStr = cookieName + "=" + encodeURIComponent(code) + ";path=/;max-age=2592000";
-			if(cookieDomain){
-				cookieStr += ";domain=" + cookieDomain;
-			}
-			document.cookie = cookieStr;
-
-			// Редирект если текущий URL не совпадает с целевым
-			const targetUrl = url.replace(/\/+$/, '');
-			const currentUrl = location.origin + location.pathname.replace(/\/+$/, '');
-			if(currentUrl !== targetUrl){
-				location.href = url;
-			}else{
-				location.reload();
-			}
-		}
-		</script>
-
-	<?php
-	/* ======================= DESKTOP ======================= */
-	else : ?>
-
-		<div class="rs-dropdown">
-			<button class="rs-dropdown-btn">🌍 <?php echo esc_html(rs_get_region_selector_label('select_region')); ?> <i class="rs-dropdown-caret fas fa-angle-down" aria-hidden="true"></i></button>
-			<ul class="rs-dropdown-list">
-				<?php foreach($countries as $host => $c): ?>
-					<li data-host="<?= esc_attr($host) ?>" data-url="<?= esc_attr($c['url']) ?>" data-code="<?= esc_attr($c['code']) ?>">
-						<span class="rs-flag"><?= esc_html($c['emoji']) ?></span>
-						<span class="rs-name"><?= esc_html(rs_get_region_display_name($c['code'], $c['name'])) ?></span>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-
-		<style>
-		.rs-dropdown { position: relative; display: inline-block; font-family: sans-serif; }
-		.rs-dropdown-caret {
-			display: inline-block;
-			font-size: 14px;
-			margin-left: 6px;
-			line-height: 1;
-			vertical-align: middle;
-		}
-		.rs-dropdown-btn {
-			background: transparent; color:gray; border: none;
-			padding: 8px 14px; border-radius: 6px;
-			cursor: pointer; font-size: 14px;
-			display: flex; align-items: center; gap: 6px;
-
-		}
-		.rs-dropdown-list {
-			position: absolute; top: 100%; left: 0;
-			background: #fff; border: 1px solid #ccc;
-			border-radius: 6px; margin-top: 4px;
-			list-style: none; display: none;
-			min-width: 180px; max-height: 250px;
-			overflow-y: auto; z-index: 999;
-			box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-		}
-		.rs-dropdown-list li {
-			padding: 6px 10px; cursor: pointer;
-			display: flex; align-items: center; gap: 8px;
-		}
-		.rs-dropdown-list li:hover { background: #f0f0f0; }
-		.rs-flag { font-size: 18px; }
-		.rs-name { font-size: 14px; }
-		</style>
-
-		<script>
-		(function(){
-			const dropdown = document.querySelector('.rs-dropdown:not(.rs-currency-dropdown)');
-			if(!dropdown) return;
-
-			const btn = dropdown.querySelector('.rs-dropdown-btn');
-			const list = dropdown.querySelector('.rs-dropdown-list');
-			const cookieName = "<?= esc_js($cookie_name) ?>";
-			const cookieDomain = "<?= esc_js($cookie_domain) ?>";
-			const localStorageKey = "rs_region_selected";
-
-			btn.addEventListener('click', (e)=>{
-				e.stopPropagation();
-				list.style.display = list.style.display === 'block' ? 'none' : 'block';
-			});
-
-			document.addEventListener('click', e=>{
-				if(!dropdown.contains(e.target)) list.style.display = 'none';
-			});
-
-			list.querySelectorAll('li').forEach(li=>{
-				li.addEventListener('click', ()=>{
-					const code = li.dataset.code; // код страны для куки
-					const url  = li.dataset.url;
-
-					localStorage.setItem(localStorageKey, code);
-
-					let cookieStr = cookieName + "=" + encodeURIComponent(code) + ";path=/;max-age=2592000";
-					if(cookieDomain){
-						cookieStr += ";domain=" + cookieDomain;
-					}
-					document.cookie = cookieStr;
-
-					location.href = url;
-				});
-			});
-		})();
-		</script>
-
-	<?php endif;
-
-	return ob_get_clean();
-});
-
 /* ========================= SHORTCODE: CURRENCY SELECTOR ========================= */
 
 /**
@@ -2833,7 +2253,7 @@ function rs_get_unique_currencies() {
 
 	foreach ($map as $country_code => $currency) {
 		$code = $currency['code'];
-		// Пропускаем KZT — определяется автоматически по региону Казахстан
+		// KZT не показываем в селекторе, чтобы валюта домена doska.kz оставалась базовой.
 		if ($code === 'KZT') continue;
 		if (!in_array($code, $seen_codes)) {
 			$seen_codes[] = $code;
@@ -2863,54 +2283,42 @@ add_shortcode('rs_currency_selector', function($atts){
 	/* ======================= MOBILE ======================= */
 	if ( wp_is_mobile() ) : ?>
 
-		<select class="rs-currency-select" onchange="rsSelectCurrency(this)" style="padding:6px 10px;border-radius:6px;border:1px solid #ccc;font-size:14px;">
-			<option value="">Currency</option>
-			<?php foreach($currencies as $c): ?>
-				<option value="<?= esc_attr($c['code']) ?>" <?= selected($c['code'], $current_code, false) ?>>
-					<?= esc_html($c['symbol'] . ' ' . $c['code']) ?>
-				</option>
-			<?php endforeach; ?>
-		</select>
-
-		<script>
-		function rsSelectCurrency(select){
-			const code = select.value;
-			if(!code) return;
-			document.cookie = "rs_currency=" + encodeURIComponent(code) + ";path=/;max-age=2592000";
-			location.reload();
-		}
-		</script>
+		<div class="rs-currency-selector rs-currency-selector--mobile">
+			<?php $select_id = wp_unique_id('rs-currency-select-'); ?>
+			<label class="screen-reader-text" for="<?php echo esc_attr($select_id); ?>"><?php esc_html_e('Select currency', 'classiadspro'); ?></label>
+			<select id="<?php echo esc_attr($select_id); ?>" class="rs-currency-select" aria-label="<?php esc_attr_e('Select currency', 'classiadspro'); ?>">
+				<?php foreach($currencies as $c): ?>
+					<option value="<?= esc_attr($c['code']) ?>" <?= selected($c['code'], $current_code, false) ?>>
+						<?= esc_html($c['symbol'] . ' ' . $c['code']) ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+		</div>
 
 	<?php
 	/* ======================= DESKTOP ======================= */
 	else : ?>
 
-		<div class="rs-dropdown rs-currency-dropdown">
-			<button class="rs-dropdown-btn rs-currency-btn"><?= esc_html($current['symbol'] . ' ' . $current['code']) ?> <i class="rs-dropdown-caret fas fa-angle-down" aria-hidden="true"></i></button>
-			<ul class="rs-dropdown-list rs-currency-list">
+		<div class="rs-dropdown rs-currency-dropdown rs-currency-selector">
+			<button type="button" class="rs-dropdown-btn rs-currency-btn" aria-haspopup="true" aria-expanded="false">
+				<span class="rs-currency-current-symbol"><?= esc_html($current['symbol']) ?></span>
+				<span class="rs-currency-current-code"><?= esc_html($current['code']) ?></span>
+				<i class="rs-dropdown-caret fas fa-angle-down" aria-hidden="true"></i>
+			</button>
+			<ul class="rs-dropdown-list rs-currency-list" hidden>
 				<?php foreach($currencies as $c): ?>
-					<li data-code="<?= esc_attr($c['code']) ?>" class="<?= ($c['code'] === $current_code) ? 'rs-active' : '' ?>">
-						<span class="rs-currency-symbol"><?= esc_html($c['symbol']) ?></span>
-						<span class="rs-currency-code"><?= esc_html($c['code']) ?></span>
-						<?php if($c['code'] === $current_code): ?>
-							<span class="rs-check">✓</span>
-						<?php endif; ?>
+					<li class="<?= ($c['code'] === $current_code) ? 'rs-active' : '' ?>">
+						<button type="button" class="rs-currency-option" data-code="<?= esc_attr($c['code']) ?>" aria-pressed="<?= ($c['code'] === $current_code) ? 'true' : 'false' ?>">
+							<span class="rs-currency-symbol"><?= esc_html($c['symbol']) ?></span>
+							<span class="rs-currency-code"><?= esc_html($c['code']) ?></span>
+							<?php if($c['code'] === $current_code): ?>
+								<span class="rs-check" aria-hidden="true">✓</span>
+							<?php endif; ?>
+						</button>
 					</li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
-
-		<style>
-		/* Currency selector — same arrow & button style as region selector */
-		.rs-currency-dropdown .rs-dropdown-btn {
-			display: flex;
-			align-items: center;
-			gap: 6px;
-		}
-		.rs-currency-dropdown .rs-dropdown-caret {
-			font-size: 14px;
-		}
-		</style>
 
 	<?php endif;
 
@@ -2918,7 +2326,36 @@ add_shortcode('rs_currency_selector', function($atts){
 });
 
 add_filter('wp_nav_menu_items', function($items, $args){
-	return do_shortcode($items);
+	$items = do_shortcode($items);
+
+	$patterns = [
+		'~<li([^>]*)>\s*<a\b[^>]*>\s*(<div class="rs-dropdown rs-currency-dropdown rs-currency-selector">.*?</div>)\s*</a>\s*</li>~is',
+		'~<li([^>]*)>\s*<a\b[^>]*>\s*(<div class="rs-currency-selector rs-currency-selector--mobile">.*?</div>)\s*</a>\s*</li>~is',
+	];
+
+	foreach ($patterns as $pattern) {
+		$items = preg_replace_callback($pattern, function($matches) {
+			$li_attributes = $matches[1];
+
+			if (strpos($li_attributes, 'rs-currency-menu-item') === false) {
+				if (preg_match('/class=(["\'])(.*?)\1/i', $li_attributes, $class_matches)) {
+					$updated_classes = trim($class_matches[2] . ' rs-currency-menu-item');
+					$li_attributes = preg_replace(
+						'/class=(["\'])(.*?)\1/i',
+						'class=$1' . esc_attr($updated_classes) . '$1',
+						$li_attributes,
+						1
+					);
+				} else {
+					$li_attributes .= ' class="rs-currency-menu-item"';
+				}
+			}
+
+			return '<li' . $li_attributes . '>' . $matches[2] . '</li>';
+		}, $items);
+	}
+
+	return $items;
 }, 10, 2);
 
 /**
@@ -3283,24 +2720,16 @@ function rs_bootstrap_default_currency() {
 		return;
 	}
 
-	$region_cookie_name = rs_get_cookie_name();
-	if (!empty($_COOKIE[$region_cookie_name])) {
-		return;
-	}
-
 	rs_set_currency_cookie(rs_get_default_currency_code());
 }
 add_action('init', 'rs_bootstrap_default_currency', 1);
 
 /**
- * Получить текущую валюту по куке страны
- * Язык определяется по префиксу URL (TranslatePress), страна — по куке
+ * Получить текущую валюту
  */
 function rs_get_current_currency() {
 	$map = rs_get_currency_map_with_rates();
-	$manual_currency = null;
 
-	// 0. Сначала проверяем куку ручного выбора валюты
 	if (!empty($_COOKIE['rs_currency'])) {
 		$manual_currency = rs_get_currency_by_code($_COOKIE['rs_currency']);
 		if ($manual_currency) {
@@ -3308,16 +2737,6 @@ function rs_get_current_currency() {
 		}
 	}
 
-	// Иначе уже учитываем региональную куку как вторичный сигнал
-	$cookie_name = rs_get_cookie_name();
-	if (!empty($_COOKIE[$cookie_name])) {
-		$country_code = strtolower(trim($_COOKIE[$cookie_name]));
-		if (isset($map[$country_code])) {
-			return $map[$country_code];
-		}
-	}
-
-	// 2. Fallback — определяем страну по домену
 	$host = strtolower($_SERVER['HTTP_HOST']);
 	$domain_map = [
 		'doska.kz' => 'kz',
@@ -3331,12 +2750,10 @@ function rs_get_current_currency() {
 		}
 	}
 
-	// 3. Для localhost — лира
 	if (strpos($host, 'localhost') !== false) {
 		return $map['tr'];
 	}
 
-	// 4. Общий дефолт - лира
 	$default_currency = rs_get_currency_by_code(rs_get_default_currency_code());
 	return $default_currency ?: $map['tr'];
 }
@@ -4601,3 +4018,311 @@ function classiadspro_directorypress_category_wpseo_metadesc($description) {
     return $yoast_description !== '' ? $yoast_description : $description;
 }
 add_filter('wpseo_metadesc', 'classiadspro_directorypress_category_wpseo_metadesc', 20);
+
+function classiadspro_translatepress_translate_string($value, $allow_html = false) {
+	if (!is_string($value) || $value === '' || is_admin()) {
+		return $value;
+	}
+
+	$translated = $value;
+
+	if (function_exists('trp_translate')) {
+		static $is_translating = false;
+		if (!$is_translating) {
+			$is_translating = true;
+			$trp_translation = trp_translate($value, null, false);
+			$is_translating = false;
+
+			if (is_string($trp_translation) && $trp_translation !== '') {
+				$translated = $trp_translation;
+			}
+		}
+	}
+
+	if ($translated === $value) {
+		$dictionary_translation = classiadspro_translatepress_lookup_listing_dictionary_translation($value);
+		if (is_string($dictionary_translation) && $dictionary_translation !== '') {
+			$translated = $dictionary_translation;
+		}
+	}
+
+	return $allow_html ? $translated : wp_strip_all_tags($translated);
+}
+
+function classiadspro_translatepress_translate_listing_string($value, $allow_html = false) {
+	if (!classiadspro_is_directorypress_listing_request()) {
+		return $value;
+	}
+
+	return classiadspro_translatepress_translate_string($value, $allow_html);
+}
+
+function classiadspro_is_directorypress_listing_request() {
+	$post = get_post();
+	if ($post && $post->post_type === 'dp_listing') {
+		return true;
+	}
+
+	return function_exists('directorypress_is_listing_page') && directorypress_is_listing_page();
+}
+
+function classiadspro_translatepress_get_current_language_suffix() {
+	$language = '';
+
+	if (!empty($GLOBALS['TRP_LANGUAGE']) && is_string($GLOBALS['TRP_LANGUAGE'])) {
+		$language = $GLOBALS['TRP_LANGUAGE'];
+	} elseif (function_exists('determine_locale')) {
+		$language = determine_locale();
+	} else {
+		$language = get_locale();
+	}
+
+	$language = strtolower(str_replace('-', '_', trim((string) $language)));
+
+	return $language !== '' ? $language : 'en_us';
+}
+
+function classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix) {
+	global $wpdb;
+
+	static $tables_by_language = [];
+
+	if (isset($tables_by_language[$language_suffix])) {
+		return $tables_by_language[$language_suffix];
+	}
+
+	$like = $wpdb->esc_like($wpdb->prefix . 'trp_dictionary_') . '%_' . $wpdb->esc_like($language_suffix);
+	$tables = $wpdb->get_col($wpdb->prepare('SHOW TABLES LIKE %s', $like));
+
+	$tables_by_language[$language_suffix] = is_array($tables) ? $tables : [];
+
+	return $tables_by_language[$language_suffix];
+}
+
+function classiadspro_translatepress_lookup_listing_dictionary_translation($original) {
+	global $wpdb;
+
+	if (!is_string($original) || $original === '') {
+		return null;
+	}
+
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$tables = classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix);
+
+	if (empty($tables)) {
+		return null;
+	}
+
+	foreach ($tables as $table_name) {
+		$translation = $wpdb->get_var($wpdb->prepare(
+			"SELECT translated
+			FROM {$table_name}
+			WHERE status = 1
+				AND original = %s
+				AND translated <> ''
+			ORDER BY (translated <> original) DESC, id DESC
+			LIMIT 1",
+			$original
+		));
+
+		if (is_string($translation) && $translation !== '' && $translation !== $original) {
+			return $translation;
+		}
+	}
+
+	return null;
+}
+
+function classiadspro_translatepress_translate_listing_title($title, $listing = null) {
+	$translated_title = classiadspro_translatepress_translate_listing_string($title, false);
+
+	if (is_object($listing) && isset($listing->post->ID) && $translated_title === $title) {
+		$fallback_title = classiadspro_translatepress_lookup_listing_title_by_post_id((int) $listing->post->ID, $title);
+		if (is_string($fallback_title) && $fallback_title !== '') {
+			return $fallback_title;
+		}
+	}
+
+	return $translated_title;
+}
+add_filter('directorypress_post_title', 'classiadspro_translatepress_translate_listing_title', 10, 2);
+
+function classiadspro_translatepress_lookup_listing_title_by_post_id($post_id, $current_title) {
+	global $wpdb;
+
+	$post_id = (int) $post_id;
+	if ($post_id <= 0 || !is_string($current_title) || $current_title === '') {
+		return null;
+	}
+
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$tables = classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix);
+	if (empty($tables)) {
+		return null;
+	}
+
+	$preferred_candidates = [];
+	$fallback_candidates = [];
+	$needle = '%data-trp-post-id%' . $wpdb->esc_like((string) $post_id) . '%';
+
+	foreach ($tables as $table_name) {
+		$rows = $wpdb->get_results($wpdb->prepare(
+			"SELECT original, translated
+			FROM {$table_name}
+			WHERE status = 1
+				AND (original LIKE %s OR translated LIKE %s)
+			ORDER BY id DESC
+			LIMIT 20",
+			$needle,
+			$needle
+		), ARRAY_A);
+
+		if (!is_array($rows) || empty($rows)) {
+			continue;
+		}
+
+		foreach ($rows as $row) {
+			foreach (['original', 'translated'] as $column_name) {
+				if (empty($row[$column_name]) || !is_string($row[$column_name])) {
+					continue;
+				}
+
+				$candidate = html_entity_decode($row[$column_name], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+				$candidate = trim(wp_strip_all_tags($candidate));
+
+				if ($candidate === '' || $candidate === $current_title) {
+					continue;
+				}
+
+				if (classiadspro_translatepress_title_matches_language_script($candidate, $language_suffix)) {
+					$preferred_candidates[$candidate] = $candidate;
+				} else {
+					$fallback_candidates[$candidate] = $candidate;
+				}
+			}
+		}
+	}
+
+	if (!empty($preferred_candidates)) {
+		return reset($preferred_candidates);
+	}
+
+	if (!empty($fallback_candidates)) {
+		return reset($fallback_candidates);
+	}
+
+	return null;
+}
+
+function classiadspro_translatepress_title_matches_language_script($value, $language_suffix) {
+	if (!is_string($value) || $value === '') {
+		return false;
+	}
+
+	if (str_starts_with($language_suffix, 'ru') || str_starts_with($language_suffix, 'uk')) {
+		return (bool) preg_match('/\p{Cyrillic}/u', $value);
+	}
+
+	return false;
+}
+
+function classiadspro_translatepress_localize_directorypress_field_definitions() {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return;
+	}
+
+	global $directorypress_object;
+
+	if (
+		!is_object($directorypress_object) ||
+		!isset($directorypress_object->fields) ||
+		!is_object($directorypress_object->fields)
+	) {
+		return;
+	}
+
+	static $did_translate = false;
+	if ($did_translate) {
+		return;
+	}
+	$did_translate = true;
+
+	if (!empty($directorypress_object->fields->fields_array) && is_array($directorypress_object->fields->fields_array)) {
+		foreach ($directorypress_object->fields->fields_array as $field) {
+			if (!is_object($field)) {
+				continue;
+			}
+
+			if (!empty($field->name) && is_string($field->name)) {
+				$field->name = classiadspro_translatepress_translate_listing_string($field->name, false);
+			}
+
+			if (!empty($field->field_search_label) && is_string($field->field_search_label)) {
+				$field->field_search_label = classiadspro_translatepress_translate_listing_string($field->field_search_label, false);
+			}
+
+			if (!empty($field->description) && is_string($field->description)) {
+				$field->description = classiadspro_translatepress_translate_listing_string($field->description, false);
+			}
+		}
+	}
+
+	if (!empty($directorypress_object->fields->fields_groups_array) && is_array($directorypress_object->fields->fields_groups_array)) {
+		foreach ($directorypress_object->fields->fields_groups_array as $fields_group) {
+			if (!is_object($fields_group) || empty($fields_group->name) || !is_string($fields_group->name)) {
+				continue;
+			}
+
+			$fields_group->name = classiadspro_translatepress_translate_listing_string($fields_group->name, false);
+		}
+	}
+}
+add_action('wp', 'classiadspro_translatepress_localize_directorypress_field_definitions', 20);
+
+function classiadspro_translatepress_translate_term_name($term_name, $taxonomy) {
+	if (!is_string($term_name) || $term_name === '' || is_admin()) {
+		return $term_name;
+	}
+
+	if (!in_array($taxonomy, array('directorypress-category'), true)) {
+		return $term_name;
+	}
+
+	$translated = classiadspro_translatepress_translate_string($term_name, false);
+	if (is_string($translated) && $translated !== '') {
+		return $translated;
+	}
+
+	return $term_name;
+}
+
+function classiadspro_translatepress_filter_directorypress_term($term) {
+	if (!($term instanceof WP_Term)) {
+		return $term;
+	}
+
+	$term->name = classiadspro_translatepress_translate_term_name($term->name, $term->taxonomy);
+
+	return $term;
+}
+add_filter('get_term', 'classiadspro_translatepress_filter_directorypress_term');
+
+function classiadspro_translatepress_filter_directorypress_terms($terms, $taxonomies = array()) {
+	if (!is_array($terms) || empty($terms)) {
+		return $terms;
+	}
+
+	foreach ($terms as $index => $term) {
+		if ($term instanceof WP_Term) {
+			$terms[$index] = classiadspro_translatepress_filter_directorypress_term($term);
+		}
+	}
+
+	return $terms;
+}
+add_filter('get_terms', 'classiadspro_translatepress_filter_directorypress_terms', 10, 2);
+
+function classiadspro_translatepress_translate_listing_content($content) {
+	return classiadspro_translatepress_translate_listing_string($content, true);
+}
+add_filter('the_content', 'classiadspro_translatepress_translate_listing_content', 1);
