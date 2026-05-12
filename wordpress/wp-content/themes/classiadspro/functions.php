@@ -4068,13 +4068,49 @@ function classiadspro_is_directorypress_listing_request() {
 
 function classiadspro_translatepress_get_current_language_suffix() {
 	$language = '';
+	$trp_settings = get_option('trp_settings', array());
 
 	if (!empty($GLOBALS['TRP_LANGUAGE']) && is_string($GLOBALS['TRP_LANGUAGE'])) {
 		$language = $GLOBALS['TRP_LANGUAGE'];
-	} elseif (function_exists('determine_locale')) {
-		$language = determine_locale();
-	} else {
-		$language = get_locale();
+	}
+
+	if ($language === '' && !empty($trp_settings['url-slugs']) && is_array($trp_settings['url-slugs'])) {
+		$request_uri = isset($_SERVER['REQUEST_URI']) ? (string) $_SERVER['REQUEST_URI'] : '';
+		$request_path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
+		$path_segments = $request_path !== '' ? explode('/', $request_path) : array();
+		$first_segment = !empty($path_segments[0]) ? sanitize_title_for_query($path_segments[0]) : '';
+
+		if ($first_segment !== '') {
+			foreach ($trp_settings['url-slugs'] as $locale_code => $slug) {
+				if (!is_string($locale_code) || !is_string($slug)) {
+					continue;
+				}
+
+				if (sanitize_title_for_query($slug) === $first_segment) {
+					$language = $locale_code;
+					break;
+				}
+			}
+		}
+	}
+
+	if (
+		$language === '' &&
+		!empty($trp_settings['default-language']) &&
+		(
+			empty($trp_settings['add-subdirectory-to-default-language']) ||
+			$trp_settings['add-subdirectory-to-default-language'] !== 'yes'
+		)
+	) {
+		$language = $trp_settings['default-language'];
+	}
+
+	if ($language === '') {
+		if (function_exists('determine_locale')) {
+			$language = determine_locale();
+		} else {
+			$language = get_locale();
+		}
 	}
 
 	$language = strtolower(str_replace('-', '_', trim((string) $language)));
