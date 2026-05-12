@@ -258,7 +258,12 @@ function pacz_theme_breadcrumbs() {
 
 				} else {
 						$cat = current( get_the_category() );
-						echo get_category_parents( $cat, true, $delimiter );
+						if ( $cat instanceof WP_Term && ! is_wp_error( $cat ) ) {
+							$category_parents = get_category_parents( $cat, true, $delimiter );
+							if ( ! is_wp_error( $category_parents ) ) {
+								echo $category_parents;
+							}
+						}
 						echo get_the_title();	
 				}
 		}  elseif ( is_page() && !$post->post_parent ) {
@@ -604,7 +609,6 @@ if ( !function_exists( 'pacz_subfooter_social' ) ) {
 		echo '<div class="social-network-wrapper">'.$output.'</div>';
 	}
 }
-
 
 
 

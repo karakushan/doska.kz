@@ -127,6 +127,9 @@ define( 'WP_MAX_MEMORY_LIMIT', '512M' );
 // PHP Maximum Execution Time
 ini_set('max_execution_time', '300');
 
+// Блокируем внешние HTTP-запросы для диагностики производительности
+// define('WP_HTTP_BLOCK_EXTERNAL', true);
+
 
 /* That's all, stop editing! Happy publishing. */
 

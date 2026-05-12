@@ -454,6 +454,7 @@ function pacz_theme_enqueue_scripts()
 		wp_enqueue_style('pacz-styles', PACZ_THEME_STYLES . '/pacz-styles.css', false, $theme_data['Version'], 'all');
 		//wp_enqueue_style('pacz-blog', PACZ_THEME_STYLES . '/pacz-blog.css', false, $theme_data['Version'], 'all');
 		wp_enqueue_style('pacz-post', PACZ_THEME_STYLES . '/post.css', false, $theme_data['Version'], 'all');
+		wp_enqueue_style('pacz-font-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap', array(), null, 'all');
 
 		if (!class_exists('Pacz_Static_Files')) {
 			$font_family = $pacz_settings['body-font']['font-family'];
@@ -2711,18 +2712,17 @@ function rs_set_currency_cookie($currency_code) {
 	$_COOKIE['rs_currency'] = $currency_code;
 }
 
-function rs_bootstrap_default_currency() {
-	if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
-		return;
+function rs_wpsc_currency_cache_key($string) {
+	if (empty($_COOKIE['rs_currency'])) {
+		return $string;
 	}
 
-	if (!empty($_COOKIE['rs_currency'])) {
-		return;
-	}
-
-	rs_set_currency_cookie(rs_get_default_currency_code());
+	return $string . 'rs_currency=' . strtoupper(trim((string) $_COOKIE['rs_currency'])) . ',';
 }
-add_action('init', 'rs_bootstrap_default_currency', 1);
+
+if (function_exists('add_cacheaction')) {
+	add_cacheaction('wp_cache_get_cookies_values', 'rs_wpsc_currency_cache_key');
+}
 
 /**
  * Получить текущую валюту
@@ -2740,7 +2740,6 @@ function rs_get_current_currency() {
 	$host = strtolower($_SERVER['HTTP_HOST']);
 	$domain_map = [
 		'doska.kz' => 'kz',
-		'adshelppro.com' => 'us',
 	];
 	foreach ($domain_map as $domain => $code) {
 		if ($host === $domain || strpos($host, '.' . $domain) !== false) {

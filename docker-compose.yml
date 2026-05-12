@@ -31,13 +31,14 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
-      # Xdebug configuration
-      WORDPRESS_DEBUG: 1
+      # Xdebug отключен для производительности.
+      # При необходимости отладки раскомментируйте и пересоберите контейнер.
+      # WORDPRESS_DEBUG: 1
       # PHP_IDE_CONFIG: serverName=doska
-      XDEBUG_MODE: develop,debug
-      XDEBUG_CLIENT_HOST: host.docker.internal
-      XDEBUG_CLIENT_PORT: 9003
-      XDEBUG_START_WITH_REQUEST: "yes"
+      # XDEBUG_MODE: develop,debug
+      # XDEBUG_CLIENT_HOST: host.docker.internal
+      # XDEBUG_CLIENT_PORT: 9003
+      # XDEBUG_START_WITH_REQUEST: "yes"
       # XDEBUG_IDEKEY: doska
       DOCKER_ENV: "true"
     volumes:
