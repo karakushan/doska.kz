@@ -137,7 +137,7 @@ class DirectoryPress {
 		}
 		add_action('init', 'directorypress_init_session');
 		add_action('init', 'directorypress_register_post_type', 0);
-		add_action('init', array($this, 'directorypress_get_system_pages'), 1);
+		add_action('init', array($this, 'directorypress_get_system_pages'), 30);
 		add_action('wp', array($this, 'directorypress_init_directorytypes_pages'), 1);
 		add_action('admin_init', array($this, 'directorypress_init_directorytypes_pages'), 1);
 		add_action('init', array($this, 'redux_include'), 0);
@@ -150,11 +150,9 @@ class DirectoryPress {
 		add_action('wp', array($this, 'directorypress_draft_listing_on_expiry_call'), 1);
 		
 		if (!get_option('directorypress_installed_directory')) {
-			//$this->directorypress_init_classes();
 			add_action('init', 'directorypress_install_directory', 0);
-		} else {
-			$this->directorypress_init_classes();
 		}
+		add_action('init', array($this, 'directorypress_init_classes'), 20);
 		
 		add_action('wp', array($this, 'wp_loaded'));
 		add_filter('query_vars', array($this, 'add_query_vars'));

@@ -627,6 +627,7 @@ add_action('wp_ajax_nopriv_directorypress_listing_submit_admin_process_function'
 
 function directorypress_listing_submit_admin_process_function(){
 	global $directorypress_admin_info_strings;
+	$directorypress_admin_info_strings = directorypress_get_admin_info_strings();
 	$field = sanitize_text_field($_POST['field']);
 	echo '<p class="alert alert-info">'. esc_html__('This information is only visible to Admin', 'DIRECTORYPRESS') .'</p>';
 	if(!empty($field)){

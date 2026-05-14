@@ -15,7 +15,7 @@
  * Set constants.
  */
 if ( ! defined( 'DT_TITLE' ) ) {
-	define( 'DT_TITLE', __( 'Classiads Templates', 'classiads-templates' ) );
+	define( 'DT_TITLE', 'Classiads Templates' );
 }
 
 if ( ! defined( 'DT_VERSION' ) ) {
@@ -41,6 +41,15 @@ if ( ! defined( 'DT_URI' ) ) {
 require_once DT_PATH . 'class-classiads-templates.php';
 require_once DT_PATH . 'vendor/autoload.php';
 
+function classiads_templates_load_textdomain() {
+	load_plugin_textdomain(
+		'classiads-templates',
+		false,
+		dirname( plugin_basename( __FILE__ ) ) . '/languages'
+	);
+}
+add_action( 'init', 'classiads_templates_load_textdomain', 5 );
+
 function classiads_templates_activate() {
 	wp_redirect(admin_url('admin.php?page=pacz-admin-theme-setup'));
 }
@@ -51,10 +60,9 @@ function classiads_templates_deactivate() {
 
 register_activation_hook( __FILE__, 'classiads_templates_activate' );
 register_deactivation_hook( __FILE__, 'classiads_templates_deactivate' );
-/**
- * Set directory locations, text strings, and settings.
- */
-$Classiads_Templates = new Classiads_Templates(
+
+function classiads_templates_boot() {
+	global $Classiads_Templates;
 
 	$config = array(
 		'designinvento_templates_url'   => 'classiads-templates', // The wp-admin page slug where Merlin WP loads.
@@ -69,7 +77,7 @@ $Classiads_Templates = new Classiads_Templates(
 		'edd_item_name'        => '', // EDD_Theme_Updater_Admin item_name.
 		'edd_theme_slug'       => '', // EDD_Theme_Updater_Admin item_slug.
 		'ready_big_button_url' => '', // Link for the big button on the ready step.
-	),
+	);
 
 	$strings = array(
 		'admin-menu'               => esc_html__( 'Classiads Templates', 'classiads-templates' ),
@@ -112,7 +120,7 @@ $Classiads_Templates = new Classiads_Templates(
 		'builder-header-success%s' => esc_html__( 'You\'re up to speed!', 'classiads-templates' ),
 		'builder%s'                => esc_html__( 'Select a page builder tool to build your site.', 'classiads-templates' ),
 		'builder-success%s'        => esc_html__( 'You may have already run this theme setup wizard. If you would like to proceed anyway, click on the "Start" button below.', 'classiads-templates' ),
-		
+
 		'child-header'             => esc_html__( 'Install Child Theme', 'classiads-templates' ),
 		'child-header-success'     => esc_html__( 'You\'re good to go!', 'classiads-templates' ),
 		'child'                    => esc_html__( 'Let\'s build & activate a child theme so you may easily make theme changes.', 'classiads-templates' ),
@@ -140,7 +148,11 @@ $Classiads_Templates = new Classiads_Templates(
 		'ready-link-1'             => sprintf( '<a href="%1$s" target="_blank">%2$s</a>', 'https://designinvento.net/', esc_html__( 'Explore Designinvento', 'classiads-templates' ) ),
 		'ready-link-2'             => sprintf( '<a href="%1$s" target="_blank">%2$s</a>', 'https://designinvento.net/contact/', esc_html__( 'Get Theme Support', 'classiads-templates' ) ),
 		'ready-link-3'             => sprintf( '<a href="%1$s">%2$s</a>', admin_url( 'customize.php' ), esc_html__( 'Start Customizing', 'classiads-templates' ) ),
-	)
-);
-require_once DT_PATH . 'includes/updates.php';
-require_once DT_PATH . 'demos/demos.php';
+	);
+
+	$Classiads_Templates = new Classiads_Templates( $config, $strings );
+
+	require_once DT_PATH . 'includes/updates.php';
+	require_once DT_PATH . 'demos/demos.php';
+}
+add_action( 'init', 'classiads_templates_boot', 20 );

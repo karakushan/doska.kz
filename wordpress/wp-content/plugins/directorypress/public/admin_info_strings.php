@@ -1,6 +1,10 @@
 <?php
-global $directorypress_admin_info_strings;
-$directorypress_admin_info_strings = array(
+function directorypress_get_admin_info_strings() {
+    static $directorypress_admin_info_strings = null;
+    if ($directorypress_admin_info_strings !== null) {
+        return $directorypress_admin_info_strings;
+    }
+    $directorypress_admin_info_strings = array(
 	'listing_title' => array(
 		'translation' => sprintf(esc_html__('Title field can be translated from DirectoryPress Frontend Plugin, Please visit %s for more info', 'DIRECTORYPRESS'), '<a href="https://help.designinvento.net/docs/directorypress/general/directorypress-translation/" target="_blank">here</a>'),
 	),
@@ -144,5 +148,10 @@ $directorypress_admin_info_strings = array(
 		'admin_setting' => sprintf(esc_html__('To Turn on/off this field, Please visit %s -> click DirectoryPress Frontend Addon -> click frontend submission -> un-select (Require Terms of Services on submission page)', 'DIRECTORYPRESS'), '<a href="'. admin_url('/admin.php?page=directorypress_settings') .'" target="_blank">DirectoryPress Settings</a>'),
 		'remote_tutorial_url' => esc_html__('To change field label, Please translate directorypress frontend listing plugin', 'DIRECTORYPRESS'),
 	),
+	);
 
-);
+
+    return $directorypress_admin_info_strings;
+}
+global $directorypress_admin_info_strings;
+$directorypress_admin_info_strings = array();

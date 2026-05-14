@@ -178,8 +178,6 @@ class Classiadspro_Theme
 	function init($options)
 	{
 		$this->pacz_constants($options);
-		$this->pacz_functions();
-		$this->pacz_admin();
 
 		add_action('init', array(
 			&$this,
@@ -194,6 +192,14 @@ class Classiadspro_Theme
 			&$this,
 			'pacz_settings',
 		));
+		add_action('after_setup_theme', array(
+			&$this,
+			'pacz_functions',
+		), 20);
+		add_action('after_setup_theme', array(
+			&$this,
+			'pacz_admin',
+		), 20);
 	}
 	function pacz_settings()
 	{
@@ -234,7 +240,7 @@ class Classiadspro_Theme
 		define('PACZ_THEME_ADMIN_ASSETS_URI', PACZ_THEME_DIR_URI . '/includes/assets');
 		define('THEME_VERSION', $pacz_parent_theme[0]);
 		define("PACZ_THEME_SETTINGS", 'classiads_settings');
-		define("PACZ_THEME_DASHBOARD_STRING", esc_attr__('Classiads Dashboard', 'classiadspro'));
+			define("PACZ_THEME_DASHBOARD_STRING", 'Classiads Dashboard');
 		define('PACZ_THEME_CONTROL_PANEL', PACZ_THEME_FRAMEWORK . '/pacz-panel');
 		define('PACZ_THEME_CONTROL_PANEL_URI', PACZ_THEME_DIR_URI . '/includes/framework/pacz-panel');
 	}
