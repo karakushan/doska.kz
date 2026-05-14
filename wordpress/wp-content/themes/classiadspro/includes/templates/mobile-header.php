@@ -31,6 +31,11 @@
 						do_action('pacz_mobile_header_login');
 					echo '</div>';
 				}
+				if (shortcode_exists('language-switcher')) {
+					echo '<div class="pacz-mobile-language-switcher">';
+						echo do_shortcode('[language-switcher display="only-flags"]');
+					echo '</div>';
+				}
 				if($pacz_settings['mobile-search-button']){
 					do_action( 'responsive_nav_listing_search_link');
 				}

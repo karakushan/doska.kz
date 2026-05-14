@@ -22,6 +22,27 @@ function classiadspro_load_textdomain()
 }
 add_action('after_setup_theme', 'classiadspro_load_textdomain');
 
+/**
+ * Avoid TranslatePress slug deadlocks in admin-side DirectoryPress flows.
+ *
+ * TranslatePress SEO Pack translates internal links by hooking permalink filters.
+ * In wp-admin, DirectoryPress screens can trigger several parallel requests that
+ * resolve the same listing URLs and race on wp_trp_slug_originals inserts.
+ *
+ * Keep slug translation enabled on the public site, but disable these hooks for
+ * admin, AJAX and REST contexts where translated internal permalinks are not
+ * needed and have been causing deadlocks.
+ */
+function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
+{
+	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+		return array();
+	}
+
+	return $hooks;
+}
+add_filter('trp_translatable_slug_hooks_array', 'classiadspro_limit_trp_slug_translation_hooks_in_admin');
+
 // Load Firebase Push Notifications
 require_once get_template_directory() . '/includes/actions/firebase.php';
 
@@ -4678,3 +4699,12 @@ function classiadspro_translatepress_translate_single_listing_output_buffer($htm
 
 	return is_string($result) && $result !== '' ? preg_replace('/^<\?xml.+?\?>/i', '', $result) : $html;
 }
+
+function classiadspro_disable_hfb_header_on_mobile($enabled) {
+	if (wp_is_mobile()) {
+		return false;
+	}
+
+	return $enabled;
+}
+add_filter('hfb_header_enabled', 'classiadspro_disable_hfb_header_on_mobile');

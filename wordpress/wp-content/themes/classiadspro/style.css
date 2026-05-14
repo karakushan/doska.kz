@@ -11,7 +11,6 @@ License: GNU General Public License v2.0
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-
 /*
 
 Please do not add your styles in this file and instead use 
@@ -20,48 +19,48 @@ child theme or use custom.css in the same root this file locates.
 
 
 */
-.ultimate-btn-inline-block{
-display:inline-block;
+.ultimate-btn-inline-block {
+  display: inline-block;
 }
 
-.classaids-frontend-offcanvas{
-	padding-top:50px;
-	z-index:10000;
+.classaids-frontend-offcanvas {
+  padding-top: 50px;
+  z-index: 10000;
 }
 
 /* Style the button that is used to open the sidepanel */
 .classaids-frontend-offcanvas-btn {
-  width:120px;
-  display:inline-block;
-  Position:fixed;
-  right:0;
-  top:50%;
-  cursor:pointer;
-  transform:scale(1);
+  width: 120px;
+  display: inline-block;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  cursor: pointer;
+  transform: scale(1);
 }
-.classaids-frontend-offcanvas-btn:hover{
-	transform:scale(1.01);
+.classaids-frontend-offcanvas-btn:hover {
+  transform: scale(1.01);
 }
 
-.classaids-frontend-offcanvas-btn img{
-	width:100%;
+.classaids-frontend-offcanvas-btn img {
+  width: 100%;
 }
-.classaids-frontend-offcanvas .list-group{
-	margin-left:0;
+.classaids-frontend-offcanvas .list-group {
+  margin-left: 0;
 }
-.classaids-frontend-offcanvas .list-group-item a img{
-	vertical-align: middle;
-	margin-right: 5px;
+.classaids-frontend-offcanvas .list-group-item a img {
+  vertical-align: middle;
+  margin-right: 5px;
 }
-.classaids-frontend-offcanvas .offcanvas-footer{
-	text-align:center;
-	padding:10px;
+.classaids-frontend-offcanvas .offcanvas-footer {
+  text-align: center;
+  padding: 10px;
 }
 
 /* Sticky Widget Effect - Fix for Elementor containers */
 /* Fix for parent containers to enable sticky effect */
 #page {
-	overflow-x: visible;
+  overflow-x: visible;
 }
 
 .elementor-section,
@@ -69,36 +68,246 @@ display:inline-block;
 .elementor-column,
 .elementor-row,
 .elementor-widget-wrap {
-	overflow: visible !important;
+  overflow: visible !important;
 }
 
 /* Ensure the sticky widget works properly */
 .sticky-widget {
-	position: sticky;
-	top: 20px;
-	z-index: 999;
-	transition: all 0.3s ease;
+  position: sticky;
+  top: 20px;
+  z-index: 999;
+  transition: all 0.3s ease;
 }
 
 .sticky-widget.is-sticky {
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-	border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
 }
 
 .elementor-12637 .elementor-element.elementor-element-5e7b5543 .hfb-button {
-    background-color: #ffea1d;
-    text-align: center;
+  background-color: #ffea1d;
+  text-align: center;
+  width: 100%;
+  height: 50px;
+  padding: 0 10px;
+  margin: 0 0 0 0;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3em;
+  color: #333;
+  border-radius: 5px 5px 5px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home #pacz-page-title {
+  display: none;
+}
+
+#pacz-page-title {
+  height: auto !important;
+  padding: 20px;
+}
+
+.pacz-mobile-logo-wrap a {
+  width: 57px;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .rs-currency-selector {
     width: 100%;
-    height: 50px;
-    padding: 0 10px;
-    margin: 0 0 0 0;
-    font-family: "Lexend Deca",sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.3em;
-    color: #333;
-    border-radius: 5px 5px 5px 5px;
+    padding: 15px;
+  }
+  .rs-currency-selector--mobile .rs-currency-select {
+    min-height: 42px;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pacz-mobile-login-wrap .dropdown-content {
+    width: 209px;
+    top: 51px;
+  }
+
+  nav.trp-floating-switcher {
+    display: none !important;
+  }
+
+  .pacz-mobile-header-content-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-left: 0;
+    margin-right: 0;
+    flex-wrap: nowrap;
+  }
+
+  .pacz-mobile-header-content-wrap > * {
+    flex: 0 0 40px;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+  }
+
+  .responsive-nav-link {
+    margin-right: 0;
+  }
+
+  .responsive-nav-link,
+  .pacz-mobile-listing-btn,
+  .pacz-mobile-login-wrap,
+  .responsive-nav-search-link,
+  .pacz-mobile-language-switcher {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .responsive-nav-link .pacz-burger-icon,
+  .pacz-mobile-login-wrap .dropdown,
+  .pacz-mobile-login-wrap .pacz-mobile-login,
+  .pacz-mobile-language-switcher .trp_language_switcher_shortcode,
+  .pacz-mobile-language-switcher .trp-shortcode-switcher__wrapper,
+  .responsive-nav-search-link .search-burgur {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .responsive-nav-link .pacz-burger-icon {
+    padding-top: 0;
+  }
+
+  .pacz-mobile-language-switcher,
+  .pacz-mobile-language-switcher .trp_language_switcher_shortcode {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+  }
+
+  .pacz-mobile-language-switcher {
+    order: 4;
+  }
+
+  .pacz-mobile-login-wrap {
+    order: 3;
+  }
+
+  .responsive-nav-search-link {
+    order: 5;
+  }
+
+  .pacz-mobile-language-switcher .trp-shortcode-switcher__wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .pacz-mobile-language-switcher .trp-shortcode-anchor {
+    display: none !important;
+  }
+
+  .pacz-mobile-language-switcher .trp-shortcode-overlay {
+    position: relative !important;
+
+    top: auto !important;
+    z-index: 20;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .pacz-mobile-language-switcher .trp-current-language-item__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    border-radius: 50%;
+    background: #f2f3f5;
+  }
+
+  .pacz-mobile-language-switcher .trp-language-item__current {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .pacz-mobile-language-switcher .trp-language-item-name,
+  .pacz-mobile-language-switcher .trp-shortcode-arrow {
+    display: none !important;
+  }
+
+  .pacz-mobile-language-switcher .trp-flag-image {
+    width: 20px !important;
+    height: auto !important;
+    margin: 0 !important;
+    border-radius: 2px;
+  }
+
+  .pacz-mobile-language-switcher .trp-switcher-dropdown-list {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    min-width: 56px;
+    padding: 0;
+    border: 1px solid rgba(20, 56, 82, 0.12);
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .pacz-mobile-language-switcher .trp-switcher-dropdown-list .trp-language-item {
+    justify-content: center;
+    padding: 10px;
+    gap: 0;
+  }
+
+  .pacz-mobile-login-wrap .dropbtn,
+  .pacz-mobile-login-wrap .pacz-mobile-login,
+  .pacz-mobile-listing-btn .submit-listing-button-single,
+  .pacz-mobile-listing-btn .dropdown-toggle,
+  .responsive-nav-search-link .search-burgur {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    padding: 0 !important;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pacz-mobile-login-wrap .dropbtn img {
+    float: none;
+    width: 28px;
+    margin-top: 0;
+  }
+
+  .pacz-mobile-login-wrap .dropbtn span,
+  .pacz-mobile-login-wrap .author-name-header {
+    display: none !important;
+  }
 }
