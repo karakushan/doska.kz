@@ -4192,28 +4192,13 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 			WHERE status = 1
 				AND original = %s
 				AND translated <> ''
-			ORDER BY (translated <> original) DESC, id DESC
+				AND translated <> original
+			ORDER BY id DESC
 			LIMIT 1",
 			$original
 		));
 
 		if (is_string($translation) && $translation !== '' && $translation !== $original) {
-			$translation_cache[$cache_key] = $translation;
-			return $translation;
-		}
-
-		$translation = $wpdb->get_var($wpdb->prepare(
-			"SELECT translated
-			FROM {$table_name}
-			WHERE status = 1
-				AND LOWER(original) = LOWER(%s)
-				AND translated <> ''
-			ORDER BY (translated <> original) DESC, id DESC
-			LIMIT 1",
-			$original
-		));
-
-		if (is_string($translation) && $translation !== '' && strcasecmp($translation, $original) !== 0) {
 			$translation_cache[$cache_key] = $translation;
 			return $translation;
 		}
@@ -4247,15 +4232,36 @@ function classiadspro_translatepress_lookup_listing_title_by_post_id($post_id, $
 
 	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
 	static $title_cache = [];
-	$cache_key = $language_suffix . '|' . $post_id . '|' . md5($current_title);
+	$cache_key = $language_suffix . '|' . $post_id;
 
 	if (array_key_exists($cache_key, $title_cache)) {
-		return $title_cache[$cache_key];
+		$cached_candidates = $title_cache[$cache_key];
+
+		if (!empty($cached_candidates['preferred'])) {
+			foreach ($cached_candidates['preferred'] as $candidate) {
+				if ($candidate !== $current_title) {
+					return $candidate;
+				}
+			}
+		}
+
+		if (!empty($cached_candidates['fallback'])) {
+			foreach ($cached_candidates['fallback'] as $candidate) {
+				if ($candidate !== $current_title) {
+					return $candidate;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	$tables = classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix);
 	if (empty($tables)) {
-		$title_cache[$cache_key] = null;
+		$title_cache[$cache_key] = [
+			'preferred' => [],
+			'fallback' => [],
+		];
 		return null;
 	}
 
@@ -4301,17 +4307,27 @@ function classiadspro_translatepress_lookup_listing_title_by_post_id($post_id, $
 		}
 	}
 
-	if (!empty($preferred_candidates)) {
-		$title_cache[$cache_key] = reset($preferred_candidates);
-		return $title_cache[$cache_key];
+	$title_cache[$cache_key] = [
+		'preferred' => array_values($preferred_candidates),
+		'fallback' => array_values($fallback_candidates),
+	];
+
+	if (!empty($title_cache[$cache_key]['preferred'])) {
+		foreach ($title_cache[$cache_key]['preferred'] as $candidate) {
+			if ($candidate !== $current_title) {
+				return $candidate;
+			}
+		}
 	}
 
-	if (!empty($fallback_candidates)) {
-		$title_cache[$cache_key] = reset($fallback_candidates);
-		return $title_cache[$cache_key];
+	if (!empty($title_cache[$cache_key]['fallback'])) {
+		foreach ($title_cache[$cache_key]['fallback'] as $candidate) {
+			if ($candidate !== $current_title) {
+				return $candidate;
+			}
+		}
 	}
 
-	$title_cache[$cache_key] = null;
 	return null;
 }
 
