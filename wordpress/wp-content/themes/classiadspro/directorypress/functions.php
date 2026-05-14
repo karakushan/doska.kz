@@ -301,7 +301,7 @@ function pacz_single_listing_footer_panel_html(){
 	if(directorypress_is_listing_page() && wp_is_mobile()){
 		$authorID = $GLOBALS['authorID2'];
 		$listing = $GLOBALS['listing_id'];
-		$listing_url = get_permalink($listing->post->ID);
+		$listing_url = classiadspro_get_listing_url($listing);
 		$phone_number = get_the_author_meta('user_phone', $authorID);
 		$whatsapp_number = get_the_author_meta('user_whatsapp_number', $authorID);
 		$email_id = get_the_author_meta('user_email', $authorID);

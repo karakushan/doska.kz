@@ -100,7 +100,7 @@
 					'crop' => true
 				);
 			$src_url = ($DIRECTORYPRESS_ADIMN_SETTINGS['listing_image_width_height'] == 1 || $DIRECTORYPRESS_ADIMN_SETTINGS['listing_image_width_height'] == 2)? bfi_thumb($image_src, $param) : $image_src;
-			echo '<a class="listing-thumbnail" href="'.get_permalink().'"><img alt="'.$listing->title().'" src="'. esc_url($src_url) .'" width="'.$width.'" height="'.$height.'" /></a>';
+			echo '<a class="listing-thumbnail" href="'.esc_url(classiadspro_get_listing_url($listing)).'"><img alt="'.$listing->title().'" src="'. esc_url($src_url) .'" width="'.$width.'" height="'.$height.'" /></a>';
 		
 		}
 	}
@@ -131,7 +131,7 @@
 				'height' => $height,
 				'crop' => true
 			);
-			echo '<a class="listing-thumbnail" href="'.get_permalink().'"><img alt="'.$listing->title().'" src="'. bfi_thumb($image_src, $param).'" width="'.$width.'" height="'.$height.'" /></a>';
+			echo '<a class="listing-thumbnail" href="'.esc_url(classiadspro_get_listing_url($listing)).'"><img alt="'.$listing->title().'" src="'. bfi_thumb($image_src, $param).'" width="'.$width.'" height="'.$height.'" /></a>';
 		}
 	}
 	add_action('directorypress_listing_grid_featured_tag', 'directorypress_listing_grid_featured_tag', 1);
@@ -329,11 +329,12 @@
 			global $DIRECTORYPRESS_ADIMN_SETTINGS,$directorypress_object;
 			
 			$title_limit = $DIRECTORYPRESS_ADIMN_SETTINGS['max_title_length'];
+			$listing_url = classiadspro_get_listing_url($listing);
 			$nofollow = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_listing_nofollow_link']) && $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_listing_nofollow_link'])? 'rel="nofollow"':'';
 			
 			echo '<header class="directorypress-listing-title">';
 				if($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_exert_type'] == 'words'){
-					echo '<h2><a href="'.get_permalink().'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
+					echo '<h2><a href="'.esc_url($listing_url).'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
 					echo wp_trim_words($listing->title(), $title_limit, '');
 					do_action('directorypress_listing_user_verification_tag', $listing);
 					echo'</a></h2>';
@@ -341,7 +342,7 @@
 					$trimmed_title = function_exists('mb_substr')
 						? mb_substr($listing->title(), 0, $title_limit, 'UTF-8')
 						: substr($listing->title(), 0, $title_limit);
-					echo '<h2><a href="'.get_permalink().'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
+					echo '<h2><a href="'.esc_url($listing_url).'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
 					echo esc_html($trimmed_title);
 					do_action('directorypress_listing_user_verification_tag', $listing);
 					echo '</a></h2>';
@@ -498,7 +499,7 @@
 				}else{
 					echo '<div class="listing-rating grid-rating">';
 						echo '<span class="rating-numbers-empty"><i class="far fa-frown-open"></i></span>';
-						echo '&nbsp;<span class="review_rate-empty"><a class="" href="'. get_permalink() .'#comments-reviews" data-bs-toggle="tooltip" title="'.esc_html__('Be first to rate', 'classiadspro').'">'.esc_html__('Rate Now', 'classiadspro').'</a></span>';
+						echo '&nbsp;<span class="review_rate-empty"><a class="" href="'. esc_url(classiadspro_get_listing_url($listing) . '#comments-reviews') .'" data-bs-toggle="tooltip" title="'.esc_html__('Be first to rate', 'classiadspro').'">'.esc_html__('Rate Now', 'classiadspro').'</a></span>';
 					echo '</div>';
 				}
 			}

@@ -116,7 +116,7 @@
 											echo '<a href="#" class="listing_setting_action_link" data-modal-button-text="'.esc_attr__('Change', 'directorypress-frontend').'" data-modal-title="'.esc_attr__('Listing Performance Status', 'directorypress-frontend').'" data-modal-class="listing_performance_modal" data-listing-id="'. esc_attr($listing->post->ID) .'" data-bs-toggle="modal" data-bs-target="#listing_action_modal"><span class="dicode-material-icons dicode-material-icons-signal-cellular-outline"></span>' . esc_html__('Performance', 'directorypress-frontend') . '</a>';
 										}
 										if ($listing->status == 'active' && $listing->post->post_status == 'publish') {
-											echo '<a href="' . esc_url(get_permalink($listing->post->ID)) . '"><span class="fas fa-eye"></span>' . esc_html__('Preview', 'directorypress-frontend') . '</a>';
+											echo '<a href="' . esc_url(classiadspro_get_listing_url($listing)) . '"><span class="fas fa-eye"></span>' . esc_html__('Preview', 'directorypress-frontend') . '</a>';
 										}
 										$status_btn = (get_post_status ($listing->post->ID) == 'publish')? esc_html__('Make Private', 'directorypress-frontend'): esc_html__('Publish', 'directorypress-frontend');
 										echo '<a href="#" class="listing_setting_action_link" data-modal-button-text="'. esc_attr($status_btn) .'" data-modal-title="'.esc_attr__('Make Listing Publish or Private', 'directorypress-frontend').'" data-modal-class="change_listing_status_modal" data-listing-id="'. esc_attr($listing->post->ID) .'" data-bs-toggle="modal" data-bs-target="#listing_action_modal"><span class="dicode-material-icons dicode-material-icons-eye-off-outline"></span>'. esc_html__('Publish/Private', 'directorypress-frontend').'</a>';

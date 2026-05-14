@@ -72,6 +72,43 @@ function classiadspro_advertised_listings_title($title)
 }
 add_filter('classiadspro_advertised_listings_title', 'classiadspro_advertised_listings_title');
 
+if (!function_exists('classiadspro_get_listing_url')) {
+	function classiadspro_get_listing_url($listing)
+	{
+		if (is_numeric($listing)) {
+			$post_id = (int) $listing;
+		} elseif (is_object($listing) && isset($listing->post->ID)) {
+			$post_id = (int) $listing->post->ID;
+		} else {
+			$post_id = 0;
+		}
+
+		if (!$post_id) {
+			return home_url('/');
+		}
+
+		if (function_exists('directorypress_get_archive_page')) {
+			$archive_page = directorypress_get_archive_page();
+			$post = get_post($post_id);
+
+			if (!empty($archive_page['url']) && $post && !empty($post->post_name)) {
+				return trailingslashit($archive_page['url']) . trailingslashit($post->post_name);
+			}
+		}
+
+		if (function_exists('directorypress_directory_type_of_listing') && function_exists('directorypress_directorytype_url')) {
+			$directorytype = directorypress_directory_type_of_listing($post_id);
+			$post = get_post($post_id);
+
+			if ($directorytype && $post && !empty($post->post_name)) {
+				return directorypress_directorytype_url($post->post_name, $directorytype);
+			}
+		}
+
+		return get_permalink($post_id);
+	}
+}
+
 /**
  * Create advertise page
  */
