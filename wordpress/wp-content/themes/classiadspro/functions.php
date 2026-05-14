@@ -3311,7 +3311,12 @@ add_action('init', function () {
         clean_object_term_cache($post_id, 'dp_listing');
 
         // c) WordPress object cache
-        wp_cache_flush();
+        wp_cache_delete($post_id, 'directorypress_listings');
+        wp_cache_delete($post_id, 'directorypress_listing');
+        wp_cache_delete($post_id, 'dp_listing');
+        wp_cache_delete('last_changed', 'posts');
+        wp_cache_delete('last_changed', 'terms');
+        wp_cache_delete($post_id, 'object_term_cache');
 
         // d) Transients DirectoryPress
         $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '%transient%directorypress%'");
@@ -4023,6 +4028,15 @@ function classiadspro_translatepress_translate_string($value, $allow_html = fals
 		return $value;
 	}
 
+	static $translation_cache = [];
+
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$cache_key = $language_suffix . '|' . ($allow_html ? 'html' : 'text') . '|' . md5($value);
+
+	if (array_key_exists($cache_key, $translation_cache)) {
+		return $translation_cache[$cache_key];
+	}
+
 	$translated = $value;
 
 	if (function_exists('trp_translate')) {
@@ -4045,7 +4059,9 @@ function classiadspro_translatepress_translate_string($value, $allow_html = fals
 		}
 	}
 
-	return $allow_html ? $translated : wp_strip_all_tags($translated);
+	$translation_cache[$cache_key] = $allow_html ? $translated : wp_strip_all_tags($translated);
+
+	return $translation_cache[$cache_key];
 }
 
 function classiadspro_translatepress_translate_listing_string($value, $allow_html = false) {
@@ -4066,6 +4082,12 @@ function classiadspro_is_directorypress_listing_request() {
 }
 
 function classiadspro_translatepress_get_current_language_suffix() {
+	static $language_suffix = null;
+
+	if (is_string($language_suffix) && $language_suffix !== '') {
+		return $language_suffix;
+	}
+
 	$language = '';
 	$trp_settings = get_option('trp_settings', array());
 
@@ -4113,8 +4135,9 @@ function classiadspro_translatepress_get_current_language_suffix() {
 	}
 
 	$language = strtolower(str_replace('-', '_', trim((string) $language)));
+	$language_suffix = $language !== '' ? $language : 'en_us';
 
-	return $language !== '' ? $language : 'en_us';
+	return $language_suffix;
 }
 
 function classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix) {
@@ -4142,9 +4165,17 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 	}
 
 	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	static $translation_cache = [];
+	$cache_key = $language_suffix . '|' . md5($original);
+
+	if (array_key_exists($cache_key, $translation_cache)) {
+		return $translation_cache[$cache_key];
+	}
+
 	$tables = classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix);
 
 	if (empty($tables)) {
+		$translation_cache[$cache_key] = null;
 		return null;
 	}
 
@@ -4161,6 +4192,7 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 		));
 
 		if (is_string($translation) && $translation !== '' && $translation !== $original) {
+			$translation_cache[$cache_key] = $translation;
 			return $translation;
 		}
 
@@ -4176,10 +4208,12 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 		));
 
 		if (is_string($translation) && $translation !== '' && strcasecmp($translation, $original) !== 0) {
+			$translation_cache[$cache_key] = $translation;
 			return $translation;
 		}
 	}
 
+	$translation_cache[$cache_key] = null;
 	return null;
 }
 
@@ -4206,8 +4240,16 @@ function classiadspro_translatepress_lookup_listing_title_by_post_id($post_id, $
 	}
 
 	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	static $title_cache = [];
+	$cache_key = $language_suffix . '|' . $post_id . '|' . md5($current_title);
+
+	if (array_key_exists($cache_key, $title_cache)) {
+		return $title_cache[$cache_key];
+	}
+
 	$tables = classiadspro_translatepress_get_dictionary_tables_for_language($language_suffix);
 	if (empty($tables)) {
+		$title_cache[$cache_key] = null;
 		return null;
 	}
 
@@ -4254,13 +4296,16 @@ function classiadspro_translatepress_lookup_listing_title_by_post_id($post_id, $
 	}
 
 	if (!empty($preferred_candidates)) {
-		return reset($preferred_candidates);
+		$title_cache[$cache_key] = reset($preferred_candidates);
+		return $title_cache[$cache_key];
 	}
 
 	if (!empty($fallback_candidates)) {
-		return reset($fallback_candidates);
+		$title_cache[$cache_key] = reset($fallback_candidates);
+		return $title_cache[$cache_key];
 	}
 
+	$title_cache[$cache_key] = null;
 	return null;
 }
 
@@ -4348,11 +4393,21 @@ function classiadspro_translatepress_translate_term_name($term_name, $taxonomy) 
 		return $term_name;
 	}
 
+	static $term_translation_cache = [];
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$cache_key = $language_suffix . '|' . $taxonomy . '|' . md5($term_name);
+
+	if (array_key_exists($cache_key, $term_translation_cache)) {
+		return $term_translation_cache[$cache_key];
+	}
+
 	$translated = classiadspro_translatepress_translate_string($term_name, false);
 	if (is_string($translated) && $translated !== '') {
+		$term_translation_cache[$cache_key] = $translated;
 		return $translated;
 	}
 
+	$term_translation_cache[$cache_key] = $term_name;
 	return $term_name;
 }
 
