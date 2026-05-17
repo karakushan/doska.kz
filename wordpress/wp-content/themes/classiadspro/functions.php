@@ -153,6 +153,7 @@ function classiadspro_redirect_directorypress_dashboard_actions()
 	exit;
 }
 add_action('template_redirect', 'classiadspro_redirect_directorypress_dashboard_actions', 1);
+require_once get_template_directory() . '/includes/actions/term-ru-sync.php';
 
 function classiadspro_register_login_menu_widget_override($widgets_manager)
 {
@@ -181,6 +182,7 @@ require_once get_template_directory() . '/includes/actions/firebase.php';
 
 // Load Login Menu Messages Extension (using JavaScript/filters approach instead of class override)
 require_once get_template_directory() . '/includes/actions/login-menu-messages.php';
+require_once get_template_directory() . '/includes/actions/page-ru-sync.php';
 
 // Load Advertising System
 if (class_exists('DirectoryPress') && class_exists('WooCommerce')) {
@@ -4674,8 +4676,22 @@ function classiadspro_translatepress_ui_overrides() {
 	];
 }
 
+function classiadspro_is_directorypress_submit_request() {
+	$post = get_post();
+
+	if (!$post instanceof WP_Post) {
+		return false;
+	}
+
+	return has_shortcode($post->post_content, 'directorypress-submit');
+}
+
 function classiadspro_translatepress_start_ui_output_buffer() {
 	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
+		return;
+	}
+
+	if (classiadspro_is_directorypress_submit_request()) {
 		return;
 	}
 
@@ -4771,6 +4787,10 @@ function classiadspro_translatepress_text_node_has_excluded_ancestor($node) {
 
 function classiadspro_translatepress_start_single_listing_output_buffer() {
 	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
+		return;
+	}
+
+	if (classiadspro_is_directorypress_submit_request()) {
 		return;
 	}
 
