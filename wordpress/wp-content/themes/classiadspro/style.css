@@ -116,6 +116,23 @@ child theme or use custom.css in the same root this file locates.
   display: block;
 }
 
+.media-frame-tab-panel {
+  display: none !important;
+}
+
+.elementor-11775 .elementor-element.elementor-element-3a000493 .hfb-button i {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 0;
+    color: #fff;
+    background-color: #3a77ff;
+    border-radius: 0% 0% 0% 0%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
 @media (max-width: 991px) {
   .rs-currency-selector {
     width: 100%;
@@ -128,6 +145,23 @@ child theme or use custom.css in the same root this file locates.
 }
 
 @media (max-width: 768px) {
+  .elementor-11775 .elementor-element.elementor-element-3a000493 .hfb-button {
+
+    margin: -88px 0 0 0;
+    
+}
+  .rs-currency-selector--mobile .rs-currency-select {
+    min-height: 42px;
+    min-width: 100%!important;
+  }
+  .media-frame-menu {
+    display: none;
+  }
+  .directorypress-listings-block .responsive-2col .field-content,
+  .directorypress-listings-block .listing-post-style-2 .responsive-2col .field-content {
+    float: none;
+    line-height: 18px;
+  }
   .pacz-mobile-login-wrap .dropdown-content {
     width: 209px;
     top: 51px;

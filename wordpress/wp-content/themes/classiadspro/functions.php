@@ -35,7 +35,13 @@ add_action('after_setup_theme', 'classiadspro_load_textdomain');
  */
 function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
 {
-	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+	if (
+		is_admin() ||
+		wp_doing_ajax() ||
+		wp_doing_cron() ||
+		(defined('REST_REQUEST') && REST_REQUEST) ||
+		(defined('WP_CLI') && WP_CLI)
+	) {
 		return array();
 	}
 
@@ -2801,14 +2807,16 @@ function rs_get_current_currency() {
 		}
 	}
 
-	$host = strtolower($_SERVER['HTTP_HOST']);
+	$host = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
 	$domain_map = [
 		'doska.kz' => 'kz',
 	];
-	foreach ($domain_map as $domain => $code) {
-		if ($host === $domain || strpos($host, '.' . $domain) !== false) {
-			if (isset($map[$code])) {
-				return $map[$code];
+	if ($host !== '') {
+		foreach ($domain_map as $domain => $code) {
+			if ($host === $domain || strpos($host, '.' . $domain) !== false) {
+				if (isset($map[$code])) {
+					return $map[$code];
+				}
 			}
 		}
 	}
@@ -3187,7 +3195,7 @@ function rs_exchange_rates_admin_page() {
 
 				$.post(ajaxurl, {
 					action: 'rs_refresh_rates',
-					_wp_ajax_nonce: '<?php echo esc_js(wp_create_nonce("rs_refresh_rates_nonce")); ?>'
+					_ajax_nonce: '<?php echo esc_js(wp_create_nonce("rs_refresh_rates_nonce")); ?>'
 				}, function(response) {
 					$btn.prop('disabled', false);
 					if (response.success) {
@@ -4708,3 +4716,4 @@ function classiadspro_disable_hfb_header_on_mobile($enabled) {
 	return $enabled;
 }
 add_filter('hfb_header_enabled', 'classiadspro_disable_hfb_header_on_mobile');
+
