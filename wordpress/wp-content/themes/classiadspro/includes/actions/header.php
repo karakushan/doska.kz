@@ -234,9 +234,9 @@ if ( !function_exists( 'pacz_header_logreg' ) ) {
 					echo '<div class="dropdown">';
 						echo '<button class="dropbtn">'.$user_thumb .'</button>';
 						echo '<div class="dropdown-content"><ul class="clearfix">';
-							echo '<li><i class="fas fa-tachometer-alt"></i><a href="'.directorypress_dashboardUrl().'">'.esc_html__('My Dashboard', 'classiadspro').'</a></li>';
-							echo '<li><i class="fab fa-adversal"></i><a href="'.directorypress_dashboardUrl().'">'.esc_html__('My Listings', 'classiadspro').'</a></li>';
-							echo '<li><i class="fas fa-user"></i><a href="'.directorypress_dashboardUrl(array('directory_action' => 'profile')).'">'.esc_html__('Edit Profile', 'classiadspro').'</a></li>';
+							echo '<li><i class="fas fa-tachometer-alt"></i><a href="'.esc_url(classiadspro_get_directorypress_dashboard_url()).'">'.esc_html__('My Dashboard', 'classiadspro').'</a></li>';
+							echo '<li><i class="fab fa-adversal"></i><a href="'.esc_url(classiadspro_get_directorypress_dashboard_url()).'">'.esc_html__('My Listings', 'classiadspro').'</a></li>';
+							echo '<li><i class="fas fa-user"></i><a href="'.esc_url(classiadspro_get_directorypress_dashboard_url(array('directory_action' => 'profile'))).'">'.esc_html__('Edit Profile', 'classiadspro').'</a></li>';
 							echo '<li><i class="fas fa-sign-out-alt"></i><a href="'.wp_logout_url(esc_url( home_url('/'))).'">'.esc_html__('logout', 'classiadspro').'</a></li>';
 						echo '<ul></div>';
 					echo '</div>'; 
@@ -274,9 +274,9 @@ if ( !function_exists( 'pacz_mobile_header_login' ) ) {
 				echo '<div class="dropdown">';
 					echo '<button class="pacz-mobile-login dropbtn"><i class="'.$icon.'"></i><p class="author-name-header"></p></button>';
 					echo '<div class="dropdown-content"><ul class="clearfix">';
-						echo '<li><i class="fas fa-tachometer-alt"></i><a href="'.directorypress_dashboardUrl().'">'.esc_html__('My Dashboard', 'classiadspro').'</a></li>';
-						echo '<li><i class="fas fa-ad"></i><a href="'.directorypress_dashboardUrl().'">'.esc_html__('My Listings', 'classiadspro').'</a></li>';
-						echo '<li><i class="fas fa-user"></i><a href="'.directorypress_dashboardUrl(array('directory_action' => 'profile')).'">'.esc_html__('Edit Profile', 'classiadspro').'</a></li>';
+						echo '<li><i class="fas fa-tachometer-alt"></i><a href="'.esc_url(classiadspro_get_directorypress_dashboard_url()).'">'.esc_html__('My Dashboard', 'classiadspro').'</a></li>';
+						echo '<li><i class="fas fa-ad"></i><a href="'.esc_url(classiadspro_get_directorypress_dashboard_url()).'">'.esc_html__('My Listings', 'classiadspro').'</a></li>';
+						echo '<li><i class="fas fa-user"></i><a href="'.esc_url(classiadspro_get_directorypress_dashboard_url(array('directory_action' => 'profile'))).'">'.esc_html__('Edit Profile', 'classiadspro').'</a></li>';
 						echo '<li><i class="fas fa-sign-out-alt"></i><a href="'.wp_logout_url(esc_url( home_url('/'))).'">'.esc_html__('logout', 'classiadspro').'</a></li>';
 					echo '<ul></div>';
 				echo '</div>'; 

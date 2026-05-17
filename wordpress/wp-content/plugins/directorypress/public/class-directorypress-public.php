@@ -84,7 +84,7 @@ class DirectoryPress_Public_Handler {
 			wp_register_script('jquery-lity', DIRECTORYPRESS_RESOURCES_URL . 'lib/lity/js/lity.min.js', array('jquery'), false, true);
 			wp_register_script('select2', DIRECTORYPRESS_RESOURCES_URL . 'lib/select2/js/select2.min.js', array('jquery'), false, true);
 			wp_register_script('directorypress-select2-triger', DIRECTORYPRESS_RESOURCES_URL . 'lib/select2/js/select2-triger.js', array('jquery'), false, true);
-			wp_register_script('slick-js', DIRECTORYPRESS_RESOURCES_URL . 'lib/slick-carousel/js/slick.min.js', array('jquery'), false, true);
+			wp_register_script('slick', DIRECTORYPRESS_RESOURCES_URL . 'lib/slick-carousel/js/slick.min.js', array('jquery'), false, true);
 			wp_register_script('slick-carousel-triger', DIRECTORYPRESS_RESOURCES_URL . 'lib/slick-carousel/js/slick-triger.min.js', array('jquery'), false, true);
 			wp_register_script('directorypress-public', DIRECTORYPRESS_RESOURCES_URL . 'js/directorypress-public.js', array('jquery'), false, true);
 			wp_register_script('jquery-cookie', DIRECTORYPRESS_RESOURCES_URL . 'js/jquery.cookie.js', array('jquery'), false, true);

@@ -292,6 +292,7 @@ class directorypress_fields_admin {
 					if ($fields_group->id) {
 						if ($fields->save_fields_group_from_array($id, $validation->result_array())) {
 							directorypress_add_notification(esc_html__('updated successfully!', 'DIRECTORYPRESS'));
+							$fields_group->build_group_from_array($validation->result_array());
 							include('_html/add_edit_group.php');
 						}
 					} else {

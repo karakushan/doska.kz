@@ -324,7 +324,9 @@ class directorypress_ajax {
 					);
 				}
 				
-				wp_send_json($out);
+				echo json_encode($out);
+
+				break;
 		}
 		
 		die();
@@ -568,7 +570,7 @@ class directorypress_ajax {
 
 			if ($row && $row['location_id'] || $row['map_coords_1'] != '0.000000' || $row['map_coords_2'] != '0.000000' || $row['address_line_1'] || $row['zip_or_postal_index']) {
 				$listing = new directorypress_listing;
-				if ($listing->directorypress_init_lpost_listing($row['post_id'])) {
+				if ($listing->directorypress_init_lpost_listing($row['post_id']) && 'publish' === get_post_status( $row['post_id'] )) {
 					$location = new directorypress_location($row['post_id']);
 					$location_settings['id'] = directorypress_get_input_value($row, 'id');
 					$location_settings['selected_location'] = directorypress_get_input_value($row, 'location_id');

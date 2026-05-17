@@ -49,6 +49,133 @@ function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
 }
 add_filter('trp_translatable_slug_hooks_array', 'classiadspro_limit_trp_slug_translation_hooks_in_admin');
 
+/**
+ * Resolve a stable DirectoryPress dashboard URL even when the plugin-global
+ * dashboard page URL was not initialized before header widgets render.
+ *
+ * DirectoryPress normally populates this on `init`, but some header render
+ * paths can ask for the URL earlier and fall back to the directory archive.
+ */
+function classiadspro_get_directorypress_dashboard_base_url()
+{
+	static $dashboard_base_url = null;
+	global $wpdb;
+
+	if (is_string($dashboard_base_url) && $dashboard_base_url !== '') {
+		return $dashboard_base_url;
+	}
+
+	$dashboard_base_url = '';
+
+	if (function_exists('directorypress_dashboardUrl')) {
+		$candidate = directorypress_dashboardUrl();
+		if (is_string($candidate) && $candidate !== '' && $candidate !== '/' && $candidate !== home_url('/')) {
+			$dashboard_base_url = $candidate;
+			return $dashboard_base_url;
+		}
+	}
+
+	$dashboard_page_id = (int) $wpdb->get_var(
+		"SELECT ID
+		FROM {$wpdb->posts}
+		WHERE post_content LIKE '%[directorypress-dashboard]%'
+			AND post_status = 'publish'
+			AND post_type = 'page'
+		LIMIT 1"
+	);
+
+	if ($dashboard_page_id > 0) {
+		$dashboard_base_url = get_permalink($dashboard_page_id);
+	}
+
+	if (!$dashboard_base_url && function_exists('directorypress_dashboardUrl')) {
+		$dashboard_base_url = directorypress_dashboardUrl();
+	}
+
+	if (!$dashboard_base_url) {
+		$dashboard_base_url = home_url('/');
+	}
+
+	return $dashboard_base_url;
+}
+
+function classiadspro_get_directorypress_dashboard_url($args = array())
+{
+	$base_url = classiadspro_get_directorypress_dashboard_base_url();
+
+	if (!is_array($args) || empty($args)) {
+		return $base_url;
+	}
+
+	return add_query_arg($args, $base_url);
+}
+
+function classiadspro_redirect_directorypress_dashboard_actions()
+{
+	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+		return;
+	}
+
+	if (empty($_GET['directory_action'])) {
+		return;
+	}
+
+	$dashboard_actions = array(
+		'profile',
+		'messages',
+		'notification_settings',
+		'edit_advert',
+		'raiseup_listing',
+		'renew_listing',
+		'upgrade_listing',
+		'claim_listing',
+		'process_claim',
+		'add_translation',
+	);
+
+	$action = sanitize_key(wp_unslash($_GET['directory_action']));
+	if (!in_array($action, $dashboard_actions, true)) {
+		return;
+	}
+
+	$request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '/';
+	$current_url = home_url($request_uri);
+	$dashboard_url = classiadspro_get_directorypress_dashboard_url(wp_unslash($_GET));
+
+	$current_path = wp_parse_url($current_url, PHP_URL_PATH);
+	$dashboard_path = wp_parse_url($dashboard_url, PHP_URL_PATH);
+
+	if (!$dashboard_path || $current_path === $dashboard_path) {
+		return;
+	}
+
+	wp_safe_redirect($dashboard_url, 302);
+	exit;
+}
+add_action('template_redirect', 'classiadspro_redirect_directorypress_dashboard_actions', 1);
+
+function classiadspro_register_login_menu_widget_override($widgets_manager)
+{
+	if (
+		!class_exists('Header_Footer_Builder') ||
+		!class_exists('\Elementor\Widget_Base') ||
+		class_exists('\HFB\WidgetsManager\Widgets\Pacz_Elementor_Login')
+	) {
+		return;
+	}
+
+	require_once get_template_directory() . '/includes/elementor/login.php';
+
+	if (
+		is_object($widgets_manager) &&
+		method_exists($widgets_manager, 'register') &&
+		class_exists('\HFB\WidgetsManager\Widgets\Pacz_Elementor_Login')
+	) {
+		$widgets_manager->register(new \HFB\WidgetsManager\Widgets\Pacz_Elementor_Login());
+	}
+}
+add_action('elementor/widgets/register', 'classiadspro_register_login_menu_widget_override', 0);
+
 // Load Firebase Push Notifications
 require_once get_template_directory() . '/includes/actions/firebase.php';
 
@@ -4716,4 +4843,3 @@ function classiadspro_disable_hfb_header_on_mobile($enabled) {
 	return $enabled;
 }
 add_filter('hfb_header_enabled', 'classiadspro_disable_hfb_header_on_mobile');
-

@@ -25,7 +25,7 @@ function directorypress_is_user_allowed($user_roles_setting) {
 	if ($user_roles_setting) {
 		$user = wp_get_current_user();
 			
-		if (!array_intersect($user->roles, $user_roles_setting)) {
+		if (is_user_logged_in() && !array_intersect($user->roles, $user_roles_setting)) {
 			$user_allowed = false;
 		}
 	}

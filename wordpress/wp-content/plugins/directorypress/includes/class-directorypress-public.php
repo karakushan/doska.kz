@@ -190,7 +190,8 @@ class directorypress_public {
 	
 	public function where_packages_ids($where = '') {
 		if ($this->packages_ids)
-			$where .= " AND (directorypress_packages.id IN (" . implode(',', $this->packages_ids) . "))";
+			$sanitized_ids = array_map('intval', (array) $this->packages_ids);
+			$where .= " AND (directorypress_packages.id IN (" . implode(',', $sanitized_ids) . "))";
 		return $where;
 	}
 	

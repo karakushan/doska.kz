@@ -2081,15 +2081,15 @@ class Pacz_Elementor_Login extends Widget_Base {
 								if($settings['user_menu_dropdown'] == 'custom'){
 									$this->custom_user_menu_links();
 								}else{
-									echo '<li><a href="'. directorypress_dashboardUrl().'"><i class="fas fa-tachometer-alt"></i>'. esc_html__('My Dashboard', 'pacz') .'</a></li>';
-									echo '<li><a href="'. directorypress_dashboardUrl().'"><i class="fas fa-ad"></i>'. esc_html__('My Listings', 'pacz') .'</a></li>';
-									echo '<li><a href="'. directorypress_dashboardUrl(array('directory_action' => 'profile')) .'"><i class="fas fa-user"></i>'. esc_html__('Edit Profile', 'pacz') .'</a></li>';
+									echo '<li><a href="'. esc_url(\classiadspro_get_directorypress_dashboard_url()) .'"><i class="fas fa-tachometer-alt"></i>'. esc_html__('My Dashboard', 'pacz') .'</a></li>';
+									echo '<li><a href="'. esc_url(\classiadspro_get_directorypress_dashboard_url()) .'"><i class="fas fa-ad"></i>'. esc_html__('My Listings', 'pacz') .'</a></li>';
+									echo '<li><a href="'. esc_url(\classiadspro_get_directorypress_dashboard_url(array('directory_action' => 'profile'))) .'"><i class="fas fa-user"></i>'. esc_html__('Edit Profile', 'pacz') .'</a></li>';
 									
 									// Add Messages menu item with badge
 									if (function_exists('difp_get_new_message_number') && function_exists('directorypress_dashboardUrl')) {
 										$unread_count = difp_get_new_message_number();
 										$message_badge = $unread_count > 0 ? ' <span class="message-count-badge">' . esc_html($unread_count) . '</span>' : '';
-										echo '<li><a href="'. directorypress_dashboardUrl(array('directory_action' => 'messages')) .'"><i class="fas fa-envelope"></i>'. esc_html__('Messages', 'pacz') . $message_badge .'</a></li>';
+										echo '<li><a href="'. esc_url(\classiadspro_get_directorypress_dashboard_url(array('directory_action' => 'messages'))) .'"><i class="fas fa-envelope"></i>'. esc_html__('Messages', 'pacz') . $message_badge .'</a></li>';
 									}
 									
 									echo '<li><a href="'. wp_logout_url(esc_url( home_url('/'))) .'"><i class="fas fa-sign-out-alt"></i>'. esc_html__('logout', 'pacz') .'</a></li>';
@@ -2156,7 +2156,7 @@ class Pacz_Elementor_Login extends Widget_Base {
 						if($item['user_menu_dropdown_link_icon']){
 							Icons_Manager::render_icon( $item['user_menu_dropdown_link_icon'], [ 'aria-hidden' => 'true' ] );
 						}
-						echo esc_html($item['user_menu_dropdown_link_label']) .'</a>';
+						echo esc_html($item['user_menu_dropdown_link_label']);
 					echo '</a>';
 					
 				echo '</li>';

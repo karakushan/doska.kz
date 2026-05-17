@@ -779,16 +779,16 @@ $pp_title_font_weight = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_typo']['font-w
 $pp_title_font_line_height = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_typo']['line-height']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_typo']['line-height'])) ? ('line-height:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_typo']['line-height'] . ' !important;') : '';
 $pp_title_font_transform = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_typo_transform']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_typo_transform'])) ? ('text-transform: ' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_typo_transform'] . ' !important;') : ('text-transform: uppercase;');
 
-$pp_price_font_family = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-family']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-family'])) ? ('font-family:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-family'] . ';') : '';
-$pp_price_font_size = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-size']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-size'])) ? ('font-size:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-size'] . ';') : '';
-$pp_price_font_weight = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-weight']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-weight'])) ? ('font-weight:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-weight'] . ';') : '';
-$pp_price_font_line_height = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['line-height']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['line-heigh'])) ? ('line-height:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['line-height'] . ';') : '';
-$pp_price_font_transform = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo_transform']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo_transform'])) ? ('text-transform: ' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo_transform'] . ';') : ('text-transform: uppercase;');
+$pp_price_font_family = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-family']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-family'])) ? ('font-family:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-family'] . ' !important;') : '';
+$pp_price_font_size = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-size']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-size'])) ? ('font-size:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-size'] . ' !important;') : '';
+$pp_price_font_weight = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-weight']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-weight'])) ? ('font-weight:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['font-weight'] . ' !important;') : '';
+$pp_price_font_line_height = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['line-height']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['line-heigh'])) ? ('line-height:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo']['line-height'] . ' !important;') : '';
+$pp_price_font_transform = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo_transform']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo_transform'])) ? ('text-transform: ' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_typo_transform'] . ' !important;') : ('text-transform: uppercase;');
 
-$pp_list_font_family = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-family']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-family'])) ? ('font-family:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-family'] . ';') : '';
-$pp_list_font_size = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-size']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-size'])) ? ('font-size:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-size'] . ';') : '';
-$pp_list_font_weight = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-weight']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-weight'])) ? ('font-weight:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-weight'] . ';') : '';
-$pp_list_font_line_height = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['line-height']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['line-heigh'])) ? ('line-height:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['line-height'] . ';') : '';
+$pp_list_font_family = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-family']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-family'])) ? ('font-family:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-family'] . ' !important;') : '';
+$pp_list_font_size = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-size']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-size'])) ? ('font-size:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-size'] . ' !important;') : '';
+$pp_list_font_weight = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-weight']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-weight'])) ? ('font-weight:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['font-weight'] . ' !important;') : '';
+$pp_list_font_line_height = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['line-height']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['line-heigh'])) ? ('line-height:' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo']['line-height'] . ' !important;') : '';
 $pp_list_font_transform = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo_transform']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo_transform'])) ? ('text-transform: ' . $DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo_transform'] . ' !important;') : '';
 
 /* text color */
@@ -796,8 +796,8 @@ $pp_list_font_transform = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_typo_tr
 $pp_title_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_color']['regular']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_color']['regular'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_color']['regular']. ' !important;') : '';
 $pp_title_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_color']['hover']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_color']['hover'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_title_color']['hover']. ' !important;') : '';
 
-$pp_list_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['regular']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['regular'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['regular']. ';') : '';
-$pp_list_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['hover']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['hover'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['hover']. ';') : '';
+$pp_list_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['regular']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['regular'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['regular']. ' !important;') : '';
+$pp_list_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['hover']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['hover'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_color']['hover']. ' !important;') : '';
 
 $pp_price_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color']['regular']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color']['regular'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color']['regular']. ' !important;') : '';
 $pp_price_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color']['hover']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color']['hover'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color']['hover']. '!important;') : '';
@@ -805,13 +805,13 @@ $pp_price_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_price_color'][
 $pp_button_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_color']['regular']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_color']['regular'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_color']['regular']. ' !important;') : '';
 $pp_button_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_color']['hover']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_color']['hover'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_color']['hover']. ' !important;') : '';
 
-$pp_icon_check_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_check_icon_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_check_icon_color']['color'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_check_icon_color']['rgba']. ';') : '';
-$pp_icon_remove_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_remove_icon_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_remove_icon_color']['color'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_remove_icon_color']['rgba']. ';') : '';
+$pp_icon_check_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_check_icon_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_check_icon_color']['color'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_check_icon_color']['rgba']. ' !important;') : '';
+$pp_icon_remove_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_remove_icon_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_remove_icon_color']['color'])) ? ('color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_remove_icon_color']['rgba']. ' !important;') : '';
 
 /* background color */
 
-$pp_wrapper_bg = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg']['color'])) ? ('background-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg']['rgba']. ';') : '';
-$pp_wrapper_bg_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg_hover']['color'])) ? ('background-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg_hover']['rgba']. ';') : '';
+$pp_wrapper_bg = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg']['color'])) ? ('background-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg']['rgba']. ' !important;') : '';
+$pp_wrapper_bg_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg_hover']['color'])) ? ('background-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_bg_hover']['rgba']. ' !important;') : '';
 
 $pp_list_bg = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_bg']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_bg']['color'])) ? ('background-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_bg']['rgba']. ' !important;') : '';
 $pp_list_bg_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_bg_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_bg_hover']['color'])) ? ('background-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_bg_hover']['rgba']. ' !important;') : '';
@@ -821,21 +821,21 @@ $pp_button_bg_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_bg_hover'
 
 /* border color */
 
-$pp_wrapper_border_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color']['rgba']. ';') : '';
-$pp_wrapper_border_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color_hover']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color_hover']['rgba']. ';') : '';
+$pp_wrapper_border_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color']['rgba']. ' !important;') : '';
+$pp_wrapper_border_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color_hover']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_border_color_hover']['rgba']. ' !important;') : '';
 
 $pp_list_border_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_border_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_border_color']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_border_color']['rgba']. ' !important;') : '';
 $pp_list_border_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_border_color_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_border_color_hover']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_list_border_color_hover']['rgba']. ' !important;') : '';
 
 $pp_button_border_color = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color']['rgba']. ' !important;') : '';
-$pp_button_border_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color_hover']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color_hover']['rgba']. ';') : '';
+$pp_button_border_color_hover = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color_hover']['rgba']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color_hover']['color'])) ? ('border-color:' .$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_border_color_hover']['rgba']. ' !important;') : '';
 
 /* border radius */
 
-$pp_wrapper_border_radius_top = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-top']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-top'])) ? ('border-top-left-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-top'].';') : '';
-$pp_wrapper_border_radius_bottom = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-bottom']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-bottom'])) ? ('border-bottom-right-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-bottom'].';') : '';
-$pp_wrapper_border_radius_left = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-left']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-left'])) ? ('border-bottom-left-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-left'].';') : '';
-$pp_wrapper_border_radius_right = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-right']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-right'])) ? ('border-top-right-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-right'].';') : '';
+$pp_wrapper_border_radius_top = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-top']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-top'])) ? ('border-top-left-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-top'].' !important;') : '';
+$pp_wrapper_border_radius_bottom = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-bottom']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-bottom'])) ? ('border-bottom-right-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-bottom'].' !important;') : '';
+$pp_wrapper_border_radius_left = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-left']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-left'])) ? ('border-bottom-left-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-left'].' !important;') : '';
+$pp_wrapper_border_radius_right = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-right']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-right'])) ? ('border-top-right-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_wrapper_radius']['padding-right'].' !important;') : '';
 
 $pp_button_border_radius_top = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_radius']['padding-top']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_radius']['padding-top'])) ? ('border-top-left-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_radius']['padding-top'].' !important;') : '';
 $pp_button_border_radius_bottom = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_radius']['padding-bottom']) && !empty($DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_radius']['padding-bottom'])) ? ('border-bottom-right-radius:'.$DIRECTORYPRESS_ADIMN_SETTINGS['pp_button_radius']['padding-bottom'].' !important;') : '';
@@ -919,7 +919,7 @@ DirectoryPress_Static_Files::addGlobalStyle("
 	.directorypress-choose-plan .directorypress-list-group .directorypress-list-group-item .directorypress-icon-remove{
 		{$pp_icon_remove_color}
 	}
-	.directorypress-choose-plan .directorypress-list-group .directorypress-list-group-item.pp-button a.pricing-button{
+	.directorypress-choose-plan .directorypress-list-group-item.pp-button a.pricing-button{
 		{$pp_button_bg}
 		{$pp_button_border_width}
 		{$pp_button_border_color}
@@ -929,7 +929,7 @@ DirectoryPress_Static_Files::addGlobalStyle("
 		{$pp_button_border_radius_right}
 		{$pp_button_color}
 	}
-	.directorypress-choose-plan .directorypress-list-group .directorypress-list-group-item.pp-button a.pricing-button:hover{
+	.directorypress-choose-plan .directorypress-list-group-item.pp-button a.pricing-button:hover{
 		{$pp_button_bg_hover}
 		{$pp_button_border_color_hover}
 		{$pp_button_color_hover}

@@ -3,7 +3,7 @@
  * Plugin Name:       DirectoryPress
  * Plugin URI:        https://designinvento.net/downloads/directorypress-wordpress-directory-plugin/
  * Description:       DirectoryPress offers ultimate functionality for business directory listing, classified ads listing. Real estate, pets directory, yellow pages, automobile or any kind of directory. 
- * Version:           3.6.25
+ * Version:           3.6.27
  * Author:            Designinvento
  * Author URI:        https://designinvento.net/
  * License:           GPL-2.0+
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 // = Plugin Version =
 // ==================
 
-define( 'DIRECTORYPRESS_VERSION', '3.6.25' );
+define( 'DIRECTORYPRESS_VERSION', '3.6.27' );
 
 $DIRECTORYPRESS_ADIMN_SETTINGS = get_option('directorypress_admin_settings');
 

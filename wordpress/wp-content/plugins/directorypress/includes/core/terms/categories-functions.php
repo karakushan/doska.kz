@@ -385,61 +385,75 @@ function directorypress_render_cat_bg_image( $cat_icon = array(), $id = 'categor
 // Save Category Fields
 function directorypress_save_category_fields_ajax() {
 	$response = array();
-	$term_id = sanitize_text_field($_POST['term_id']);
 	
-	if ( isset( $_POST['directorypress_category_icon'] ) ) {
-            
-		update_term_meta( esc_attr($term_id), 'directorypress_category_icon', $_POST['directorypress_category_icon'] );
+	if ( ! wp_verify_nonce( $_POST['nonce'], 'directorypress-ajax-nonce' ) ) {
+        $response['type'] = 'error';
+		$response = esc_html__('no permission!', 'DIRECTORYPRESS');      
+    }else{
+		if (current_user_can( 'manage_options' ) ) {
+			
+			$term_id = sanitize_text_field($_POST['term_id']);
+			
+			if ( isset( $_POST['directorypress_category_icon'] ) ) {
+					
+				update_term_meta( esc_attr($term_id), 'directorypress_category_icon', $_POST['directorypress_category_icon'] );
+			}
+			if ( isset( $_POST['directorypress_category_icon_for_listing'] ) ) {
+				update_term_meta( esc_attr($term_id), 'directorypress_category_icon_for_listing', $_POST['directorypress_category_icon_for_listing'] );
+			}
+			if ( isset( $_POST['directorypress_category_icon_for_map'] ) ) {
+					
+				update_term_meta( esc_attr($term_id), 'directorypress_category_icon_for_map', $_POST['directorypress_category_icon_for_map'] );
+			}
+			if ( isset( $_POST['category-image-id'] ) ) {
+					
+					update_term_meta( esc_attr($term_id), 'category-image-id', $_POST['category-image-id'] );
+			}
+			if ( isset( $_POST['directorypress_category_font_icon'] ) ) {
+					$directorypress_category_font_icon = sanitize_text_field($_POST['directorypress_category_font_icon']);
+					 update_term_meta( esc_attr($term_id), 'directorypress_category_font_icon', $directorypress_category_font_icon );
+			}
+			if ( isset( $_POST['marker_color'] ) ) {
+					$directorypress_category_color = sanitize_text_field($_POST['marker_color']);
+					 update_term_meta(esc_attr($term_id), 'marker_color', $directorypress_category_color );
+			}
+			
+			$response['type'] = 'success';
+			$response['message'] = esc_html__('updated successfully', 'DIRECTORYPRESS');
+		}else{
+			$response['type'] = 'error';
+			$response = esc_html__('no permission!', 'DIRECTORYPRESS');
+		}
 	}
-	if ( isset( $_POST['directorypress_category_icon_for_listing'] ) ) {
-		update_term_meta( esc_attr($term_id), 'directorypress_category_icon_for_listing', $_POST['directorypress_category_icon_for_listing'] );
-	}
-	if ( isset( $_POST['directorypress_category_icon_for_map'] ) ) {
-            
-		update_term_meta( esc_attr($term_id), 'directorypress_category_icon_for_map', $_POST['directorypress_category_icon_for_map'] );
-	}
-	if ( isset( $_POST['category-image-id'] ) ) {
-            
-			update_term_meta( esc_attr($term_id), 'category-image-id', $_POST['category-image-id'] );
-	}
-	if ( isset( $_POST['directorypress_category_font_icon'] ) ) {
-            $directorypress_category_font_icon = sanitize_text_field($_POST['directorypress_category_font_icon']);
-			 update_term_meta( esc_attr($term_id), 'directorypress_category_font_icon', $directorypress_category_font_icon );
-	}
-	if ( isset( $_POST['marker_color'] ) ) {
-            $directorypress_category_color = sanitize_text_field($_POST['marker_color']);
-			 update_term_meta(esc_attr($term_id), 'marker_color', $directorypress_category_color );
-	}
-	
-	$response['type'] = 'success';
-	$response['message'] = esc_html__('updated successfully', 'DIRECTORYPRESS');
 	
 	wp_send_json($response); 
 	
 }
 function directorypress_save_category_fields( $term_id, $tt_id = '', $taxonomy = '' ) {
-	if ( isset( $_POST['directorypress_category_icon'] ) ) {
-            
-		update_term_meta( $term_id, 'directorypress_category_icon', $_POST['directorypress_category_icon'] );
-	}
-	if ( isset( $_POST['directorypress_category_icon_for_listing'] ) ) {
-            
-		update_term_meta( $term_id, 'directorypress_category_icon_for_listing', $_POST['directorypress_category_icon_for_listing'] );
-	}
-	if ( isset( $_POST['directorypress_category_icon_for_map'] ) ) {
-        
-		update_term_meta( $term_id, 'directorypress_category_icon_for_map', $_POST['directorypress_category_icon_for_map'] );
-	}
-	if ( isset( $_POST['category-image-id'] ) ) {
-		update_term_meta( $term_id, 'category-image-id', $_POST['category-image-id'] );
-	}
-	if ( isset( $_POST['directorypress_category_font_icon'] ) ) {
-            $directorypress_category_font_icon = sanitize_text_field($_POST['directorypress_category_font_icon']);
-			 update_term_meta( $term_id, 'directorypress_category_font_icon', $directorypress_category_font_icon );
-	}
-	if ( isset( $_POST['marker_color'] ) ) {
-            $directorypress_category_color = sanitize_text_field($_POST['marker_color']);
-			 update_term_meta( $term_id, 'marker_color', $directorypress_category_color );
+	if (current_user_can( 'manage_options' ) ) {
+		if ( isset( $_POST['directorypress_category_icon'] ) ) {
+				
+			update_term_meta( $term_id, 'directorypress_category_icon', $_POST['directorypress_category_icon'] );
+		}
+		if ( isset( $_POST['directorypress_category_icon_for_listing'] ) ) {
+				
+			update_term_meta( $term_id, 'directorypress_category_icon_for_listing', $_POST['directorypress_category_icon_for_listing'] );
+		}
+		if ( isset( $_POST['directorypress_category_icon_for_map'] ) ) {
+			
+			update_term_meta( $term_id, 'directorypress_category_icon_for_map', $_POST['directorypress_category_icon_for_map'] );
+		}
+		if ( isset( $_POST['category-image-id'] ) ) {
+			update_term_meta( $term_id, 'category-image-id', $_POST['category-image-id'] );
+		}
+		if ( isset( $_POST['directorypress_category_font_icon'] ) ) {
+				$directorypress_category_font_icon = sanitize_text_field($_POST['directorypress_category_font_icon']);
+				 update_term_meta( $term_id, 'directorypress_category_font_icon', $directorypress_category_font_icon );
+		}
+		if ( isset( $_POST['marker_color'] ) ) {
+				$directorypress_category_color = sanitize_text_field($_POST['marker_color']);
+				 update_term_meta( $term_id, 'marker_color', $directorypress_category_color );
+		}
 	}
 	
 }

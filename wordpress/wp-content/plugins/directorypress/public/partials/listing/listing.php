@@ -211,14 +211,11 @@
 			$nofollow = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_listing_nofollow_link']) && $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_listing_nofollow_link'])? 'rel="nofollow"':'';
 			
 			echo '<header class="directorypress-listing-title">';
-			if($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_exert_type'] == 'words'){
-				echo '<h2><a href="'. esc_url(get_permalink()).'" title="'. esc_attr($listing->title()) .'" '. wp_kses_post($nofollow) .'>'. esc_html(wp_trim_words($listing->title(), $title_limit, '')) .'</a></h2>';
-			}else{
-				$trimmed_title = function_exists('mb_substr')
-					? mb_substr($listing->title(), 0, $title_limit, 'UTF-8')
-					: substr($listing->title(), 0, $title_limit);
-				echo '<h2><a href="'. esc_url(get_permalink()).'" title="'. esc_attr($listing->title()) .'" '. wp_kses_post($nofollow) .'>'. esc_html($trimmed_title).'</a></h2>';
-			}
+				if($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_exert_type'] == 'words'){
+					echo '<h2><a href="'. esc_url(get_permalink()).'" title="'. esc_attr($listing->title()) .'" '. wp_kses_post($nofollow) .'>'. esc_html(wp_trim_words($listing->title(), $title_limit, '')) .'</a></h2>';
+				}else{
+					echo '<h2><a href="'. esc_url(get_permalink()).'" title="'. esc_attr($listing->title()) .'" '. wp_kses_post($nofollow) .'>'. esc_html(substr($listing->title(), 0, $title_limit)).'</a></h2>';
+				}
 			echo '</header>';
 		}
 	}

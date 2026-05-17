@@ -289,6 +289,7 @@ class directorypress_fields_group {
 	public $on_tab;
 	public $group_style;
 	public $hide_anonymous;
+	public $icon = '';
 	public $fields_array = array();
 
 	public function __construct($row = null) {
@@ -298,12 +299,14 @@ class directorypress_fields_group {
 			$this->on_tab = $row['on_tab'];
 			$this->group_style = (isset($row['group_style']))? $row['group_style'] :'';
 			$this->hide_anonymous = $row['hide_anonymous'];
+			$this->icon = $row['icon'];
 		}
 	}
 	
 	public function validation() {
 		$validation = new directorypress_form_validation();
 		$validation->set_rules('name', esc_html__('Group name', 'DIRECTORYPRESS'), 'required');
+		$validation->set_rules('icon', esc_html__('Group icon', 'DIRECTORYPRESS'));
 		$validation->set_rules('on_tab', esc_html__('Show on Tab', 'DIRECTORYPRESS'), 'is_checked');
 		$validation->set_rules('group_style', esc_html__('Group style', 'DIRECTORYPRESS'), 'required');
 		$validation->set_rules('hide_anonymous', esc_html__('Hide from anonymous', 'DIRECTORYPRESS'), 'is_checked');
@@ -318,6 +321,7 @@ class directorypress_fields_group {
 				'on_tab' => directorypress_get_input_value($array, 'on_tab'),
 				'group_style' => $array['group_style'],
 				'hide_anonymous' => directorypress_get_input_value($array, 'hide_anonymous'),
+				'icon' => directorypress_get_input_value($array, 'icon'),
 		);
 		
 		$insert_update_args = apply_filters('directorypress_field_group_create_edit_args', $insert_update_args, $this, $array);
@@ -339,6 +343,7 @@ class directorypress_fields_group {
 				'on_tab' => directorypress_get_input_value($array, 'on_tab'),
 				'group_style' => $array['group_style'],
 				'hide_anonymous' => directorypress_get_input_value($array, 'hide_anonymous'),
+				'icon' => directorypress_get_input_value($array, 'icon'),
 		);
 		
 		$insert_update_args = apply_filters('directorypress_field_group_create_edit_args', $insert_update_args, $this, $array);
@@ -357,7 +362,16 @@ class directorypress_fields_group {
 		$wpdb->update($wpdb->directorypress_fields, array('group_id' => 0), array('group_id' => $this->id)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- no valid wrapper available for custom tables and caching not required in this use case
 		return true;
 	}
+	public function build_group_from_array($array) {
 	
+			$this->id = directorypress_get_input_value($array, 'id');
+			$this->name = directorypress_get_input_value($array, 'name');
+			$this->on_tab = directorypress_get_input_value($array, 'on_tab');
+			$this->group_style = directorypress_get_input_value($array, 'group_style');
+			$this->hide_anonymous = directorypress_get_input_value($array, 'hide_anonymous');
+			$this->icon = directorypress_get_input_value($array, 'icon');
+		
+	}
 	public function set_directorypress_fields($fields_array) {
 		foreach ($fields_array AS $field) {
 			if ($this->id == $field->group_id)

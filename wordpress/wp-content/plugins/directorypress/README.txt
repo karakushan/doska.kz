@@ -3,8 +3,8 @@ Contributors: Designinvento
 Donate link: https://designinvento.net/
 Tags: business directory, classified, car dealer, directories, directory listing
 Requires at least: 6.0
-Tested up to: 6.8.2
-Stable tag: 3.6.25
+Tested up to: 6.9.1
+Stable tag: 3.6.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,8 +225,12 @@ DirectoryPress is supported for Elementor and WpBckery page builders, Apart from
 =Does DirectoryPress Works without addon plugins or i need to purchase all addons=
 DirectoryPress does not require any addon plugin, but premium addons can extend the functionality of core plugin.
 
-=Can user Manage and Submit listing from Front-end?
+=Can user Manage and Submit listing from Front-end?=
 Yes DirectoryPress offer most robust front-end user panel with listing management, Profile management, Orders management, inbox messages and many more
+
+=Where do I report security bugs found in this plugin?=
+
+Please report security bugs found in the source code of the DirectoryPress plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbbdb-1bbd-4a13-87fd-09d508dad75c). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Installation ==
 
@@ -235,6 +239,14 @@ Yes DirectoryPress offer most robust front-end user panel with listing managemen
 2. Activate the plugin through the 'Plugins' screen in WordPress
 
 == Changelog ==
+= 3.6.27 =
+* Security Vulnerabilities Fixed
+* minor fixes
+
+= 3.6.26 =
+* Security Improvement
+* minor fixes
+
 = 3.6.25 =
 * Security Improvement
 * Woocomerce compatibility checked.

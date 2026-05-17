@@ -26,6 +26,7 @@ class directorypress_directory_handler extends directorypress_public {
 	public $listing_view;
 	public $listing;
 	public $category;
+	public $location;
 
 	public function init($shortcode_atts = array(), $shortcode = 'directorypress-main') {
 		global $directorypress_object, $DIRECTORYPRESS_ADIMN_SETTINGS;
@@ -299,11 +300,13 @@ class directorypress_directory_handler extends directorypress_public {
 				add_action('wp_head', array($this, 'change_global_post'), -1000);
 				add_action('wp_head', array($this, 'back_global_post'), 1000);
 				add_action('wp_head', array($this, 'insert_opengraph_metadat'), -10);
-				if (function_exists('rel_canonical')) {
-					remove_action('wp_head', 'rel_canonical');
-				}
+				
 				// replace the default WordPress canonical URL function with your own
 				add_action('wp_head', array($this, 'rel_canonical_with_custom_tag_override'));
+				add_filter( 'rank_math/frontend/canonical', function( $canonical ) {
+					return get_permalink($this->listing->post->ID);
+				});
+				
 			} else {
 				$this->set404();
 			}
@@ -314,6 +317,13 @@ class directorypress_directory_handler extends directorypress_public {
 		} elseif (get_query_var('category-directorypress')) {
 			
 			do_action('archive_category_page', $this, $search_args, $shortcode_atts, $map_args);
+			//add_action('wp_head', array($this, 'insert_opengraph_metadat'), -10);
+				
+				// replace the default WordPress canonical URL function with your own
+				add_action('wp_head', array($this, 'rel_canonical_with_custom_tag_override'));
+				//add_filter( 'rank_math/frontend/canonical', function( $canonical ) {
+//return get_permalink($this->listing->post->ID);
+				//});
 		
 		} elseif (get_query_var('location-directorypress')) {
 			
@@ -518,13 +528,32 @@ class directorypress_directory_handler extends directorypress_public {
 	
 	public function page_title($title, $separator = '|') {
 		
-		if ($this->getPageTitle()){
-			$title = $this->getPageTitle() . ' ' . $separator . ' ';
-		}
-		if (directorypress_wpml_supported_settings('directorypress_directory_title')){ 
-			$title .= directorypress_wpml_supported_settings('directorypress_directory_title');
+		if ($category_object = directorypress_get_term_by_path(get_query_var('category-directorypress'))) {
+			$rm_seo_title = get_term_meta( $category_object->term_id, 'rank_math_title', true );
+			if($rm_seo_title && !empty($rm_seo_title)){
+				$title = $rm_seo_title;
+			}else{
+				$title = $category_object->name . ' ' . $separator . ' ';
+				if (directorypress_wpml_supported_settings('directorypress_directory_title')){ 
+					$title .= directorypress_wpml_supported_settings('directorypress_directory_title');
+				}else{
+					$title .= get_option('blogname');
+				}
+			}
 		}else{
-			$title .= get_option('blogname');
+			$rm_seo_title = get_post_meta( $this->listing->post->ID, 'rank_math_title', true );
+			if($rm_seo_title && !empty($rm_seo_title)){
+				$title = $rm_seo_title;
+			}else{
+				if ($this->getPageTitle()){
+					$title = $this->getPageTitle() . ' ' . $separator . ' ';
+				}
+				if (directorypress_wpml_supported_settings('directorypress_directory_title')){ 
+					$title .= directorypress_wpml_supported_settings('directorypress_directory_title');
+				}else{
+					$title .= get_option('blogname');
+				}
+			}
 		}
 		
 		return $title;
@@ -532,8 +561,8 @@ class directorypress_directory_handler extends directorypress_public {
 
 	// rewrite canonical URL
 	public function rel_canonical_with_custom_tag_override() {
-		echo '<link rel="canonical" href="' . esc_url(get_permalink($this->listing->post->ID)) . '" />
-';
+		echo '<link rel="canonical" href="' . esc_url(get_permalink($this->listing->post->ID)) . '" />';
+		add_filter('rank_math/frontend/canonical', array($this, 'opengraph_url'),11);
 	}
 	
 	// Adding the Open Graph in the Language Attributes
@@ -551,7 +580,7 @@ class directorypress_directory_handler extends directorypress_public {
 	public function insert_opengraph_metadat() {
 		echo '<meta property="og:type" content="article" data-directorypress-og-meta="true" />';
 		echo '<meta property="og:title" content="' . esc_attr($this->opengraph_title()) . '" />';
-	
+		echo '<link rel="canonical" href="' . esc_url(get_permalink($this->listing->post->ID)) . '" />';
 		echo '<meta property="og:description" content="' . esc_attr($this->opengraph_description()) . '" />';
 		echo '<meta property="og:url" content="' . esc_url($this->opengraph_url()) . '" />';
 		echo '<meta property="og:site_name" content="' . esc_attr($this->opengraph_site_name()) . '" />';
@@ -564,11 +593,39 @@ class directorypress_directory_handler extends directorypress_public {
 		add_filter('wpseo_opengraph_url', array($this, 'opengraph_url'), 10, 2);
 		add_filter('wpseo_opengraph_image', array($this, 'opengraph_image'), 10, 2);
 		add_filter('wpseo_opengraph_site_name', array($this, 'opengraph_site_name'), 10, 2);
+		add_filter('rank_math/frontend/title', array($this, 'opengraph_title'));
+		add_filter('rank_math/frontend/description', array($this, 'rankmath_description'));
+		add_filter('rank_math/opengraph/url', array($this, 'opengraph_url'));
+		add_filter('rank_math/frontend/robots', array($this, 'rankmath_robots'));
+		remove_action( 'rank_math/head', 'rank_math_canonical' );
 	}
+	/*public rankmath_data($robots){
+		$meta_description = get_post_meta( $this->listing->post->ID, '_rank_math_description', true );
+		//if ( is_single() && has_category( 'my-category', get_the_ID() ) ) {
+        $robots['index'] = 'noindex'; // Add 'noindex' to the robots meta
+    //}
+    return $robots;
+	}*/
 	
 	public function opengraph_title() {
+		
 		global $DIRECTORYPRESS_ADIMN_SETTINGS;
-		return esc_attr($this->listing->title()) . ' - ' . $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_directory_title'];
+		if ($category_object = directorypress_get_term_by_path(get_query_var('category-directorypress'))) {
+			$rm_seo_title = get_term_meta( $category_object->term_id, 'rank_math_title', true );
+			if($rm_seo_title && !empty($rm_seo_title)){
+				return $rm_seo_title;
+			}else{
+				return $category_object->name;
+			}
+		}else{
+			
+			$rm_seo_title = get_post_meta( $this->listing->post->ID, 'rank_math_title', true );
+			if($rm_seo_title && !empty($rm_seo_title)){
+				return $rm_seo_title;
+			}else{
+				return esc_attr($this->listing->title()) . ' - ' . $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_directory_title'];
+			}
+		}
 	}
 	
 	public function opengraph_description() {
@@ -579,6 +636,28 @@ class directorypress_directory_handler extends directorypress_public {
 		}
 	
 		return esc_attr($excerpt);
+	}
+	
+	public function rankmath_description() {
+		if ($category_object = directorypress_get_term_by_path(get_query_var('category-directorypress'))) {
+			$desc = RankMath\Post::get_meta( 'description', $category_object->term_id );
+		}else{
+			$desc = RankMath\Post::get_meta( 'description', $this->listing->post->ID );
+		}
+		
+
+		 if ($desc ) {
+			return $desc;
+		 
+		 }else{
+
+			return $description;
+		 }
+	}
+	public function rankmath_robots($robots) {
+		//$robots = get_post_meta( $this->listing->post->ID, 'rank_math_robots', true );
+		$robots['index'] = 'index';
+		return $robots;
 	}
 	
 	public function opengraph_url() {
@@ -606,37 +685,36 @@ function directorypress_handle_wpcf7() {
 	global $DIRECTORYPRESS_ADIMN_SETTINGS;
 	if (defined('WPCF7_VERSION')) {
 		if ($DIRECTORYPRESS_ADIMN_SETTINGS['message_system'] == 'email_messages' && defined('WPCF7_VERSION') && directorypress_wpml_supported_settings('directorypress_listing_contact_form_7')) {
-			add_filter('wpcf7_mail_components', 'directorypress_wpcf7_handle_email', 10, 2);
+			add_filter('wpcf7_before_send_mail', 'directorypress_wpcf7_handle_email', 10, 3);
 		}
-			
-		function directorypress_wpcf7_handle_email($WPCF7_components, $WPCF7_currentform) {
-			if (isset($_REQUEST['listing_id'])) {
-				$post = get_post($_REQUEST['listing_id']);
-	
-				$mail = $WPCF7_currentform->prop('mail');
-				// DO not touch mail_2
-				if ($mail['recipient'] == $WPCF7_components['recipient']) {
-					if ($post && isset($_POST['_wpcf7']) && preg_match_all('/'.get_shortcode_regex().'/s', directorypress_wpml_supported_settings('directorypress_listing_contact_form_7'), $matches)) {
-						foreach ($matches[2] AS $key=>$shortcode) {
-							if ($shortcode == 'contact-form-7') {
-								if ($attrs = shortcode_parse_atts($matches[3][$key])) {
-									if (isset($attrs['id']) && $attrs['id'] == $_POST['_wpcf7']) {
-										$contact_email = null;
-										if ($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_custom_contact_email'] && ($listing = directorypress_get_listing($post)) && $listing->contact_email) {
-											$contact_email = $listing->contact_email;
-										} elseif (($listing_owner = get_userdata($post->post_author)) && $listing_owner->user_email) {
-											$contact_email = $listing_owner->user_email;
-										}
-										if ($contact_email)
-											$WPCF7_components['recipient'] = $contact_email;
-									}
-								}
-							}
-						}
-					}
+		
+		function directorypress_wpcf7_handle_email( $contact_form, $abort, $submission ) {
+			global $DIRECTORYPRESS_ADIMN_SETTINGS;
+			// Get the current mail properties
+			$properties = $contact_form->get_properties();
+			$posted_data = $submission->get_posted_data();
+			$listing_id = $posted_data['listing_id'];
+			if(isset($listing_id) && !empty($listing_id)){
+				$post = get_post($listing_id);
+				if ($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_custom_contact_email'] && ($listing = directorypress_get_listing($post)) && $listing->contact_email) {
+					$contact_email = $listing->contact_email;
+				} elseif (($listing_owner = get_userdata($post->post_author)) && $listing_owner->user_email) {
+					$contact_email = $listing_owner->user_email;
+				}else{
+					$contact_email = null;
+				}
+				if($contact_email){
+					$new_recipient = $contact_email;
+
+					// Update the recipient in the mail properties
+					$properties['mail']['recipient'] = $new_recipient;
+				
+					// Set the updated properties back to the contact form
+					$contact_form->set_properties( $properties );
 				}
 			}
-			return $WPCF7_components;
+
+			return $contact_form;
 		}
 	}
 }

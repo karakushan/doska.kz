@@ -59,7 +59,7 @@ class DirectoryPress {
 		if ( defined( 'DIRECTORYPRESS_VERSION' ) ) {
 			$this->version = DIRECTORYPRESS_VERSION;
 		}else{
-			$this->version = '3.6.25';
+			$this->version = '3.6.27';
 		}
 		$this->plugin_name = 'directorypress';
 		define("DIRECTORYPRESS_OPTIONS_BUILD", $this->plugin_name . '_dirctorypress_options_build');
@@ -137,7 +137,7 @@ class DirectoryPress {
 		}
 		add_action('init', 'directorypress_init_session');
 		add_action('init', 'directorypress_register_post_type', 0);
-		add_action('init', array($this, 'directorypress_get_system_pages'), 30);
+		add_action('init', array($this, 'directorypress_get_system_pages'), 1);
 		add_action('wp', array($this, 'directorypress_init_directorytypes_pages'), 1);
 		add_action('admin_init', array($this, 'directorypress_init_directorytypes_pages'), 1);
 		add_action('init', array($this, 'redux_include'), 0);
@@ -150,9 +150,11 @@ class DirectoryPress {
 		add_action('wp', array($this, 'directorypress_draft_listing_on_expiry_call'), 1);
 		
 		if (!get_option('directorypress_installed_directory')) {
+			//$this->directorypress_init_classes();
 			add_action('init', 'directorypress_install_directory', 0);
+		} else {
+			$this->directorypress_init_classes();
 		}
-		add_action('init', array($this, 'directorypress_init_classes'), 20);
 		
 		add_action('wp', array($this, 'wp_loaded'));
 		add_filter('query_vars', array($this, 'add_query_vars'));
@@ -884,20 +886,8 @@ class DirectoryPress {
 		}
 		$listings_ids_to_suspend = array_unique($listings_ids_to_suspend);
 		foreach ($listings_ids_to_suspend AS $listing_id) {
-			$old_status = get_post_status($listing_id);
 			update_post_meta($listing_id, '_listing_status', 'expired');
 			wp_update_post(array('ID' => $listing_id, 'post_status' => 'draft')); // This needed in order terms counts were always actual
-			
-			// Trigger listing expired hook
-			do_action('directorypress_listing_expired', $listing_id);
-			
-			// Trigger listing deactivated hook if status changed from publish to draft
-			if ($old_status === 'publish') {
-				do_action('directorypress_listing_deactivated', $listing_id);
-			}
-			
-			// Trigger general status change hook
-			do_action('directorypress_listing_status_changed', $listing_id, $old_status, 'draft');
 			
 			$listing = directorypress_get_listing($listing_id);
 			if ($listing->package->change_package_id && ($new_package = $this->packages->get_package_by_id($listing->package->change_package_id))) {

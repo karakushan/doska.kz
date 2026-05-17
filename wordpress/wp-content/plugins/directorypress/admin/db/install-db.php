@@ -10,13 +10,14 @@ function directorypress_install_directory() {
 		$wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->directorypress_fields_groups} (
 					`id` int(11) NOT NULL AUTO_INCREMENT,
 					`name` varchar(255) NOT NULL,
+					`icon` varchar(255) NOT NULL,
 					`on_tab` tinyint(1) NOT NULL DEFAULT '0',
 					`group_style` varchar(255) NOT NULL DEFAULT '0',
 					`hide_anonymous` tinyint(1) NOT NULL DEFAULT '0',
 					PRIMARY KEY (`id`)
 					) $collate ;");
 		if (!$wpdb->get_var("SELECT id FROM {$wpdb->directorypress_fields_groups} WHERE name = 'Contact Information'"))
-			$wpdb->query("INSERT INTO {$wpdb->directorypress_fields_groups} (`name`, `on_tab`, `group_style`, `hide_anonymous`) VALUES ('Contact Information', 0, 1, 0)");
+			$wpdb->query("INSERT INTO {$wpdb->directorypress_fields_groups} (`name`, `icon`, `on_tab`, `group_style`, `hide_anonymous`) VALUES ('Contact Information', '', 0, 1, 0)");
 
 		$wpdb->query("CREATE TABLE IF NOT EXISTS {$wpdb->directorypress_fields} (
 					`id` int(11) NOT NULL AUTO_INCREMENT,

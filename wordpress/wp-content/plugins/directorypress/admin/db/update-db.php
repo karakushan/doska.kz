@@ -81,3 +81,13 @@ function directorypress_db_update_3_6_2(){
 	$wpdb->query("ALTER TABLE `".$prefix."directorypress_fields` ADD `field_search_label` varchar(255) NOT NULL AFTER `name`");
 	update_option('directorypress_db_update_3_6_2', 'updated');
 }
+if(!get_option('directorypress_db_update_3_6_3') || get_option('directorypress_db_update_3_6_3') != 'updated'){
+	directorypress_db_update_3_6_3();
+}
+function directorypress_db_update_3_6_3(){
+	global $DIRECTORYPRESS_ADIMN_SETTINGS, $wpdb;
+	$prefix = $wpdb->prefix;
+	
+	$wpdb->query("ALTER TABLE `".$prefix."directorypress_fields_groups` ADD `icon` varchar(255) NOT NULL AFTER `name`");
+	update_option('directorypress_db_update_3_6_3', 'updated');
+}

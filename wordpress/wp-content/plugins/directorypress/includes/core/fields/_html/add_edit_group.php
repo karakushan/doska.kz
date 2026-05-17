@@ -8,6 +8,10 @@
 			<div><input name="name" id="fields_group_name" type="text" class="regular-text" value="<?php echo esc_attr($fields_group->name); ?>" /></div>
 		</div>
 		<div class="field-holder">
+			<div><label><?php esc_html_e('Group Icon Class', 'DIRECTORYPRESS'); ?></label></div>
+			<div><input name="icon" id="fields_group_icon" type="text" class="regular-text" value="<?php echo esc_attr($fields_group->icon); ?>" /></div>
+		</div>
+		<div class="field-holder">
 			<div><label><?php esc_html_e('Show in Single listing Tabs', 'DIRECTORYPRESS'); ?></label></div>
 			<label class="switch">
 				<input name="on_tab" type="checkbox" value="1" <?php checked($fields_group->on_tab); ?> />

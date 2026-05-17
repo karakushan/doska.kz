@@ -201,17 +201,16 @@ if(!function_exists('remove_redux_menu2')){
      */
 
     // -> START Basic Fields
-	global $directorypress_object, $directorypress_social_services, $sitepress, $DIRECTORYPRESS_ADIMN_SETTINGS;
+	$listings_tabs = array();
+	global $directorypress_object, $directorypress_social_services, $sitepress, $DIRECTORYPRESS_ADIMN_SETTINGS, $listings_tabs;
 	
 	$ordering_items = directorypress_sorting_options();
 	
-	$listings_tabs = array(
-		array('value' => 'addresses-tab', 'label' => esc_html__('Addresses tab', 'DIRECTORYPRESS')),
-		array('value' => 'comments-tab', 'label' => esc_html__('Comments tab', 'DIRECTORYPRESS')),
-		array('value' => 'videos-tab', 'label' => esc_html__('Videos tab', 'DIRECTORYPRESS'))
-	);
+	$listings_tabs[] = array('value' => 'addresses-tab', 'label' => esc_html__('Addresses', 'DIRECTORYPRESS'));
+	$listings_tabs[] = array('value' => 'comments-tab', 'label' => esc_html__('Reviews', 'DIRECTORYPRESS'));
+	$listings_tabs[] = array('value' => 'videos-tab', 'label' => esc_html__('Videos', 'DIRECTORYPRESS'));
 	
-	if($directorypress_object === null){
+	if(is_object($directorypress_object) && !is_null($directorypress_object)){
 		foreach ($directorypress_object->fields->fields_groups_array AS $fields_group){
 			if ($fields_group->on_tab){
 				$listings_tabs[] = array('value' => 'field-group-tab-'.$fields_group->id, 'label' => $fields_group->name);

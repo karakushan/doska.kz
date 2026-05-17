@@ -610,7 +610,7 @@ function directorypress_business_hours_status($listing, $time_string = false){
 add_action('directorypress_listing_submit_user_info', 'directorypress_listing_submit_user_info_function');
 function directorypress_listing_submit_user_info_function($content = ''){
 	if(!empty($content)){
-		echo '<a data-bs-toggle="popover" data-placement="top" data-content="'. wp_kses_post($content) .'" data-trigger="click"><i class="far fa-question-circle"></i></a>';	
+		echo '<a data-bs-toggle="popover" data-placement="top" data-bs-content="'. wp_kses_post($content) .'" data-trigger="click"><i class="far fa-question-circle"></i></a>';	
 	}
 }
 
@@ -627,7 +627,6 @@ add_action('wp_ajax_nopriv_directorypress_listing_submit_admin_process_function'
 
 function directorypress_listing_submit_admin_process_function(){
 	global $directorypress_admin_info_strings;
-	$directorypress_admin_info_strings = directorypress_get_admin_info_strings();
 	$field = sanitize_text_field($_POST['field']);
 	echo '<p class="alert alert-info">'. esc_html__('This information is only visible to Admin', 'DIRECTORYPRESS') .'</p>';
 	if(!empty($field)){

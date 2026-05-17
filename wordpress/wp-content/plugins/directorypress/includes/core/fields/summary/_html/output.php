@@ -18,10 +18,10 @@ if (has_excerpt() || ($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_cropped_con
 	?>
 	<span class="field-content">
 		<?php
-			ob_start();
+			//ob_start();
 			//the_excerpt_max_charlength($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_excerpt_length']);
-			the_excerpt();
-			echo wp_kses_post(ob_get_clean());
+			//the_excerpt();
+			echo wp_kses_post(wp_trim_words(get_the_excerpt(), $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_excerpt_length']));
 		?>
 	</span>
 </div>

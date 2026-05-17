@@ -67,6 +67,7 @@
 				e.preventDefault();
 				//alert('test');
 				attachVideo();
+				directorypress_check_videos_attachments_number();
 			});
 			window.attachVideo = function() {
 				//$("#directorypress-attach-video-input").change(function(){

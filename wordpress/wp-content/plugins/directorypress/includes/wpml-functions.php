@@ -27,7 +27,7 @@ function directorypress_wpml_supported_option_id($option) {
 
 function directorypress_wpml_supported_settings($option) {
 	global $DIRECTORYPRESS_ADIMN_SETTINGS;
-	return get_option(directorypress_wpml_supported_option_id($option));
+	return $DIRECTORYPRESS_ADIMN_SETTINGS[directorypress_wpml_supported_option_id($option)];
 }
 
 function directorypress_wpml_supported_settings_description() {

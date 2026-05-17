@@ -259,6 +259,7 @@ var button_loader_wrapper = '.dp-backend-button-loader';
 				url: directorypress_js_instance.ajaxurl,
 				data: { 'action': 'directorypress_fields_group_list'},
 				dataType: "html",
+				cache: false,
 				success: function (response) {
 					jQuery('#fields_group .fields_group_list_wrapper').find(loader_wrapper).remove();
 					jQuery('#fields_group .fields_group_list_wrapper').html(response);	
@@ -292,7 +293,7 @@ var button_loader_wrapper = '.dp-backend-button-loader';
 		jQuery.ajax({
 			type: "POST",
 			url: directorypress_js_instance.ajaxurl,
-			data: Form + '&action=directorypress_save_category_fields_ajax',
+			data: Form + '&action=directorypress_save_category_fields_ajax&nonce='+directorypress_js_instance.nonce,
 			dataType: "json",
 			success: function (response) {
 				jQuery('#directorypress_terms_configure .modal-body').find(loader_wrapper).remove();
