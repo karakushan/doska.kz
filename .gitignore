@@ -41,3 +41,6 @@ wordpress/wp-content/uploads/
 # WordPress updraft backups
 wordpress/wp-content/updraft/
 
+# WordPress languages
+wordpress/wp-content/languages/
+
