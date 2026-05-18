@@ -28,8 +28,10 @@ wp-content/debug.log
 wordpress/wp-content/debug.log
 *.log.gz
 
-# WordPress plugins (exclude all plugin files)
-wordpress/wp-content/plugins/
+# WordPress plugins (exclude only service account files and sensitive data)
+# wordpress/wp-content/plugins/
+wordpress/wp-content/plugins/*/service-account-*.json
+wordpress/wp-content/plugins/**/*.env
 
 # Firebase credentials
 **/firebase-push-notifications/service-account-*.json

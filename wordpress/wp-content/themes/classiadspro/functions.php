@@ -50,6 +50,112 @@ function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
 add_filter('trp_translatable_slug_hooks_array', 'classiadspro_limit_trp_slug_translation_hooks_in_admin');
 
 /**
+ * Move DP listing auto-translation out of the save_post request.
+ *
+ * The custom auto-translate plugin hooks an anonymous callback directly into
+ * save_post_dp_listing and performs multiple remote translation calls inline.
+ * That expands the critical section of a listing save and increases the chance
+ * of TranslatePress slug deadlocks in admin flows.
+ *
+ * We cannot edit the plugin, so we unhook its closure at runtime and replace it
+ * with a single background event that calls the same plugin translation
+ * functions after the save request has finished.
+ */
+function classiadspro_detach_sync_dp_listing_autotranslate()
+{
+	$hook_name = 'save_post_dp_listing';
+
+	if (empty($GLOBALS['wp_filter'][$hook_name]) || !($GLOBALS['wp_filter'][$hook_name] instanceof WP_Hook)) {
+		return;
+	}
+
+	$target_file = wp_normalize_path(WP_PLUGIN_DIR . '/auto-translate-dp-listing-pro.php');
+	$hook = $GLOBALS['wp_filter'][$hook_name];
+
+	foreach ($hook->callbacks as $priority => $callbacks) {
+		foreach ($callbacks as $callback_id => $callback_data) {
+			if (
+				empty($callback_data['function']) ||
+				!($callback_data['function'] instanceof Closure)
+			) {
+				continue;
+			}
+
+			try {
+				$reflection = new ReflectionFunction($callback_data['function']);
+			} catch (ReflectionException $exception) {
+				continue;
+			}
+
+			$callback_file = wp_normalize_path($reflection->getFileName());
+			if ($callback_file !== $target_file || (int) $reflection->getStartLine() !== 291) {
+				continue;
+			}
+
+			remove_action($hook_name, $callback_data['function'], $priority);
+		}
+	}
+}
+add_action('init', 'classiadspro_detach_sync_dp_listing_autotranslate', 1);
+
+function classiadspro_schedule_dp_listing_autotranslate($post_id, $post, $update)
+{
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return;
+	}
+
+	if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+		return;
+	}
+
+	if (!$post instanceof WP_Post || $post->post_type !== 'dp_listing') {
+		return;
+	}
+
+	if (!current_user_can('edit_post', $post_id)) {
+		return;
+	}
+
+	if (empty(get_option('dp_translator_gemini_key')) || !function_exists('dp_check_or_generate_translation')) {
+		return;
+	}
+
+	if (in_array($post->post_status, array('auto-draft', 'trash', 'inherit'), true)) {
+		return;
+	}
+
+	wp_clear_scheduled_hook('classiadspro_run_dp_listing_autotranslate', array($post_id));
+	wp_schedule_single_event(time() + 15, 'classiadspro_run_dp_listing_autotranslate', array($post_id));
+}
+add_action('save_post_dp_listing', 'classiadspro_schedule_dp_listing_autotranslate', 20, 3);
+
+function classiadspro_run_dp_listing_autotranslate($post_id)
+{
+	$post_id = (int) $post_id;
+	if ($post_id <= 0) {
+		return;
+	}
+
+	$post = get_post($post_id);
+	if (!$post instanceof WP_Post || $post->post_type !== 'dp_listing') {
+		return;
+	}
+
+	if (!in_array($post->post_status, array('publish', 'pending', 'draft', 'future', 'private'), true)) {
+		return;
+	}
+
+	if (empty(get_option('dp_translator_gemini_key')) || !function_exists('dp_get_translatepress_languages') || !function_exists('dp_check_or_generate_translation')) {
+		return;
+	}
+
+	foreach ((array) dp_get_translatepress_languages() as $lang => $label) {
+		dp_check_or_generate_translation($post_id, $lang);
+	}
+}
+add_action('classiadspro_run_dp_listing_autotranslate', 'classiadspro_run_dp_listing_autotranslate');
+
+/**
  * Resolve a stable DirectoryPress dashboard URL even when the plugin-global
  * dashboard page URL was not initialized before header widgets render.
  *
