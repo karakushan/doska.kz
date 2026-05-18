@@ -4279,8 +4279,107 @@ function classiadspro_is_directorypress_listing_request() {
 		return true;
 	}
 
-	return function_exists('directorypress_is_listing_page') && directorypress_is_listing_page();
+	if (function_exists('directorypress_is_listing_page') && directorypress_is_listing_page()) {
+		return true;
+	}
+
+	return classiadspro_get_current_directorypress_listing_post_id() > 0;
 }
+
+function classiadspro_prepare_directorypress_listing_shortcode_context() {
+	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+		return;
+	}
+
+	$listing_post_id = classiadspro_get_current_directorypress_listing_post_id();
+	if ($listing_post_id <= 0) {
+		return;
+	}
+
+	$current_post = get_post();
+	if ($current_post instanceof WP_Post && $current_post->post_type === 'dp_listing') {
+		return;
+	}
+
+	global $directorypress_object, $wp_query;
+
+	$listing_post = get_post($listing_post_id);
+	if ($listing_post instanceof WP_Post) {
+		set_query_var('listing-directorypress', $listing_post->post_name);
+
+		if ($wp_query instanceof WP_Query) {
+			$wp_query->set('listing-directorypress', $listing_post->post_name);
+		}
+	}
+
+	if (!function_exists('directorypress_get_listing')) {
+		return;
+	}
+
+	$listing = directorypress_get_listing($listing_post_id);
+	if (!is_object($listing)) {
+		return;
+	}
+
+	if (is_object($directorypress_object)) {
+		$directorypress_object->current_listing = $listing;
+
+		if (empty($directorypress_object->current_directorytype) && !empty($listing->directorytype)) {
+			$directorypress_object->current_directorytype = $listing->directorytype;
+		}
+
+		if (empty($directorypress_object->current_directorytype) && method_exists($directorypress_object, 'setup_current_page_directorytype')) {
+			$directorypress_object->setup_current_page_directorytype(!empty($listing->directorytype) ? $listing->directorytype : null);
+		}
+	}
+}
+add_action('wp', 'classiadspro_prepare_directorypress_listing_shortcode_context', 20);
+
+function classiadspro_render_directorypress_listing_shortcode_content($content) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $content;
+	}
+
+	$post = get_post();
+	if (!($post instanceof WP_Post) || $post->post_type !== 'page') {
+		return $content;
+	}
+
+	if (
+		!has_shortcode($post->post_content, 'directorypress-listing') &&
+		(!defined('DIRECTORYPRESS_LISTING_SHORTCODE') || !has_shortcode($post->post_content, DIRECTORYPRESS_LISTING_SHORTCODE))
+	) {
+		return $content;
+	}
+
+	if (
+		!is_string($content) ||
+		strpos($content, 'directorypress-single-content-area') !== false
+	) {
+		return $content;
+	}
+
+	$listing_post_id = classiadspro_get_current_directorypress_listing_post_id();
+	if ($listing_post_id <= 0) {
+		return $content;
+	}
+
+	static $is_rendering_listing_shortcode = false;
+	if ($is_rendering_listing_shortcode) {
+		return $content;
+	}
+
+	$is_rendering_listing_shortcode = true;
+	$listing_html = do_shortcode('[directorypress-listing listing_id="' . (int) $listing_post_id . '"]');
+	$is_rendering_listing_shortcode = false;
+
+	if (!is_string($listing_html) || trim($listing_html) === '') {
+		return $content;
+	}
+
+	return $content . $listing_html;
+}
+add_filter('the_content', 'classiadspro_render_directorypress_listing_shortcode_content', 999);
 
 function classiadspro_translatepress_get_current_language_suffix() {
 	static $language_suffix = null;
@@ -4804,8 +4903,10 @@ add_action('template_redirect', 'classiadspro_translatepress_start_single_listin
 
 function classiadspro_translatepress_translate_single_listing_output_buffer($html) {
 	if (!is_string($html) || $html === '' || !class_exists('DOMDocument')) {
-		return $html;
+		return classiadspro_override_dp_listing_head_meta_in_html($html);
 	}
+
+	$html = classiadspro_override_dp_listing_head_meta_in_html($html);
 
 	$dom = new DOMDocument();
 	$previous_state = libxml_use_internal_errors(true);
@@ -4818,6 +4919,7 @@ function classiadspro_translatepress_translate_single_listing_output_buffer($htm
 	}
 
 	$xpath = new DOMXPath($dom);
+	classiadspro_override_dp_listing_head_meta_in_dom($dom, $xpath);
 	$text_nodes = $xpath->query('//*[contains(concat(" ", normalize-space(@class), " "), " single-listing ")]//text()[normalize-space(.) != ""]');
 
 	if (!$text_nodes instanceof DOMNodeList) {
@@ -4863,3 +4965,523 @@ function classiadspro_disable_hfb_header_on_mobile($enabled) {
 	return $enabled;
 }
 add_filter('hfb_header_enabled', 'classiadspro_disable_hfb_header_on_mobile');
+
+function classiadspro_override_dp_listing_head_meta_in_html($html) {
+	if (!is_string($html) || $html === '' || !classiadspro_is_directorypress_listing_request()) {
+		return $html;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	if ($post_id <= 0) {
+		return $html;
+	}
+
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($translated_title === '') {
+		$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	$translated_description = classiadspro_get_dp_listing_translation_description($post_id);
+
+	if ($translated_title !== '') {
+		$title_tag = htmlspecialchars($translated_title . ' | Listings', ENT_QUOTES | ENT_HTML5, 'UTF-8');
+		$og_title = htmlspecialchars($translated_title . ' - Listings', ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+		$html = preg_replace('/<title\b[^>]*>.*?<\/title>/is', '<title>' . $title_tag . '</title>', $html, 1);
+		$html = preg_replace_callback(
+			'/(<meta\b[^>]*property="og:title"[^>]*content=")[^"]*(")/i',
+			static function ($matches) use ($og_title) {
+				return $matches[1] . $og_title . $matches[2];
+			},
+			$html
+		);
+		$html = preg_replace_callback(
+			'/(<meta\b[^>]*name="twitter:title"[^>]*content=")[^"]*(")/i',
+			static function ($matches) use ($title_tag) {
+				return $matches[1] . $title_tag . $matches[2];
+			},
+			$html
+		);
+	}
+
+	if ($translated_description !== '') {
+		$description_attr = htmlspecialchars($translated_description, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+		$html = preg_replace_callback(
+			'/(<meta\b[^>]*name="description"[^>]*content=")[^"]*(")/i',
+			static function ($matches) use ($description_attr) {
+				return $matches[1] . $description_attr . $matches[2];
+			},
+			$html
+		);
+		$html = preg_replace_callback(
+			'/(<meta\b[^>]*property="og:description"[^>]*content=")[^"]*(")/i',
+			static function ($matches) use ($description_attr) {
+				return $matches[1] . $description_attr . $matches[2];
+			},
+			$html
+		);
+		$html = preg_replace_callback(
+			'/(<meta\b[^>]*name="twitter:description"[^>]*content=")[^"]*(")/i',
+			static function ($matches) use ($description_attr) {
+				return $matches[1] . $description_attr . $matches[2];
+			},
+			$html
+		);
+	}
+
+	return $html;
+}
+
+function classiadspro_dom_set_node_text($node, $value) {
+	if (!$node instanceof DOMNode || !is_string($value)) {
+		return;
+	}
+
+	while ($node->firstChild) {
+		$node->removeChild($node->firstChild);
+	}
+
+	$node->appendChild($node->ownerDocument->createTextNode($value));
+}
+
+function classiadspro_dom_set_meta_content_by_query($xpath, $query, $value) {
+	if (!$xpath instanceof DOMXPath || !is_string($query) || $query === '' || !is_string($value) || $value === '') {
+		return;
+	}
+
+	$nodes = $xpath->query($query);
+	if (!$nodes instanceof DOMNodeList) {
+		return;
+	}
+
+	foreach ($nodes as $node) {
+		if ($node instanceof DOMElement) {
+			$node->setAttribute('content', $value);
+		}
+	}
+}
+
+function classiadspro_override_dp_listing_head_meta_in_dom($dom, $xpath) {
+	if (
+		!$dom instanceof DOMDocument ||
+		!$xpath instanceof DOMXPath ||
+		!classiadspro_is_directorypress_listing_request()
+	) {
+		return;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	if ($post_id <= 0) {
+		return;
+	}
+
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($translated_title === '') {
+		$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	$translated_description = classiadspro_get_dp_listing_translation_description($post_id);
+
+	if ($translated_title !== '') {
+		$title_nodes = $xpath->query('//title');
+		if ($title_nodes instanceof DOMNodeList) {
+			foreach ($title_nodes as $title_node) {
+				classiadspro_dom_set_node_text($title_node, $translated_title . ' | Listings');
+			}
+		}
+
+		classiadspro_dom_set_meta_content_by_query($xpath, '//meta[@property="og:title"]', $translated_title . ' - Listings');
+		classiadspro_dom_set_meta_content_by_query($xpath, '//meta[@name="twitter:title"]', $translated_title);
+	}
+
+	if ($translated_description !== '') {
+		classiadspro_dom_set_meta_content_by_query($xpath, '//meta[@name="description"]', $translated_description);
+		classiadspro_dom_set_meta_content_by_query($xpath, '//meta[@property="og:description"]', $translated_description);
+		classiadspro_dom_set_meta_content_by_query($xpath, '//meta[@name="twitter:description"]', $translated_description);
+	}
+}
+
+function classiadspro_get_dp_listing_translation_language_candidates() {
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$candidates = array();
+
+	if (is_string($language_suffix) && $language_suffix !== '') {
+		$candidates[] = strtolower($language_suffix);
+
+		$short_code = strtok($language_suffix, '_');
+		if (is_string($short_code) && $short_code !== '') {
+			$candidates[] = strtolower($short_code);
+		}
+	}
+
+	$trp_settings = get_option('trp_settings', array());
+	if (!empty($trp_settings['default-language']) && is_string($trp_settings['default-language'])) {
+		$default_language = strtolower(str_replace('-', '_', $trp_settings['default-language']));
+		$candidates[] = $default_language;
+
+		$default_short_code = strtok($default_language, '_');
+		if (is_string($default_short_code) && $default_short_code !== '') {
+			$candidates[] = strtolower($default_short_code);
+		}
+	}
+
+	$aliases = array(
+		'ru_ru' => 'ru',
+		'ru' => 'ru',
+		'uk_ua' => 'ua',
+		'uk' => 'ua',
+		'ua' => 'ua',
+		'en_us' => 'en',
+		'en' => 'en',
+		'es_es' => 'es',
+		'es' => 'es',
+		'de_de' => 'de',
+		'de' => 'de',
+		'tr_tr' => 'tr',
+		'tr' => 'tr',
+	);
+
+	foreach ($candidates as $candidate) {
+		if (isset($aliases[$candidate])) {
+			$candidates[] = $aliases[$candidate];
+		}
+	}
+
+	return array_values(array_unique(array_filter(array_map('strval', $candidates))));
+}
+
+function classiadspro_get_dp_listing_translation_data($post_id = 0) {
+	$post_id = $post_id ? (int) $post_id : (int) get_the_ID();
+	if ($post_id <= 0 || get_post_type($post_id) !== 'dp_listing') {
+		return null;
+	}
+
+	$translations = get_post_meta($post_id, 'translations', true);
+	if (!is_array($translations) || empty($translations)) {
+		return null;
+	}
+
+	foreach (classiadspro_get_dp_listing_translation_language_candidates() as $candidate) {
+		if (!empty($translations[$candidate]) && is_array($translations[$candidate])) {
+			return $translations[$candidate];
+		}
+	}
+
+	return null;
+}
+
+function classiadspro_get_current_directorypress_listing_post_id() {
+	$post = get_post();
+	if ($post instanceof WP_Post && $post->post_type === 'dp_listing') {
+		return (int) $post->ID;
+	}
+
+	global $directorypress_object;
+
+	if (
+		is_object($directorypress_object) &&
+		isset($directorypress_object->current_listing) &&
+		is_object($directorypress_object->current_listing) &&
+		isset($directorypress_object->current_listing->post->ID)
+	) {
+		return (int) $directorypress_object->current_listing->post->ID;
+	}
+
+	if (
+		isset($GLOBALS['directorypress_shortcode_instance']) &&
+		is_object($GLOBALS['directorypress_shortcode_instance']) &&
+		isset($GLOBALS['directorypress_shortcode_instance']->listing) &&
+		is_object($GLOBALS['directorypress_shortcode_instance']->listing) &&
+		isset($GLOBALS['directorypress_shortcode_instance']->listing->post->ID)
+	) {
+		return (int) $GLOBALS['directorypress_shortcode_instance']->listing->post->ID;
+	}
+
+	$queried_id = (int) get_queried_object_id();
+	if ($queried_id > 0 && get_post_type($queried_id) === 'dp_listing') {
+		return $queried_id;
+	}
+
+	$request_uri = isset($_SERVER['REQUEST_URI']) ? (string) wp_unslash($_SERVER['REQUEST_URI']) : '';
+	$request_path = trim((string) wp_parse_url($request_uri, PHP_URL_PATH), '/');
+
+	if ($request_path !== '') {
+		$path_segments = array_values(array_filter(explode('/', $request_path), 'strlen'));
+		$candidate_slug = '';
+
+		if (!empty($path_segments)) {
+			$candidate_slug = sanitize_title(end($path_segments));
+
+			$trp_settings = get_option('trp_settings', array());
+			if (
+				$candidate_slug !== '' &&
+				!empty($trp_settings['url-slugs']) &&
+				is_array($trp_settings['url-slugs']) &&
+				in_array($candidate_slug, array_map('sanitize_title', $trp_settings['url-slugs']), true)
+			) {
+				$candidate_slug = '';
+			}
+		}
+
+		if ($candidate_slug !== '') {
+			$listing_post = get_page_by_path($candidate_slug, OBJECT, 'dp_listing');
+			if ($listing_post instanceof WP_Post) {
+				return (int) $listing_post->ID;
+			}
+		}
+	}
+
+	return 0;
+}
+
+function classiadspro_get_dp_listing_translation_value($post_id, $path) {
+	$translation = classiadspro_get_dp_listing_translation_data($post_id);
+	if (!is_array($translation) || empty($path) || !is_array($path)) {
+		return '';
+	}
+
+	$value = $translation;
+	foreach ($path as $segment) {
+		if (!is_array($value) || !array_key_exists($segment, $value)) {
+			return '';
+		}
+
+		$value = $value[$segment];
+	}
+
+	return is_string($value) ? trim($value) : '';
+}
+
+function classiadspro_get_dp_listing_translation_description($post_id) {
+	$description = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'description'));
+	if ($description !== '') {
+		return $description;
+	}
+
+	$content = classiadspro_get_dp_listing_translation_value($post_id, array('content'));
+	if ($content === '') {
+		return '';
+	}
+
+	return wp_trim_words(wp_strip_all_tags($content), 35, ' ...');
+}
+
+function classiadspro_filter_dp_listing_translated_title($title, $post_id = 0) {
+	if (is_admin()) {
+		return $title;
+	}
+
+	$post_id = $post_id ? (int) $post_id : (int) get_the_ID();
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+
+	return $translated_title !== '' ? $translated_title : $title;
+}
+add_filter('the_title', 'classiadspro_filter_dp_listing_translated_title', 99, 2);
+
+function classiadspro_filter_dp_listing_document_title($title) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $title;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($translated_title === '') {
+		$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	return $translated_title !== '' ? $translated_title : $title;
+}
+add_filter('pre_get_document_title', 'classiadspro_filter_dp_listing_document_title', 99);
+
+function classiadspro_filter_dp_listing_wpseo_title($title) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $title;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($translated_title === '') {
+		$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	return $translated_title !== '' ? $translated_title : $title;
+}
+add_filter('wpseo_title', 'classiadspro_filter_dp_listing_wpseo_title', 99);
+
+function classiadspro_filter_dp_listing_wpseo_metadesc($description) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $description;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	$translated_description = classiadspro_get_dp_listing_translation_description($post_id);
+
+	return $translated_description !== '' ? $translated_description : $description;
+}
+add_filter('wpseo_metadesc', 'classiadspro_filter_dp_listing_wpseo_metadesc', 99);
+
+function classiadspro_filter_dp_listing_wpseo_opengraph_title($title) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $title;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($translated_title === '') {
+		$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	return $translated_title !== '' ? $translated_title . ' - Listings' : $title;
+}
+add_filter('wpseo_opengraph_title', 'classiadspro_filter_dp_listing_wpseo_opengraph_title', 99);
+
+function classiadspro_filter_dp_listing_wpseo_opengraph_desc($description) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $description;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	$translated_description = classiadspro_get_dp_listing_translation_description($post_id);
+
+	return $translated_description !== '' ? $translated_description : $description;
+}
+add_filter('wpseo_opengraph_desc', 'classiadspro_filter_dp_listing_wpseo_opengraph_desc', 99);
+add_filter('wpseo_twitter_description', 'classiadspro_filter_dp_listing_wpseo_opengraph_desc', 99);
+
+function classiadspro_filter_dp_listing_excerpt($excerpt, $post = null) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return $excerpt;
+	}
+
+	$post_id = 0;
+	if ($post instanceof WP_Post) {
+		$post_id = (int) $post->ID;
+	} elseif (is_numeric($post)) {
+		$post_id = (int) $post;
+	} else {
+		$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	}
+
+	$translated_description = classiadspro_get_dp_listing_translation_description($post_id);
+
+	return $translated_description !== '' ? $translated_description : $excerpt;
+}
+add_filter('get_the_excerpt', 'classiadspro_filter_dp_listing_excerpt', 99, 2);
+
+function classiadspro_filter_directorypress_listing_excerpt_from_content($excerpt, $words_length, $listing) {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request() || !is_object($listing) || empty($listing->post->ID)) {
+		return $excerpt;
+	}
+
+	$translated_description = classiadspro_get_dp_listing_translation_description((int) $listing->post->ID);
+
+	return $translated_description !== '' ? $translated_description : $excerpt;
+}
+add_filter('directorypress_get_excerpt_from_content', 'classiadspro_filter_directorypress_listing_excerpt_from_content', 99, 3);
+
+function classiadspro_replace_directorypress_listing_opengraph_meta() {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return;
+	}
+
+	global $wp_filter;
+
+	if (empty($wp_filter['wp_head']) || !isset($wp_filter['wp_head']->callbacks) || !is_array($wp_filter['wp_head']->callbacks)) {
+		return;
+	}
+
+	foreach ($wp_filter['wp_head']->callbacks as $priority => $callbacks) {
+		foreach ($callbacks as $callback_data) {
+			if (
+				empty($callback_data['function']) ||
+				!is_array($callback_data['function']) ||
+				!is_object($callback_data['function'][0]) ||
+				$callback_data['function'][1] !== 'insert_opengraph_metadat'
+			) {
+				continue;
+			}
+
+			remove_action('wp_head', $callback_data['function'], (int) $priority);
+		}
+	}
+}
+add_action('wp', 'classiadspro_replace_directorypress_listing_opengraph_meta', 20);
+
+function classiadspro_output_listing_translation_opengraph_meta() {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	if ($post_id <= 0) {
+		return;
+	}
+
+	$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($translated_title === '') {
+		$translated_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	$translated_description = classiadspro_get_dp_listing_translation_description($post_id);
+	$permalink = get_permalink($post_id);
+	$image = get_the_post_thumbnail_url($post_id, 'full');
+
+	if ($translated_title === '' && $translated_description === '') {
+		return;
+	}
+
+	echo '<meta property="og:type" content="article" data-classiadspro-og-meta="true" />';
+
+	if ($translated_title !== '') {
+		echo '<meta property="og:title" content="' . esc_attr($translated_title . ' - Listings') . '" />';
+	}
+
+	if ($translated_description !== '') {
+		echo '<meta property="og:description" content="' . esc_attr($translated_description) . '" />';
+	}
+
+	if ($permalink) {
+		echo '<meta property="og:url" content="' . esc_url($permalink) . '" />';
+	}
+
+	echo '<meta property="og:site_name" content="' . esc_attr(get_bloginfo('name')) . '" />';
+
+	if ($image) {
+		echo '<meta property="og:image" content="' . esc_url($image) . '" />';
+	}
+}
+add_action('wp_head', 'classiadspro_output_listing_translation_opengraph_meta', -9);
+
+function classiadspro_output_listing_translation_meta_tags() {
+	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+		return;
+	}
+
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	if ($post_id <= 0) {
+		return;
+	}
+
+	$seo_title = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'title'));
+	if ($seo_title === '') {
+		$seo_title = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	}
+
+	$seo_description = classiadspro_get_dp_listing_translation_description($post_id);
+	$seo_keywords = classiadspro_get_dp_listing_translation_value($post_id, array('seo', 'keywords'));
+
+	if ($seo_description !== '') {
+		echo '<meta name="description" content="' . esc_attr($seo_description) . '" />' . "\n";
+		echo '<meta name="twitter:description" content="' . esc_attr($seo_description) . '" />' . "\n";
+	}
+
+	if ($seo_keywords !== '') {
+		echo '<meta name="keywords" content="' . esc_attr($seo_keywords) . '" />' . "\n";
+	}
+
+	if ($seo_title !== '') {
+		echo '<meta name="twitter:title" content="' . esc_attr($seo_title) . '" />' . "\n";
+	}
+}
+add_action('wp_head', 'classiadspro_output_listing_translation_meta_tags', -8);

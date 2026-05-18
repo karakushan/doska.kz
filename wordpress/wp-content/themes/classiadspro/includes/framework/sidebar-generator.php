@@ -4,6 +4,7 @@ class classiadsproSidebarGenerator {
 	var $sidebar_names = array();
 	var $footer_sidebar_count = 0;
 	var $footer_sidebar_names = array();
+	var $sidebar_ids = array();
 
 	function __construct() {
 
@@ -21,6 +22,20 @@ class classiadsproSidebarGenerator {
 			'author'=>esc_html__( 'Author Page', 'classiadspro' ),
 		);
 
+		$this->sidebar_ids = array(
+			'page' => 'sidebar-1',
+			'blog' => 'sidebar-2',
+			'single_post' => 'sidebar-3',
+			'search' => 'sidebar-4',
+			'404' => 'sidebar-5',
+			'archive' => 'sidebar-6',
+			'woocommerce' => 'sidebar-7',
+			'woocommerce_single' => 'sidebar-8',
+			'bbpress' => 'sidebar-9',
+			'alsp_listing_single' => 'sidebar-10',
+			'author' => 'sidebar-11',
+		);
+
 
 		$this->footer_sidebar_names = array(
 			esc_html__( 'Footer Column One', 'classiadspro' ),
@@ -31,6 +46,54 @@ class classiadsproSidebarGenerator {
 			esc_html__( 'Footer Column Six', 'classiadspro' ),
 		);
 
+	}
+
+	function get_sidebar_id( $key ) {
+		return isset( $this->sidebar_ids[ $key ] ) ? $this->sidebar_ids[ $key ] : null;
+	}
+
+	function resolve_sidebar( $sidebar ) {
+		global $wp_registered_sidebars;
+
+		if ( empty( $sidebar ) ) {
+			return $sidebar;
+		}
+
+		if ( isset( $wp_registered_sidebars[ $sidebar ] ) ) {
+			return $sidebar;
+		}
+
+		foreach ( $wp_registered_sidebars as $sidebar_id => $registered_sidebar ) {
+			if ( isset( $registered_sidebar['name'] ) && $registered_sidebar['name'] === $sidebar ) {
+				return $sidebar_id;
+			}
+		}
+
+		$legacy_sidebar_names = array(
+			'Pages' => 'sidebar-1',
+			'Blog' => 'sidebar-2',
+			'Blog Single' => 'sidebar-3',
+			'Search' => 'sidebar-4',
+			'404' => 'sidebar-5',
+			'Archive' => 'sidebar-6',
+			'Woocommerce Shop' => 'sidebar-7',
+			'Woocommerce Single' => 'sidebar-8',
+			'bbPress' => 'sidebar-9',
+			'Listing Single' => 'sidebar-10',
+			'Author Page' => 'sidebar-11',
+		);
+
+		if ( isset( $legacy_sidebar_names[ $sidebar ] ) ) {
+			return $legacy_sidebar_names[ $sidebar ];
+		}
+
+		foreach ( $this->sidebar_names as $sidebar_key => $sidebar_name ) {
+			if ( $sidebar_name === $sidebar && isset( $this->sidebar_ids[ $sidebar_key ] ) ) {
+				return $this->sidebar_ids[ $sidebar_key ];
+			}
+		}
+
+		return $sidebar;
 	}
 
 	function register_sidebar() {
@@ -95,7 +158,7 @@ class classiadsproSidebarGenerator {
 			$sidebar = $this->sidebar_names["404"];
 		}elseif (is_active_sidebar("sidebar-3") && is_singular( 'post' ) ) {
 			$sidebar = $this->sidebar_names['single_post'];
-		}elseif (is_active_sidebar("alsp_listing_single") && is_page() && (has_shortcode($post->post_content, 'alsp-listing') ||  (class_exists('DirectoryPress') && directorypress_is_listing_page()))) {
+		}elseif (is_active_sidebar($this->get_sidebar_id('alsp_listing_single')) && is_page() && (has_shortcode($post->post_content, 'alsp-listing') ||  (class_exists('DirectoryPress') && directorypress_is_listing_page()))) {
 			$sidebar = $this->sidebar_names['alsp_listing_single'];
 		}elseif (is_active_sidebar("sidebar-1") && is_page() && !is_home() ) {
 			$sidebar = $this->sidebar_names['page'];
@@ -119,7 +182,7 @@ class classiadsproSidebarGenerator {
 		
 		
 		if ( isset( $sidebar ) ) {
-			dynamic_sidebar( $sidebar );
+			dynamic_sidebar( $this->resolve_sidebar( $sidebar ) );
 		}
 	}
 

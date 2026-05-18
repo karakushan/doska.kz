@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * The base configuration for WordPress
  *
@@ -131,6 +133,7 @@ ini_set('max_execution_time', '300');
 // define('WP_HTTP_BLOCK_EXTERNAL', true);
 
 
+define( 'DUPLICATOR_AUTH_KEY', 'h} {h Jb$v:Kj{`:h!5yc?8BAbx;8QLDrTZZjtsz[XN<V]Qg,pmh`ZZ3 =RdY3Kj' );
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

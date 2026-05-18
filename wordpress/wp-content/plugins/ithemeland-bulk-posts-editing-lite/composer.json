@@ -1,0 +1,19 @@
+{
+    "name": "ithemeland/ithemeland-wordpress-posts-bulk-editing-lite",
+    "authors": [
+        {
+            "name": "iThemeland",
+            "email": "info@ithemelandco.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "wpbel\\classes\\": "classes/",
+            "wpbel\\framework\\": "framework/"
+        }
+    },
+    "description": "iThemeland Bulk Posts Editing Lite",
+    "require": {
+        "khanhicetea/twigeval": "^1.4"
+    }
+}

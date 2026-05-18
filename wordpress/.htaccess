@@ -1,3 +1,7 @@
+# BEGIN LSCACHE
+# END LSCACHE
+# BEGIN NON_LSCACHE
+# END NON_LSCACHE
 # Remote uploads fallback for local development
 <IfModule mod_rewrite.c>
 RewriteEngine On
