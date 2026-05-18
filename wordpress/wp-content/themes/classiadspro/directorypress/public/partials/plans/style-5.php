@@ -22,6 +22,10 @@
 			
 		?>
 		<?php foreach ($packages AS $package): ?>
+		<?php
+			$package_name = classiadspro_translatepress_translate_string($package->name, false);
+			$package_description = $package->description ? classiadspro_translatepress_translate_string($package->description, false) : '';
+		?>
 		<?php $tcounter++; ?>
 		<?php if(directorypress_is_user_allowed($package->who_can_submit)){ ?>
 		<?php if ($counter == 0): ?>
@@ -36,12 +40,12 @@
 						<?php endif; ?>
 						<?php echo pacz_directorypress_package_duration($package); ?>
 						<h3>
-							<?php echo esc_html($package->name); ?>
-							<?php if ($package->description): echo '<i class="fas fa-angle-down"></i>'; endif; ?>
+							<?php echo esc_html($package_name); ?>
+							<?php if ($package_description): echo '<i class="fas fa-angle-down"></i>'; endif; ?>
 						</h3>
-						<?php if ($package->description): ?>
+						<?php if ($package_description): ?>
 							<div class="directorypress-package_description" style="display:none;">
-								<?php echo esc_html($package->description); ?>
+								<?php echo esc_html($package_description); ?>
 							</div>
 						<?php endif; ?>
 						<?php do_action('directorypress_submitlisting_package_name', $package); ?>

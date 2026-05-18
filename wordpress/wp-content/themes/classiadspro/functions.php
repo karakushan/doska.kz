@@ -50,6 +50,59 @@ function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
 add_filter('trp_translatable_slug_hooks_array', 'classiadspro_limit_trp_slug_translation_hooks_in_admin');
 
 /**
+ * Disable TranslatePress SEO Pack slug collection in admin-side requests.
+ *
+ * The SEO Pack doesn't rely only on permalink hooks. It also hooks into
+ * trp_translateable_strings / trp_translateable_information and records
+ * original slugs even when automatic slug translation is disabled. In
+ * DirectoryPress edit and AJAX translation flows this still triggers writes to
+ * wp_trp_slug_originals and can deadlock.
+ */
+function classiadspro_disable_trp_slug_collection_in_admin_requests()
+{
+	if (
+		!(
+			is_admin() ||
+			wp_doing_ajax() ||
+			wp_doing_cron() ||
+			(defined('REST_REQUEST') && REST_REQUEST) ||
+			(defined('WP_CLI') && WP_CLI)
+		)
+	) {
+		return;
+	}
+
+	$targets = array(
+		'trp_translateable_strings' => 'include_slug_for_machine_translation',
+		'trp_translateable_information' => 'save_machine_translated_slug',
+	);
+
+	foreach ($targets as $hook_name => $method_name) {
+		if (empty($GLOBALS['wp_filter'][$hook_name]) || !($GLOBALS['wp_filter'][$hook_name] instanceof WP_Hook)) {
+			continue;
+		}
+
+		$hook = $GLOBALS['wp_filter'][$hook_name];
+		foreach ($hook->callbacks as $priority => $callbacks) {
+			foreach ($callbacks as $callback_data) {
+				if (
+					empty($callback_data['function']) ||
+					!is_array($callback_data['function']) ||
+					!is_object($callback_data['function'][0]) ||
+					get_class($callback_data['function'][0]) !== 'TRP_IN_SP_Slug_Manager' ||
+					$callback_data['function'][1] !== $method_name
+				) {
+					continue;
+				}
+
+				remove_filter($hook_name, $callback_data['function'], $priority);
+			}
+		}
+	}
+}
+add_action('init', 'classiadspro_disable_trp_slug_collection_in_admin_requests', 20);
+
+/**
  * Move DP listing auto-translation out of the save_post request.
  *
  * The custom auto-translate plugin hooks an anonymous callback directly into
@@ -61,10 +114,8 @@ add_filter('trp_translatable_slug_hooks_array', 'classiadspro_limit_trp_slug_tra
  * with a single background event that calls the same plugin translation
  * functions after the save request has finished.
  */
-function classiadspro_detach_sync_dp_listing_autotranslate()
+function classiadspro_remove_dp_listing_autotranslator_closure($hook_name, $start_line)
 {
-	$hook_name = 'save_post_dp_listing';
-
 	if (empty($GLOBALS['wp_filter'][$hook_name]) || !($GLOBALS['wp_filter'][$hook_name] instanceof WP_Hook)) {
 		return;
 	}
@@ -73,7 +124,7 @@ function classiadspro_detach_sync_dp_listing_autotranslate()
 	$hook = $GLOBALS['wp_filter'][$hook_name];
 
 	foreach ($hook->callbacks as $priority => $callbacks) {
-		foreach ($callbacks as $callback_id => $callback_data) {
+		foreach ($callbacks as $callback_data) {
 			if (
 				empty($callback_data['function']) ||
 				!($callback_data['function'] instanceof Closure)
@@ -88,13 +139,20 @@ function classiadspro_detach_sync_dp_listing_autotranslate()
 			}
 
 			$callback_file = wp_normalize_path($reflection->getFileName());
-			if ($callback_file !== $target_file || (int) $reflection->getStartLine() !== 291) {
+			if ($callback_file !== $target_file || (int) $reflection->getStartLine() !== (int) $start_line) {
 				continue;
 			}
 
 			remove_action($hook_name, $callback_data['function'], $priority);
 		}
 	}
+}
+
+function classiadspro_detach_sync_dp_listing_autotranslate()
+{
+	classiadspro_remove_dp_listing_autotranslator_closure('save_post_dp_listing', 291);
+	classiadspro_remove_dp_listing_autotranslator_closure('wp_ajax_dp_translate_single_post_ajax', 465);
+	classiadspro_remove_dp_listing_autotranslator_closure('wp_ajax_dp_translate_all_step', 499);
 }
 add_action('init', 'classiadspro_detach_sync_dp_listing_autotranslate', 1);
 
@@ -116,7 +174,7 @@ function classiadspro_schedule_dp_listing_autotranslate($post_id, $post, $update
 		return;
 	}
 
-	if (empty(get_option('dp_translator_gemini_key')) || !function_exists('dp_check_or_generate_translation')) {
+	if (empty(get_option('dp_translator_gemini_key')) || !function_exists('dp_get_translatepress_languages')) {
 		return;
 	}
 
@@ -145,15 +203,323 @@ function classiadspro_run_dp_listing_autotranslate($post_id)
 		return;
 	}
 
-	if (empty(get_option('dp_translator_gemini_key')) || !function_exists('dp_get_translatepress_languages') || !function_exists('dp_check_or_generate_translation')) {
+	if (empty(get_option('dp_translator_gemini_key')) || !function_exists('dp_get_translatepress_languages')) {
 		return;
 	}
 
 	foreach ((array) dp_get_translatepress_languages() as $lang => $label) {
-		dp_check_or_generate_translation($post_id, $lang);
+		classiadspro_generate_dp_listing_translation($post_id, $lang, false);
 	}
 }
 add_action('classiadspro_run_dp_listing_autotranslate', 'classiadspro_run_dp_listing_autotranslate');
+
+function classiadspro_normalize_dp_listing_translation_language($language_code)
+{
+	$language_code = strtolower(str_replace('-', '_', trim((string) $language_code)));
+	$aliases = array(
+		'ua' => 'uk',
+		'uk' => 'uk',
+		'uk_ua' => 'uk',
+		'ru' => 'ru',
+		'ru_ru' => 'ru',
+		'tr' => 'tr',
+		'tr_tr' => 'tr',
+		'en' => 'en',
+		'en_us' => 'en',
+		'es' => 'es',
+		'es_es' => 'es',
+		'de' => 'de',
+		'de_de' => 'de',
+	);
+
+	if (isset($aliases[$language_code])) {
+		return $aliases[$language_code];
+	}
+
+	$short_code = strtok($language_code, '_');
+	return is_string($short_code) && $short_code !== '' ? strtolower($short_code) : $language_code;
+}
+
+function classiadspro_request_dp_listing_translation($text, $language_code, $field_type = 'content')
+{
+	$text = (string) $text;
+	if ($text === '') {
+		return '';
+	}
+
+	$api_key = (string) get_option('dp_translator_gemini_key');
+	if ($api_key === '') {
+		return new WP_Error('dp_translator_missing_key', 'Gemini API key is missing.');
+	}
+
+	$model = (string) get_option('dp_translator_gemini_model', 'gemini-2.5-flash');
+	$language_code = classiadspro_normalize_dp_listing_translation_language($language_code);
+	$language_names = array(
+		'en' => 'English',
+		'ru' => 'Russian',
+		'uk' => 'Ukrainian',
+		'tr' => 'Turkish',
+		'de' => 'German',
+		'es' => 'Spanish',
+	);
+	$language_name = isset($language_names[$language_code]) ? $language_names[$language_code] : strtoupper($language_code);
+
+	switch ($field_type) {
+		case 'title':
+		case 'seo_title':
+			$prompt = "Translate this classifieds listing title into {$language_name} (ISO 639-1: {$language_code}). "
+				. "Keep brand names, model numbers, and technical codes unchanged. Translate descriptive words naturally. "
+				. "Return only the translated title.\n\n{$text}";
+			break;
+
+		case 'seo_description':
+			$prompt = "Translate this SEO description into {$language_name} (ISO 639-1: {$language_code}). "
+				. "Preserve meaning and make the result natural for search snippets. Return only the translated description.\n\n{$text}";
+			break;
+
+		default:
+			$prompt = "Translate the following classifieds listing text into {$language_name} (ISO 639-1: {$language_code}). "
+				. "Preserve meaning, formatting, and tone. Return only the translated text.\n\n{$text}";
+			break;
+	}
+
+	$url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$api_key}";
+	$body = wp_json_encode(
+		array(
+			'contents' => array(
+				array(
+					'parts' => array(
+						array('text' => $prompt),
+					),
+				),
+			),
+			'generationConfig' => array(
+				'temperature' => 0,
+			),
+		)
+	);
+
+	$response = wp_remote_post(
+		$url,
+		array(
+			'headers' => array('Content-Type' => 'application/json'),
+			'body' => $body,
+			'timeout' => 30,
+		)
+	);
+
+	if (is_wp_error($response)) {
+		return $response;
+	}
+
+	$data = json_decode(wp_remote_retrieve_body($response), true);
+	$status_code = (int) wp_remote_retrieve_response_code($response);
+
+	if ($status_code >= 400 || !empty($data['error'])) {
+		$message = isset($data['error']['message']) && is_string($data['error']['message'])
+			? trim($data['error']['message'])
+			: 'Translation request failed.';
+
+		return new WP_Error('dp_translator_api_error', $message, array('status' => $status_code));
+	}
+
+	$translated_text = '';
+	if (!empty($data['candidates'][0]['content']['parts']) && is_array($data['candidates'][0]['content']['parts'])) {
+		foreach ($data['candidates'][0]['content']['parts'] as $part) {
+			if (!empty($part['text']) && is_string($part['text'])) {
+				$translated_text .= $part['text'];
+			}
+		}
+	}
+
+	$translated_text = trim($translated_text);
+	if ($translated_text === '') {
+		return new WP_Error('dp_translator_empty_response', 'Translation service returned an empty response.');
+	}
+
+	return $translated_text;
+}
+
+function classiadspro_generate_dp_listing_translation($post_id, $language_code, $force = false)
+{
+	$post_id = (int) $post_id;
+	if ($post_id <= 0 || get_post_type($post_id) !== 'dp_listing') {
+		return false;
+	}
+
+	$storage_key = trim((string) $language_code);
+	if ($storage_key === '') {
+		return false;
+	}
+
+	$machine_language_code = classiadspro_normalize_dp_listing_translation_language($storage_key);
+	if ($machine_language_code === '') {
+		return false;
+	}
+
+	$translations = get_post_meta($post_id, 'translations', true);
+	if (!is_array($translations)) {
+		$translations = array();
+	}
+
+	if (empty($translations[$storage_key]) || !is_array($translations[$storage_key])) {
+		$translations[$storage_key] = array();
+	}
+
+	$original_title = (string) get_post_field('post_title', $post_id);
+	$original_content = (string) get_post_field('post_content', $post_id);
+	$seo_title = (string) get_post_meta($post_id, '_yoast_wpseo_title', true);
+	if ($seo_title === '') {
+		$seo_title = $original_title;
+	}
+
+	$seo_description = (string) get_post_meta($post_id, '_yoast_wpseo_metadesc', true);
+	if ($seo_description === '') {
+		$seo_description = mb_substr(wp_strip_all_tags($original_content), 0, 160);
+	}
+
+	$updated = false;
+	$errors = array();
+
+	if ($force || empty($translations[$storage_key]['title'])) {
+		$translated_title = classiadspro_request_dp_listing_translation($original_title, $machine_language_code, 'title');
+		if (is_wp_error($translated_title)) {
+			$errors[] = $translated_title->get_error_message();
+		} else {
+			$translations[$storage_key]['title'] = $translated_title;
+			$updated = true;
+		}
+	}
+
+	if ($force || empty($translations[$storage_key]['content'])) {
+		$translated_content = classiadspro_request_dp_listing_translation($original_content, $machine_language_code, 'content');
+		if (is_wp_error($translated_content)) {
+			$errors[] = $translated_content->get_error_message();
+		} else {
+			$translations[$storage_key]['content'] = $translated_content;
+			$updated = true;
+		}
+	}
+
+	if (empty($translations[$storage_key]['seo']) || !is_array($translations[$storage_key]['seo'])) {
+		$translations[$storage_key]['seo'] = array();
+	}
+
+	if ($force || empty($translations[$storage_key]['seo']['title'])) {
+		$translated_seo_title = classiadspro_request_dp_listing_translation($seo_title, $machine_language_code, 'seo_title');
+		if (is_wp_error($translated_seo_title)) {
+			$errors[] = $translated_seo_title->get_error_message();
+		} else {
+			$translations[$storage_key]['seo']['title'] = $translated_seo_title;
+			$updated = true;
+		}
+	}
+
+	if ($force || empty($translations[$storage_key]['seo']['description'])) {
+		$translated_seo_description = classiadspro_request_dp_listing_translation($seo_description, $machine_language_code, 'seo_description');
+		if (is_wp_error($translated_seo_description)) {
+			$errors[] = $translated_seo_description->get_error_message();
+		} else {
+			$translations[$storage_key]['seo']['description'] = $translated_seo_description;
+			$updated = true;
+		}
+	}
+
+	if (
+		($force || empty($translations[$storage_key]['seo']['keywords'])) &&
+		!empty($translations[$storage_key]['title']) &&
+		!empty($translations[$storage_key]['content'])
+	) {
+		$translations[$storage_key]['seo']['keywords'] = dp_generate_keywords_translated(
+			array(
+				'title' => isset($translations[$storage_key]['title']) ? (string) $translations[$storage_key]['title'] : '',
+				'content' => wp_strip_all_tags(isset($translations[$storage_key]['content']) ? (string) $translations[$storage_key]['content'] : ''),
+			),
+			$machine_language_code,
+			8
+		);
+		$updated = true;
+	}
+
+	if ($updated) {
+		$translations[$storage_key]['_hashes'] = array(
+			'title' => function_exists('dp_translation_hash') ? dp_translation_hash($original_title) : md5(trim(wp_strip_all_tags($original_title))),
+			'content' => function_exists('dp_translation_hash') ? dp_translation_hash($original_content) : md5(trim(wp_strip_all_tags($original_content))),
+		);
+
+		update_post_meta($post_id, 'translations', $translations);
+	}
+
+	if (!empty($errors)) {
+		return new WP_Error('dp_translation_failed', reset($errors));
+	}
+
+	return $updated;
+}
+
+function classiadspro_ajax_translate_single_dp_listing()
+{
+	check_ajax_referer('dp_translate_single_post_nonce', 'nonce');
+
+	$post_id = isset($_POST['post_id']) ? (int) $_POST['post_id'] : 0;
+	if ($post_id <= 0 || !current_user_can('edit_post', $post_id)) {
+		wp_send_json_error('Нет прав');
+	}
+
+	$errors = array();
+	foreach ((array) dp_get_translatepress_languages() as $language_code => $label) {
+		$result = classiadspro_generate_dp_listing_translation($post_id, $language_code, true);
+		if (is_wp_error($result)) {
+			$errors[] = $result->get_error_message();
+		}
+	}
+
+	if (!empty($errors)) {
+		wp_send_json_error(reset($errors));
+	}
+
+	wp_send_json_success();
+}
+add_action('wp_ajax_dp_translate_single_post_ajax', 'classiadspro_ajax_translate_single_dp_listing', 20);
+
+function classiadspro_ajax_translate_all_dp_listings_step()
+{
+	if (!current_user_can('manage_options')) {
+		wp_send_json_error('Нет прав');
+	}
+
+	$offset = isset($_POST['offset']) ? (int) $_POST['offset'] : 0;
+	$query = new WP_Query(array(
+		'post_type' => 'dp_listing',
+		'posts_per_page' => 1,
+		'offset' => $offset,
+		'post_status' => 'publish',
+		'fields' => 'ids',
+	));
+
+	if (!$query->have_posts()) {
+		wp_send_json_success(array('done' => true, 'progress' => 100));
+	}
+
+	$post_id = (int) $query->posts[0];
+	$errors = array();
+	foreach ((array) dp_get_translatepress_languages() as $language_code => $label) {
+		$result = classiadspro_generate_dp_listing_translation($post_id, $language_code, true);
+		if (is_wp_error($result)) {
+			$errors[] = $result->get_error_message();
+		}
+	}
+
+	if (!empty($errors)) {
+		wp_send_json_error(reset($errors));
+	}
+
+	$total = wp_count_posts('dp_listing')->publish ?: 1;
+	$progress = min(100, round((($offset + 1) / $total) * 100));
+
+	wp_send_json_success(array('done' => false, 'progress' => $progress));
+}
+add_action('wp_ajax_dp_translate_all_step', 'classiadspro_ajax_translate_all_dp_listings_step', 20);
 
 /**
  * Resolve a stable DirectoryPress dashboard URL even when the plugin-global
@@ -4875,6 +5241,15 @@ function classiadspro_translatepress_ui_overrides() {
 		'login' => 'Вход',
 		'Register' => 'Регистрация',
 		'Post Free Ad' => 'Разместить объявление',
+		'About' => 'О нас',
+		'Pricing Plan' => 'Тарифы',
+		'All Categories' => 'Все категории',
+		'Terms of Services' => 'Условия использования',
+		'FAQ' => 'FAQ',
+		'Forget Password' => 'Забыли пароль',
+		'Normal Package' => 'Обычный пакет',
+		'Best Package' => 'Лучший пакет',
+		'most popular' => 'самый популярный',
 		'View All Listings' => 'Посмотреть все объявления',
 		'Our News' => 'Наши новости',
 		'Contact Us' => 'Свяжитесь с нами',
