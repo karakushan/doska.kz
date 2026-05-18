@@ -1,0 +1,919 @@
+/*
+=======================================================
+Translatepress Addon Dashboard - Admin Panel Styles
+=======================================================
+*/
+
+:root {
+    --primary-color: #e77279;
+    --secondary-color: #e45860;
+    --background-color: #f8f9fa;
+    --border-color: #ddd;
+    --text-color: #222;
+    --text-color-light: #666;
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --font-size-base: 16px;
+    --line-height-base: 1.5;
+}
+
+/* General Wrapper */
+.tpap-dashboard-wrapper {
+    margin: 0 auto;
+    padding: 0 20px 0 0;
+    max-width: 1240px;
+    box-sizing: border-box;
+}
+
+.tpap-dashboard-wrapper * {
+    box-sizing: border-box;
+    font-family: Inter, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tpap-dashboard-wrapper h3 {
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+:is(.toplevel_page_loco-addon, .settings_page_translatepress-tpap-dashboard) #wpbody #wpbody-content {
+    margin-top: 80px !important;
+    margin-block-start: 80px !important;
+}
+
+/* ================================================
+   Buttons & Links
+================================================ */
+.tpap-dashboard-btns-row {
+    display: flex;
+    gap: 10px;
+}
+
+.tpap-dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid var(--border-color);
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+.tpap-dashboard-btn:focus {
+   box-shadow: none;
+}
+
+.tpap-dashboard-btn.primary {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--secondary-color);
+}
+
+.tpap-dashboard-btn:hover {
+    background: #fff6f7;
+    color: var(--primary-color);
+    border-color: var(--border-color);
+}
+
+.tpap-dashboard-btn.svg-hover:hover svg path {
+    stroke: var(--primary-color);
+}
+
+/*
+
+
+/* ================================================
+   Header Section
+================================================ */
+.tpap-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--background-color);
+    padding: 5px 20px;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 6px 6px 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 20px);
+    margin: 0 0 0 -20px;
+    box-shadow: var(--shadow);
+    height: 70px;
+}
+.tpap-dashboard-social-icons a:focus{
+    box-shadow:none;
+}
+.tpap-dashboard-header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+  	.tpap-dashboard-header-left img{
+	max-width: 170px;
+}
+.tpap-dashboard-header-left svg {
+    height: 50px;
+}
+
+.tpap-dashboard-tab-title {
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.tpap-dashboard-header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* ================================================
+   Dashboard Layout
+================================================ */
+.tpap-dashboard-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 25px;
+    flex: 2;
+}
+
+@media (min-width: 768px) {
+    .tpap-dashboard-dashboard {
+        flex-direction: row;
+        gap: 40px;
+    }
+}
+
+.tpap-dashboard-left-section {
+    width: auto;
+    flex: 2;
+    margin-top: 25px;
+}
+
+
+/* ================================================
+   Welcome Section
+================================================ */
+.tpap-dashboard-welcome {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+	gap: 15px;
+}
+
+.tpap-dashboard-translation-providers{
+    margin-top: 24px;
+}
+
+.tpap-dashboard-welcome-text {
+    width: 50%;
+    flex-direction: column;
+}
+
+.tpap-dashboard-welcome-text h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+	line-height: 25px;
+}
+
+.tpap-dashboard-welcome p {
+    font-size: 0.875rem;
+    color: var(--text-color-light);
+    margin: 10px 0 20px;
+}
+
+.tpap-dashboard-welcome-video {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tpap-dashboard-welcome-video .play-icon {
+    width: 54px;
+    height: 54px;
+    position: absolute;
+    left: calc(50% - 27px);
+    top: calc(50% - 27px);
+    animation: play-icon 1s ease-in-out infinite;
+}
+
+.tpap-dashboard-welcome-video img.translatepress-addon-video {
+    width: 100%;
+    height: auto;
+}
+
+a.tpap-dashboard-docs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 30px;
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+a.tpap-dashboard-docs:hover {
+    color: var(--primary-color);
+}
+
+
+/* ================================================
+   Translation Providers
+================================================ */
+.tpap-dashboard-providers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.tpap-dashboard-provider-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.tpap-dashboard-provider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.tpap-dashboard-provider-header img {
+    height: 25px;
+}
+
+.tpap-dashboard-badge {
+    background: #131413;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 12px;
+    border-radius: 12px;
+}
+
+.tpap-dashboard-badge.free {
+    background: var(--primary-color);
+}
+
+.tpap-dashboard-provider-buttons {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+}
+
+/* ================================================
+   Sidebar
+================================================ */
+.tpap-dashboard-sidebar {
+    width: 548px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 25px;
+    flex: 1;
+}
+
+/* Translation Status */
+.tpap-dashboard-sidebar .tpap-dashboard-status {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 10px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    flex-direction: column;
+}
+
+.tpap-dashboard-sts-top {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #c3c4c7;
+    gap: 12px;
+    font-size: 15px;
+}
+
+.tpap-dashboard-sts-top span:first-child {
+    font-weight: 800;
+    font-size: 24px;
+}
+
+ul.tpap-dashboard-sts-btm {
+    padding: 0;
+    margin: 9px 0;
+}
+
+ul.tpap-dashboard-sts-btm li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+ul.tpap-dashboard-sts-btm li span:first-child {
+    font-weight: 600;
+}
+
+
+/* Full Website Translate */
+.tpap-dashboard-translate-full .tpap-dashboard-addon {
+    border-bottom: 1px solid #c3c4c7;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tpap-dashboard-addon.first {
+    border-top: 1px solid #c3c4c7;
+    padding-top: 15px;
+}
+
+.tpap-dashboard-addon-l {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.tpap-dashboard-addon-r img {
+    width: 72px;
+}
+
+.tpap-dashboard-translate-full .installed {
+    background: #cfd5d1;
+    color: #7f7f7f;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.tpap-dashboard-translate-full .addon-desc {
+    font-size: 12px;
+    color: #838389;
+    margin-bottom: 5px;
+}
+
+/* ================================================
+   Rate Us Section
+================================================ */
+.tpap-dashboard-rate-us {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+.tpap-dashboard-rate-us h3{
+    line-height: 25px;
+}
+
+.tpap-dashboard-rate-us .review-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007cba;
+    font-weight: bold;
+}
+
+/* ================================================
+   Animations
+================================================ */
+@keyframes play-icon {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/*===============================================
+    Tab Content
+================================================ */
+.tpap-dashboard-wrapper .tab-content{
+    display: flex;
+    gap: 25px;
+}
+
+.tpap-dashboard-ai-translations .header,
+.tpap-dashboard-license .header ,
+.tpap-dashboard-settings .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+/* ================================================
+   AI Translations
+================================================ */
+.tpap-dashboard-ai-translations {
+    width: auto;
+    flex: 2;
+    margin-top: 25px;
+}
+
+.tpap-dashboard-ai-translations-container{
+    background: white;
+    padding: 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.tpap-dashboard-ai-translations .description {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.tpap-dashboard-ai-translations .tpap-dashboard-translations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card {
+    margin-top: 35px;
+    position: relative;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 13px 15px 15px 15px;
+    text-align: start;
+    flex: 1;
+    max-width: 223px;
+}
+
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card h3{
+    margin-top: 12px;
+	font-size: 1.0rem;
+    margin-bottom: 10px;
+}
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card p {
+    padding-right: 4px;
+}
+
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card .logo{
+	background-color: white;
+    left: 20px;
+    position: absolute;
+    top: -12px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    width: 95px;
+    padding: 4px 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card .logo img{
+    width: 85%;
+    height: 100%;
+}
+
+
+
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card .play-btn-container img {
+ width: 100%;
+ height: 100%;
+}
+.tpap-dashboard-ai-translations .tpap-dashboard-translation-card .play-btn-container a:focus {
+    box-shadow: none;
+   }
+
+
+.tpap-dashboard-ai-translations .tpap-dashboard-play-btn {
+    background: #00cc66;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ================================================
+   License
+================================================ */
+.tpap-dashboard-license {
+    width: 100%;
+    margin-top: 25px;
+    flex: 2;
+}
+
+button#tpap-refresh-license-btn {
+    
+    color: #2271b1;
+    border-color: #2271b1;
+    background: #f6f7f7;
+    vertical-align: top;
+    height: 30px;
+    margin-block-end: 0;
+    margin-inline-start: 15px;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 2.15384615;
+    min-height: 30px;
+    margin: 0;
+    padding: 0 10px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-appearance: none;
+    border-radius: 6px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    
+}
+
+.tpap-dashboard-license-container,
+.tpap-dashboard-license-pro-container {
+    background: white;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.tpap-dashboard-license h1,
+.tpap-dashboard-license-pro-container h1 {
+    margin: 14px 0px 22px 0px;
+    font-size: 22px;
+    line-height: 25px;
+}
+
+/* License Form Styles */
+.tpap-dashboard-license-field {
+    margin-bottom: 20px;
+}
+
+.tpap-dashboard-license-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.tpap-dashboard-license-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: var(--font-size-base);
+    transition: border-color 0.2s ease;
+}
+
+.tpap-dashboard-license-field input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgb(178 48 48 / 10%);
+}
+
+.tpap-dashboard-activation-note {
+    margin: 20px 0;
+    color: var(--text-color-light);
+    font-size: 14px;
+}
+
+.tpap-dashboard-license-form .activation-note {
+    margin-top: 16px;
+}
+
+/* Pro License Container */
+.tpap-dashboard-license-pro-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tpap-dashboard-license-pro-container ul li {
+    margin-bottom: 8px;
+}
+
+.valid {
+    color: green;
+    font-weight: bold;
+}
+
+.tpap-dashboard-license-pro-container .license-type,
+.tpap-dashboard-license-pro-container .validity {
+    font-weight: bold;
+}
+
+.tpap-dashboard-license-pro-container .license-key {
+    background: #f5f5f5;
+    padding: 5px;
+    border-radius: 4px;
+    display: inline-block;
+    font-family: monospace;
+}
+
+/* Deactivate Button */
+.tpap-dashboard-license-pro-container-deactivate-btn {
+    display: flex;
+    justify-content: space-between;
+    margin: 41px 0px 20px 0px;
+}
+
+.tpap-dashboard-license-pro-container .deactivate-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tpap-dashboard-license-pro-container .deactivate-btn:hover {
+    background: #c0392b;
+}
+
+/* Button Container */
+.tpap-dashboard-license-pro-container-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.tpap-dashboard-license-pro-container-buttons .btns {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.tpap-dashboard-license-pro-container-buttons a {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* ================================================
+   Info
+================================================ */
+.tpap-dashboard-info {
+    margin-top: 70px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tpap-dashboard-info-links {
+    font-size: 14px;
+}
+
+.tpap-dashboard-info-links p{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tpap-dashboard-info .logo {
+    width: 150px;
+    height: 16px;
+    margin-bottom: 10px;
+}
+
+.tpap-dashboard-info .logo  a:focus{
+    box-shadow: none;
+}
+
+.tpap-dashboard-info-links a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.tpap-dashboard-social-icons a:focus{
+     text-decoration: underline;
+}
+
+.tpap-dashboard-social-icons img{
+    margin-top: 10px;
+}
+.tpap-dashboard-social-icons svg {
+    width: 32px;  
+    height: 32px; 
+}
+@media (max-width: 488px) and  (min-width:100px){
+	.tpap-dashboard-ai-translations .tpap-dashboard-ai-translations-container .header,
+	.tpap-dashboard-settings-container .header,
+	.tpap-dashboard-license-container .header{
+    flex-direction: column;
+    align-items: start;
+	padding-bottom: 10px;
+}
+	.tpap-dashboard-ai-translations .tpap-dashboard-translations {
+    flex-direction: column;
+}
+}
+@media (max-width: 767px) {
+
+	.tpap-dashboard-wrapper .tab-content{
+    flex-direction: column;
+	gap: 0px;
+}
+	.tpap-dashboard-sidebar {
+    width: auto;
+}
+	.tpap-dashboard-header {
+    padding: 0px 11px 11px 20px;
+    height: 145px;
+	flex-direction: column;
+    gap: 0px;
+	top: 47px;
+}
+
+:is(.toplevel_page_loco-addon, .settings_page_translatepress-tpap-dashboard) #wpbody #wpbody-content {
+    margin-top: 150px !important;
+}
+	.tpap-dashboard-welcome {
+    flex-direction: column;
+}
+.tpap-dashboard-welcome-video {
+    width: 100%;
+}
+	.tpap-dashboard-wrapper{
+	padding:60px 12px 0px 0px;
+	}
+	.tpap-dashboard-header-right {
+    gap: 6px;
+}
+}
+@media (max-width: 766px) and  (min-width:601px){
+	.tpap-dashboard-header {
+	top: 0px;
+}
+}
+	
+@media (max-width: 767px) and (min-width:377px){
+	.tpap-dashboard-header {
+    height: 110px;
+    
+    :is(.toplevel_page_loco-addon, .settings_page_translatepress-tpap-dashboard) #wpbody #wpbody-content {
+        margin-top: 115px !important;
+    }
+}
+}
+	
+	
+@media (max-width: 1024px) {
+.tpap-dashboard-header-left svg {
+    max-width: 120px;
+}
+	.tpap-dashboard-header {
+	gap: 15px;
+}
+
+	.tpap-dashboard-header-left img{
+	max-width: 125px;
+}
+	.tpap-dashboard-btn {
+    padding: 8px 6px;
+}
+	.tpap-dashboard-header-right {
+    gap: 13px;
+}
+	.tpap-dashboard-ai-translations .tpap-dashboard-translations {
+    gap: 7px;
+}
+}
+@media (max-width: 767px) and (min-width: 375px) {
+    .tpa-dashboard-header {
+        height: 130px;
+    }
+  }
+
+/* ================================================
+   Feedback Container
+================================================ */
+.tpap-dashboard-feedback-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+}
+
+.tpap-dashboard-feedback-container .feedback-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.tpap-dashboard-feedback-container input[type="checkbox"] {
+    margin-top: 3px;
+}
+
+.tpap-dashboard-feedback-container p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.tpap-dashboard-feedback-container .tpap-see-terms {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.tpap-dashboard-feedback-container .tpap-see-terms:hover {
+    text-decoration: underline;
+}
+
+.tpap-dashboard-feedback-container #termsBox {
+    margin-top: 10px;
+    padding-left: 20px;
+    font-size: 12px;
+    color: var(--text-color-light);
+}
+
+.tpap-dashboard-feedback-container #termsBox ul {
+    margin: 5px 0;
+    padding-left: 20px;
+}
+
+.tpap-dashboard-feedback-container #termsBox li {
+    margin-bottom: 5px;
+}
+
+.tpap-dashboard-feedback-container .tpap-dashboard-save-settings {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.tpap-dashboard-feedback-container .save-settings-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tpap-dashboard-feedback-container .save-settings-btn:hover {
+    background: var(--secondary-color);
+}
+
+.tpap-dashboard-feedback-container .save-settings-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(231, 114, 121, 0.2);
+}
+
+/* ================================================
+   Settings
+================================================ */
+.tpap-dashboard-settings {
+    width: 100%;
+    margin-top: 25px;
+    flex: 2;
+}
+
+.tpap-dashboard-settings-container {
+    background: white;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.tpap-dashboard-settings h1 {
+    margin: 14px 0px 22px 0px;
+    font-size: 22px;
+    line-height: 25px;
+}
+
+.tpap-dashboard-settings p {
+    margin-bottom: 20px;
+    color: var(--text-color-light);
+}

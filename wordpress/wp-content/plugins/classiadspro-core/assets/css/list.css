@@ -1,0 +1,22 @@
+/* Shortcode:List Styles
+-------------------------------------------------------------------- */
+.pacz-list-styles ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 32px;
+}
+.pacz-list-styles ul li {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px 0;
+  padding: 0 0 0 30px;
+  font-size: 14px;
+  color: #666;
+}
+.pacz-list-styles ul li:before {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  font-size: 16px;
+}

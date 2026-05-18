@@ -1,0 +1,92 @@
+/* Shortcode:Social Networks
+-------------------------------------------------------------------- */
+.pacz-social-network {
+  margin:0;
+  padding: 0;
+}
+.pacz-social-network.social-align-right {
+  text-align: right;
+}
+.pacz-social-network.social-align-center {
+  text-align: center;
+}
+.pacz-social-network.social-align-left {
+  text-align: left;
+}
+.pacz-social-network ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pacz-social-network ul li {
+  display: inline-block;
+  margin: 0;
+}
+.pacz-social-network ul li a {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin: 4px;
+  font-size: 20px;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+.pacz-social-network ul li a.dark {
+  border-color: #737373;
+  color: #999;
+}
+.pacz-social-network ul li a.dark:hover {
+  color: #fff ;
+  background-color: #737373;
+}
+.pacz-social-network ul li a.light {
+  border-color: #fff;
+  color: #fff;
+}
+.pacz-social-network ul li a.light:hover {
+  background-color: #fff ;
+  color: #000 ;
+}
+.pacz-social-network ul li a i {
+  vertical-align: middle;
+  line-height: 32px;
+}
+.pacz-social-network.square-style a,
+.pacz-social-network.circle-style a {
+  border-style: solid;
+  border-width: 3px;
+}
+.pacz-social-network.square-style a {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.pacz-social-network.circle-style a {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.pacz-social-network.simple-style a {
+  border-color: transparent !important;
+}
+.pacz-social-network.simple-style a i {
+  transition: color .3s ease;
+}
+.pacz-social-network.simple-style a:hover,
+.pacz-social-network.simple-style a.custom {
+  background-color: transparent !important;
+}
+.pacz-social-network.simple-style a.dark:hover {
+  color: inherit !important;
+}
+.pacz-social-network.simple-style a.light:hover {
+  color: #fff !important;
+}
+@media handheld, only screen and (max-width: 650px) {
+  .pacz-social-network.social-align-right,
+  .pacz-social-network.social-align-left {
+    text-align: center;
+  }
+}

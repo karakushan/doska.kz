@@ -1,0 +1,10 @@
+{
+	"name": " Ads Listing System Plugin",
+	"version": "2.0.3",
+	"download_url": "https://assets.designinvento.net/plugins/classiadspro/5-5-3/listing.zip",
+	"upgrade_notice": "includes important fixes",
+	"sections": {
+		"description": "This Version of Ads Listing System Plugin includes important fixes and recommended update for Classiadspro 5.5.3"
+		
+	}
+}

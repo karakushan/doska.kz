@@ -1,0 +1,29 @@
+/* Shortcode:Video Player
+-------------------------------------------------------------------- */
+.pacz-video-player {
+  padding: 12px;
+  border: 2px solid #eee;
+}
+.pacz-video-player .pacz-video-title {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.pacz-video-player .video-container {
+  margin-bottom: 0 !important;
+}
+.video-container {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,1665 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DirectoryPress Frontend Listing\n"
+"POT-Creation-Date: 2025-04-08 14:03+0500\n"
+"PO-Revision-Date: 2020-02-19 17:40+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 2.4.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: directorypress-frontend.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-directorypress-frontend-admin.php:27
+msgid "DirectoryPress Frontend Addon"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:32
+msgid "Frontend Submission"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:39
+msgid "Frontend submission login mode"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:41
+msgid "login required"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:42
+msgid "necessary to fill in contact form"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:43
+msgid "not necessary to fill in contact form"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:44
+msgid "do not show contact form"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:52
+msgid "Hide choose package page"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:54
+msgid ""
+"When all packages are similar and all has packages of listings, user do not "
+"need to choose package to submit when he already has a package."
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:59
+msgid "Enable pre-moderation of listings"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:61
+msgid "Moderation will be required for all listings even after payment"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:66
+msgid "Enable moderation after a listing was modified"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:72
+msgid "Enable submit listing button"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:78
+msgid "Allow regular users to change listings expiration dates"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:84
+msgid "Restrict User To Access WordPress Back-end"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:85
+msgid ""
+"Restrict all user roles other than Admin to access WordPess Dahboard e.g "
+"subscriber, editor,contributor, customer etc"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:91
+msgid ""
+"Hide top admin bar at the frontend for regular users and do not allow them to "
+"see dashboard at all"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:97
+msgid "Allow users to manage own profile at the frontend dashboard"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:103
+msgid "Require Terms of Services on submission page?"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:104
+msgid ""
+"If yes, create a WordPress page containing your TOS agreement and assign it "
+"using the dropdown above."
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:111
+msgid "Use custom login page for listings submission process"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:112
+msgid ""
+"You may use any 3rd party plugin to make custom login page and assign it with "
+"submission process using the dropdown above."
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:119
+msgid "Use custom login page for login into dashboard"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:120
+msgid ""
+"You may use any 3rd party plugin to make custom login page and assign it with "
+"login into dashboard using the dropdown above."
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:127
+msgid "Use custom Registration page"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:128
+msgid ""
+"Registration link would be redirected to selected page from default login form"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:135
+msgid "Use custom Password Reset Page"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:136
+msgid ""
+"Forgot/Reset Password link would be redirected to selected page from default "
+"login form"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:144
+msgid "User Profile"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:151
+msgid "User Email option on FrontEnd"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:157
+msgid "User Phone option on FrontEnd"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:163
+msgid "User Whatsapp option on FrontEnd"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:169
+msgid "User Address option on FrontEnd"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:175
+msgid "User Website option on FrontEnd"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:181
+msgid "Social media Links in user panel and frontend"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:182
+msgid ""
+"by turning it off social media links will be removed from author page and "
+"widgets"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:188
+msgid "Listing Features"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:195
+msgid "Enable Performance Static"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:201
+msgid "Allow user to send custom note to admin"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:207
+msgid "User Panel Skin"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:214
+msgid "Enable User Panel Styling"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:220
+msgid "Panel Width"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:222
+msgid "Default (1170px)"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:223
+msgid "Full width"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:224
+msgid "Custom"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:231
+#: admin/class-directorypress-frontend-admin.php:240
+msgid "Panel Content Area Width"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:248
+msgid "Panel Side Area Width"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:256
+msgid "Panel Content Area Background"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:264
+msgid "Panel Content Area Border Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:272
+msgid "Panel Sidebar Area Border Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:282
+msgid "Sidebar Author Box Padding"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:294
+msgid "Sidebar Author Box Background Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:301
+msgid "Sidebar Author Name Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:308
+msgid "Sidebar Author Status Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:319
+msgid "Sidebar Menu Wrapper Padding"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:334
+msgid "Sidebar Parent Menu Padding"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:349
+msgid "Sidebar Parent Menu Radius"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:361
+msgid "Parent Menu Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:381
+msgid "Sidebar Submenu Menu Padding"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:396
+msgid "Sidebar Submenu Menu Radius"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:408
+msgid "User Panel SubMenu Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:425
+msgid "User Panel Menu Border Bottom Color"
+msgstr ""
+
+#: admin/class-directorypress-frontend-admin.php:438
+msgid "User Panel SubMenu Border Bottom Color"
+msgstr ""
+
+#: includes/class-directorypress-frontend.php:266
+msgid "Submit new"
+msgstr ""
+
+#: includes/class-directorypress-frontend.php:272
+#: includes/class-directorypress-frontend.php:314
+#, php-format
+msgid "Submit new %s"
+msgstr ""
+
+#: includes/class-directorypress-frontend.php:279
+msgid "Add new listing"
+msgstr ""
+
+#: includes/class-directorypress-frontend.php:335
+msgid "Log out"
+msgstr ""
+
+#: includes/class-directorypress-frontend.php:358
+msgid "You can not see dashboard!"
+msgstr ""
+
+#: includes/class-directorypress-frontend.php:388
+msgid "Approval of listing"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:138
+msgid "Translation was successfully created!"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:142
+msgid "Translation was not created!"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:174
+#: includes/directorypress_class_panel.php:176
+#: includes/directorypress_class_submit.php:161
+#: includes/directorypress_class_submit.php:205
+#: includes/directorypress_class_submit.php:207 public/create_advert.php:73
+#: public/edit_advert.php:16
+msgid "Auto Draft"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:175
+#: includes/directorypress_class_submit.php:206
+msgid "Listing title field required"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:225
+#: includes/directorypress_class_submit.php:283
+msgid "Contact email"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:288
+#: includes/directorypress_class_submit.php:309
+msgid "Please check the box to agree the Terms of Services."
+msgstr ""
+
+#: includes/directorypress_class_panel.php:328
+#: includes/directorypress_class_submit.php:397
+msgid "Listing was saved successfully! Now it's awaiting moderators approval."
+msgstr ""
+
+#: includes/directorypress_class_panel.php:330
+#: includes/directorypress_class_submit.php:401
+msgid "Listing was saved successfully!"
+msgstr ""
+
+#: includes/directorypress_class_panel.php:357
+msgid "Notification about listing modification (do not reply)"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:73
+msgid "You are not allowed to submit in this package!"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:189 public/create_advert.php:42
+msgid "Contact Name"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:190 public/create_advert.php:51
+msgid "Contact Email"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:295
+msgid "Anti-bot test wasn't passed!"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:372
+msgid "Registration notification"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:384
+msgid ""
+"New user was created and added to the site, login and password were sent to "
+"provided contact email."
+msgstr ""
+
+#: includes/directorypress_class_submit.php:440
+msgid "Notification about new listing creation (do not reply)"
+msgstr ""
+
+#: includes/directorypress_class_submit.php:455
+msgid "New Submission"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:37
+msgid "Pricing Plans"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:88
+#: includes/elementor/directorypress-submit.php:97
+msgid "Setting"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:95
+#: includes/elementor/directorypress-submit.php:104
+msgid "Show All parameters?"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:96
+#: includes/elementor/directorypress-submit.php:105
+msgid "Show parameters whether on or off."
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:101
+#: includes/elementor/directorypress-pricing-plans.php:116
+#: includes/elementor/directorypress-pricing-plans.php:130
+#: includes/elementor/directorypress-pricing-plans.php:144
+#: includes/elementor/directorypress-pricing-plans.php:158
+#: includes/elementor/directorypress-pricing-plans.php:172
+#: includes/elementor/directorypress-pricing-plans.php:186
+#: includes/elementor/directorypress-pricing-plans.php:200
+#: includes/elementor/directorypress-submit.php:110
+#: includes/elementor/directorypress-submit.php:125
+#: includes/elementor/directorypress-submit.php:139
+#: includes/elementor/directorypress-submit.php:153
+#: includes/elementor/directorypress-submit.php:167
+#: includes/elementor/directorypress-submit.php:181
+#: includes/elementor/directorypress-submit.php:195
+#: includes/elementor/directorypress-submit.php:209 includes/vc_config.php:36
+#: includes/vc_config.php:43 includes/vc_config.php:49 includes/vc_config.php:55
+#: includes/vc_config.php:61 includes/vc_config.php:67 includes/vc_config.php:73
+#: includes/vc_config.php:79 includes/vc_config.php:121
+#: includes/vc_config.php:128 includes/vc_config.php:134
+#: includes/vc_config.php:140 includes/vc_config.php:146
+#: includes/vc_config.php:152 includes/vc_config.php:158
+#: includes/vc_config.php:164 includes/vc_config.php:170
+msgid "No"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:102
+#: includes/elementor/directorypress-pricing-plans.php:115
+#: includes/elementor/directorypress-pricing-plans.php:129
+#: includes/elementor/directorypress-pricing-plans.php:143
+#: includes/elementor/directorypress-pricing-plans.php:157
+#: includes/elementor/directorypress-pricing-plans.php:171
+#: includes/elementor/directorypress-pricing-plans.php:185
+#: includes/elementor/directorypress-pricing-plans.php:199
+#: includes/elementor/directorypress-submit.php:111
+#: includes/elementor/directorypress-submit.php:124
+#: includes/elementor/directorypress-submit.php:138
+#: includes/elementor/directorypress-submit.php:152
+#: includes/elementor/directorypress-submit.php:166
+#: includes/elementor/directorypress-submit.php:180
+#: includes/elementor/directorypress-submit.php:194
+#: includes/elementor/directorypress-submit.php:208 includes/vc_config.php:36
+#: includes/vc_config.php:43 includes/vc_config.php:49 includes/vc_config.php:55
+#: includes/vc_config.php:61 includes/vc_config.php:67 includes/vc_config.php:73
+#: includes/vc_config.php:79 includes/vc_config.php:121
+#: includes/vc_config.php:128 includes/vc_config.php:134
+#: includes/vc_config.php:140 includes/vc_config.php:146
+#: includes/vc_config.php:152 includes/vc_config.php:158
+#: includes/vc_config.php:164 includes/vc_config.php:170
+msgid "Yes"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:110
+#: includes/elementor/directorypress-submit.php:119
+msgid "Show Package Duration"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:124
+#: includes/elementor/directorypress-submit.php:133
+msgid "Show Sticky"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:138
+#: includes/elementor/directorypress-submit.php:147
+msgid "Show Featured"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:152
+#: includes/elementor/directorypress-submit.php:161
+msgid "Show Categories Number"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:166
+#: includes/elementor/directorypress-submit.php:175
+msgid "Show Locations Number"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:180
+#: includes/elementor/directorypress-submit.php:189
+msgid "Show Images Number"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:194
+#: includes/elementor/directorypress-submit.php:203
+msgid "Show Videos Number"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:208
+#: includes/elementor/directorypress-submit.php:217
+msgid "Columns Number"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:209
+#: includes/elementor/directorypress-submit.php:218
+msgid "Pricing plans in a row"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:214
+#: includes/elementor/directorypress-submit.php:223
+msgid "1 Column"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:215
+#: includes/elementor/directorypress-submit.php:224
+msgid "2 Column"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:216
+#: includes/elementor/directorypress-submit.php:225
+msgid "3 Column"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:217
+#: includes/elementor/directorypress-submit.php:226
+msgid "4 Column"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:228
+#: includes/elementor/directorypress-submit.php:237
+msgid "Content"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:235
+#: includes/elementor/directorypress-submit.php:244
+msgid "Select Directory"
+msgstr ""
+
+#: includes/elementor/directorypress-pricing-plans.php:246
+#: includes/elementor/directorypress-submit.php:255
+msgid "Select Packages"
+msgstr ""
+
+#: includes/elementor/directorypress-submit.php:46
+msgid "Submit Form"
+msgstr ""
+
+#: includes/general-function.php:61
+msgid " Directorypress Dashboard"
+msgstr ""
+
+#: includes/listing-functions.php:16
+msgid "Your comment here!"
+msgstr ""
+
+#: includes/listing-functions.php:18
+msgid ""
+"Feel free to contact us if you have a special query regarding this listing."
+msgstr ""
+
+#: includes/listing-functions.php:38 includes/listing-functions.php:83
+#: includes/listing-functions.php:133 includes/listing-functions.php:187
+#: includes/listing-functions.php:248 includes/listing-functions.php:321
+#: includes/listing-functions.php:548 includes/listing-functions.php:607
+#: includes/profile-functions.php:12
+msgid "No kiddies please!"
+msgstr ""
+
+#: includes/listing-functions.php:47
+msgid "Message Sent!"
+msgstr ""
+
+#: includes/listing-functions.php:50
+msgid "Error: You can not Manage this listing"
+msgstr ""
+
+#: includes/listing-functions.php:65
+msgid "Listing will be deleted permanently along with all data."
+msgstr ""
+
+#: includes/listing-functions.php:91
+msgid "Deleted Sucessfully!"
+msgstr ""
+
+#: includes/listing-functions.php:96 includes/listing-functions.php:338
+msgid "Error: not allowed"
+msgstr ""
+
+#: includes/listing-functions.php:100
+msgid "Error: You can not Delete this listing"
+msgstr ""
+
+#: includes/listing-functions.php:115
+msgid "Listing will be BumpedUp to the top of all listings."
+msgstr ""
+
+#: includes/listing-functions.php:145
+msgid "Listing BumpUp To Top"
+msgstr ""
+
+#: includes/listing-functions.php:149
+msgid ""
+"Notice: An order has been created, please pay by going to your orders to "
+"complete Bumpup process."
+msgstr ""
+
+#: includes/listing-functions.php:153 includes/listing-functions.php:208
+msgid "Error: Not Allowed"
+msgstr ""
+
+#: includes/listing-functions.php:169
+msgid ""
+"Listing will be Renewed as per purchased plan, Payment may apply if applicable."
+msgstr ""
+
+#: includes/listing-functions.php:200
+msgid "Listing Renewed Sucessfully"
+msgstr ""
+
+#: includes/listing-functions.php:204
+msgid ""
+"Notice: An order has been created, please pay by going to your orders to "
+"complete Renew process."
+msgstr ""
+
+#: includes/listing-functions.php:225
+msgid "You can upgrade listing to available options."
+msgstr ""
+
+#: includes/listing-functions.php:257
+msgid "New package ID"
+msgstr ""
+
+#: includes/listing-functions.php:263
+msgid "Upgraded Sucessfully!"
+msgstr ""
+
+#: includes/listing-functions.php:266
+msgid ""
+"Notice: An order has been created, please pay by going to your orders to "
+"complete upgradation."
+msgstr ""
+
+#: includes/listing-functions.php:271
+msgid "Something Went Wrong, Please Try Again"
+msgstr ""
+
+#: includes/listing-functions.php:275
+msgid "Not Allowed"
+msgstr ""
+
+#: includes/listing-functions.php:298 includes/listing-functions.php:302
+#: includes/panel-functions.php:80
+msgid "Private"
+msgstr ""
+
+#: includes/listing-functions.php:299 includes/listing-functions.php:301
+#: includes/listing-functions.php:333 public/partials/listing/desktop.php:160
+#: public/partials/listing/mobile.php:121
+msgid "Publish"
+msgstr ""
+
+#: includes/listing-functions.php:305
+#, php-format
+msgid ""
+"Your Current Listing Status is %s you can change Listing Status to %s below."
+msgstr ""
+
+#: includes/listing-functions.php:307
+msgid "Your are not allowed to access this data"
+msgstr ""
+
+#: includes/listing-functions.php:328
+msgid "Listing Status Changed to Publish Sucessfully!"
+msgstr ""
+
+#: includes/listing-functions.php:329 public/partials/listing/desktop.php:160
+#: public/partials/listing/mobile.php:121
+msgid "Make Private"
+msgstr ""
+
+#: includes/listing-functions.php:332
+msgid "Listing Status Changed to Private Sucessfully!"
+msgstr ""
+
+#: includes/listing-functions.php:369 public/view_stats.php:7
+msgid "January"
+msgstr ""
+
+#: includes/listing-functions.php:370 public/view_stats.php:8
+msgid "February"
+msgstr ""
+
+#: includes/listing-functions.php:371 public/view_stats.php:9
+msgid "March"
+msgstr ""
+
+#: includes/listing-functions.php:372 public/view_stats.php:10
+msgid "April"
+msgstr ""
+
+#: includes/listing-functions.php:373 public/view_stats.php:11
+msgid "May"
+msgstr ""
+
+#: includes/listing-functions.php:374 public/view_stats.php:12
+msgid "June"
+msgstr ""
+
+#: includes/listing-functions.php:375 public/view_stats.php:13
+msgid "July"
+msgstr ""
+
+#: includes/listing-functions.php:376 public/view_stats.php:14
+msgid "August"
+msgstr ""
+
+#: includes/listing-functions.php:377 public/view_stats.php:15
+msgid "September"
+msgstr ""
+
+#: includes/listing-functions.php:378 public/view_stats.php:16
+msgid "October"
+msgstr ""
+
+#: includes/listing-functions.php:379 public/view_stats.php:17
+msgid "November"
+msgstr ""
+
+#: includes/listing-functions.php:380 public/view_stats.php:18
+msgid "December"
+msgstr ""
+
+#: includes/listing-functions.php:485
+msgid "Edit"
+msgstr ""
+
+#: includes/listing-functions.php:493
+msgid "Add"
+msgstr ""
+
+#: includes/listing-functions.php:501
+msgid "No Permission."
+msgstr ""
+
+#: includes/listing-functions.php:505
+msgid "WPMP Plugin Required."
+msgstr ""
+
+#: includes/listing-functions.php:528 includes/profile-functions.php:442
+#: includes/profile-functions.php:469
+msgid "Close"
+msgstr ""
+
+#: includes/panel-functions.php:71
+msgid "online"
+msgstr ""
+
+#: includes/panel-functions.php:76
+msgid "Listings"
+msgstr ""
+
+#: includes/panel-functions.php:78
+msgid "All"
+msgstr ""
+
+#: includes/panel-functions.php:79
+msgid "Published"
+msgstr ""
+
+#: includes/panel-functions.php:81
+msgid "Pending"
+msgstr ""
+
+#: includes/panel-functions.php:82 public/partials/listing/desktop.php:94
+#: public/partials/listing/desktop.php:108 public/partials/listing/mobile.php:37
+#: public/partials/listing/mobile.php:77
+msgid "Expired"
+msgstr ""
+
+#: includes/panel-functions.php:86
+msgid "Accounts"
+msgstr ""
+
+#: includes/panel-functions.php:89
+msgid "Edit Profile"
+msgstr ""
+
+#: includes/panel-functions.php:102
+msgid "Messages"
+msgstr ""
+
+#: includes/panel-functions.php:104
+msgid "Inbox"
+msgstr ""
+
+#: includes/panel-functions.php:112
+msgid "Bookmarks"
+msgstr ""
+
+#: includes/panel-functions.php:116
+msgid "WP Admin"
+msgstr ""
+
+#: includes/profile-functions.php:17 includes/profile-functions.php:96
+#: includes/profile-functions.php:145 includes/profile-functions.php:198
+#: includes/profile-functions.php:494
+msgid "This Action is disabled on demo site."
+msgstr ""
+
+#: includes/profile-functions.php:73
+msgid "Profile Updated!"
+msgstr ""
+
+#: includes/profile-functions.php:91 includes/profile-functions.php:489
+msgid "No kiddies please."
+msgstr ""
+
+#: includes/profile-functions.php:100
+msgid "All the fields are required!"
+msgstr ""
+
+#: includes/profile-functions.php:111
+msgid "New password did not match!"
+msgstr ""
+
+#: includes/profile-functions.php:116
+msgid "Password Has Been Changed Successfully"
+msgstr ""
+
+#: includes/profile-functions.php:122
+msgid "Old password did not match"
+msgstr ""
+
+#: includes/profile-functions.php:127
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: includes/profile-functions.php:171
+msgid "Image Updated!"
+msgstr ""
+
+#: includes/profile-functions.php:176
+msgid "Uploaded Image Type is Not Allowed!"
+msgstr ""
+
+#: includes/profile-functions.php:181 includes/profile-functions.php:218
+msgid "Error!"
+msgstr ""
+
+#: includes/profile-functions.php:212
+msgid "Profile Photo Removed!"
+msgstr ""
+
+#: includes/profile-functions.php:237
+msgid "Email verification code"
+msgstr ""
+
+#: includes/profile-functions.php:244
+msgid ""
+"verification code has been sent to your registered email id, Please check your "
+"inbox and provide verification code in input filed below"
+msgstr ""
+
+#: includes/profile-functions.php:247
+msgid "failed"
+msgstr ""
+
+#: includes/profile-functions.php:264
+msgid "email verified successfully"
+msgstr ""
+
+#: includes/profile-functions.php:268 includes/profile-functions.php:319
+msgid "Please provide valid verification code"
+msgstr ""
+
+#: includes/profile-functions.php:290
+msgid ""
+"verification code has been sent to your registered Phone number, Please check "
+"your inbox and provide verification code in input filed below"
+msgstr ""
+
+#: includes/profile-functions.php:296
+msgid "Aww!, there was an error."
+msgstr ""
+
+#: includes/profile-functions.php:315
+msgid "Phone number verified successfully"
+msgstr ""
+
+#: includes/profile-functions.php:336 includes/profile-functions.php:340
+#: includes/profile-functions.php:386 includes/profile-functions.php:390
+#: includes/profile-functions.php:427 public/profile.php:37 public/profile.php:40
+msgid "Email Verification"
+msgstr ""
+
+#: includes/profile-functions.php:337 includes/profile-functions.php:348
+#: includes/profile-functions.php:387 includes/profile-functions.php:398
+msgid "verified"
+msgstr ""
+
+#: includes/profile-functions.php:341 includes/profile-functions.php:352
+#: includes/profile-functions.php:391 includes/profile-functions.php:402
+#: public/email_verification_required.php:4 public/profile.php:41
+#: public/profile.php:49
+msgid "verify"
+msgstr ""
+
+#: includes/profile-functions.php:347 includes/profile-functions.php:351
+#: includes/profile-functions.php:397 includes/profile-functions.php:401
+#: includes/profile-functions.php:454 public/profile.php:45 public/profile.php:48
+msgid "Phone Verification"
+msgstr ""
+
+#: includes/profile-functions.php:358
+msgid "User Verification"
+msgstr ""
+
+#: includes/profile-functions.php:432
+msgid ""
+"Click Get New link for verification code, Code will be sent to your registered "
+"email."
+msgstr ""
+
+#: includes/profile-functions.php:435 includes/profile-functions.php:462
+msgid "Insert Verification Code"
+msgstr ""
+
+#: includes/profile-functions.php:437
+msgid "Verify E-mail"
+msgstr ""
+
+#: includes/profile-functions.php:438 includes/profile-functions.php:465
+msgid "Get New"
+msgstr ""
+
+#: includes/profile-functions.php:459
+msgid ""
+"Click Get New link for verification code, Code will be sent to your registered "
+"Phone Number."
+msgstr ""
+
+#: includes/profile-functions.php:464
+msgid "Verify Phone"
+msgstr ""
+
+#: includes/profile-functions.php:503
+msgid "Account Deleted Permanently!"
+msgstr ""
+
+#: includes/profile-functions.php:508
+msgid "Something went wrong, please try again."
+msgstr ""
+
+#: includes/profile-functions.php:512
+msgid "You Can not delete Administrator Account Here."
+msgstr ""
+
+#: includes/profile-functions.php:516
+msgid "You are not allowed to perform this action."
+msgstr ""
+
+#: includes/profile-functions.php:536 public/profile.php:114
+msgid "Close Your Account"
+msgstr ""
+
+#: includes/profile-functions.php:540
+msgid "Are you sure? Be aware this action can not undo."
+msgstr ""
+
+#: includes/profile-functions.php:545
+msgid "Delete Account"
+msgstr ""
+
+#: includes/profile-functions.php:546 public/claim_process.php:16
+#: public/raise_up.php:13 public/renew.php:12 public/upgrade.php:22
+msgid "Cancel"
+msgstr ""
+
+#: includes/vc_config.php:7
+msgid "Listings submit"
+msgstr ""
+
+#: includes/vc_config.php:8
+msgid "Listings submission pages"
+msgstr ""
+
+#: includes/vc_config.php:12 includes/vc_config.php:97 includes/vc_config.php:188
+msgid "Listing Content"
+msgstr ""
+
+#: includes/vc_config.php:17 includes/vc_config.php:102
+msgid "Listings packages"
+msgstr ""
+
+#: includes/vc_config.php:18 includes/vc_config.php:103
+msgid "Choose exact packages to display"
+msgstr ""
+
+#: includes/vc_config.php:24 includes/vc_config.php:109
+msgid "Specific directorytype"
+msgstr ""
+
+#: includes/vc_config.php:31 includes/vc_config.php:116
+msgid "Columns"
+msgstr ""
+
+#: includes/vc_config.php:37 includes/vc_config.php:122
+msgid "Show negative parameters?"
+msgstr ""
+
+#: includes/vc_config.php:38 includes/vc_config.php:123
+msgid ""
+"Show parameters those have negation. For example, such row in the table will "
+"be shown: Featured Listings - No. In other case this row will be hidden."
+msgstr ""
+
+#: includes/vc_config.php:44 includes/vc_config.php:129
+msgid "Show package active period on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:50 includes/vc_config.php:135
+msgid "Show is package has_sticky on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:56 includes/vc_config.php:141
+msgid "Show is package has_featured on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:62 includes/vc_config.php:147
+msgid "Show package categories number on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:68 includes/vc_config.php:153
+msgid "Show package locations number on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:74 includes/vc_config.php:165
+msgid "Show package images number on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:80 includes/vc_config.php:171
+msgid "Show package videos number on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:85 includes/vc_config.php:176
+msgid "Show only on directorytype pages"
+msgstr ""
+
+#: includes/vc_config.php:87 includes/vc_config.php:178
+msgid "Otherwise it will load plugin's files on all pages."
+msgstr ""
+
+#: includes/vc_config.php:92
+msgid "Pricing table"
+msgstr ""
+
+#: includes/vc_config.php:93
+msgid ""
+"Listings packages table. Works in the same way as 1st step on Listings submit, "
+"displays only pricing table. Note, that page with Listings submit element "
+"required."
+msgstr ""
+
+#: includes/vc_config.php:159
+msgid "Show is package supports maps on choose package page?"
+msgstr ""
+
+#: includes/vc_config.php:183
+msgid "Users Dashboard"
+msgstr ""
+
+#: includes/vc_config.php:184
+msgid "Listing frontend dashboard"
+msgstr ""
+
+#: public/adverts.php:6
+msgid "Total Listing"
+msgstr ""
+
+#: public/adverts.php:12
+msgid "Active Listing"
+msgstr ""
+
+#: public/adverts.php:18
+msgid "Expired Listing"
+msgstr ""
+
+#: public/adverts.php:24 public/partials/listing/desktop.php:103
+#: public/partials/listing/mobile.php:32
+msgid "Pending Approval"
+msgstr ""
+
+#: public/adverts.php:30
+msgid "Your Listings"
+msgstr ""
+
+#: public/claim_process.php:2
+#, php-format
+msgid "Approve or decline claim of listing \"%s\""
+msgstr ""
+
+#: public/claim_process.php:6
+#, php-format
+msgid "User \"%s\" had claimed this listing."
+msgstr ""
+
+#: public/claim_process.php:8
+msgid "Message from claimer:"
+msgstr ""
+
+#: public/claim_process.php:10
+msgid "In case of approval new owner will receive email notification."
+msgstr ""
+
+#: public/claim_process.php:12
+msgid "Approve"
+msgstr ""
+
+#: public/claim_process.php:14
+msgid "Decline"
+msgstr ""
+
+#: public/claim_process.php:18 public/raise_up.php:15 public/renew.php:14
+#: public/upgrade.php:24 public/view_stats.php:72
+msgid "Go back "
+msgstr ""
+
+#: public/create_advert.php:9
+#, php-format
+msgid "Create New %s in package"
+msgstr ""
+
+#: public/create_advert.php:12
+#, php-format
+msgid "Create New %s"
+msgstr ""
+
+#: public/create_advert.php:20
+#, php-format
+msgid ""
+"You are logged in as %s. You can %s or continue submission in this account."
+msgstr ""
+
+#: public/create_advert.php:20
+msgid "Logout"
+msgstr ""
+
+#: public/create_advert.php:25
+#, php-format
+msgid ""
+"Returning user? Please <a href='%s'>Log in</a> or register in this submission "
+"form."
+msgstr ""
+
+#: public/create_advert.php:37
+msgid "Contact Details"
+msgstr ""
+
+#: public/create_advert.php:44 public/create_advert.php:53
+#: public/create_advert.php:143 public/create_advert.php:157
+#: public/edit_advert.php:80 public/edit_advert.php:93
+msgid "Required"
+msgstr ""
+
+#: public/create_advert.php:59
+msgid "Login information will be sent to your email after submission"
+msgstr ""
+
+#: public/create_advert.php:65 public/edit_advert.php:12
+msgid "General Details"
+msgstr ""
+
+#: public/create_advert.php:69 public/edit_advert.php:15
+#: public/partials/listing/desktop.php:7
+msgid "Title"
+msgstr ""
+
+#: public/create_advert.php:70 public/edit_advert.php:15
+msgid "*"
+msgstr ""
+
+#: public/create_advert.php:78 public/edit_advert.php:21
+msgid "Contact email "
+msgstr ""
+
+#: public/create_advert.php:89 public/edit_advert.php:32
+msgid "select existing tags or type new"
+msgstr ""
+
+#: public/create_advert.php:103 public/edit_advert.php:45
+msgid "Listing expiration date"
+msgstr ""
+
+#: public/create_advert.php:130 public/edit_advert.php:67
+msgid "Extra Details"
+msgstr ""
+
+#: public/create_advert.php:174 public/edit_advert.php:109
+msgid "Media"
+msgstr ""
+
+#: public/create_advert.php:190
+msgid "Address"
+msgstr ""
+
+#: public/create_advert.php:217 public/edit_advert.php:144
+msgid "I have read and agreed to the "
+msgstr ""
+
+#: public/create_advert.php:217 public/edit_advert.php:144
+msgid "Terms of Services"
+msgstr ""
+
+#: public/create_advert.php:226
+msgid "Submit Listing"
+msgstr ""
+
+#: public/edit_advert.php:4
+#, php-format
+msgid "Edit listing \"%s\""
+msgstr ""
+
+#: public/edit_advert.php:22
+msgid ""
+"When field is empty contact messages from contact form will be sent directly "
+"to author email"
+msgstr ""
+
+#: public/edit_advert.php:122
+msgid "locations"
+msgstr ""
+
+#: public/edit_advert.php:152
+msgid "Save Listing"
+msgstr ""
+
+#: public/email_verification_required.php:6
+#, php-format
+msgid "Email verification is required to submit new listing  %s"
+msgstr ""
+
+#: public/package_details.php:15 public/package_details.php:26
+msgid "Sticky"
+msgstr ""
+
+#: public/package_details.php:37 public/package_details.php:48
+msgid "Featured"
+msgstr ""
+
+#: public/package_details.php:59
+msgid "1 category"
+msgstr ""
+
+#: public/package_details.php:61
+#, php-format
+msgid "Up to %d categories"
+msgstr ""
+
+#: public/package_details.php:63
+msgid "No categories"
+msgstr ""
+
+#: public/package_details.php:72
+msgid "1 location"
+msgstr ""
+
+#: public/package_details.php:74
+#, php-format
+msgid "Up to %d locations"
+msgstr ""
+
+#: public/package_details.php:76
+msgid "No locations"
+msgstr ""
+
+#: public/package_details.php:84
+msgid "1 image"
+msgstr ""
+
+#: public/package_details.php:86
+#, php-format
+msgid "Up to %d images"
+msgstr ""
+
+#: public/package_details.php:88
+msgid "No images"
+msgstr ""
+
+#: public/package_details.php:96
+msgid "1 video"
+msgstr ""
+
+#: public/package_details.php:98
+#, php-format
+msgid "Up to %d videos"
+msgstr ""
+
+#: public/package_details.php:100
+msgid "No videos"
+msgstr ""
+
+#: public/partials/listing/desktop.php:9 public/partials/listing/mobile.php:70
+msgid "Expiry"
+msgstr ""
+
+#: public/partials/listing/desktop.php:11
+msgid "Status"
+msgstr ""
+
+#: public/partials/listing/desktop.php:13 public/partials/listing/mobile.php:65
+msgid "Listing ID"
+msgstr ""
+
+#: public/partials/listing/desktop.php:15
+msgid "Settings"
+msgstr ""
+
+#: public/partials/listing/desktop.php:90 public/partials/listing/mobile.php:73
+msgid "No Expiry"
+msgstr ""
+
+#: public/partials/listing/desktop.php:92 public/partials/listing/mobile.php:75
+msgid "left"
+msgstr ""
+
+#: public/partials/listing/desktop.php:106 public/partials/listing/mobile.php:35
+msgid "Active"
+msgstr ""
+
+#: public/partials/listing/desktop.php:116 public/partials/listing/mobile.php:45
+msgid "Unpaid"
+msgstr ""
+
+#: public/partials/listing/desktop.php:116 public/partials/listing/mobile.php:45
+msgid "Pay now"
+msgstr ""
+
+#: public/partials/listing/desktop.php:120 public/partials/listing/mobile.php:49
+msgid "Stopped"
+msgstr ""
+
+#: public/partials/listing/desktop.php:137 public/partials/listing/mobile.php:98
+msgid "Configure"
+msgstr ""
+
+#: public/partials/listing/desktop.php:143 public/partials/listing/mobile.php:104
+msgid "Edit Listing"
+msgstr ""
+
+#: public/partials/listing/desktop.php:146 public/partials/listing/mobile.php:107
+msgid "Renew"
+msgstr ""
+
+#: public/partials/listing/desktop.php:149
+#: public/partials/listing/desktop.php:155
+#: public/partials/listing/desktop.php:166 public/partials/listing/mobile.php:110
+#: public/partials/listing/mobile.php:116 public/partials/listing/mobile.php:127
+msgid "Change"
+msgstr ""
+
+#: public/partials/listing/desktop.php:149 public/partials/listing/mobile.php:110
+msgid "Change Listing Package"
+msgstr ""
+
+#: public/partials/listing/desktop.php:149 public/partials/listing/mobile.php:110
+msgid "Upgrade"
+msgstr ""
+
+#: public/partials/listing/desktop.php:152 public/partials/listing/mobile.php:113
+msgid "Boost"
+msgstr ""
+
+#: public/partials/listing/desktop.php:152 public/partials/listing/mobile.php:113
+msgid "Boost Your Listing"
+msgstr ""
+
+#: public/partials/listing/desktop.php:152 public/partials/listing/mobile.php:113
+msgid "BumpUp To Top"
+msgstr ""
+
+#: public/partials/listing/desktop.php:155 public/partials/listing/mobile.php:116
+msgid "Listing Performance Status"
+msgstr ""
+
+#: public/partials/listing/desktop.php:155 public/partials/listing/mobile.php:116
+msgid "Performance"
+msgstr ""
+
+#: public/partials/listing/desktop.php:158 public/partials/listing/mobile.php:119
+msgid "Preview"
+msgstr ""
+
+#: public/partials/listing/desktop.php:161 public/partials/listing/mobile.php:122
+msgid "Make Listing Publish or Private"
+msgstr ""
+
+#: public/partials/listing/desktop.php:161 public/partials/listing/mobile.php:122
+msgid "Publish/Private"
+msgstr ""
+
+#: public/partials/listing/desktop.php:163 public/partials/listing/mobile.php:124
+msgid "Send"
+msgstr ""
+
+#: public/partials/listing/desktop.php:163 public/partials/listing/mobile.php:124
+msgid "Send A Note To Admin"
+msgstr ""
+
+#: public/partials/listing/desktop.php:163 public/partials/listing/mobile.php:124
+msgid "Note To Admin"
+msgstr ""
+
+#: public/partials/listing/desktop.php:166 public/partials/listing/mobile.php:127
+msgid "Translation"
+msgstr ""
+
+#: public/partials/listing/desktop.php:169
+#: public/partials/listing/desktop.php:171 public/partials/listing/mobile.php:130
+#: public/partials/listing/mobile.php:132
+msgid "Delete"
+msgstr ""
+
+#: public/partials/listing/desktop.php:169 public/partials/listing/mobile.php:130
+msgid "Are You Sure?"
+msgstr ""
+
+#: public/partials/plans/style-1.php:31
+msgid "most popular"
+msgstr ""
+
+#: public/partials/plans/style-1.php:50
+#, php-format
+msgid "for <strong>%d</strong> %s in the package"
+msgstr ""
+
+#: public/partials/plans/style-1.php:60
+msgid "You have already submitted maximum listings in this package."
+msgstr ""
+
+#: public/partials/plans/style-1.php:61 public/partials/plans/style-1.php:65
+msgid "Select This Plan"
+msgstr ""
+
+#: public/phone_verification_required.php:6
+msgid "Phone verification is required to submit new listing"
+msgstr ""
+
+#: public/phone_verification_required.php:9
+msgid "Verify Now"
+msgstr ""
+
+#: public/profile.php:75
+msgid "Upload Photo"
+msgstr ""
+
+#: public/profile.php:88 public/profile.php:102
+msgid "Change Password"
+msgstr ""
+
+#: public/profile.php:93
+msgid "Current password"
+msgstr ""
+
+#: public/profile.php:96
+msgid "New password"
+msgstr ""
+
+#: public/profile.php:99
+msgid "Confirm new password"
+msgstr ""
+
+#: public/profile.php:110
+msgid "Close Account"
+msgstr ""
+
+#: public/profile.php:113
+msgid ""
+"Be careful this action can not be reversed, All data would be deleted "
+"permanently."
+msgstr ""
+
+#: public/profile.php:122
+msgid "Username"
+msgstr ""
+
+#: public/profile.php:126
+msgid "First Name"
+msgstr ""
+
+#: public/profile.php:130
+msgid "Last Name"
+msgstr ""
+
+#: public/profile.php:134
+msgid "Nickname"
+msgstr ""
+
+#: public/profile.php:134 public/profile.php:165
+msgid "(required)"
+msgstr ""
+
+#: public/profile.php:138
+msgid "Display to Public as"
+msgstr ""
+
+#: public/profile.php:165
+msgid "E-mail"
+msgstr ""
+
+#: public/profile.php:171
+msgid "Website"
+msgstr ""
+
+#: public/profile.php:177
+msgid "Phone Number"
+msgstr ""
+
+#: public/profile.php:183
+msgid "Whatsapp Number"
+msgstr ""
+
+#: public/profile.php:188
+msgid "Biography"
+msgstr ""
+
+#: public/profile.php:192
+msgid "Public Address"
+msgstr ""
+
+#: public/profile.php:198
+msgid "Facebook"
+msgstr ""
+
+#: public/profile.php:202
+msgid "Twitter"
+msgstr ""
+
+#: public/profile.php:206
+msgid "Linkedin"
+msgstr ""
+
+#: public/profile.php:210
+msgid "Pinterest"
+msgstr ""
+
+#: public/profile.php:214
+msgid "Behance"
+msgstr ""
+
+#: public/profile.php:218
+msgid "Dribbble"
+msgstr ""
+
+#: public/profile.php:222
+msgid "Instagram"
+msgstr ""
+
+#: public/profile.php:226
+msgid "YouTube"
+msgstr ""
+
+#: public/profile.php:230
+msgid "Vimeo"
+msgstr ""
+
+#: public/profile.php:234
+msgid "Flickr"
+msgstr ""
+
+#: public/profile.php:239
+msgid "Update Profile"
+msgstr ""
+
+#: public/raise_up.php:2
+#, php-format
+msgid "Raise up listing \"%s\""
+msgstr ""
+
+#: public/raise_up.php:5
+msgid "Listing will be raised up to the top of all lists, those ordered by date."
+msgstr ""
+
+#: public/raise_up.php:6
+msgid ""
+"Note, that listing will not stick on top, so new listings and other listings, "
+"those were raised up later, will place higher."
+msgstr ""
+
+#: public/raise_up.php:11
+msgid "Raise up"
+msgstr ""
+
+#: public/renew.php:2
+#, php-format
+msgid "Renew listing \"%s\""
+msgstr ""
+
+#: public/renew.php:5
+msgid ""
+"Listing will be renewed and raised up to the top of all lists, those ordered "
+"by date."
+msgstr ""
+
+#: public/renew.php:10
+msgid "Renew listing"
+msgstr ""
+
+#: public/upgrade.php:2
+#, php-format
+msgid "Change package of listing \"%s\""
+msgstr ""
+
+#: public/upgrade.php:5
+msgid ""
+"The package of listing will be changed. You may upgrade or downgrade the "
+"package. If new package has an option of limited active period - expiration "
+"date of listing will be reassigned automatically."
+msgstr ""
+
+#: public/upgrade.php:9
+msgid "Choose new package"
+msgstr ""
+
+#: public/upgrade.php:20
+msgid "Change package"
+msgstr ""
+
+#: public/view_stats.php:1
+#, php-format
+msgid "Clicks statistics of listing \"%s\""
+msgstr ""
+
+#: public/view_stats.php:3
+#, php-format
+msgid "Total clicks: %d"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "DirectoryPress Frontend"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid ""
+"https://designinvento.net/downloads/directorypress-frontend-listing-addon/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Frontend Ads listing functionality for DirectoryPress Plugin."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Designinvento"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://designinvento.net"
+msgstr ""

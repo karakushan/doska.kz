@@ -1,0 +1,1561 @@
+# Copyright (C) 2019 Designinvento-Templates
+# This file is distributed under the same license as the Designinvento-Templates package.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Designinvento-Templates\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Designinveto\n"
+"Last-Translator: Designinvento\n"
+"Report-Msgid-Bugs-To: https://designinvento.net/\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
+"_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
+"esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: class-classiads-templates.php:401
+msgid "You Have A Valid License"
+msgstr ""
+
+#: class-classiads-templates.php:407
+msgid ""
+"A Valid License Required For Theme Setup, Premium Plugin's Installation And "
+"Future Updates"
+msgstr ""
+
+#: class-classiads-templates.php:536 class-classiads-templates.php:537
+msgid "Designinvento Templates"
+msgstr ""
+
+#: class-classiads-templates.php:577
+msgid "Something went wrong. Please refresh the page and try again!"
+msgstr ""
+
+#: class-classiads-templates.php:729
+msgid "Please define default parameters in the form of an array."
+msgstr ""
+
+#: class-classiads-templates.php:734
+msgid "Please define an SVG icon filename."
+msgstr ""
+
+#: class-classiads-templates.php:850
+msgid "Welcome"
+msgstr ""
+
+#: class-classiads-templates.php:859
+msgid "License"
+msgstr ""
+
+#: class-classiads-templates.php:867 class-classiads-templates.php:2270
+msgid "Content"
+msgstr ""
+
+#: class-classiads-templates.php:875
+msgid "Plugins"
+msgstr ""
+
+#: class-classiads-templates.php:883 classiads-templates.php:76
+#: classiads-templates.php:77 classiads-templates.php:78
+#: includes/class-tgm-plugin-activation.php:2810
+msgid "Install"
+msgstr ""
+
+#: class-classiads-templates.php:890
+msgid "Ready"
+msgstr ""
+
+#: class-classiads-templates.php:997
+msgid "The welcome step has been displayed"
+msgstr ""
+
+#: class-classiads-templates.php:1092
+msgid "The license activation step has been displayed"
+msgstr ""
+
+#: class-classiads-templates.php:1164
+msgid "The child theme installation step has been displayed"
+msgstr ""
+
+#: class-classiads-templates.php:1258
+#: includes/class-tgm-plugin-activation.php:2366
+msgid "Required"
+msgstr ""
+
+#: class-classiads-templates.php:1259
+msgid "req"
+msgstr ""
+
+#: class-classiads-templates.php:1299
+msgid "The plugin installation step has been displayed"
+msgstr ""
+
+#: class-classiads-templates.php:1363
+msgid "Select which demo data you want to import:"
+msgstr ""
+
+#: class-classiads-templates.php:1383 class-classiads-templates.php:2926
+msgid "Preview"
+msgstr ""
+
+#: class-classiads-templates.php:1384 class-classiads-templates.php:2915
+msgid "Select"
+msgstr ""
+
+#: class-classiads-templates.php:1410 class-classiads-templates.php:1492
+msgid "The content import step has been displayed"
+msgstr ""
+
+#: class-classiads-templates.php:1446
+msgid ""
+"Make sure you reset the site to default installation values before importing "
+"demo data."
+msgstr ""
+
+#: class-classiads-templates.php:1451
+#, php-format
+msgid ""
+"You can use the <a href=\"%s\">WP Reset</a> plugin to reset and run through "
+"demos."
+msgstr ""
+
+#: class-classiads-templates.php:1573
+msgid "The final step has been displayed"
+msgstr ""
+
+#: class-classiads-templates.php:1650
+msgid "The existing child theme was activated"
+msgstr ""
+
+#: class-classiads-templates.php:1668
+msgid "The newly generated child theme was activated"
+msgstr ""
+
+#: class-classiads-templates.php:1690
+msgid ""
+"Yikes! The theme activation failed. Please try again or contact support."
+msgstr ""
+
+#: class-classiads-templates.php:1699
+msgid "Please add your license key before attempting to activate one."
+msgstr ""
+
+#: class-classiads-templates.php:1712
+msgid "The license activation was performed with the following results"
+msgstr ""
+
+#: class-classiads-templates.php:1758 class-classiads-templates.php:1799
+msgid "An error occurred, please try again."
+msgstr ""
+
+#: class-classiads-templates.php:1771
+#, php-format
+msgid "Your license key expired on %s."
+msgstr ""
+
+#: class-classiads-templates.php:1777
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: class-classiads-templates.php:1781
+msgid ""
+"This appears to be an invalid license key. Please try again or contact "
+"support."
+msgstr ""
+
+#: class-classiads-templates.php:1786
+msgid "Your license is not active for this URL."
+msgstr ""
+
+#: class-classiads-templates.php:1791
+#, php-format
+msgid "This appears to be an invalid license key for %s."
+msgstr ""
+
+#: class-classiads-templates.php:1795
+msgid "Your license key has reached its activation limit."
+msgstr ""
+
+#: class-classiads-templates.php:1890
+msgid "The child theme functions.php content was generated"
+msgstr ""
+
+#: class-classiads-templates.php:1921
+msgid "The child theme style.css content was generated"
+msgstr ""
+
+#: class-classiads-templates.php:1956
+msgid ""
+"The child theme screenshot was copied to the child theme, with the following "
+"result"
+msgstr ""
+
+#: class-classiads-templates.php:1958
+msgid "The child theme screenshot was not generated, because of these results"
+msgstr ""
+
+#: class-classiads-templates.php:1987
+msgid "Activating"
+msgstr ""
+
+#: class-classiads-templates.php:2003
+msgid "Updating"
+msgstr ""
+
+#: class-classiads-templates.php:2019 class-classiads-templates.php:2035
+#: class-classiads-templates.php:2261 class-classiads-templates.php:2273
+#: class-classiads-templates.php:2286 class-classiads-templates.php:2299
+#: class-classiads-templates.php:2312 class-classiads-templates.php:2325
+#: class-classiads-templates.php:2337 class-classiads-templates.php:2350
+#: class-classiads-templates.php:2393
+msgid "Installing"
+msgstr ""
+
+#: class-classiads-templates.php:2027
+msgid "A plugin with the following data will be processed"
+msgstr ""
+
+#: class-classiads-templates.php:2039
+msgid "A plugin with the following data was processed"
+msgstr ""
+
+#: class-classiads-templates.php:2048 class-classiads-templates.php:2262
+#: class-classiads-templates.php:2274 class-classiads-templates.php:2287
+#: class-classiads-templates.php:2300 class-classiads-templates.php:2313
+#: class-classiads-templates.php:2326 class-classiads-templates.php:2338
+#: class-classiads-templates.php:2351
+msgid "Success"
+msgstr ""
+
+#: class-classiads-templates.php:2072
+msgid ""
+"The content importer AJAX call failed to start, because of incorrect data"
+msgstr ""
+
+#: class-classiads-templates.php:2077
+msgid "Invalid content!"
+msgstr ""
+
+#: class-classiads-templates.php:2088
+msgid "The content import AJAX call will be executed with this import data"
+msgstr ""
+
+#: class-classiads-templates.php:2130
+msgid "The content import AJAX call failed with this passed data"
+msgstr ""
+
+#: class-classiads-templates.php:2141
+msgid "Error"
+msgstr ""
+
+#: class-classiads-templates.php:2154
+msgid ""
+"The content importer AJAX call for retrieving total content import items "
+"failed to start, because of incorrect data."
+msgstr ""
+
+#: class-classiads-templates.php:2159
+msgid "Invalid data!"
+msgstr ""
+
+#: class-classiads-templates.php:2258
+msgid "After import setup "
+msgstr ""
+
+#: class-classiads-templates.php:2259 class-classiads-templates.php:2348
+msgid "After import setup."
+msgstr ""
+
+#: class-classiads-templates.php:2260 class-classiads-templates.php:2272
+#: class-classiads-templates.php:2285 class-classiads-templates.php:2298
+#: class-classiads-templates.php:2311 class-classiads-templates.php:2324
+#: class-classiads-templates.php:2336 class-classiads-templates.php:2349
+msgid "Pending"
+msgstr ""
+
+#: class-classiads-templates.php:2271
+msgid "Demo content data."
+msgstr ""
+
+#: class-classiads-templates.php:2283
+msgid "Widgets"
+msgstr ""
+
+#: class-classiads-templates.php:2284
+msgid "Sample widgets data."
+msgstr ""
+
+#: class-classiads-templates.php:2296
+msgid "Revolution Slider"
+msgstr ""
+
+#: class-classiads-templates.php:2297
+msgid "Sample Revolution sliders data."
+msgstr ""
+
+#: class-classiads-templates.php:2309
+msgid "Options"
+msgstr ""
+
+#: class-classiads-templates.php:2310
+msgid "Sample theme options data."
+msgstr ""
+
+#: class-classiads-templates.php:2322
+msgid "Theme Options"
+msgstr ""
+
+#: class-classiads-templates.php:2323
+msgid "Theme framework options."
+msgstr ""
+
+#: class-classiads-templates.php:2334
+msgid "DirectoryPress Settings"
+msgstr ""
+
+#: class-classiads-templates.php:2335
+msgid "DirectoryPress Settings."
+msgstr ""
+
+#: class-classiads-templates.php:2347
+msgid "After import setup"
+msgstr ""
+
+#: class-classiads-templates.php:2377
+msgid "The revolution slider import was executed"
+msgstr ""
+
+#: class-classiads-templates.php:2495
+msgid "The Hello world post status was set to draft"
+msgstr ""
+
+#: class-classiads-templates.php:2544
+msgid ""
+"This predefined demo import does not have the name parameter: "
+"import_file_name"
+msgstr ""
+
+#: class-classiads-templates.php:2892 class-classiads-templates.php:2959
+msgid "Sorry! There is no demo for your choice."
+msgstr ""
+
+#: classiads-templates.php:18 classiads-templates.php:65
+msgid "Classiads Templates"
+msgstr ""
+
+#: classiads-templates.php:68
+#, php-format
+msgid "%1$s%2$s Themes &lsaquo; Theme Setup: %3$s%4$s"
+msgstr ""
+
+#: classiads-templates.php:69
+msgid "Return to the dashboard"
+msgstr ""
+
+#: classiads-templates.php:70
+msgid "Disable this wizard"
+msgstr ""
+
+#: classiads-templates.php:72
+msgid "Skip"
+msgstr ""
+
+#: classiads-templates.php:73
+msgid "Next"
+msgstr ""
+
+#: classiads-templates.php:74
+msgid "Start"
+msgstr ""
+
+#: classiads-templates.php:75
+msgid "Cancel"
+msgstr ""
+
+#: classiads-templates.php:79
+msgid "Start Import"
+msgstr ""
+
+#: classiads-templates.php:80 includes/class-tgm-plugin-activation.php:2819
+msgid "Activate"
+msgstr ""
+
+#: classiads-templates.php:81
+msgid "Later"
+msgstr ""
+
+#: classiads-templates.php:84
+#, php-format
+msgid "Activate %s"
+msgstr ""
+
+#: classiads-templates.php:86
+#, php-format
+msgid "%s is Activated"
+msgstr ""
+
+#: classiads-templates.php:88
+msgid "Enter your license key to enable remote updates and theme support."
+msgstr ""
+
+#: classiads-templates.php:89
+msgid "License key"
+msgstr ""
+
+#: classiads-templates.php:90
+msgid "The theme is already registered, so you can go to the next step!"
+msgstr ""
+
+#: classiads-templates.php:91
+msgid "Your theme is activated! Remote updates and theme support are enabled."
+msgstr ""
+
+#: classiads-templates.php:92
+msgid "Need help?"
+msgstr ""
+
+#: classiads-templates.php:95
+#, php-format
+msgid "Welcome to %s"
+msgstr ""
+
+#: classiads-templates.php:96
+msgid "Hi. Welcome back"
+msgstr ""
+
+#: classiads-templates.php:97
+msgid ""
+"This wizard will set up your theme, install plugins, and import content. It "
+"is optional & should take only a few minutes."
+msgstr ""
+
+#: classiads-templates.php:98 classiads-templates.php:104
+msgid ""
+"You may have already run this theme setup wizard. If you would like to "
+"proceed anyway, click on the \"Start\" button below."
+msgstr ""
+
+#: classiads-templates.php:101
+#, php-format
+msgid "Page Builder Tool %s"
+msgstr ""
+
+#: classiads-templates.php:102 classiads-templates.php:115
+msgid "You're up to speed!"
+msgstr ""
+
+#: classiads-templates.php:103
+msgid "Select a page builder tool to build your site."
+msgstr ""
+
+#: classiads-templates.php:106
+msgid "Install Child Theme"
+msgstr ""
+
+#: classiads-templates.php:107
+msgid "You're good to go!"
+msgstr ""
+
+#: classiads-templates.php:108
+msgid ""
+"Let's build & activate a child theme so you may easily make theme changes."
+msgstr ""
+
+#: classiads-templates.php:109
+msgid ""
+"Your child theme has already been installed and is now activated, if it "
+"wasn't already."
+msgstr ""
+
+#: classiads-templates.php:110
+msgid "Learn about child themes"
+msgstr ""
+
+#: classiads-templates.php:111
+msgid ""
+"Awesome. Your child theme has already been installed and is now activated."
+msgstr ""
+
+#: classiads-templates.php:112
+msgid "Awesome. Your child theme has been created and is now activated."
+msgstr ""
+
+#: classiads-templates.php:114 includes/class-tgm-plugin-activation.php:335
+msgid "Install Plugins"
+msgstr ""
+
+#: classiads-templates.php:116
+msgid ""
+"Let's install some essential WordPress plugins to get your site up to speed."
+msgstr ""
+
+#: classiads-templates.php:117
+msgid ""
+"The required WordPress plugins are all installed and up to date. Press \"Next"
+"\" to continue the setup wizard."
+msgstr ""
+
+#: classiads-templates.php:118 classiads-templates.php:122
+msgid "Advanced"
+msgstr ""
+
+#: classiads-templates.php:120
+msgid "Import Starter Site"
+msgstr ""
+
+#: classiads-templates.php:121
+msgid ""
+"Let's import content to your website, to help you get familiar with the "
+"theme."
+msgstr ""
+
+#: classiads-templates.php:124
+msgid "All done. Have fun!"
+msgstr ""
+
+#: classiads-templates.php:127
+msgid "Your theme has been all set up. Enjoy your new theme by Designinvento."
+msgstr ""
+
+#: classiads-templates.php:128
+msgid "Extras"
+msgstr ""
+
+#: classiads-templates.php:129
+msgid "View your website"
+msgstr ""
+
+#: classiads-templates.php:130
+msgid "Explore Designinvento"
+msgstr ""
+
+#: classiads-templates.php:131
+msgid "Get Theme Support"
+msgstr ""
+
+#: classiads-templates.php:132
+msgid "Start Customizing"
+msgstr ""
+
+#: demos/demos.php:36 demos/demos.php:63 demos/demos.php:91 demos/demos.php:119
+#: demos/demos.php:146 demos/demos.php:173 demos/demos.php:201
+#: demos/demos.php:228 demos/demos.php:255 demos/demos.php:283
+#: demos/demos.php:310 demos/demos.php:338 demos/demos.php:366
+#: demos/demos.php:393 demos/demos.php:421 demos/demos.php:448
+#: demos/demos.php:476 demos/demos.php:503 demos/demos.php:530
+#: demos/demos.php:557 demos/demos.php:585 demos/demos.php:612
+#: demos/demos.php:639 demos/demos.php:666 demos/demos.php:693
+#: demos/demos.php:720 demos/demos.php:747 demos/demos.php:774
+#: demos/demos.php:801 demos/demos.php:828 demos/demos.php:855
+#: demos/demos.php:882 demos/demos.php:909 demos/demos.php:936
+#: demos/demos.php:964 demos/demos.php:992 demos/demos.php:1019
+#: demos/demos.php:1046 demos/demos.php:1075 demos/demos.php:1104
+#: demos/demos.php:1132 demos/demos.php:1160 demos/demos.php:1188
+msgid ""
+"After you import this demo, you will have to setup the slider separately."
+msgstr ""
+
+#: includes/class-designinvento-templates-customizer-importer.php:30
+msgid "The customizer import has finished successfully"
+msgstr ""
+
+#: includes/class-designinvento-templates-customizer-importer.php:57
+#, php-format
+msgid "Error: The customizer import file is missing! File path: %s"
+msgstr ""
+
+#: includes/class-designinvento-templates-customizer-importer.php:70
+msgid ""
+"Error: The customizer import file does not have any content in it. Please "
+"make sure to use the correct customizer import file."
+msgstr ""
+
+#: includes/class-designinvento-templates-customizer-importer.php:80
+msgid ""
+"Error: The customizer import file is not in a correct format. Please make "
+"sure to use the correct customizer import file."
+msgstr ""
+
+#: includes/class-designinvento-templates-customizer-importer.php:86
+msgid ""
+"Error: The customizer import file is not suitable for current theme. You can "
+"only import customizer settings for the same theme or a child theme."
+msgstr ""
+
+#: includes/class-designinvento-templates-downloader.php:56
+msgid "The file was not able to save to disk, while trying to download it"
+msgstr ""
+
+#: includes/class-designinvento-templates-downloader.php:78
+msgid "Missing URL for downloading a file!"
+msgstr ""
+
+#: includes/class-designinvento-templates-downloader.php:96
+#, php-format
+msgid ""
+"An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - "
+"%6$s."
+msgstr ""
+
+#: includes/class-designinvento-templates-redux-importer.php:32
+#: includes/class-designinvento-templates-redux-importer.php:61
+msgid "The Redux Framework data was imported"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:72
+msgid "Error: Widget import file could not be found."
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:83
+msgid "Error: Widget import file does not have any content in it."
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:105
+msgid ""
+"Error: Widget import data could not be read. Please try a different file."
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:144
+msgid "Sidebar does not exist in theme (moving widget to Inactive)"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:165
+msgid "Site does not support widget"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:198
+msgid "Widget already exists"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:256
+msgid "Imported"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:260
+msgid "Imported to Inactive"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:266
+msgid "No Title"
+msgstr ""
+
+#: includes/class-designinvento-templates-widget-importer.php:328
+msgid "No results for widget import!"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:334
+msgid "Install Required Plugins"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:337
+#, php-format
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:339
+#, php-format
+msgid "Updating Plugin: %s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:340
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:343
+#, php-format
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:349
+#, php-format
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:355
+#, php-format
+msgid ""
+"The following plugin needs to be updated to its latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgid_plural ""
+"The following plugins need to be updated to their latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:361
+#, php-format
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:367
+#, php-format
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:373
+#, php-format
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:378
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:383
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:388
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:392
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:393
+#: includes/class-tgm-plugin-activation.php:920
+#: includes/class-tgm-plugin-activation.php:2626
+#: includes/class-tgm-plugin-activation.php:3673
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:394
+#: includes/class-tgm-plugin-activation.php:3252
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:395
+#: includes/class-tgm-plugin-activation.php:3045
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:397
+#, php-format
+msgid "No action taken. Plugin %1$s was already active."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:399
+#, php-format
+msgid ""
+"Plugin not activated. A higher version of %s is needed for this theme. "
+"Please update the plugin."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:401
+#, php-format
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:402
+msgid "Dismiss this notice"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:403
+msgid ""
+"There are one or more required or recommended plugins to install, update or "
+"activate."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:404
+msgid "Please contact the administrator of this site for help."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:607
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:608
+msgid "Update Required"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:725
+msgid "Set the parent_slug config variable instead."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:1027
+msgid ""
+"The remote plugin package does not contain a folder with the desired slug "
+"and renaming did not work."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:1027
+#: includes/class-tgm-plugin-activation.php:1030
+msgid ""
+"Please contact the plugin provider and ask them to package their plugin "
+"according to the WordPress guidelines."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:1030
+msgid ""
+"The remote plugin package consists of more than one file, but the files are "
+"not packaged in a folder."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:1214
+#: includes/class-tgm-plugin-activation.php:3041
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2075
+#, php-format
+msgid "TGMPA v%s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2369
+msgid "Recommended"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2385
+msgid "WordPress Repository"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2388
+msgid "External Source"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2391
+msgid "Pre-Packaged"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2408
+msgid "Not Installed"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2412
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2414
+msgid "Active"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2420
+msgid "Required Update not Available"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2423
+msgid "Requires Update"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2426
+msgid "Update recommended"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2435
+#, php-format
+msgctxt "Install/Update Status"
+msgid "%1$s, %2$s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2481
+#, php-format
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:2485
+#, php-format
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:2489
+#, php-format
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:2493
+#, php-format
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-tgm-plugin-activation.php:2575
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2583
+msgid "Installed version:"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2591
+msgid "Minimum required version:"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2603
+msgid "Available version:"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2626
+msgid "No plugins to install, update or activate."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2640
+msgid "Plugin"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2641
+msgid "Source"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2642
+msgid "Type"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2646
+msgid "Version"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2647
+msgid "Status"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2696
+#, php-format
+msgid "Install %2$s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2701
+#, php-format
+msgid "Update %2$s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2707
+#, php-format
+msgid "Activate %2$s"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2777
+msgid "Upgrade message from the plugin author:"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2816
+msgid "Update"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2850
+msgid "No plugins were selected to be installed. No action taken."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2852
+msgid "No plugins were selected to be updated. No action taken."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2893
+msgid "No plugins are available to be installed at this time."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:2895
+msgid "No plugins are available to be updated at this time."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3001
+msgid "No plugins were selected to be activated. No action taken."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3027
+msgid "No plugins are available to be activated at this time."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3251
+msgid "Plugin activation failed."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3591
+#, php-format
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3594
+#, php-format
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3596
+#, php-format
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3600
+msgid ""
+"The installation and activation process is starting. This process may take a "
+"while on some hosts, so please be patient."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3602
+#, php-format
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3602
+#: includes/class-tgm-plugin-activation.php:3610
+msgid "Show Details"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3602
+#: includes/class-tgm-plugin-activation.php:3610
+msgid "Hide Details"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3603
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3605
+#, php-format
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3608
+msgid ""
+"The installation process is starting. This process may take a while on some "
+"hosts, so please be patient."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3610
+#, php-format
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3611
+msgid "All installations have been completed."
+msgstr ""
+
+#: includes/class-tgm-plugin-activation.php:3613
+#, php-format
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: includes/plugins_template.php:11
+msgid "Multi Directory"
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:54
+msgid "View details"
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:77
+#, php-format
+msgid "More information about %s"
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:128
+msgid "Check for updates"
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:213
+#, php-format
+msgctxt "the plugin title"
+msgid "The %s plugin is up to date."
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:215
+#, php-format
+msgctxt "the plugin title"
+msgid "A new version of the %s plugin is available."
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:217
+#, php-format
+msgctxt "the plugin title"
+msgid "Could not determine if updates are available for %s."
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Plugin/Ui.php:223
+#, php-format
+msgid "Unknown update checker status \"%s\""
+msgstr ""
+
+#: pacz-update-checker/Puc/v4p5/Vcs/PluginUpdateChecker.php:98
+msgid "There is no changelog available."
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/Importer.php:55
+msgid ""
+"The XMLReader class is missing! Please install the XMLReader PHP extension "
+"on your server"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/Importer.php:68
+msgid "Could not open the XML file for parsing!"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/Importer.php:249
+msgid "Content import start error: "
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/Importer.php:281
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:173
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:291
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:375
+#, php-format
+msgid ""
+"This WXR file (version %s) is newer than the importer (version %s) and may "
+"not be supported. Please consider updating."
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/Importer.php:505
+msgid "New AJAX call!"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:135
+msgid "Could not open the file for parsing"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:525
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:126
+msgid "The file does not exist, please try again."
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:588
+msgid "Invalid author mapping"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:689
+msgid "Cannot import auto-draft posts"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:781
+#, php-format
+msgid "Failed to import \"%s\": Invalid post type %s"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:791
+#, php-format
+msgid "%s \"%s\" already exists."
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:869
+#, php-format
+msgid "Skipping attachment \"%s\", fetching attachments disabled"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:883
+#, php-format
+msgid "Failed to import \"%s\" (%s)"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:915
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1833
+#, php-format
+msgid "Imported \"%s\" (%s)"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:920
+#, php-format
+msgid "Post %d remapped to %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:960
+#, php-format
+msgid "Failed to import term: %s - %s"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1105
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:946
+msgid "Invalid file type"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1604
+#, php-format
+msgid "Failed to import user \"%s\""
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1625
+#, php-format
+msgid "Imported user \"%s\""
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1629
+#, php-format
+msgid "User %d remapped to %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1794
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:509
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:731
+#, php-format
+msgid "Failed to import %s %s"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1838
+#, php-format
+msgid "Term %d remapped to %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1897
+#, php-format
+msgid "Failed to add metakey: %s, metavalue: %s to term_id: %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1906
+#, php-format
+msgid "Meta for term_id %d : %s => %s ; successfully added!"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1958
+#, php-format
+msgid "Remote server returned %1$d %2$s for %3$s"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1980
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1016
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:1986
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1022
+#, php-format
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2011
+#, php-format
+msgid "Running post-processing for post %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2024
+#, php-format
+msgid "Could not find the post parent for \"%s\" (post #%d)"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2029
+#, php-format
+msgid "Post %d was imported with parent %d, but could not be found"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2043
+#, php-format
+msgid "Could not find the author for \"%s\" (post #%d)"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2048
+#, php-format
+msgid "Post %d was imported with author \"%s\", but could not be found"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2074
+#, php-format
+msgid "Post %d was marked for post-processing, but none was required."
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2085
+#, php-format
+msgid "Could not update \"%s\" (post #%d) with mapped data"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2130
+#, php-format
+msgid "Could not find the menu object for \"%s\" (post #%d)"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2135
+#, php-format
+msgid ""
+"Post %d was imported with object \"%d\" of type \"%s\", but could not be "
+"found"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2157
+#, php-format
+msgid "Could not find the comment parent for comment #%d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2161
+#, php-format
+msgid "Comment %d was imported with parent %d, but could not be found"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2175
+#, php-format
+msgid "Could not find the author for comment #%d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2179
+#, php-format
+msgid "Comment %d was imported with author %d, but could not be found"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2196
+#, php-format
+msgid "Could not update comment #%d with mapped data"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2227
+#, php-format
+msgid "Faulty term_id provided in terms-to-be-remapped array %s"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2237
+#, php-format
+msgid "No taxonomy provided in terms-to-be-remapped array for term #%d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2247
+#, php-format
+msgid "No parent_slug identified in remapping-array for term: %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2255
+#, php-format
+msgid "The term(%d)\"s parent_slug (%s) is not found in the remapping-array."
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2269
+#, php-format
+msgid "No data returned by get_term_by for term_id #%d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2288
+#, php-format
+msgid "Could not update \"%s\" (term #%d) with mapped data"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2298
+#, php-format
+msgid "Term %d was successfully updated with parent %d"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2333
+msgid "Starting remapping of featured images"
+msgstr ""
+
+#: vendor/proteusthemes/wp-content-importer-v2/src/WXRImporter.php:2342
+#, php-format
+msgid "Remapping featured image ID %d to new ID %d for post ID %d"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:42
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:72
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:80
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:43
+msgid ""
+"Details are shown above. The importer will now try again with a different "
+"parser..."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:84
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:89
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:306
+#: vendor/wp-importer/wordpress-importer/src/parsers.php:502
+msgid ""
+"This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:125
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:134
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:185
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:189
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:198
+msgid "Sorry, there has been an error."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:169
+msgid "All done."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:169
+msgid "Have fun!"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:170
+msgid "Remember to update the passwords and roles of imported users."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:190
+#, php-format
+msgid ""
+"The export file could not be found at <code>%s</code>. It is likely that "
+"this was caused by a permissions problem."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:206
+#, php-format
+msgid ""
+"This WXR file (version %s) may not be supported by this version of the "
+"importer. Please consider updating."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:231
+#, php-format
+msgid ""
+"Failed to import author %s. Their posts will be attributed to the current "
+"user."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:257
+msgid "Assign Authors"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:258
+msgid ""
+"To make it easier for you to edit and save the imported content, you may "
+"want to reassign the author of the imported item to an existing user of this "
+"site. For example, you may want to import all the entries as <code>admin</"
+"code>s entries."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:260
+#, php-format
+msgid ""
+"If a new user is created by WordPress, a new password will be randomly "
+"generated and the new user&#8217;s role will be set as %s. Manually changing "
+"the new user&#8217;s details will be necessary."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:270
+msgid "Import Attachments"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:273
+msgid "Download and import file attachments"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:277
+msgid "Submit"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:290
+msgid "Import author:"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:301
+msgid "or create new user with login name:"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:304
+msgid "as a new user:"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:312
+msgid "assign posts to an existing user:"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:314
+msgid "or assign posts to an existing user:"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:315
+msgid "- Select -"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:365
+#, php-format
+msgid ""
+"Failed to create new user for %s. Their posts will be attributed to the "
+"current user."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:417
+#, php-format
+msgid "Failed to import category %s"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:460
+#, php-format
+msgid "Failed to import post tag %s"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:598
+#, php-format
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:635
+#, php-format
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:697
+#, php-format
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:863
+msgid "Menu item skipped due to missing menu slug"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:870
+#, php-format
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:933
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:996
+msgid "Remote server did not respond"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1004
+#, php-format
+msgid "Remote server returned error response %1$d %2$s"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1122
+msgid "Import WordPress"
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1129
+#, php-format
+msgid ""
+"A new version of this importer is available. Please update to version %s to "
+"ensure compatibility with newer export files."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1144
+msgid ""
+"Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import "
+"the posts, pages, comments, custom fields, categories, and tags into this "
+"site."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1145
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr ""
+
+#: vendor/wp-importer/wordpress-importer/src/wordpress-importer.php:1219
+msgid ""
+"Import <strong>posts, pages, comments, custom fields, categories, and tags</"
+"strong> from a WordPress export file."
+msgstr ""

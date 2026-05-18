@@ -1,0 +1,178 @@
+/* Shortcode:Clients Carousel
+-------------------------------------------------------------------- */
+.pacz-clients-shortcode {
+  position: relative;
+}
+.pacz-clients-shortcode .owl-item{
+  padding:10px;
+}
+.pacz-clients-shortcode .pacz-grid {
+  margin:0 auto;
+}
+.pacz-clients-shortcode .pacz-grid ul {
+  *zoom: 1;
+  margin-left:-15px;
+  margin-right:-15px;
+}
+.pacz-clients-shortcode .pacz-grid ul.owl-carousel {
+  margin-left:0;
+  margin-right:0;
+}
+.pacz-clients-shortcode ul:before,
+.pacz-clients-shortcode ul:after {
+  content: " ";
+  display: table;
+}
+.pacz-clients-shortcode ul:after {
+  clear: both;
+}
+.pacz-clients-shortcode ul,
+.pacz-clients-shortcode li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pacz-clients-shortcode.grid-style .client-item-wrapper {
+  border: none !important;
+  margin: 0 1px 1px;
+}
+@media handheld, only screen and (max-width: 500px) {
+  .pacz-clients-shortcode.grid-style .client-item {
+    float: none !important;
+    margin: 0 auto !important;
+    text-align: center;
+  }
+}
+.pacz-clients-shortcode .client-item {
+  float: left;
+  position: relative;
+}
+.pacz-clients-shortcode .client-item:hover .clients-info {
+  opacity: 1;
+}
+.pacz-clients-shortcode .client-item:last-of-type .client-item-wrapper {
+  border-right-width: 5px;
+}
+.pacz-clients-shortcode .client-item-wrapper {
+  border-style: solid;
+  border-right-width: 0;
+  line-height: 4px;
+  position: relative;
+  z-index: 5;
+}
+.pacz-clients-shortcode.column-style.one-column li {
+  width: 100%;
+}
+.pacz-clients-shortcode.column-style.two-column li {
+  width: 50%;
+  padding:0 15px;
+}
+.pacz-clients-shortcode.column-style.three-column li {
+  width: 33.3333%;
+  padding:0 15px;
+}
+.pacz-clients-shortcode.column-style.four-column li {
+  width: 25%;
+  padding:0 15px;
+}
+.pacz-clients-shortcode.column-style.five-column li {
+  width: 20%;
+  padding:0 15px;
+}
+.pacz-clients-shortcode.column-style.six-column li {
+  width: 16.6667%;
+  padding:0 15px;
+}
+@media handheld, only screen and (max-width: 960px) {
+  .pacz-clients-shortcode.column-style.three-column li{
+    width: 33.333% !important;
+  }
+  .pacz-clients-shortcode.column-style.four-column li {
+    width: 25% !important;
+  }
+
+  .pacz-clients-shortcode.column-style.five-column li {
+    width: 20% !important;
+  }
+  .pacz-clients-shortcode.column-style.six-column li {
+    width: 33.33% !important;
+  }
+}
+@media handheld, only screen and (max-width: 767px) {
+  .pacz-clients-shortcode.column-style.three-column li,
+  .pacz-clients-shortcode.column-style.four-column li,
+  .pacz-clients-shortcode.column-style.five-column li,
+  .pacz-clients-shortcode.column-style.six-column li {
+    width: 49.8% !important;
+  }
+}
+@media handheld, only screen and (max-width: 550px) {
+  .pacz-clients-shortcode.column-style.three-column li,
+  .pacz-clients-shortcode.column-style.four-column li,
+  .pacz-clients-shortcode.column-style.two-column li,
+  .pacz-clients-shortcode.column-style.five-column li,
+  .pacz-clients-shortcode.column-style.six-column li {
+    width: 100% !important;
+	margin-bottom:30px;
+  }
+}
+.pacz-clients-shortcode.column-style .client-logo {
+  width: 100%;
+}
+.pacz-clients-shortcode.column-style .client-item .client-item-wrapper {
+  border-top: none !important;
+  border-left: none !important;
+}
+.pacz-clients-shortcode .client-logo {
+  position: relative;
+  display: inline-block;
+  background-position: center center;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter:grayscale(100%);
+}
+.pacz-clients-shortcode .client-logo:hover{
+	filter:grayscale(0);
+}
+.pacz-clients-shortcode.bg-cover-true .client-logo {
+  background-size: cover;
+  background-repeat: no-repeat;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+}
+.pacz-clients-shortcode .clients-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100.1%;
+  height: 100%;
+  line-height: 20px;
+  z-index: 14;
+  display: table;
+  opacity: 0;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=@opacity)';
+  transition: opacity 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out;
+  -moz-transition: opacity 0.25s ease-in-out;
+  -ms-transition: opacity 0.25s ease-in-out;
+  -o-transition: opacity 0.25s ease-in-out;
+  background-color: #222222 !important;
+}
+.pacz-clients-shortcode .clients-info-holder {
+  height: 100%;
+  width: 100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+.pacz-clients-shortcode .client-company {
+  display: block;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 18px;
+  color: #fff;
+  text-align: center;
+  padding: 0 5%;
+}
