@@ -22,6 +22,29 @@ function classiadspro_load_textdomain()
 }
 add_action('after_setup_theme', 'classiadspro_load_textdomain');
 
+function classiadspro_is_background_or_admin_request()
+{
+	return (
+		is_admin() ||
+		wp_doing_ajax() ||
+		wp_doing_cron() ||
+		(defined('REST_REQUEST') && REST_REQUEST) ||
+		(defined('WP_CLI') && WP_CLI)
+	);
+}
+
+function classiadspro_is_trp_automatic_slug_translation_disabled()
+{
+	$settings = get_option('trp_machine_translation_settings', array());
+
+	return !is_array($settings) || ($settings['automatically-translate-slug'] ?? 'no') !== 'yes';
+}
+
+function classiadspro_should_disable_trp_slug_collection()
+{
+	return classiadspro_is_background_or_admin_request() || classiadspro_is_trp_automatic_slug_translation_disabled();
+}
+
 /**
  * Avoid TranslatePress slug deadlocks in admin-side DirectoryPress flows.
  *
@@ -35,13 +58,7 @@ add_action('after_setup_theme', 'classiadspro_load_textdomain');
  */
 function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
 {
-	if (
-		is_admin() ||
-		wp_doing_ajax() ||
-		wp_doing_cron() ||
-		(defined('REST_REQUEST') && REST_REQUEST) ||
-		(defined('WP_CLI') && WP_CLI)
-	) {
+	if (classiadspro_is_background_or_admin_request()) {
 		return array();
 	}
 
@@ -50,25 +67,16 @@ function classiadspro_limit_trp_slug_translation_hooks_in_admin($hooks)
 add_filter('trp_translatable_slug_hooks_array', 'classiadspro_limit_trp_slug_translation_hooks_in_admin');
 
 /**
- * Disable TranslatePress SEO Pack slug collection in admin-side requests.
+ * Disable TranslatePress SEO Pack automatic slug collection when it cannot be used.
  *
  * The SEO Pack doesn't rely only on permalink hooks. It also hooks into
  * trp_translateable_strings / trp_translateable_information and records
- * original slugs even when automatic slug translation is disabled. In
- * DirectoryPress edit and AJAX translation flows this still triggers writes to
- * wp_trp_slug_originals and can deadlock.
+ * original slugs even when automatic slug translation is disabled. That can
+ * make normal translated frontend requests race on wp_trp_slug_originals.
  */
-function classiadspro_disable_trp_slug_collection_in_admin_requests()
+function classiadspro_disable_trp_slug_collection_when_unavailable()
 {
-	if (
-		!(
-			is_admin() ||
-			wp_doing_ajax() ||
-			wp_doing_cron() ||
-			(defined('REST_REQUEST') && REST_REQUEST) ||
-			(defined('WP_CLI') && WP_CLI)
-		)
-	) {
+	if (!classiadspro_should_disable_trp_slug_collection()) {
 		return;
 	}
 
@@ -100,7 +108,7 @@ function classiadspro_disable_trp_slug_collection_in_admin_requests()
 		}
 	}
 }
-add_action('init', 'classiadspro_disable_trp_slug_collection_in_admin_requests', 20);
+add_action('init', 'classiadspro_disable_trp_slug_collection_when_unavailable', 20);
 
 /**
  * Move DP listing auto-translation out of the save_post request.
@@ -167,10 +175,6 @@ function classiadspro_schedule_dp_listing_autotranslate($post_id, $post, $update
 	}
 
 	if (!$post instanceof WP_Post || $post->post_type !== 'dp_listing') {
-		return;
-	}
-
-	if (!current_user_can('edit_post', $post_id)) {
 		return;
 	}
 
@@ -275,6 +279,12 @@ function classiadspro_request_dp_listing_translation($text, $language_code, $fie
 		case 'seo_description':
 			$prompt = "Translate this SEO description into {$language_name} (ISO 639-1: {$language_code}). "
 				. "Preserve meaning and make the result natural for search snippets. Return only the translated description.\n\n{$text}";
+			break;
+
+		case 'term_description':
+			$prompt = "Translate this classifieds category description into {$language_name} (ISO 639-1: {$language_code}). "
+				. "Preserve the meaning, HTML markup, formatting, links, and a natural directory category tone. "
+				. "Return only the translated description.\n\n{$text}";
 			break;
 
 		default:
@@ -655,6 +665,7 @@ require_once get_template_directory() . '/includes/actions/firebase.php';
 // Load Login Menu Messages Extension (using JavaScript/filters approach instead of class override)
 require_once get_template_directory() . '/includes/actions/login-menu-messages.php';
 require_once get_template_directory() . '/includes/actions/page-ru-sync.php';
+require_once get_template_directory() . '/includes/actions/term-description-cron-translation.php';
 
 // Load Advertising System
 if (class_exists('DirectoryPress') && class_exists('WooCommerce')) {
