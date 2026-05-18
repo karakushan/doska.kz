@@ -589,6 +589,29 @@ function classiadspro_term_sync_upsert_slug_translation($slug_originals_table, $
 	return true;
 }
 
+function classiadspro_term_sync_is_percent_encoded_slug($slug)
+{
+	return is_string($slug) && $slug !== '' && preg_match('/%[0-9A-Fa-f]{2}/', $slug);
+}
+
+function classiadspro_term_sync_get_canonical_english_slug($slug, $maps)
+{
+	if (!is_string($slug) || $slug === '') {
+		return $slug;
+	}
+
+	$restored_slug = classiadspro_term_sync_restore_slug($slug, $maps['slugs_reverse']);
+	if ($restored_slug !== '' && $restored_slug !== $slug) {
+		return $restored_slug;
+	}
+
+	if (!classiadspro_term_sync_is_percent_encoded_slug($slug) && !classiadspro_term_sync_contains_cyrillic(urldecode($slug))) {
+		return $slug;
+	}
+
+	return $slug;
+}
+
 function classiadspro_term_sync_collect_strings($value, &$strings)
 {
 	if (is_string($value)) {
@@ -1077,6 +1100,7 @@ function classiadspro_run_term_ru_source_strict_migration()
 	}
 
 	$map = classiadspro_term_sync_strict_map();
+	$maps = classiadspro_term_sync_get_trp_maps();
 	$terms = classiadspro_term_sync_get_raw_terms($taxonomy);
 	$terms_by_id = array();
 
@@ -1106,7 +1130,9 @@ function classiadspro_run_term_ru_source_strict_migration()
 		$old_name = (string) $term->name;
 		$old_slug = (string) $term->slug;
 		$new_name = isset($target['name']) ? (string) $target['name'] : $old_name;
-		$new_slug = isset($target['slug']) ? (string) $target['slug'] : $old_slug;
+		$ru_slug = isset($target['slug']) ? (string) $target['slug'] : '';
+		$canonical_english_slug = classiadspro_term_sync_get_canonical_english_slug($old_slug, $maps);
+		$new_slug = $canonical_english_slug !== '' ? $canonical_english_slug : $old_slug;
 		$new_description = isset($target['description']) ? (string) $target['description'] : (string) $term->description;
 
 		if ($new_name !== '' && $new_name !== $old_name) {
@@ -1148,10 +1174,17 @@ function classiadspro_run_term_ru_source_strict_migration()
 			}
 		}
 
+		if ($ru_slug !== '' && $final_slug !== '') {
+			if (classiadspro_term_sync_upsert_slug_translation($slug_originals_table, $slug_translations_table, $final_slug, $ru_slug, 'ru_RU', $apply)) {
+				$slug_changed++;
+				$report_lines[] = sprintf('slug ru_RU%s: %s => %s', $apply ? '' : ' [dry-run]', $final_slug, $ru_slug);
+			}
+		}
+
 		if ($final_slug !== '' && $old_slug !== '' && $final_slug !== $old_slug) {
 			if (classiadspro_term_sync_upsert_slug_translation($slug_originals_table, $slug_translations_table, $final_slug, $old_slug, 'en_US', $apply)) {
 				$slug_changed++;
-				$report_lines[] = sprintf('slug%s: %s => %s', $apply ? '' : ' [dry-run]', $final_slug, $old_slug);
+				$report_lines[] = sprintf('slug en_US%s: %s => %s', $apply ? '' : ' [dry-run]', $final_slug, $old_slug);
 			}
 		}
 	}
