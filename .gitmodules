@@ -1,0 +1,3 @@
+[submodule "wordpress/wp-content/plugins/firebase-push-notifications"]
+	path = wordpress/wp-content/plugins/firebase-push-notifications
+	url = https://github.com/karakushan/Firebase-Push-Notifications.git
