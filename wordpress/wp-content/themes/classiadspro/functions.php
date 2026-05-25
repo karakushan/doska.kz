@@ -2954,19 +2954,35 @@ function rs_get_unique_currencies() {
 	return $unique;
 }
 
-add_shortcode('rs_currency_selector', function($atts){
+function rs_render_currency_selector($args = []) {
 	$currencies = rs_get_unique_currencies();
-	if(!$currencies) return '';
+	if (!$currencies) {
+		return '';
+	}
+
+	$args = wp_parse_args(
+		$args,
+		[
+			'layout' => wp_is_mobile() ? 'select' : 'dropdown',
+			'selected_display' => 'symbol',
+			'context_class' => '',
+		]
+	);
 
 	$current = rs_get_current_currency();
 	$current_code = $current['code'];
+	$context_class = trim((string) $args['context_class']);
+	$selector_classes = 'rs-currency-selector';
+
+	if ($context_class !== '') {
+		$selector_classes .= ' ' . $context_class;
+	}
 
 	ob_start();
 
-	/* ======================= MOBILE ======================= */
-	if ( wp_is_mobile() ) : ?>
+	if ($args['layout'] === 'select') : ?>
 
-		<div class="rs-currency-selector rs-currency-selector--mobile">
+		<div class="<?php echo esc_attr($selector_classes . ' rs-currency-selector--mobile'); ?>">
 			<?php $select_id = wp_unique_id('rs-currency-select-'); ?>
 			<label class="screen-reader-text" for="<?php echo esc_attr($select_id); ?>"><?php esc_html_e('Select currency', 'classiadspro'); ?></label>
 			<select id="<?php echo esc_attr($select_id); ?>" class="rs-currency-select" aria-label="<?php esc_attr_e('Select currency', 'classiadspro'); ?>">
@@ -2979,13 +2995,20 @@ add_shortcode('rs_currency_selector', function($atts){
 		</div>
 
 	<?php
-	/* ======================= DESKTOP ======================= */
 	else : ?>
 
-		<div class="rs-dropdown rs-currency-dropdown rs-currency-selector">
-			<button type="button" class="rs-dropdown-btn rs-currency-btn" aria-haspopup="true" aria-expanded="false">
+		<div class="rs-dropdown rs-currency-dropdown <?php echo esc_attr($selector_classes); ?>">
+			<button
+				type="button"
+				class="rs-dropdown-btn rs-currency-btn"
+				aria-haspopup="true"
+				aria-expanded="false"
+				aria-label="<?php echo esc_attr(sprintf(__('Selected currency: %s', 'classiadspro'), $current_code)); ?>"
+			>
 				<span class="rs-currency-current-symbol"><?= esc_html($current['symbol']) ?></span>
-				<span class="rs-currency-current-code"><?= esc_html($current['code']) ?></span>
+				<?php if ($args['selected_display'] !== 'symbol') : ?>
+					<span class="rs-currency-current-code"><?= esc_html($current['code']) ?></span>
+				<?php endif; ?>
 				<i class="rs-dropdown-caret fas fa-angle-down" aria-hidden="true"></i>
 			</button>
 			<ul class="rs-dropdown-list rs-currency-list" hidden>
@@ -3006,6 +3029,20 @@ add_shortcode('rs_currency_selector', function($atts){
 	<?php endif;
 
 	return ob_get_clean();
+}
+
+add_shortcode('rs_currency_selector', function($atts){
+	$atts = shortcode_atts(
+		[
+			'layout' => wp_is_mobile() ? 'select' : 'dropdown',
+			'selected_display' => 'symbol',
+			'context_class' => '',
+		],
+		(array) $atts,
+		'rs_currency_selector'
+	);
+
+	return rs_render_currency_selector($atts);
 });
 
 add_filter('wp_nav_menu_items', function($items, $args){
@@ -3040,6 +3077,42 @@ add_filter('wp_nav_menu_items', function($items, $args){
 
 	return $items;
 }, 10, 2);
+
+function classiadspro_inject_currency_switcher_into_header_menu($items, $args) {
+	if (is_admin() || wp_is_mobile()) {
+		return $items;
+	}
+
+	if (
+		empty($args->theme_location) ||
+		!in_array($args->theme_location, ['primary-menu', 'second-menu', 'third-menu', 'fourth-menu', 'fifth-menu', 'sixth-menu', 'seventh-menu'], true)
+	) {
+		return $items;
+	}
+
+	if (strpos($items, 'rs-currency-menu-item') !== false) {
+		return $items;
+	}
+
+	$currency_item = '<li class="menu-item rs-currency-menu-item">' . rs_render_currency_selector([
+		'layout' => 'dropdown',
+		'selected_display' => 'symbol',
+		'context_class' => 'rs-currency-selector--compact',
+	]) . '</li>';
+
+	$language_pattern = '~(<li[^>]*class="[^"]*\btrp-language-switcher-container\b[^"]*"[^>]*>.*?</li>)~is';
+	if (preg_match($language_pattern, $items)) {
+		return preg_replace($language_pattern, '$1' . $currency_item, $items, 1);
+	}
+
+	$header_items_pattern = '~(<li[^>]*class="[^"]*\b(?:pacz-header-search|logreg-header|listing-btn)\b[^"]*"[^>]*>)~i';
+	if (preg_match($header_items_pattern, $items)) {
+		return preg_replace($header_items_pattern, $currency_item . '$1', $items, 1);
+	}
+
+	return $items . $currency_item;
+}
+add_filter('wp_nav_menu_items', 'classiadspro_inject_currency_switcher_into_header_menu', 20, 2);
 
 /**
  * Keep TranslatePress menu switchers in sync with published languages.

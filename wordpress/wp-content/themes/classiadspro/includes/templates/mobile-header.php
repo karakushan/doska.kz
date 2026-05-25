@@ -36,6 +36,15 @@
 						echo do_shortcode('[language-switcher display="only-flags"]');
 					echo '</div>';
 				}
+				if (function_exists('rs_render_currency_selector')) {
+					echo '<div class="pacz-mobile-currency-switcher">';
+						echo rs_render_currency_selector([
+							'layout' => 'dropdown',
+							'selected_display' => 'symbol',
+							'context_class' => 'rs-currency-selector--compact rs-currency-selector--mobile-header',
+						]);
+					echo '</div>';
+				}
 				if($pacz_settings['mobile-search-button']){
 					do_action( 'responsive_nav_listing_search_link');
 				}

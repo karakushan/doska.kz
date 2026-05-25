@@ -134,7 +134,7 @@ child theme or use custom.css in the same root this file locates.
     align-items: center;
 }
 @media (max-width: 991px) {
-  .rs-currency-selector {
+  .rs-currency-selector--mobile {
     width: 100%;
     padding: 15px;
   }
@@ -145,6 +145,36 @@ child theme or use custom.css in the same root this file locates.
 }
 
 @media (max-width: 768px) {
+  .pacz-mobile-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .pacz-mobile-logo-wrap,
+  .pacz-mobile-header-content-wrap {
+    float: none !important;
+  }
+
+  .pacz-mobile-logo-wrap {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .pacz-mobile-logo-wrap a {
+    width: auto;
+    max-width: 82px;
+    display: flex;
+    align-items: center;
+  }
+
+  .pacz-mobile-logo-wrap img {
+    max-width: 100%;
+    height: auto;
+  }
+
   .elementor-11775 .elementor-element.elementor-element-3a000493 .hfb-button {
 
     margin: -88px 0 0 0;
@@ -172,20 +202,24 @@ child theme or use custom.css in the same root this file locates.
   }
 
   .pacz-mobile-header-content-wrap {
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 4px;
     margin-left: 0;
     margin-right: 0;
     flex-wrap: nowrap;
+    width: auto;
+    max-width: calc(100% - 92px);
+    min-width: 0;
   }
 
   .pacz-mobile-header-content-wrap > * {
-    flex: 0 0 40px;
-    width: 40px;
-    min-width: 40px;
-    height: 40px;
+    flex: 0 0 38px;
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
     padding-left: 0;
     padding-right: 0;
     margin: 0;
@@ -202,6 +236,7 @@ child theme or use custom.css in the same root this file locates.
   .responsive-nav-link,
   .pacz-mobile-listing-btn,
   .pacz-mobile-login-wrap,
+  .pacz-mobile-currency-switcher,
   .responsive-nav-search-link,
   .pacz-mobile-language-switcher {
     padding-left: 0;
@@ -211,12 +246,14 @@ child theme or use custom.css in the same root this file locates.
   .responsive-nav-link .pacz-burger-icon,
   .pacz-mobile-login-wrap .dropdown,
   .pacz-mobile-login-wrap .pacz-mobile-login,
+  .pacz-mobile-currency-switcher .rs-currency-dropdown,
+  .pacz-mobile-currency-switcher .rs-currency-btn,
   .pacz-mobile-language-switcher .trp_language_switcher_shortcode,
   .pacz-mobile-language-switcher .trp-shortcode-switcher__wrapper,
   .responsive-nav-search-link .search-burgur {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,6 +264,7 @@ child theme or use custom.css in the same root this file locates.
   }
 
   .pacz-mobile-language-switcher,
+  .pacz-mobile-currency-switcher,
   .pacz-mobile-language-switcher .trp_language_switcher_shortcode {
     display: inline-flex;
     align-items: center;
@@ -237,12 +275,21 @@ child theme or use custom.css in the same root this file locates.
     order: 4;
   }
 
+  .pacz-mobile-currency-switcher {
+    order: 5;
+  }
+
   .pacz-mobile-login-wrap {
     order: 3;
   }
 
   .responsive-nav-search-link {
-    order: 5;
+    order: 6;
+  }
+
+  #pacz-header .pacz-mobile-currency-switcher .rs-dropdown {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .pacz-mobile-language-switcher .trp-shortcode-switcher__wrapper {
@@ -271,17 +318,17 @@ child theme or use custom.css in the same root this file locates.
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     padding: 0 !important;
     border-radius: 50%;
     background: #f2f3f5;
   }
 
   .pacz-mobile-language-switcher .trp-language-item__current {
-    width: 40px;
-    height: 40px;
-    min-height: 40px;
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
     padding: 0 !important;
     display: flex;
     align-items: center;
@@ -324,9 +371,9 @@ child theme or use custom.css in the same root this file locates.
   .pacz-mobile-listing-btn .submit-listing-button-single,
   .pacz-mobile-listing-btn .dropdown-toggle,
   .responsive-nav-search-link .search-burgur {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
     padding: 0 !important;
     margin: 0;
     display: flex;

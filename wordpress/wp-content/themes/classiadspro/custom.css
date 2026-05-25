@@ -1483,6 +1483,10 @@ input:disabled + .toggle-slider {
   transition: color .2s ease;
 }
 
+.rs-currency-selector--compact .rs-currency-btn {
+  gap: 0;
+}
+
 .rs-currency-btn:hover,
 .rs-currency-dropdown.is-open .rs-currency-btn {
   background: transparent;
@@ -1609,6 +1613,47 @@ input:disabled + .toggle-slider {
 
 #pacz-main-navigation > ul > li.rs-currency-menu-item .rs-currency-current-code {
   font-size: 14px;
+}
+
+.rs-currency-selector--compact .rs-currency-current-symbol {
+  min-width: 0;
+}
+
+.rs-currency-selector--compact .rs-dropdown-caret {
+  display: none;
+}
+
+.rs-currency-selector--mobile-header {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+}
+
+#pacz-header .pacz-mobile-currency-switcher .rs-dropdown,
+.rs-currency-selector--mobile-header.rs-currency-selector {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+  width: 38px;
+}
+
+.rs-currency-selector--mobile-header .rs-currency-btn {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f2f3f5;
+  color: #26323d;
+  font-size: 18px;
+}
+
+.rs-currency-selector--mobile-header .rs-currency-list {
+  top: calc(100% + 8px);
+  right: 0 !important;
+  left: auto !important;
+  min-width: 160px;
 }
 
 .rs-currency-selector--mobile .rs-currency-select {
