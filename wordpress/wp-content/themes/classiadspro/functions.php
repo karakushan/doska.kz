@@ -5144,6 +5144,22 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 }
 
 function classiadspro_translatepress_translate_listing_title($title, $listing = null) {
+	$post_id = 0;
+	if (is_object($listing) && isset($listing->post->ID)) {
+		$post_id = (int) $listing->post->ID;
+	} elseif (get_post_type() === 'dp_listing') {
+		$post_id = (int) get_the_ID();
+	} else {
+		$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	}
+
+	if ($post_id > 0) {
+		$saved_translation = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+		if ($saved_translation !== '') {
+			return $saved_translation;
+		}
+	}
+
 	$translated_title = classiadspro_translatepress_translate_listing_string($title, false);
 
 	if (is_object($listing) && isset($listing->post->ID) && $translated_title === $title) {
@@ -5395,6 +5411,20 @@ function classiadspro_translatepress_filter_directorypress_terms($terms, $taxono
 add_filter('get_terms', 'classiadspro_translatepress_filter_directorypress_terms', 10, 2);
 
 function classiadspro_translatepress_translate_listing_content($content) {
+	$post_id = 0;
+	if (get_post_type() === 'dp_listing') {
+		$post_id = (int) get_the_ID();
+	} elseif (classiadspro_is_directorypress_listing_request()) {
+		$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	}
+
+	if ($post_id > 0) {
+		$saved_translation = classiadspro_get_dp_listing_translation_value($post_id, array('content'));
+		if ($saved_translation !== '') {
+			return $saved_translation;
+		}
+	}
+
 	return classiadspro_translatepress_translate_listing_string($content, true);
 }
 add_filter('the_content', 'classiadspro_translatepress_translate_listing_content', 1);
@@ -5534,6 +5564,34 @@ function classiadspro_translatepress_text_node_has_excluded_ancestor($node) {
 	return false;
 }
 
+function classiadspro_dom_node_has_ancestor_class($node, $target_classes) {
+	if (!$node instanceof DOMNode) {
+		return false;
+	}
+
+	$target_classes = array_filter(array_map('strval', (array) $target_classes));
+	if (empty($target_classes)) {
+		return false;
+	}
+
+	while ($node && $node->parentNode instanceof DOMElement) {
+		$node = $node->parentNode;
+		$class_name = $node->getAttribute('class');
+
+		if ($class_name === '') {
+			continue;
+		}
+
+		foreach ($target_classes as $target_class) {
+			if (preg_match('/(^|\s)' . preg_quote($target_class, '/') . '(\s|$)/', $class_name)) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 function classiadspro_translatepress_start_single_listing_output_buffer() {
 	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
 		return;
@@ -5557,6 +5615,9 @@ function classiadspro_translatepress_translate_single_listing_output_buffer($htm
 	}
 
 	$html = classiadspro_override_dp_listing_head_meta_in_html($html);
+	$post_id = classiadspro_get_current_directorypress_listing_post_id();
+	$has_saved_title_translation = $post_id > 0 && classiadspro_get_dp_listing_translation_value($post_id, array('title')) !== '';
+	$has_saved_content_translation = $post_id > 0 && classiadspro_get_dp_listing_translation_value($post_id, array('content')) !== '';
 
 	$dom = new DOMDocument();
 	$previous_state = libxml_use_internal_errors(true);
@@ -5587,6 +5648,20 @@ function classiadspro_translatepress_translate_single_listing_output_buffer($htm
 			if (in_array($tag_name, array('script', 'style'), true)) {
 				continue;
 			}
+		}
+
+		if (
+			$has_saved_title_translation &&
+			classiadspro_dom_node_has_ancestor_class($text_node, array('directorypress-listing-title'))
+		) {
+			continue;
+		}
+
+		if (
+			$has_saved_content_translation &&
+			classiadspro_dom_node_has_ancestor_class($text_node, array('directorypress-field-description'))
+		) {
+			continue;
 		}
 
 		$original_text = trim($text_node->nodeValue);
