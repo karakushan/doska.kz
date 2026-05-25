@@ -621,13 +621,28 @@ function classiadspro_redirect_directorypress_dashboard_actions()
 	}
 
 	$request_uri = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '/';
-	$current_url = home_url($request_uri);
+	$current_request_url = home_url('/');
+	if (!empty($_SERVER['HTTP_HOST'])) {
+		$current_request_url = (is_ssl() ? 'https://' : 'http://') . wp_unslash($_SERVER['HTTP_HOST']) . $request_uri;
+	}
+
+	$current_url = $current_request_url;
 	$dashboard_url = classiadspro_get_directorypress_dashboard_url(wp_unslash($_GET));
+
+	$current_url_normalized = untrailingslashit($current_url);
+	$dashboard_url_normalized = untrailingslashit($dashboard_url);
+
+	if ($current_url_normalized === $dashboard_url_normalized) {
+		return;
+	}
 
 	$current_path = wp_parse_url($current_url, PHP_URL_PATH);
 	$dashboard_path = wp_parse_url($dashboard_url, PHP_URL_PATH);
 
-	if (!$dashboard_path || $current_path === $dashboard_path) {
+	if (
+		!$dashboard_path ||
+		untrailingslashit((string) $current_path) === untrailingslashit((string) $dashboard_path)
+	) {
 		return;
 	}
 
@@ -3600,6 +3615,24 @@ function rs_convert_price($price) {
 }
 
 /**
+ * Перевод цены из выбранной пользователем валюты в базовую USD перед сохранением.
+ */
+function rs_normalize_price_to_base_currency($price) {
+	if (!is_numeric($price) || $price <= 0) {
+		return $price;
+	}
+
+	$currency = rs_get_current_currency();
+	$rate = isset($currency['rate']) ? (float) $currency['rate'] : 0.0;
+
+	if ($rate <= 0) {
+		return $price;
+	}
+
+	return round(((float) $price) / $rate, 6);
+}
+
+/**
  * Форматирование цены с символом валюты
  */
 function rs_format_price($price, $convert = true) {
@@ -3655,6 +3688,58 @@ add_filter('directorypress_field_load', function($data, $field, $post_id) {
 	}
 	return $data;
 }, 10, 3);
+
+/**
+ * DirectoryPress хранит цену как базовое значение.
+ * Пользователь вводит цену в текущей валюте интерфейса, поэтому
+ * после стандартного сохранения нормализуем ее обратно в USD.
+ */
+function rs_normalize_directorypress_price_meta($post_id, $post, $update) {
+	if (wp_is_post_revision($post_id) || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)) {
+		return;
+	}
+
+	if (empty($_POST) || !is_object($post)) {
+		return;
+	}
+
+	if (empty($post->post_type) || strpos($post->post_type, 'listing') === false) {
+		return;
+	}
+
+	if (!function_exists('directorypress_get_input_value')) {
+		return;
+	}
+
+	global $directorypress_object;
+
+	if (empty($directorypress_object) || empty($directorypress_object->fields) || empty($directorypress_object->fields->fields_array)) {
+		return;
+	}
+
+	foreach ($directorypress_object->fields->fields_array as $field) {
+		if (!is_object($field) || get_class($field) !== 'directorypress_field_price') {
+			continue;
+		}
+
+		$price_input_name = 'directorypress-field-input-' . $field->id;
+		if (!isset($_POST[$price_input_name])) {
+			continue;
+		}
+
+		$submitted_price = directorypress_get_input_value($_POST, $price_input_name);
+		$normalized_price = rs_normalize_price_to_base_currency($submitted_price);
+		update_post_meta($post_id, '_field_' . $field->id, $normalized_price);
+
+		$max_price_input_name = 'directorypress-field-input-max-' . $field->id;
+		if (isset($_POST[$max_price_input_name])) {
+			$submitted_max_price = directorypress_get_input_value($_POST, $max_price_input_name);
+			$normalized_max_price = rs_normalize_price_to_base_currency($submitted_max_price);
+			update_post_meta($post_id, '_field_' . $field->id . '_max', $normalized_max_price);
+		}
+	}
+}
+add_action('save_post', 'rs_normalize_directorypress_price_meta', 100, 3);
 
 // Изменение валюты WooCommerce
 add_filter('woocommerce_currency', function($currency) {
