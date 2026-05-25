@@ -139,7 +139,7 @@ $prices = classiadspro_get_advertising_prices();
                                     <h2><?php esc_html_e('Advertise Listing', 'classiadspro'); ?></h2>
                                     <p class="listing-title"><?php echo esc_html($listing->title()); ?></p>
 
-                                    <?php if ($listing->status != 'active' || $listing->post->post_status != 'publish'): ?>
+                                    <?php if (!classiadspro_is_listing_advertising_available($listing)): ?>
                                         <div class="feature-warning">
                                             <div class="warning-icon">⚠️</div>
                                             <div class="warning-text">

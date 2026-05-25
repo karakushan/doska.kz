@@ -763,6 +763,27 @@ if (!function_exists('classiadspro_get_listing_url')) {
 	}
 }
 
+if (!function_exists('classiadspro_is_listing_advertising_available')) {
+	function classiadspro_is_listing_advertising_available($listing)
+	{
+		if (!is_object($listing)) {
+			return false;
+		}
+
+		$listing_status = isset($listing->status) ? (string) $listing->status : '';
+		if ($listing_status === 'active') {
+			return true;
+		}
+
+		$post_status = '';
+		if (isset($listing->post) && $listing->post instanceof WP_Post) {
+			$post_status = (string) $listing->post->post_status;
+		}
+
+		return $post_status === 'publish';
+	}
+}
+
 /**
  * Create advertise page
  */
