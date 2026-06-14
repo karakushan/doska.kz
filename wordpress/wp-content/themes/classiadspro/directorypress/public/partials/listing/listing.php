@@ -331,18 +331,27 @@
 			$title_limit = $DIRECTORYPRESS_ADIMN_SETTINGS['max_title_length'];
 			$listing_url = classiadspro_get_listing_url($listing);
 			$nofollow = (isset($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_listing_nofollow_link']) && $DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_listing_nofollow_link'])? 'rel="nofollow"':'';
+			$listing_post_id = isset($listing->post->ID) ? (int) $listing->post->ID : 0;
+			$listing_title = $listing_post_id > 0 ? classiadspro_get_dp_listing_display_title($listing_post_id, get_the_title($listing_post_id)) : '';
+
+			if ($listing_title === '' && is_object($listing) && method_exists($listing, 'title')) {
+				$listing_title = (string) $listing->title();
+			}
 			
 			echo '<header class="directorypress-listing-title">';
 				if($DIRECTORYPRESS_ADIMN_SETTINGS['directorypress_exert_type'] == 'words'){
-					echo '<h2><a href="'.esc_url($listing_url).'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
-					echo wp_trim_words($listing->title(), $title_limit, '');
+					echo '<h2><a href="'.esc_url($listing_url).'" title="'.esc_attr($listing_title).'" '.$nofollow.'>';
+					echo wp_trim_words($listing_title, $title_limit, '');
 					do_action('directorypress_listing_user_verification_tag', $listing);
 					echo'</a></h2>';
 				}else{
-					$trimmed_title = function_exists('mb_substr')
-						? mb_substr($listing->title(), 0, $title_limit, 'UTF-8')
-						: substr($listing->title(), 0, $title_limit);
-					echo '<h2><a href="'.esc_url($listing_url).'" title="'.esc_attr($listing->title()).'" '.$nofollow.'>';
+					$trimmed_title = $listing_title;
+					if ($title_limit) {
+						$trimmed_title = function_exists('mb_substr')
+							? mb_substr($listing_title, 0, $title_limit, 'UTF-8')
+							: substr($listing_title, 0, $title_limit);
+					}
+					echo '<h2><a href="'.esc_url($listing_url).'" title="'.esc_attr($listing_title).'" '.$nofollow.'>';
 					echo esc_html($trimmed_title);
 					do_action('directorypress_listing_user_verification_tag', $listing);
 					echo '</a></h2>';

@@ -5851,27 +5851,7 @@ function classiadspro_override_dp_listing_head_meta_in_dom($dom, $xpath) {
 function classiadspro_get_dp_listing_translation_language_candidates() {
 	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
 	$candidates = array();
-
-	if (is_string($language_suffix) && $language_suffix !== '') {
-		$candidates[] = strtolower($language_suffix);
-
-		$short_code = strtok($language_suffix, '_');
-		if (is_string($short_code) && $short_code !== '') {
-			$candidates[] = strtolower($short_code);
-		}
-	}
-
-	$trp_settings = get_option('trp_settings', array());
-	if (!empty($trp_settings['default-language']) && is_string($trp_settings['default-language'])) {
-		$default_language = strtolower(str_replace('-', '_', $trp_settings['default-language']));
-		$candidates[] = $default_language;
-
-		$default_short_code = strtok($default_language, '_');
-		if (is_string($default_short_code) && $default_short_code !== '') {
-			$candidates[] = strtolower($default_short_code);
-		}
-	}
-
+	$default_candidates = array();
 	$aliases = array(
 		'ru_ru' => 'ru',
 		'ru' => 'ru',
@@ -5888,7 +5868,34 @@ function classiadspro_get_dp_listing_translation_language_candidates() {
 		'tr' => 'tr',
 	);
 
+	if (is_string($language_suffix) && $language_suffix !== '') {
+		$candidates[] = strtolower($language_suffix);
+
+		$short_code = strtok($language_suffix, '_');
+		if (is_string($short_code) && $short_code !== '') {
+			$candidates[] = strtolower($short_code);
+		}
+	}
+
 	foreach ($candidates as $candidate) {
+		if (isset($aliases[$candidate])) {
+			$candidates[] = $aliases[$candidate];
+		}
+	}
+
+	$trp_settings = get_option('trp_settings', array());
+	if (!empty($trp_settings['default-language']) && is_string($trp_settings['default-language'])) {
+		$default_language = strtolower(str_replace('-', '_', $trp_settings['default-language']));
+		$default_candidates[] = $default_language;
+
+		$default_short_code = strtok($default_language, '_');
+		if (is_string($default_short_code) && $default_short_code !== '') {
+			$default_candidates[] = strtolower($default_short_code);
+		}
+	}
+
+	foreach ($default_candidates as $candidate) {
+		$candidates[] = $candidate;
 		if (isset($aliases[$candidate])) {
 			$candidates[] = $aliases[$candidate];
 		}
@@ -5997,6 +6004,37 @@ function classiadspro_get_dp_listing_translation_value($post_id, $path) {
 	}
 
 	return is_string($value) ? trim($value) : '';
+}
+
+function classiadspro_get_dp_listing_display_title($post_id, $fallback_title = '') {
+	$post_id = (int) $post_id;
+	$fallback_title = is_string($fallback_title) ? $fallback_title : '';
+
+	if ($post_id <= 0 || get_post_type($post_id) !== 'dp_listing') {
+		return $fallback_title;
+	}
+
+	$saved_translation = classiadspro_get_dp_listing_translation_value($post_id, array('title'));
+	if ($saved_translation !== '') {
+		return $saved_translation;
+	}
+
+	$base_title = $fallback_title !== '' ? $fallback_title : get_the_title($post_id);
+	if (!is_string($base_title) || $base_title === '') {
+		return '';
+	}
+
+	$translated_title = classiadspro_translatepress_translate_string($base_title, false);
+	if (is_string($translated_title) && $translated_title !== '') {
+		return $translated_title;
+	}
+
+	$fallback_translation = classiadspro_translatepress_lookup_listing_title_by_post_id($post_id, $base_title);
+	if (is_string($fallback_translation) && $fallback_translation !== '') {
+		return $fallback_translation;
+	}
+
+	return $base_title;
 }
 
 function classiadspro_get_dp_listing_translation_description($post_id) {
