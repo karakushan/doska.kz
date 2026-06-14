@@ -1691,6 +1691,8 @@ input:disabled + .toggle-slider {
 
   .listing-archive .directorypress-listings-block .responsive-2col .field-content {
     padding: 8px 8px 0;
+    color: #ff2d2d;
+
   }
   .listing-archive .directorypress-listings-block .publish_date {
     padding: 0 8px 8px;
@@ -1699,7 +1701,7 @@ input:disabled + .toggle-slider {
 
   .directorypress-listing.listing-post-style-mobile_1 .listing-bottom-metas {
     padding: 2px 8px;
-  } 
+  }
 
   .directorypress-listings-grid .listing-post-style-14 .directorypress-listing-item-holder {
     overflow: hidden;
@@ -1734,7 +1736,7 @@ input:disabled + .toggle-slider {
   .directorypress-listings-grid .listing-post-style-mobile_1 header.directorypress-listing-title h2 a,
   .directorypress-listings-grid .listing-post-style-mobile_1 header.directorypress-listing-title h2 a:visited {
     display: block;
-    font-size: 13px !important;
+    font-size: 14px !important;
     line-height: 1.35 !important;
     color: #191a1f !important;
   }

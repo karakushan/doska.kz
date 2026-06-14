@@ -4900,9 +4900,10 @@ function classiadspro_translatepress_translate_string($value, $allow_html = fals
 		return $translation_cache[$cache_key];
 	}
 
-	$translated = $value;
+	$forced_translation = classiadspro_translatepress_get_forced_string_translation($value);
+	$translated = is_string($forced_translation) && $forced_translation !== '' ? $forced_translation : $value;
 
-	if (function_exists('trp_translate')) {
+	if ($translated === $value && function_exists('trp_translate')) {
 		static $is_translating = false;
 		if (!$is_translating) {
 			$is_translating = true;
@@ -4925,6 +4926,65 @@ function classiadspro_translatepress_translate_string($value, $allow_html = fals
 	$translation_cache[$cache_key] = $allow_html ? $translated : wp_strip_all_tags($translated);
 
 	return $translation_cache[$cache_key];
+}
+
+function classiadspro_translatepress_get_forced_string_translation($value) {
+	if (!is_string($value) || $value === '') {
+		return null;
+	}
+
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$normalized_value = trim($value);
+
+	$overrides = [
+		'ru' => [
+			'Price' => 'Цена',
+			'price' => 'цена',
+		],
+		'uk' => [
+			'Price' => 'Ціна',
+			'price' => 'ціна',
+		],
+	];
+
+	foreach ($overrides as $language_prefix => $translations) {
+		if (!str_starts_with($language_suffix, $language_prefix)) {
+			continue;
+		}
+
+		if (isset($translations[$normalized_value])) {
+			return $translations[$normalized_value];
+		}
+	}
+
+	return null;
+}
+
+function classiadspro_translatepress_get_forced_directorypress_field_label($field) {
+	if (!is_object($field) || empty($field->type) || !is_string($field->type)) {
+		return null;
+	}
+
+	$field_slug = '';
+	if (!empty($field->slug) && is_string($field->slug)) {
+		$field_slug = strtolower(trim($field->slug));
+	}
+
+	if ($field->type !== 'price' && $field_slug !== 'price') {
+		return null;
+	}
+
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+
+	if (str_starts_with($language_suffix, 'ru')) {
+		return 'Цена';
+	}
+
+	if (str_starts_with($language_suffix, 'uk')) {
+		return 'Ціна';
+	}
+
+	return 'Price';
 }
 
 function classiadspro_translatepress_translate_listing_string($value, $allow_html = false) {
@@ -5342,6 +5402,17 @@ function classiadspro_translatepress_localize_directorypress_field_definitions()
 				continue;
 			}
 
+			$forced_field_label = classiadspro_translatepress_get_forced_directorypress_field_label($field);
+			if (is_string($forced_field_label) && $forced_field_label !== '') {
+				$field->name = $forced_field_label;
+
+				if (!empty($field->field_search_label) && is_string($field->field_search_label)) {
+					$field->field_search_label = $forced_field_label;
+				}
+
+				continue;
+			}
+
 			if (!empty($field->name) && is_string($field->name)) {
 				$field->name = classiadspro_translatepress_translate_listing_string($field->name, false);
 			}
@@ -5632,7 +5703,7 @@ add_action('template_redirect', 'classiadspro_translatepress_start_single_listin
 
 function classiadspro_translatepress_translate_single_listing_output_buffer($html) {
 	if (!is_string($html) || $html === '' || !class_exists('DOMDocument')) {
-		return classiadspro_override_dp_listing_head_meta_in_html($html);
+		return classiadspro_force_known_listing_label_replacements(classiadspro_override_dp_listing_head_meta_in_html($html));
 	}
 
 	$html = classiadspro_override_dp_listing_head_meta_in_html($html);
@@ -5700,7 +5771,31 @@ function classiadspro_translatepress_translate_single_listing_output_buffer($htm
 
 	$result = $dom->saveHTML();
 
-	return is_string($result) && $result !== '' ? preg_replace('/^<\?xml.+?\?>/i', '', $result) : $html;
+	$result = is_string($result) && $result !== '' ? preg_replace('/^<\?xml.+?\?>/i', '', $result) : $html;
+
+	return classiadspro_force_known_listing_label_replacements($result);
+}
+
+function classiadspro_force_known_listing_label_replacements($html) {
+	if (!is_string($html) || $html === '') {
+		return $html;
+	}
+
+	$language_suffix = classiadspro_translatepress_get_current_language_suffix();
+	$price_label = 'Price';
+
+	if (str_starts_with($language_suffix, 'ru')) {
+		$price_label = 'Цена';
+	} elseif (str_starts_with($language_suffix, 'uk')) {
+		$price_label = 'Ціна';
+	}
+
+	$replacements = [
+		'знаменос:' => $price_label . ':',
+		'знаменос' => $price_label,
+	];
+
+	return strtr($html, $replacements);
 }
 
 function classiadspro_disable_hfb_header_on_mobile($enabled) {
