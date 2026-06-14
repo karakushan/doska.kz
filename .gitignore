@@ -40,6 +40,9 @@ backups/*.json
 # VS Code settings
 .vscode/
 
+# Project SSH keys
+.ssh/
+
 # WordPress uploads
 wordpress/wp-content/uploads/
 
@@ -48,4 +51,3 @@ wordpress/wp-content/updraft/
 
 # WordPress languages
 wordpress/wp-content/languages/
-
