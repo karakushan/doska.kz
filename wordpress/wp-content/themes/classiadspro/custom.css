@@ -1683,6 +1683,10 @@ input:disabled + .toggle-slider {
 }
 
 @media (max-width: 599px) {
+  .elementor-12836 .elementor-element.elementor-element-7816dc0d .advanced-term-slider-item {
+    min-height: 180px;
+
+}
   .directorypress-listings-grid .listing-post-style-14 header.directorypress-listing-title,
   .directorypress-listings-grid .listing-post-style-mobile_1 header.directorypress-listing-title {
     color: #191a1f !important;

@@ -1251,10 +1251,24 @@ function pacz_footer_elements()
 			echo '<div class="pacz-preloader"></div>';
 		}
 	}
+
+	$classiadspro_custom_js = isset($pacz_settings['custom-js']) ? (string) $pacz_settings['custom-js'] : '';
+	if ($classiadspro_custom_js !== '') {
+		$classiadspro_custom_js = str_replace(
+			"$(this).text($(this).attr('title').replace('+');",
+			"$(this).text($(this).attr('title').replace('+', ''));",
+			$classiadspro_custom_js
+		);
+		$classiadspro_custom_js = str_replace(
+			"$(this).css('background','none!important');",
+			"this.style.setProperty('background', 'none', 'important');",
+			$classiadspro_custom_js
+		);
+	}
 ?>
-	<?php if ($pacz_settings['custom-js']) : ?>
+	<?php if ($classiadspro_custom_js) : ?>
 		<script>
-			<?php echo esc_js($pacz_settings['custom-js']); ?>
+			<?php echo esc_js($classiadspro_custom_js); ?>
 		</script>
 	<?php endif; ?>
 
@@ -4773,6 +4787,77 @@ function dpfix_after_import($post_id)
 add_action('wp_head', function() {
     echo '<script>var odd_even_label = 2;</script>';
 }, 1);
+
+function classiadspro_output_pwa_head_tags() {
+	$canonical_url = 'https://adshelppro.com';
+	$manifest_url = $canonical_url . '/firebase-push.webmanifest';
+	$site_icon_url = get_site_icon_url(512);
+	if (!$site_icon_url) {
+		$site_icon_url = $canonical_url . '/wp-content/uploads/2025/05/cropped-cropped-logo-1.png';
+	}
+	?>
+	<link rel="manifest" href="<?php echo esc_url($manifest_url); ?>">
+	<meta name="theme-color" content="#191a1f">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="apple-mobile-web-app-title" content="AdsHelpPro">
+	<link rel="apple-touch-icon" href="<?php echo esc_url($site_icon_url); ?>">
+	<?php
+}
+add_action('wp_head', 'classiadspro_output_pwa_head_tags', 2);
+
+function classiadspro_output_ios_push_hint() {
+	if (is_admin()) {
+		return;
+	}
+	$current_user = wp_get_current_user();
+	$user_id = $current_user instanceof WP_User ? (int) $current_user->ID : 0;
+	?>
+	<script>
+	(function () {
+	  var ua = window.navigator.userAgent || "";
+	  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+	  var isStandalone = window.navigator.standalone === true || (
+	    window.matchMedia && window.matchMedia("(display-mode: standalone)").matches
+	  );
+	  var isServerLoggedIn = <?php echo is_user_logged_in() ? 'true' : 'false'; ?>;
+	  var isLoggedIn = document.body && document.body.classList.contains("logged-in");
+	  var hasLoggedInCookie = document.cookie.indexOf("wordpress_logged_in_") !== -1;
+	  var storageKey = "classiadspro_ios_push_hint_dismissed_user_<?php echo (int) $user_id; ?>_v5";
+
+	  if (!isIOS || isStandalone || (!isServerLoggedIn && !isLoggedIn && !hasLoggedInCookie)) {
+	    return;
+	  }
+
+	  try {
+	    if (window.localStorage.getItem(storageKey) === "1") {
+	      return;
+	    }
+	  } catch (error) {}
+
+	  function showHint() {
+	    window.alert(
+	      "\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f \u043d\u0430 iPhone\n\n" +
+	      "\u0427\u0442\u043e\u0431\u044b \u0432\u043a\u043b\u044e\u0447\u0438\u0442\u044c push-\u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f, \u0434\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u0441\u0430\u0439\u0442 \u043d\u0430 \u044d\u043a\u0440\u0430\u043d \u0414\u043e\u043c\u043e\u0439 \u0447\u0435\u0440\u0435\u0437 Share -> Add to Home Screen.\n\n" +
+	      "\u041f\u043e\u0441\u043b\u0435 \u044d\u0442\u043e\u0433\u043e \u043e\u0442\u043a\u0440\u043e\u0439\u0442\u0435 \u0441\u0430\u0439\u0442 \u0441 \u0438\u043a\u043e\u043d\u043a\u0438 \u0438 \u0432\u043e\u0439\u0434\u0438\u0442\u0435 \u0441\u043d\u043e\u0432\u0430."
+	    );
+
+	    try {
+	      window.localStorage.setItem(storageKey, "1");
+	    } catch (error) {}
+	  }
+
+	  if (document.readyState === "loading") {
+	    document.addEventListener("DOMContentLoaded", showHint);
+	  } else {
+	    showHint();
+	  }
+	})();
+	</script>
+	<?php
+}
+add_action('wp_footer', 'classiadspro_output_ios_push_hint', 99);
 
 add_filter('nonce_life', function() {
     return 12 * HOUR_IN_SECONDS;

@@ -1,6 +1,13 @@
 <?php
 global $pacz_settings;
 
+if (!function_exists('pacz_convert_rgba')) {
+	$general_helpers = trailingslashit(get_template_directory()) . 'includes/framework/general.php';
+	if (file_exists($general_helpers)) {
+		require_once $general_helpers;
+	}
+}
+
 
 /*
  *

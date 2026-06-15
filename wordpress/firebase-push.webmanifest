@@ -1,0 +1,19 @@
+{
+  "id": "https://adshelppro.com/",
+  "name": "AdsHelpPro",
+  "short_name": "AdsHelpPro",
+  "description": "AdsHelpPro",
+  "start_url": "https://adshelppro.com/",
+  "scope": "https://adshelppro.com/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#191a1f",
+  "icons": [
+    {
+      "src": "/wp-content/uploads/2025/05/cropped-cropped-logo-1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

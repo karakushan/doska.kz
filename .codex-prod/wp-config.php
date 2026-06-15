@@ -1,7 +1,33 @@
 <?php
 
 
+define('DISABLE_WP_CRON', true);
 
+
+if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+    strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    session_write_close();
+}
+
+
+define('FORCE_SSL_ADMIN', true);
+define('FORCE_SSL_LOGIN', true);
+
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+}
+
+$canonical_host = 'adshelppro.com';
+$current_host = isset($_SERVER['HTTP_HOST']) ? strtolower(preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'])) : $canonical_host;
+
+if (PHP_SAPI !== 'cli' && $current_host !== $canonical_host && $current_host !== 'www.' . $canonical_host) {
+    header('Location: https://' . $canonical_host . ($_SERVER['REQUEST_URI'] ?? '/'), true, 301);
+    exit;
+}
+
+define('WP_HOME', 'https://' . $canonical_host);
+define('WP_SITEURL', 'https://' . $canonical_host);
+define('COOKIE_DOMAIN', '');
 /**
  * The base configuration for WordPress
  *
@@ -23,16 +49,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', "wordpress" );
+define( 'DB_NAME', "adshelppro_c" );
 
 /** Database username */
-define( 'DB_USER', "wordpress" );
+define( 'DB_USER', "adshelppro_c" );
 
 /** Database password */
-define( 'DB_PASSWORD', "wordpress" );
+define( 'DB_PASSWORD', "sHD5.y?]jt~%EX|%" );
 
 /** Database hostname */
-define( 'DB_HOST', "db" );
+define( 'DB_HOST', "localhost" );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
@@ -88,56 +114,33 @@ $table_prefix = 'wp_';
  *
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
+
 define( 'WP_DEBUG', false );
-// Enable Debug logging to the /wp-content/debug.log file
 define( 'WP_DEBUG_LOG', false );
-// Disable displaying debug info on the page
-define( 'WP_DEBUG_DISPLAY', 	false );
-
-@ini_set( 'display_errors', 0 );
-// Error reporting - exclude Deprecated, Strict, and Notices
-error_reporting( E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE );
-
+define( 'WP_DEBUG_DISPLAY', false );
+@ini_set('display_errors', 0);
 /* Add any custom values between this line and the "stop editing" line. */
-
-// Disable default WP-Cron (we use external cron via Docker)
-define( 'DISABLE_WP_CRON', true );
-
-// Keep local Docker dynamic, but never let public requests define the site URL
-// from an old host. PWA install uses these values when generating canonical URLs.
-if ( ! defined( 'WP_HOME' ) ) {
-	$rs_protocol = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ? 'https' : 'http';
-	$rs_host     = $_SERVER['HTTP_HOST'] ?? 'adshelppro.com';
-
-	if ( strpos( $rs_host, '.localhost' ) !== false ) {
-		$rs_host = preg_replace( '/^[^.]+\.localhost(?::(\d+))?$/', 'localhost$1', $rs_host );
-	}
-
-	if ( preg_match( '/(^localhost(?::\d+)?$|^127\.0\.0\.1(?::\d+)?$)/', $rs_host ) ) {
-		define( 'WP_HOME',    $rs_protocol . '://' . $rs_host );
-		define( 'WP_SITEURL', $rs_protocol . '://' . $rs_host );
-	} else {
-		define( 'WP_HOME',    'https://adshelppro.com' );
-		define( 'WP_SITEURL', 'https://adshelppro.com' );
-	}
-}
 // Увеличиваем лимиты PHP
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '1024M');
 ini_set('upload_max_filesize', '64M');
 ini_set('post_max_size', '64M');
 
 // WordPress memory limit
-define( 'WP_MEMORY_LIMIT', '512M' );
-define( 'WP_MAX_MEMORY_LIMIT', '512M' );
+define( 'WP_MEMORY_LIMIT', '1024M' );
+define( 'WP_MAX_MEMORY_LIMIT', '1024M' );
 
 // PHP Maximum Execution Time
 ini_set('max_execution_time', '300');
 
-// Блокируем внешние HTTP-запросы для диагностики производительности
-// define('WP_HTTP_BLOCK_EXTERNAL', true);
 
-
-define( 'DUPLICATOR_AUTH_KEY', 'h} {h Jb$v:Kj{`:h!5yc?8BAbx;8QLDrTZZjtsz[XN<V]Qg,pmh`ZZ3 =RdY3Kj' );
+define( 'DUPLICATOR_AUTH_KEY', 'etYUL}t#vzKFP1wqTpt7HqX/>?6QFtGMvW@mz7:VtGqDe=;yIeUj4B!(g,Y?x#2W' );
+define( 'WP_CACHE', true );
+define( 'WP_REDIS_HOST', '127.0.0.1' );
+define( 'WP_REDIS_PORT', 6379 );
+define( 'WP_REDIS_DATABASE', 0 );
+define( 'WP_REDIS_TIMEOUT', 1 );
+define( 'WP_REDIS_READ_TIMEOUT', 1 );
+define( 'WP_CACHE_KEY_SALT', 'adshelppro.com:' );
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
