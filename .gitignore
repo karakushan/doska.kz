@@ -51,3 +51,9 @@ wordpress/wp-content/updraft/
 
 # WordPress languages
 wordpress/wp-content/languages/
+
+# Hidden/system directories
+.*/
+
+# Build / deployment artifacts
+artifacts/
