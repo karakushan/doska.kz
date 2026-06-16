@@ -33,6 +33,15 @@ function classiadspro_is_background_or_admin_request()
 	);
 }
 
+function classiadspro_is_translatepress_editor_request()
+{
+	if (function_exists('trp_is_translation_editor') && trp_is_translation_editor()) {
+		return true;
+	}
+
+	return !empty($_REQUEST['trp-edit-translation']) && in_array($_REQUEST['trp-edit-translation'], array('preview', 'true'), true);
+}
+
 function classiadspro_is_trp_automatic_slug_translation_disabled()
 {
 	$settings = get_option('trp_machine_translation_settings', array());
@@ -3806,15 +3815,29 @@ add_filter('woocommerce_product_variation_get_price', function($price, $product)
 	return rs_convert_price($price);
 }, 10, 2);
 
-// Запуск обновления курсов по крону
-add_action('wp', function() {
-	if (rs_is_api_enabled() && !wp_next_scheduled('rs_update_rates_event')) {
-		wp_schedule_event(time(), 'daily', 'rs_update_rates_event');
+function rs_ensure_exchange_rates_event() {
+	$next_run = wp_next_scheduled('rs_update_rates_event');
+
+	if (!rs_is_api_enabled()) {
+		if ($next_run) {
+			wp_clear_scheduled_hook('rs_update_rates_event');
+		}
+		return;
 	}
-	if (!rs_is_api_enabled() && wp_next_scheduled('rs_update_rates_event')) {
+
+	// Самовосстановление: если событие застряло в прошлом, пересоздаем его.
+	if ($next_run && $next_run < (time() - HOUR_IN_SECONDS)) {
 		wp_clear_scheduled_hook('rs_update_rates_event');
+		$next_run = false;
 	}
-});
+
+	if (!$next_run) {
+		wp_schedule_event(time() + MINUTE_IN_SECONDS, 'daily', 'rs_update_rates_event');
+	}
+}
+
+// Запуск обновления курсов по крону
+add_action('init', 'rs_ensure_exchange_rates_event', 20);
 add_action('rs_update_rates_event', 'rs_update_exchange_rates');
 
 // Инициализация курсов при первом запуске
@@ -3891,6 +3914,7 @@ function rs_exchange_rates_admin_page() {
 			$saved_rates['source'] = 'manual';
 		}
 		update_option('rs_exchange_rates', $saved_rates);
+		rs_ensure_exchange_rates_event();
 
 		echo '<div class="notice notice-success is-dismissible"><p>Настройки сохранены.</p></div>';
 	}
@@ -5310,6 +5334,10 @@ function classiadspro_translatepress_lookup_listing_dictionary_translation($orig
 }
 
 function classiadspro_translatepress_translate_listing_title($title, $listing = null) {
+	if (classiadspro_is_translatepress_editor_request()) {
+		return $title;
+	}
+
 	$post_id = 0;
 	if (is_object($listing) && isset($listing->post->ID)) {
 		$post_id = (int) $listing->post->ID;
@@ -5461,7 +5489,7 @@ function classiadspro_translatepress_title_matches_language_script($value, $lang
 }
 
 function classiadspro_translatepress_localize_directorypress_field_definitions() {
-	if (is_admin() || !classiadspro_is_directorypress_listing_request()) {
+	if (is_admin() || classiadspro_is_translatepress_editor_request() || !classiadspro_is_directorypress_listing_request()) {
 		return;
 	}
 
@@ -5535,7 +5563,7 @@ function classiadspro_translatepress_localize_directorypress_field_definitions()
 add_action('wp', 'classiadspro_translatepress_localize_directorypress_field_definitions', 20);
 
 function classiadspro_translatepress_translate_term_name($term_name, $taxonomy) {
-	if (!is_string($term_name) || $term_name === '' || is_admin()) {
+	if (!is_string($term_name) || $term_name === '' || is_admin() || classiadspro_is_translatepress_editor_request()) {
 		return $term_name;
 	}
 
@@ -5588,6 +5616,10 @@ function classiadspro_translatepress_filter_directorypress_terms($terms, $taxono
 add_filter('get_terms', 'classiadspro_translatepress_filter_directorypress_terms', 10, 2);
 
 function classiadspro_translatepress_translate_listing_content($content) {
+	if (classiadspro_is_translatepress_editor_request()) {
+		return $content;
+	}
+
 	$post_id = 0;
 	if (get_post_type() === 'dp_listing') {
 		$post_id = (int) get_the_ID();
@@ -5644,6 +5676,10 @@ function classiadspro_is_directorypress_submit_request() {
 
 function classiadspro_translatepress_start_ui_output_buffer() {
 	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
+		return;
+	}
+
+	if (classiadspro_is_translatepress_editor_request()) {
 		return;
 	}
 
@@ -5771,6 +5807,10 @@ function classiadspro_dom_node_has_ancestor_class($node, $target_classes) {
 
 function classiadspro_translatepress_start_single_listing_output_buffer() {
 	if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed() || is_embed()) {
+		return;
+	}
+
+	if (classiadspro_is_translatepress_editor_request()) {
 		return;
 	}
 
