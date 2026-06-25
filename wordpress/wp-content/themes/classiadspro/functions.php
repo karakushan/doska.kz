@@ -1610,6 +1610,31 @@ function classiadspro_handle_registration_document($user_id, $data)
 add_action('wpfb_form_register_new_user_success', 'classiadspro_handle_registration_document', 10, 2);
 
 /**
+ * Auto-verify new users if the admin setting is enabled
+ * Hooks into wpfb_form_register_new_user_success at priority 12
+ * Runs after document upload but before welcome email
+ * 
+ * @param int $user_id The newly created user ID
+ * @param array $data Form submission data
+ */
+function classiadspro_auto_verify_user($user_id, $data)
+{
+	global $pacz_settings;
+	if (empty($pacz_settings)) {
+		$pacz_settings = get_option('pacz_settings');
+	}
+
+	$auto_verify = isset($pacz_settings['auto_verify_users']) ? $pacz_settings['auto_verify_users'] : false;
+
+	if ($auto_verify) {
+		update_user_meta($user_id, 'user_verified', '1');
+		error_log('Auto-verified user ' . $user_id . ' (auto_verify_users is enabled)');
+		classiadspro_send_verification_email($user_id);
+	}
+}
+add_action('wpfb_form_register_new_user_success', 'classiadspro_auto_verify_user', 12, 2);
+
+/**
  * Send welcome email to newly registered user
  * Hooks into wpfb_form_register_new_user_success action
  * Sends welcome email using template from theme settings
@@ -1721,6 +1746,31 @@ The {site_name} Team<br>
 		array(esc_html($user->display_name), esc_html($user->user_login), esc_html($user->user_email), esc_html($site_name), esc_url($site_url), esc_url($dashboard_url), esc_url($login_url)),
 		$email_message
 	);
+
+	// If user is already verified (auto-verify enabled), replace verification warning with verified notice
+	if (get_user_meta($user_id, 'user_verified', true) === '1') {
+		$message = str_replace(
+			'<div style="margin: 25px 0; padding: 20px; background-color: #fff8e6; border-left: 4px solid #EB6653; border-radius: 4px;">'
+			. '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #EB6653;">⚠️ ACCOUNT VERIFICATION REQUIRED</p>'
+			. '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">'
+			. 'Your account is currently under verification. You will receive a confirmation email once your account is verified.'
+			. '</p>'
+			. '</div>',
+			'<div style="margin: 25px 0; padding: 20px; background-color: #e8f5e9; border-left: 4px solid #28a745; border-radius: 4px;">'
+			. '<p style="margin: 0; font-size: 13px; font-weight: bold; color: #28a745;">✓ ACCOUNT VERIFIED</p>'
+			. '<p style="margin: 10px 0 0 0; font-size: 13px; line-height: 1.6; color: #333333;">'
+			. 'Your account has been automatically verified. You can start posting listings right away!'
+			. '</p>'
+			. '</div>',
+			$message
+		);
+
+		$message = str_replace(
+			'After your account is verified, you will be able to post listings and manage your ads from your dashboard. Please note that all listings must comply with our community guidelines.',
+			'You can now post listings and manage your ads from your dashboard. Please note that all listings must comply with our community guidelines.',
+			$message
+		);
+	}
 
 	// Prepare email
 	$to = $user->user_email;

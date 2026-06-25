@@ -3776,6 +3776,16 @@ The {site_name} Team<br>
 </table>
 </body></html>',
             ),
+            array(
+                'id'       => 'auto_verify_users',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Auto-Verify New Users', 'classiadspro' ),
+                'subtitle' => esc_html__( 'Automatically verify all newly registered users', 'classiadspro' ),
+                'desc'     => esc_html__( 'When enabled, all users will be verified automatically upon registration. When disabled, manual admin verification is required.', 'classiadspro' ),
+                'default'  => false,
+                'on'       => esc_html__( 'Enabled', 'classiadspro' ),
+                'off'      => esc_html__( 'Disabled', 'classiadspro' ),
+            ),
         ),
     ));
     
