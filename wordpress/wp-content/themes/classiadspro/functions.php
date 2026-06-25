@@ -683,6 +683,23 @@ function classiadspro_register_login_menu_widget_override($widgets_manager)
 }
 add_action('elementor/widgets/register', 'classiadspro_register_login_menu_widget_override', 0);
 
+function classiadspro_register_multi_lang_banner($widgets_manager) {
+	if (!class_exists('\Elementor\Widget_Base')) {
+		return;
+	}
+
+	require_once get_template_directory() . '/includes/elementor/lang-banner.php';
+
+	if (
+		is_object($widgets_manager) &&
+		method_exists($widgets_manager, 'register') &&
+		class_exists('\HFB\WidgetsManager\Widgets\Multi_Lang_Banner')
+	) {
+		$widgets_manager->register(new \HFB\WidgetsManager\Widgets\Multi_Lang_Banner());
+	}
+}
+add_action('elementor/widgets/register', 'classiadspro_register_multi_lang_banner');
+
 // Load Firebase Push Notifications
 require_once get_template_directory() . '/includes/actions/firebase.php';
 
