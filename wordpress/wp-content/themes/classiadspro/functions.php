@@ -700,6 +700,8 @@ function classiadspro_register_multi_lang_banner($widgets_manager) {
 }
 add_action('elementor/widgets/register', 'classiadspro_register_multi_lang_banner');
 
+require_once get_template_directory() . '/includes/widgets/class-multi-language-banner-widget.php';
+
 // Load Firebase Push Notifications
 require_once get_template_directory() . '/includes/actions/firebase.php';
 
